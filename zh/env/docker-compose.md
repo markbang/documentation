@@ -1,6 +1,6 @@
 ---
 title: "Docker Compose"
-description: "Docker Compose 多容器编排工具使用指南，通过 YAML 格式的 docker-compose.yml 配置文件定义多个服务、网络与数据卷，使用 docker compose up 一键启动整个应用栈，本文涵盖服务定义语法、端口映射与环境变量配置、依赖关系与常见应用部署实践。"
+description: "Docker Compose 多容器编排工具使用指南，通过 YAML 格式的 docker-compose.yml 配置文件定义多个服务、网络与数据卷，使用 docker compose up 一键启动整个应用栈，涵盖服务定义语法、端口映射与环境变量配置及常见部署实践"
 icon: "layer-group"
 ---
 

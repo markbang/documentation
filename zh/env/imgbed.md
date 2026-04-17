@@ -1,6 +1,6 @@
 ---
 title: "图床方案"
-description: "基于七牛云对象存储与 CDN 加速的个人图床搭建方案，涵盖七牛云存储桶创建与 AccessKey 配置、自定义域名绑定与 HTTPS 证书设置、PicGo 等图片上传工具的选择与配置、WebP 自动压缩策略以及配合 Markdown 编辑器使用的完整图床部署流程。"
+description: "基于七牛云对象存储与 CDN 加速的个人图床搭建完整方案，涵盖七牛云存储桶创建与 AccessKey 密钥配置、自定义域名绑定与 HTTPS 证书设置、PicGo 等图片上传工具的选择与配置、WebP 自动压缩策略以及配合 Markdown 编辑器使用的完整图床部署流程"
 icon: "image"
 ---
 

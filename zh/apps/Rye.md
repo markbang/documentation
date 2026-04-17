@@ -1,6 +1,6 @@
 ---
 title: "Rye"
-description: "Rye 是新一代 Python 包管理与虚拟环境一体化工具，本文对比了 pyenv、pipenv、uv、pdm 等 Python 生态中的多种包管理器与虚拟环境方案，并整理了 Rye 的安装配置、项目初始化、依赖管理与 VSCode 解释器路径识别问题的解决方法。"
+description: "Rye 是新一代 Python 包管理与虚拟环境一体化工具，本文对比了 pyenv、pipenv、uv、pdm 等 Python 生态中的多种包管理器与虚拟环境方案，并整理了 Rye 安装配置、项目初始化、依赖管理与 VSCode 解释器路径识别问题解决方法。"
 icon: "gear"
 ---
 

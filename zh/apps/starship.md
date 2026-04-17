@@ -1,6 +1,6 @@
 ---
 title: "Starship"
-description: "Starship 是一款跨 Shell 的终端提示符美化工具，支持 PowerShell、Bash、Zsh 等多种终端环境，本文介绍通过 Scoop 安装方法、PowerShell 配置文件（$PROFILE）写入启动命令、command_timeout 超时问题的解决方案以及与 oh-my-zsh 等工具的对比。"
+description: "Starship 是一款跨 Shell 的终端提示符美化工具，支持 PowerShell、Bash、Zsh 等多种终端环境，本文介绍通过 Scoop 安装的方法、PowerShell 配置文件写入启动命令和 command_timeout 超时问题的解决方案以及与 oh-my-zsh 的对比。"
 icon: "terminal"
 ---
 

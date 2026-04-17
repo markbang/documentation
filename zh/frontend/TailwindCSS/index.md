@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS"
-description: "Tailwind CSS 是一个实用优先的原子化 CSS 框架，通过在 HTML 中组合预定义工具类（如 flex、pt-4、text-center）快速构建自定义界面而无需编写传统 CSS，本文介绍 npm 安装与 PostCSS 配置、响应式断点、暗色模式与 tailwind.config.js 主题自定义。"
+description: "Tailwind CSS 是一个实用优先的原子化 CSS 框架，通过在 HTML 中组合预定义工具类（如 flex、pt-4、text-center）快速构建自定义界面而无需编写传统 CSS，介绍 npm 安装与 PostCSS 配置、响应式断点与暗色模式设置"
 icon: "palette"
 ---
 

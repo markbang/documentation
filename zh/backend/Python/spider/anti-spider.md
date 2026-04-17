@@ -1,6 +1,6 @@
 ---
 title: "反爬虫技术"
-description: "Python 爬虫中的反爬应对技术笔记，涵盖通过自定义 User-Agent 与 Referer 等 headers 参数模拟真实浏览器请求、使用 IP 代理池轮换避免封禁、通过浏览器开发者工具抓取 Ajax 异步加载数据的 API 接口地址与参数，附实战代码示例与调试技巧。"
+description: "Python 爬虫开发中反爬虫对抗技术的实战学习笔记，详细讲解 User-Agent 与 headers 请求头伪装绕过策略、IP 代理池搭建管理与自动轮换机制、利用浏览器开发者工具分析抓取 Ajax 动态加载数据接口的实用方法，附带完整可运行的反爬绕过实战代码示例与调试排查技巧。"
 icon: "shield"
 ---
 

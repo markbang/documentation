@@ -1,6 +1,6 @@
 ---
 title: "RBAC & Session Auth"
-description: "Role-Based Access Control and session cookie authentication patterns, drawn from real projects — badmin (Hono + SQLite) and cruise-ship (Next.js + PostgreSQL)."
+description: "Role-Based Access Control and session cookie authentication patterns from real projects — badmin (Hono + SQLite) and cruise-ship (Next.js)."
 icon: "shield-halved"
 ---
 

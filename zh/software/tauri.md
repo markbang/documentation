@@ -1,6 +1,6 @@
 ---
 title: "Tauri"
-description: "Tauri 是基于 Rust 的跨平台客户端开发框架，相比 Electron 打包体积更小（可低至几 MB）且内存占用更低，使用系统原生 WebView 渲染前端界面，本文记录项目创建与初始化、Rust 后端与前端 JavaScript 通信机制以及应用打包与发布的实践经验。"
+description: "Tauri 是基于 Rust 的跨平台客户端开发框架，相比 Electron 打包体积更小（可低至几 MB）且内存占用更低，使用系统原生 WebView 渲染前端界面，本文记录项目创建与初始化、Rust 后端与前端 JavaScript 通信机制以及应用打包与发布的实践经验"
 icon: "laptop-code"
 ---
 

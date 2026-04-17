@@ -1,6 +1,6 @@
 ---
 title: "Python"
-description: "Python 后端开发技术整理入口页，涵盖 FastAPI 现代高性能 Web 框架（路由定义、依赖注入、中间件与认证机制）、爬虫技术（requests 请求、数据解析与反爬应对策略）以及 httpx/matplotlib/PyTorch 等第三方库使用指南，包含框架入门代码示例与各子页面快速导航。"
+description: "Python 后端开发技术知识体系整理与分类学习导航，涵盖 FastAPI 异步 Web 框架、网络爬虫开发与反爬策略应对、httpx 现代 HTTP 请求库、matplotlib 数据可视化绑图、PyTorch 深度学习框架等常用第三方库使用指南，附入门代码示例与各专题页面导航索引。"
 icon: "python"
 ---
 
