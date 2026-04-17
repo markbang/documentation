@@ -3,26 +3,30 @@ title: "DaisyUI"
 description: "DaisyUI is a Tailwind CSS component library with pre-designed buttons, cards, modals, and navbars, covering installation, themes, and examples."
 icon: "palette"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/daisyui.md)
+</Note>
+
 
 # DaisyUI
 
-DaisyUI 是一个基于 Tailwind CSS 的组件库，提供了丰富的预设计组件。
+DaisyUI isa基于 Tailwind CSS 的ComponentLibrary，提供了丰富的预设计Component。
 
-## 特性
+## Features
 
-- 🎨 **纯 CSS 组件**：无 JavaScript 依赖
-- 🎭 **30+ 主题**：内置多种主题，支持深色模式
-- 🧩 **语义化类名**：易于理解和使用
-- 🎯 **Tailwind 兼容**：完美集成 Tailwind CSS
-- 📦 **轻量级**：按需加载，体积小
+- 🎨 **pure CSS components**：no JavaScript dependency
+- 🎭 **30+ 主题**：built-in multiple themes，supports深色模式
+- 🧩 **semantic class names**：easy to understand and use
+- 🎯 **Tailwind 兼容**：perfect integration Tailwind CSS
+- 📦 **lightweight**：load on demand，small size
 
-## 安装
+## Installation
 
 ```bash
 npm install -D daisyui@latest
 ```
 
-配置 `tailwind.config.js`：
+Configuration `tailwind.config.js`：
 
 ```javascript
 module.exports = {
@@ -33,7 +37,7 @@ module.exports = {
 }
 ```
 
-## 常用组件
+## Common Components
 
 ### Button
 
@@ -51,7 +55,7 @@ module.exports = {
 <button class="btn btn-md">Normal</button>
 <button class="btn btn-lg">Large</button>
 
-<!-- 状态 -->
+<!-- State -->
 <button class="btn btn-disabled">Disabled</button>
 <button class="btn loading">Loading</button>
 ```
@@ -76,7 +80,7 @@ module.exports = {
 ### Modal
 
 ```html
-<!-- 触发按钮 -->
+<!-- 触发Button -->
 <label for="my-modal" class="btn">Open Modal</label>
 
 <!-- Modal -->
@@ -165,9 +169,9 @@ module.exports = {
 <div class="badge badge-ghost">Ghost</div>
 ```
 
-## 主题切换
+## Theme Switching
 
-### HTML 属性方式
+### HTML Property方式
 
 ```html
 <html data-theme="dark">
@@ -187,7 +191,7 @@ const theme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', theme);
 ```
 
-### 主题切换组件
+### Theme SwitchingComponent
 
 ```html
 <div class="dropdown">
@@ -200,7 +204,7 @@ document.documentElement.setAttribute('data-theme', theme);
 </div>
 ```
 
-## 自定义主题
+## Custom Theme
 
 ```javascript
 // tailwind.config.js
@@ -221,10 +225,10 @@ module.exports = {
 }
 ```
 
-## 实用工具类
+## 实用Tool类
 
 ```html
-<!-- 间距 -->
+<!-- Space -->
 <div class="divider">OR</div>
 
 <!-- 加载 -->
@@ -237,7 +241,7 @@ module.exports = {
   </div>
 </div>
 
-<!-- 面包屑 -->
+<!-- 面Package屑 -->
 <div class="breadcrumbs text-sm">
   <ul>
     <li><a>Home</a></li>
@@ -247,7 +251,7 @@ module.exports = {
 </div>
 ```
 
-## 布局组件
+## Layout Components
 
 ### Drawer
 
@@ -267,17 +271,17 @@ module.exports = {
 </div>
 ```
 
-## 最佳实践
+## Best Practices
 
-1. **结合 Tailwind**：DaisyUI 组件可与 Tailwind 工具类混用
+1. **结合 Tailwind**：DaisyUI Component可与 Tailwind Tool类混用
 2. **主题一致性**：为整个项目选择合适的主题
-3. **响应式设计**：使用 Tailwind 的响应式前缀
+3. **Responsive Design**：使用 Tailwind 的响应式prefix
 4. **减少定制**：尽量使用预设样式
-5. **按需加载**：配置 PurgeCSS 移除未使用的样式
+5. **load on demand**：Configuration PurgeCSS 移除未使用的样式
 
-## 参考资源
+## References
 
 - [DaisyUI 官网](https://daisyui.com/)
-- [组件文档](https://daisyui.com/components/)
-- [主题列表](https://daisyui.com/docs/themes/)
-- [GitHub 仓库](https://github.com/saadeghi/daisyui)
+- [ComponentDocumentation](https://daisyui.com/components/)
+- [主题list](https://daisyui.com/docs/themes/)
+- [GitHub 仓Library](https://github.com/saadeghi/daisyui)

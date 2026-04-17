@@ -3,13 +3,17 @@ title: "Tauri"
 description: "Tauri is a Rust-based cross-platform desktop framework smaller than Electron, covering project setup, Rust-JS communication, and app packaging."
 icon: "laptop-code"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/software/tauri.md)
+</Note>
+
 
 # Tauri
 
-Rust 跨端 app，虽然比较新的框架，但是已经有较为成熟的产品，例如：[ChatWise](https://chatwise.app)、[HuLa](https://hulaspark.com/)，学习这种跨端框架当然是要跨端才好，
-一次编写可以构建多个平台的 app
+Rust cross-platform app，although a relatively new framework，但is已经有较为成熟的产品，for example：[ChatWise](https://chatwise.app)、[HuLa](https://hulaspark.com/)，学习这种跨端Framework当然is要跨端才好，
+write once, build apps for multiple platforms
 
-## 使用 github action 自动发布 release
+## use GitHub Actions to auto-publish releases
 
 > .github/workflows/auto-push.yml
 
@@ -153,30 +157,30 @@ jobs:
           args: ${{ matrix.args }}
 ```
 
-不熟悉[Github Action](https://github.com/features/actions)的可以去看我写的[入门介绍](../env/github-workflow)
+if unfamiliar with[Github Action](https://github.com/features/actions)的可以去看我written by[intro guide](../env/github-workflow)
 
-使用上面的工作流可以在 push tag v\*的时候自动构建并发布 Release 和生成 changelog
+使用上面的Workflow可以in push tag v\*的时候自动build并发布 Release 和generates changelog
 
-changelog 生成使用的是[Antfu changelogithub](https://github.com/antfu/changelogithub)采用的是[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)语法，可以使用这种语法来提交`git message`生成好看的、易懂的 changelog
+changelog generates使用的is[Antfu changelogithub](https://github.com/antfu/changelogithub)采用的is[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)syntax，可以使用这种syntax来Commit`git message`generates好看的、easy-to-understand changelog
 
 ![changelog_example](https://cdn.bangwu.top/img/o85kd-yqbangwu20250405111742.webp)
 
 ### [Tauri-action](https://github.com/tauri-apps/tauri-action)
 
-应用签名
+app signing
 
-如何配置 latest.json
+如何Configuration latest.json
 
-如何构建移动端 app
+how to build mobile app
 
-如何自动发布到平台
+how to auto-publish to platforms
 
-### Github Action Release 仓库允许读写权限
+### Github Action Release 仓Libraryallow read/write permissions
 
-这样才能发布 Release 不然会有报错`Error permisson`
+otherwise there'll be errors publishing Release`Error permisson`
 
-## 解决 使用 Nextjs SSR window is not defined
+## Fix: Next.js SSR window is not defined
 
 ## 解决 Error: Cannot read properties of undefined (reading 'xxxxxx')
 
-这个报错很有可能是使用插件未加载导致的，在 main.rs 中初始化插件
+这个报错很有可能is使用Plugin未加载导致的，initialize plugin in main.rs

@@ -3,6 +3,10 @@ title: "Starship"
 description: "Starship is a cross-shell terminal prompt tool supporting PowerShell, Bash, and Zsh, with Scoop installation and profile configuration guide."
 icon: "terminal"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/starship.md)
+</Note>
+
 
 # Comand Line
 
@@ -18,25 +22,25 @@ icon: "terminal"
 
 ```bash
 scoop install starship
-starship config command_timeout 3600 //解决超时问题 https://github.com/starship/starship/issues/5985
+starship config command_timeout 3600 //解决超时Issue https://github.com/starship/starship/issues/5985
 ```
 
-### 配置 power shell
+### Configuration power shell
 
-需要在 power shell 执行`$PROFILE`查看配置路径`C:\Users\用户名\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`然后写入
+需要in power shell 执行`$PROFILE`查看Configuration路径`C:\Users\用户名\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`然后写入
 
 ```bash
 Invoke-Expression (&starship init powershell)
 ```
 
-使用[Bracketed-segments](https://starship.rs/zh-CN/presets/bracketed-segments)主题，也可以前往[Staship 预设](https://starship.rs/presets/)查看其他喜欢的主题，需要注意的是有的需要配置[Nerd Font](https://www.nerdfonts.com/)
+使用[Bracketed-segments](https://starship.rs/zh-CN/presets/bracketed-segments)主题，也可以前往[Staship 预设](https://starship.rs/presets/)查看其他喜欢的主题，需要注意的is有的需要Configuration[Nerd Font](https://www.nerdfonts.com/)
 
-### 配置 cmd
+### Configuration cmd
 
-starship 使用[clink](https://chrisant996.github.io/clink/)来配置 cmd
+starship 使用[clink](https://chrisant996.github.io/clink/)来Configuration cmd
 
 > [!note]
-> 使用 scoop 安装命令行不会命令高亮显示，原因是 scoop 安装的可能不带有`Enhanced default settings`这个功能，语法高亮是靠这个功能实现的，所以需要这个功能的还是从[Github Realease](https://github.com/chrisant996/clink/releases)下载吧【梦想是 scoop 管理所有应用，破碎第一步 😭】
+> 使用 scoop InstallationCommand行不会Command高亮显示，原因is scoop Installation的可能不带有`Enhanced default settings`这个功能，syntax高亮is靠这个功能Implementation的，所以需要这个功能的还is从[Github Realease](https://github.com/chrisant996/clink/releases)Download吧【梦想is scoop 管理所有应用，破碎第一步 😭】
 
 ```bash
 code %LocalAppData%\clink\starship.lua

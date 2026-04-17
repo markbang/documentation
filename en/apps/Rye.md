@@ -4,9 +4,9 @@ description: "Rye is a next-gen Python package manager and virtual environment t
 icon: "gear"
 ---
 
-[Python 上的包管理器和虚拟环境——V2EX](https://www.v2ex.com/t/1032069)
+[Python package managers and virtual environments——V2EX](https://www.v2ex.com/t/1032069)
 
-Python的环境管理工具可谓是多之又多
+Python的环境管理Tool可谓is多之又多
 
 ![python-tools](https://cdn.bangwu.top/img/202503131258281.webp)
 
@@ -14,17 +14,17 @@ Python的环境管理工具可谓是多之又多
 
 
 
-## Python 版本管理
+## Python versions管理
 
 pyenv pipenv
 
-## Python包管理
+## PythonPackage管理
 
 pip uv pdm
 
-## Rye配置
+## RyeConfiguration
 
-vscode 识别不到解释器路径问题
+vscode 识别不到解释器路径Issue
 
 ```json
 {
@@ -58,7 +58,7 @@ url = "https://pypi.org/simple/"
 rye add ipykernel
 ```
 
-### 我的配置
+### 我的Configuration
 
 ```toml
 [default]
@@ -80,7 +80,7 @@ name = "default"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 ```
 
-## 开一个项目
+## 开a项目
 
 ```bash
 rye pin 3.x

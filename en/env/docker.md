@@ -3,148 +3,152 @@ title: "Docker"
 description: "Docker containerization guide covering image building, container creation with port mapping, volume mounting for persistence, and CLI commands."
 icon: "container-storage"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/docker.md)
+</Note>
+
 
 # Docker
 
-Docker 是一个开源的应用容器引擎，让开发者可以打包应用及依赖到一个可移植的容器中。
+Docker is an open-sourceapplication container engine，lets developers package apps and dependencies into portable containers。
 
-## 安装
+## Installation
 
 ### Windows/Mac
-下载 [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+Download [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Linux (Ubuntu)
 ```bash
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 ```
 
-## 基本概念
+## Basic Concepts
 
-- **镜像 (Image)**：只读的模板，包含运行容器所需的文件系统
+- **镜像 (Image)**：只读的模板，Package含运行容器所需的file系统
 - **容器 (Container)**：镜像的运行实例
-- **仓库 (Repository)**：存储镜像的地方，如 Docker Hub
+- **仓Library (Repository)**：存储镜像的地方，如 Docker Hub
 
-## 常用命令
+## Common Commands
 
-### 镜像管理
+### Image Management
 
 ```bash
-# 搜索镜像
+# Search Image
 docker search nginx
 
-# 拉取镜像
+# Pull Image
 docker pull nginx:latest
 
-# 查看本地镜像
+# View Local Images
 docker images
 
-# 删除镜像
+# Remove Image
 docker rmi nginx:latest
 
-# 构建镜像
+# Build Image
 docker build -t myapp:1.0 .
 
-# 导出镜像
+# Export Image
 docker save -o nginx.tar nginx:latest
 
-# 导入镜像
+# Import Image
 docker load -i nginx.tar
 ```
 
-### 容器管理
+### Container Management
 
 ```bash
 # 运行容器
 docker run -d --name mynginx -p 80:80 nginx
 
-# 参数说明：
+# Parameter Description：
 # -d：后台运行
-# --name：指定容器名称
-# -p：端口映射 宿主机端口:容器端口
+# --name：指定容器name
+# -p：Port Mapping 宿主机端口:容器端口
 # -v：挂载卷 宿主机路径:容器路径
-# -e：设置环境变量
-# --restart：重启策略（no/always/on-failure/unless-stopped）
+# -e：设置Environment Variables
+# --restart：重启Strategy（no/always/on-failure/unless-stopped）
 
-# 查看运行中的容器
+# View Running Containers
 docker ps
 
-# 查看所有容器（包括停止的）
+# View All Containers（Package括停止的）
 docker ps -a
 
-# 停止容器
+# Stop Container
 docker stop mynginx
 
-# 启动容器
+# Start Container
 docker start mynginx
 
-# 重启容器
+# Restart Container
 docker restart mynginx
 
-# 删除容器
+# Remove Container
 docker rm mynginx
 
-# 强制删除运行中的容器
+# Force Remove Running Container
 docker rm -f mynginx
 
-# 进入容器
+# Enter Container
 docker exec -it mynginx bash
 
-# 查看容器日志
+# View Container Logs
 docker logs -f mynginx
 
-# 查看容器详细信息
+# View Container Details
 docker inspect mynginx
 
-# 查看容器资源占用
+# View Container Resource Usage
 docker stats
 
-# 复制文件到容器
+# Copy File to Container
 docker cp file.txt mynginx:/path/
 
-# 从容器复制文件
+# Copy File from Container
 docker cp mynginx:/path/file.txt ./
 ```
 
-### 数据卷管理
+### Volume Management
 
 ```bash
-# 创建数据卷
+# Create Volume
 docker volume create mydata
 
-# 查看数据卷列表
+# View Volumes
 docker volume ls
 
-# 查看数据卷详情
+# View Volume Details
 docker volume inspect mydata
 
-# 删除数据卷
+# Remove Volume
 docker volume rm mydata
 
-# 清理未使用的数据卷
+# Clean Unused Volumes
 docker volume prune
 ```
 
-### 网络管理
+### Network Management
 
 ```bash
-# 查看网络
+# View Networks
 docker network ls
 
-# 创建网络
+# Create Network
 docker network create mynet
 
-# 删除网络
+# Delete Network
 docker network rm mynet
 
-# 容器连接到网络
+# Connect Container to Network
 docker network connect mynet mynginx
 ```
 
 ## Dockerfile
 
-Dockerfile 是用于构建镜像的文本文件。
+Dockerfile is用于Build Image的文本file。
 
-### 基本结构
+### Basic Structure
 
 ```dockerfile
 # 基础镜像
@@ -153,13 +157,13 @@ FROM python:3.11-slim
 # 设置工作目录
 WORKDIR /app
 
-# 设置环境变量
+# 设置Environment Variables
 ENV PYTHONUNBUFFERED=1
 
-# 复制文件
+# 复制file
 COPY requirements.txt .
 
-# 执行命令
+# 执行Command
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 复制应用代码
@@ -168,29 +172,29 @@ COPY . .
 # 暴露端口
 EXPOSE 8000
 
-# 启动命令
+# 启动Command
 CMD ["python", "app.py"]
 ```
 
-### 常用指令
+### 常用Directives
 
 - FROM：指定基础镜像
 - WORKDIR：设置工作目录
-- COPY：复制文件到镜像
-- ADD：复制文件，支持URL和自动解压
-- RUN：执行命令（构建时）
-- CMD：容器启动时执行的命令
-- ENTRYPOINT：入口点，不会被docker run覆盖
-- ENV：设置环境变量
-- EXPOSE：声明端口
-- VOLUME：定义数据卷
+- COPY：复制file到镜像
+- ADD：复制file，supportsURL和自动解压
+- RUN：执行Command（build时）
+- CMD：容器启动时执行的Command
+- ENTRYPOINT：入口点，不会被docker runOverriding
+- ENV：设置Environment Variables
+- EXPOSE：Declaration端口
+- VOLUME：Definition数据卷
 - USER：指定运行用户
-- ARG：构建参数
+- ARG：buildparameters
 
-### 多阶段构建
+### Multi-stage Build
 
 ```dockerfile
-# 构建阶段
+# buildPhase
 FROM node:18 AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -198,7 +202,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# 运行阶段
+# 运行Phase
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
@@ -207,7 +211,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## .dockerignore
 
-类似 .gitignore，用于排除不需要复制到镜像的文件。
+类似 .gitignore，用于排除不需要复制到镜像的file。
 
 ```
 node_modules
@@ -218,11 +222,11 @@ __pycache__
 .vscode
 ```
 
-## 镜像加速
+## Image Registry Mirror
 
-### 配置镜像源（Linux）
+### Configuration镜像源（Linux）
 
-编辑 /etc/docker/daemon.json：
+edit /etc/docker/daemon.json：
 
 ```json
 {
@@ -239,9 +243,9 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-## 实用技巧
+## Practical Tips
 
-### 清理系统
+### Clean System
 
 ```bash
 # 清理未使用的容器、网络、镜像
@@ -251,13 +255,13 @@ docker system prune -a
 docker system df
 ```
 
-### 容器自动重启
+### Auto-restart Containers
 
 ```bash
 docker run -d --restart=always nginx
 ```
 
-### 限制资源
+### Limit Resources
 
 ```bash
 # 限制内存和CPU
@@ -270,7 +274,7 @@ docker run -d --memory="512m" --cpus="1.5" nginx
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
 ```
 
-## 常见应用部署
+## 常见应用Deployment
 
 ### Nginx
 
@@ -315,8 +319,8 @@ docker run -d \
   postgres:16
 ```
 
-## 参考资源
+## References
 
-- [Docker 官方文档](https://docs.docker.com/)
+- [Docker Official Docs](https://docs.docker.com/)
 - [Docker Hub](https://hub.docker.com/)
-- [Dockerfile 最佳实践](https://docs.docker.com/develop/dev-best-practices/)
+- [Dockerfile Best Practices](https://docs.docker.com/develop/dev-best-practices/)

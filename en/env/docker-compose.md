@@ -3,25 +3,29 @@ title: "Docker Compose"
 description: "Docker Compose orchestration guide using YAML to define services, networks, and volumes for one-command multi-container application deployment."
 icon: "layer-group"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/docker-compose.md)
+</Note>
+
 
 # Docker Compose
 
-Docker Compose 是用于定义和运行多容器 Docker 应用的工具，通过 YAML 文件配置应用服务。
+Docker Compose is for defining and running multi-container Docker applications tool，通过 YAML fileConfiguration应用服务。
 
-## 安装
+## Installation
 
 Docker Desktop 已内置 Docker Compose。
 
-### Linux 独立安装
+### Linux 独立Installation
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# 验证安装
+# ValidationInstallation
 docker-compose --version
 ```
 
-## 基本命令
+## 基本Command
 
 ```bash
 # 启动服务
@@ -30,25 +34,25 @@ docker-compose up -d
 # 停止服务
 docker-compose down
 
-# 查看服务状态
+# 查看服务State
 docker-compose ps
 
-# 查看日志
+# 查看Log
 docker-compose logs -f
 
 # 重启服务
 docker-compose restart
 
-# 构建镜像
+# Build Image
 docker-compose build
 
-# 执行命令
+# 执行Command
 docker-compose exec service_name bash
 ```
 
-## docker-compose.yml 语法
+## docker-compose.yml syntax
 
-### 基本结构
+### Basic Structure
 
 ```yaml
 version: '3.8'
@@ -73,19 +77,19 @@ volumes:
   db_data:
 ```
 
-### 常用配置项
+### 常用Configuration项
 
 - `image`: 使用的镜像
-- `build`: 构建配置
-- `ports`: 端口映射
+- `build`: buildConfiguration
+- `ports`: Port Mapping
 - `volumes`: 数据卷挂载
-- `environment`: 环境变量
-- `depends_on`: 依赖关系
-- `networks`: 网络配置
-- `restart`: 重启策略
-- `command`: 覆盖默认命令
+- `environment`: Environment Variables
+- `depends_on`: Dependencies
+- `networks`: 网络Configuration
+- `restart`: 重启Strategy
+- `command`: Overriding默认Command
 
-## 常用服务配置
+## 常用服务Configuration
 
 ## MySQL
 
@@ -288,9 +292,9 @@ volumes:
   redis_data:
 ```
 
-## 环境变量文件
+## Environment Variablesfile
 
-创建 `.env` 文件：
+创建 `.env` file：
 
 ```env
 MYSQL_ROOT_PASSWORD=root_password
@@ -298,7 +302,7 @@ MYSQL_DATABASE=mydb
 REDIS_PASSWORD=redis_password
 ```
 
-在 docker-compose.yml 中使用：
+in docker-compose.yml 中使用：
 
 ```yaml
 services:
@@ -308,22 +312,22 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
 ```
 
-## 实用技巧
+## Practical Tips
 
-### 查看服务日志
+### 查看服务Log
 
 ```bash
-# 查看所有服务日志
+# 查看所有服务Log
 docker-compose logs -f
 
-# 查看特定服务日志
+# 查看特定服务Log
 docker-compose logs -f web
 
 # 查看最后100行
 docker-compose logs --tail=100 web
 ```
 
-### 扩展服务
+### Extension服务
 
 ```bash
 # 启动3个web服务实例
@@ -339,28 +343,28 @@ docker-compose up -d --build web
 ### 清理资源
 
 ```bash
-# 停止并删除容器、网络
+# 停止并Remove Container、网络
 docker-compose down
 
-# 同时删除数据卷
+# 同时Remove Volume
 docker-compose down -v
 
-# 同时删除镜像
+# 同时Remove Image
 docker-compose down --rmi all
 ```
 
-## 最佳实践
+## Best Practices
 
-1. **使用 .env 文件**管理敏感信息
+1. **使用 .env file**管理Sensitive Info
 2. **使用命名卷**持久化数据
-3. **定义网络**隔离服务
+3. **Definition网络**隔离服务
 4. **设置 restart: always** 保证服务可用
-5. **使用 depends_on** 声明依赖关系
+5. **使用 depends_on** DeclarationDependencies
 6. **添加健康检查** health check
-7. **限制资源使用** deploy.resources
+7. **Limit Resources使用** deploy.resources
 
-## 参考资源
+## References
 
-- [Docker Compose 官方文档](https://docs.docker.com/compose/)
-- [Compose 文件规范](https://docs.docker.com/compose/compose-file/)
+- [Docker Compose Official Docs](https://docs.docker.com/compose/)
+- [Compose fileSpecification](https://docs.docker.com/compose/compose-file/)
 - [Awesome Compose](https://github.com/docker/awesome-compose)

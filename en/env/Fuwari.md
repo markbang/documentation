@@ -3,53 +3,57 @@ title: "Fuwari"
 description: "Fuwari is an Astro-based static blog theme with clean design, covering project setup, article frontmatter format, tags, and deployment steps."
 icon: "pen-nib"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/Fuwari.md)
+</Note>
+
 
 ## Fuwari
 
-[Fuwari](https://github.com/saicaca/fuwari) 是一个基于 Astro 的静态博客主题，风格优雅简洁。
+[Fuwari](https://github.com/saicaca/fuwari) isa基于 Astro 的静态blogs主题，with elegant and minimalist style。
 
-### 特性
+### Features
 
-- 🚀 **快速**：基于 Astro 构建，性能优异
-- 🎨 **美观**：现代化设计，响应式布局
-- 🌙 **暗色模式**：支持深色/浅色主题切换
-- 📝 **Markdown**：使用 Markdown 编写文章
-- 🔍 **SEO 友好**：优化搜索引擎收录
-- 📱 **响应式**：完美适配移动端
-- 💬 **评论系统**：支持多种评论系统
-- 🔗 **友链**：支持友情链接页面
+- 🚀 **快速**：built on Astro, excellent performance
+- 🎨 **美观**：modern design, responsive layout
+- 🌙 **Dark Mode**：supports深色/浅色Theme Switching
+- 📝 **Markdown**：write articles using Markdown
+- 🔍 **SEO 友好**：优化search for引擎收录
+- 📱 **响应式**：完美mobile-friendly
+- 💬 **评论系统**：supports多种评论系统
+- 🔗 **友链**：supports友情Link页面
 
-### 快速开始
+### Quick Start
 
 ```bash
-# 克隆项目
+# clone the project
 git clone https://github.com/saicaca/fuwari.git
 cd fuwari
 
-# 安装依赖
+# InstallationDependency
 npm install
 
-# 本地开发
+# local development
 npm run dev
 
-# 构建
+# build
 npm run build
 ```
 
-### 配置
+### Configuration
 
-编辑 `src/config.ts` 文件：
+edit `src/config.ts` file：
 
 ```typescript
 export const siteConfig = {
-  title: '你的博客标题',
-  subtitle: '副标题',
+  title: '你的blogstitle',
+  subtitle: 'Subtitle',
   lang: 'zh-CN',
-  description: '博客描述',
-  author: '作者名',
+  description: 'blogsDescription',
+  author: 'Author Name',
   avatar: '/avatar.jpg',
   
-  // 社交链接
+  // Social Links
   socialLinks: [
     { name: 'github', url: 'https://github.com/username' },
     { name: 'twitter', url: 'https://twitter.com/username' },
@@ -59,22 +63,22 @@ export const siteConfig = {
 
 ### 创建文章
 
-在 `src/content/posts/` 目录下创建 Markdown 文件：
+in `src/content/posts/` create under directory Markdown file：
 
 ```markdown
 ---
-title: 文章标题
+title: Article Title
 published: 2024-01-01
-description: 文章描述
-tags: [标签1, 标签2]
-category: 分类
+description: Article Description
+tags: [Tag1, Tag2]
+category: Category
 draft: false
 ---
 
-文章内容...
+Article Content...
 ```
 
-### 部署
+### Deployment
 
 #### GitHub Pages
 
@@ -104,21 +108,21 @@ jobs:
 
 #### Vercel
 
-1. 导入 GitHub 仓库到 Vercel
-2. 构建命令：`npm run build`
-3. 输出目录：`dist`
+1. import GitHub repo to Vercel
+2. buildCommand：`npm run build`
+3. output directory：`dist`
 
 #### Cloudflare Pages
 
-1. 连接 GitHub 仓库
-2. 构建命令：`npm run build`
-3. 输出目录：`dist`
+1. connect GitHub repo
+2. buildCommand：`npm run build`
+3. output directory：`dist`
 
-### 自定义
+### 自Definition
 
-#### 修改主题色
+#### modify theme colors
 
-编辑 `src/styles/global.css`：
+edit `src/styles/global.css`：
 
 ```css
 :root {
@@ -126,12 +130,12 @@ jobs:
 }
 ```
 
-#### 添加评论系统
+#### add comment system
 
-支持 Giscus、Waline 等评论系统，在配置文件中启用。
+supports Giscus、Waline 等评论系统，inConfiguration File中启用。
 
-### 参考资源
+### References
 
-- [GitHub 仓库](https://github.com/saicaca/fuwari)
-- [演示网站](https://fuwari.vercel.app/)
-- [Astro 文档](https://docs.astro.build/)
+- [GitHub 仓Library](https://github.com/saicaca/fuwari)
+- [demo site](https://fuwari.vercel.app/)
+- [Astro Documentation](https://docs.astro.build/)

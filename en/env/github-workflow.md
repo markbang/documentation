@@ -3,26 +3,30 @@ title: "GitHub Actions"
 description: "GitHub Actions CI/CD automation using YAML workflow files, covering structure, event triggers like push and pull_request, and deployment setups."
 icon: "code-branch"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/github-workflow.md)
+</Note>
+
 
 # GitHub Actions
 
-GitHub Actions 是 GitHub 提供的 CI/CD 自动化工具，可以自动执行构建、测试、部署等工作流程。
+GitHub Actions is GitHub 提供的 CI/CD 自动化Tool，可以自动执行build、Testing、Deployment等Workflow程。
 
-对公开仓库是免费不限额度的，私有仓库每月有免费额度。
+对公开仓Libraryisfree不限额度的，私有仓Library每月有free额度。
 
-## 基本概念
+## Basic Concepts
 
-- **Workflow（工作流）**：自动化流程，由一个或多个 job 组成
-- **Job（任务）**：一组在同一 runner 上执行的 steps
-- **Step（步骤）**：单个任务，可以是 action 或 shell 命令
-- **Action（动作）**：可复用的最小单元
-- **Runner（运行器）**：执行工作流的服务器
+- **Workflow（Workflow）**：自动化Process，由a或多个 job 组成
+- **Job（Task）**：a set of steps executed on the same runner
+- **Step（Step）**：单个Task，可以is action 或 shell Command
+- **Action（Action）**：reusable smallest unit
+- **Runner（Runner）**：执行Workflow的服务器
 
-## 基本语法
+## Basic Syntax
 
-工作流配置文件使用 YAML 格式，存放在 `.github/workflows/` 目录。
+WorkflowConfiguration File使用 YAML 格式，存放in `.github/workflows/` 目录。
 
-### 最简单的工作流
+### 最简单的Workflow
 
 ```yaml
 name: Hello World
@@ -52,7 +56,7 @@ on:
     - cron: '0 0 * * 0'  # 每周日午夜
   workflow_dispatch:  # 手动触发
 
-# 环境变量
+# Environment Variables
 env:
   NODE_VERSION: 18
 
@@ -77,9 +81,9 @@ jobs:
         run: npm test
 ```
 
-## 触发事件
+## 触发Event
 
-### Push 事件
+### Push Event
 
 ```yaml
 on:
@@ -94,7 +98,7 @@ on:
       - v1.*
 ```
 
-### Pull Request 事件
+### Pull Request Event
 
 ```yaml
 on:
@@ -103,7 +107,7 @@ on:
     branches: [ main ]
 ```
 
-### 定时任务
+### 定时Task
 
 ```yaml
 on:
@@ -134,7 +138,7 @@ on:
 ```yaml
 - uses: actions/checkout@v4
   with:
-    fetch-depth: 0  # 获取完整历史
+    fetch-depth: 0  # 获取完整History
 ```
 
 ### 设置 Node.js
@@ -155,7 +159,7 @@ on:
     cache: 'pip'
 ```
 
-### 缓存依赖
+### 缓存Dependency
 
 ```yaml
 - uses: actions/cache@v3
@@ -166,7 +170,7 @@ on:
       ${{ runner.os }}-node-
 ```
 
-### 上传构建产物
+### 上传build产物
 
 ```yaml
 - uses: actions/upload-artifact@v3
@@ -175,7 +179,7 @@ on:
     path: dist/
 ```
 
-### 下载构建产物
+### Downloadbuild产物
 
 ```yaml
 - uses: actions/download-artifact@v3
@@ -221,7 +225,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### 自动生成 Release Notes
+### 自动generates Release Notes
 
 ```yaml
 - name: Create Release
@@ -236,28 +240,28 @@ jobs:
 
 ## Self-hosted Runner
 
-自托管运行器允许在自己的服务器上运行工作流。
+自托管Runner允许in自己的服务器上运行Workflow。
 
 ### 添加 Runner
 
-1. 进入仓库 Settings → Actions → Runners → New self-hosted runner
-2. 根据提示在服务器上安装和配置
+1. 进入仓Library Settings → Actions → Runners → New self-hosted runner
+2. 根据提示in服务器上Installation和Configuration
 3. 启动 runner
 
-### 安装（Linux）
+### Installation（Linux）
 
 ```bash
 # 创建目录
 mkdir actions-runner && cd actions-runner
 
-# 下载
+# Download
 curl -o actions-runner-linux-x64-2.311.0.tar.gz -L \
   https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz
 
 # 解压
 tar xzf ./actions-runner-linux-x64-2.311.0.tar.gz
 
-# 配置
+# Configuration
 ./config.sh --url https://github.com/user/repo --token YOUR_TOKEN
 
 # 运行
@@ -279,7 +283,7 @@ jobs:
       - run: ./build.sh
 ```
 
-### 标签选择
+### Tag选择
 
 ```yaml
 jobs:
@@ -303,7 +307,7 @@ steps:
     run: ./deploy.sh
 ```
 
-## 矩阵构建
+## 矩阵build
 
 ```yaml
 jobs:
@@ -339,7 +343,7 @@ steps:
 
 ## 实用示例
 
-### 自动部署到服务器
+### 自动Deployment到服务器
 
 ```yaml
 name: Deploy
@@ -367,7 +371,7 @@ jobs:
             pm2 restart myapp
 ```
 
-### Docker 构建和推送
+### Docker build和Push
 
 ```yaml
 name: Docker Build
@@ -415,18 +419,18 @@ jobs:
       - run: npm run lint
 ```
 
-## 最佳实践
+## Best Practices
 
-1. **使用缓存**：加速依赖安装
-2. **矩阵构建**：多环境测试
+1. **使用缓存**：加速DependencyInstallation
+2. **矩阵build**：多环境Testing
 3. **并行执行**：多个独立 job
 4. **合理使用 if**：条件执行节省资源
-5. **保护 secrets**：不要在日志中输出
+5. **保护 secrets**：不要inLog中输出
 6. **使用官方 actions**：更可靠和维护良好
 7. **限制权限**：按需设置 permissions
 
-## 参考资源
+## References
 
-- [GitHub Actions 官方文档](https://docs.github.com/actions)
+- [GitHub Actions Official Docs](https://docs.github.com/actions)
 - [Actions Marketplace](https://github.com/marketplace?type=actions)
-- [工作流语法](https://docs.github.com/actions/reference/workflow-syntax-for-github-actions)
+- [Workflowsyntax](https://docs.github.com/actions/reference/workflow-syntax-for-github-actions)

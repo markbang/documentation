@@ -3,31 +3,35 @@ title: "Naive UI"
 description: "Naive UI is a TypeScript-friendly Vue 3 component library with 80+ components, covering installation, theme customization, and common usage."
 icon: "cube"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/Vue/NaiveUI.md)
+</Note>
+
 
 ![TypeScript](https://cdn.bangwu.top/img/TypeScript.png)
 
 # Naive UI
 
-Naive UI 是一个 Vue 3 组件库，提供了丰富的组件和完善的 TypeScript 支持。
+Naive UI isa Vue 3 ComponentLibrary，提供了丰富的Component和完善的 TypeScript supports。
 
-## 特性
+## Features
 
-- 🎨 **主题可定制**：完整的主题系统
-- 📦 **Tree Shaking**：按需加载，体积小
-- 🔧 **TypeScript**：完整的类型定义
-- 🌙 **暗色模式**：内置深色主题
-- 🎯 **无依赖**：不依赖第三方 UI 库
-- 📱 **响应式**：适配移动端
+- 🎨 **customizable theme**：complete theme system
+- 📦 **Tree Shaking**：load on demand，small size
+- 🔧 **TypeScript**：complete type definitions
+- 🌙 **Dark Mode**：内置Dark Theme
+- 🎯 **无Dependency**：no third-party UI library dependency
+- 📱 **响应式**：mobile-friendly
 
-## 安装
+## Installation
 
 ```bash
 npm install naive-ui
 ```
 
-## 使用方式
+## Usage
 
-### 全局完整引入
+### global full import
 
 ```javascript
 // main.js
@@ -40,7 +44,7 @@ app.use(naive)
 app.mount('#app')
 ```
 
-### 按需引入（推荐）
+### On-demand Import (Recommended)（推荐）
 
 ```vue
 <script setup>
@@ -55,7 +59,7 @@ import { NButton, NSpace, NCard } from 'naive-ui'
 </template>
 ```
 
-### 自动导入
+### Auto Import
 
 使用 `unplugin-auto-import` 和 `unplugin-vue-components`：
 
@@ -94,7 +98,7 @@ export default defineConfig({
 })
 ```
 
-## 配置提供者
+## Config Provider
 
 ```vue
 <script setup>
@@ -108,9 +112,9 @@ import { NConfigProvider, zhCN, dateZhCN } from 'naive-ui'
 </template>
 ```
 
-## 主题配置
+## Theme Configuration
 
-### 自定义主题
+### Custom Theme
 
 ```vue
 <script setup>
@@ -135,7 +139,7 @@ const themeOverrides = {
 </template>
 ```
 
-### 暗色模式
+### Dark Mode
 
 ```vue
 <script setup>
@@ -157,9 +161,9 @@ function toggleTheme() {
 </template>
 ```
 
-## 常用组件
+## Common Components
 
-### Button 按钮
+### Button Button
 
 ```vue
 <template>
@@ -176,11 +180,11 @@ function toggleTheme() {
     <n-button size="medium">Medium</n-button>
     <n-button size="large">Large</n-button>
     
-    <!-- 状态 -->
+    <!-- State -->
     <n-button :loading="true">Loading</n-button>
     <n-button disabled>Disabled</n-button>
     
-    <!-- 图标 -->
+    <!-- Icons -->
     <n-button>
       <template #icon>
         <n-icon><search-icon /></n-icon>
@@ -191,7 +195,7 @@ function toggleTheme() {
 </template>
 ```
 
-### Input 输入框
+### Input Input
 
 ```vue
 <script setup>
@@ -210,7 +214,7 @@ const value = ref('')
 </template>
 ```
 
-### Select 选择器
+### Select Select
 
 ```vue
 <script setup>
@@ -218,9 +222,9 @@ import { ref } from 'vue'
 
 const value = ref(null)
 const options = [
-  { label: '选项1', value: 1 },
-  { label: '选项2', value: 2 },
-  { label: '选项3', value: 3 }
+  { label: 'Option1', value: 1 },
+  { label: 'Option2', value: 2 },
+  { label: 'Option3', value: 3 }
 ]
 </script>
 
@@ -229,7 +233,7 @@ const options = [
 </template>
 ```
 
-### Table 表格
+### Table Table
 
 ```vue
 <script setup>
@@ -250,7 +254,7 @@ const data = [
 </template>
 ```
 
-### Card 卡片
+### Card Card
 
 ```vue
 <template>
@@ -268,7 +272,7 @@ const data = [
 </template>
 ```
 
-### Modal 模态框
+### Modal Modal
 
 ```vue
 <script setup>
@@ -288,7 +292,7 @@ const showModal = ref(false)
 </template>
 ```
 
-### Form 表单
+### Form Form
 
 ```vue
 <script setup>
@@ -331,15 +335,15 @@ function handleSubmit(e) {
     </n-form-item>
     
     <n-form-item>
-      <n-button attr-type="submit" type="primary">提交</n-button>
+      <n-button attr-type="submit" type="primary">Commit</n-button>
     </n-form-item>
   </n-form>
 </template>
 ```
 
-## 全局提示
+## Global Notifications
 
-### Message 消息
+### Message Message
 
 ```vue
 <script setup>
@@ -348,15 +352,15 @@ import { useMessage } from 'naive-ui'
 const message = useMessage()
 
 function showMessage() {
-  message.success('操作成功')
-  message.error('操作失败')
-  message.warning('警告信息')
+  message.success('Operation成功')
+  message.error('Operation失败')
+  message.warning('Warning信息')
   message.info('提示信息')
 }
 </script>
 ```
 
-### Dialog 对话框
+### Dialog Dialog
 
 ```vue
 <script setup>
@@ -366,7 +370,7 @@ const dialog = useDialog()
 
 function showDialog() {
   dialog.warning({
-    title: '警告',
+    title: 'Warning',
     content: '你确定吗？',
     positiveText: '确定',
     negativeText: '取消',
@@ -378,7 +382,7 @@ function showDialog() {
 </script>
 ```
 
-### Notification 通知
+### Notification Notification
 
 ```vue
 <script setup>
@@ -389,14 +393,14 @@ const notification = useNotification()
 function showNotification() {
   notification.success({
     title: '成功',
-    content: '操作成功',
+    content: 'Operation成功',
     duration: 2500
   })
 }
 </script>
 ```
 
-### Loading Bar 加载条
+### Loading Bar Loading Bar
 
 ```vue
 <script setup>
@@ -416,7 +420,7 @@ async function fetchData() {
 </script>
 ```
 
-## 布局组件
+## Layout Components
 
 ### Layout 布局
 
@@ -436,7 +440,7 @@ async function fetchData() {
 </template>
 ```
 
-### Space 间距
+### Space Space
 
 ```vue
 <template>
@@ -452,7 +456,7 @@ async function fetchData() {
 </template>
 ```
 
-### Grid 栅格
+### Grid Grid
 
 ```vue
 <template>
@@ -467,7 +471,7 @@ async function fetchData() {
 </template>
 ```
 
-## 图标
+## Icons
 
 Naive UI 推荐使用 [xicons](https://www.xicons.org/)：
 
@@ -487,18 +491,18 @@ import { Search } from '@vicons/ionicons5'
 </template>
 ```
 
-## 最佳实践
+## Best Practices
 
-1. **按需引入**：使用自动导入插件
-2. **主题一致性**：统一配置主题
-3. **全局配置**：使用 ConfigProvider
-4. **类型支持**：充分利用 TypeScript
-5. **响应式设计**：使用栅格系统
-6. **国际化**：配置 locale
+1. **On-demand Import (Recommended)**：使用Auto ImportPlugin
+2. **主题一致性**：统一Configuration主题
+3. **全局Configuration**：使用 ConfigProvider
+4. **类型supports**：充分利用 TypeScript
+5. **Responsive Design**：使用Grid系统
+6. **国际化**：Configuration locale
 
-## 参考资源
+## References
 
 - [Naive UI 官网](https://www.naiveui.com/)
-- [GitHub 仓库](https://github.com/tusen-ai/naive-ui)
-- [组件文档](https://www.naiveui.com/zh-CN/os-theme/components/button)
-- [主题编辑器](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)
+- [GitHub 仓Library](https://github.com/tusen-ai/naive-ui)
+- [ComponentDocumentation](https://www.naiveui.com/zh-CN/os-theme/components/button)
+- [主题edit器](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)

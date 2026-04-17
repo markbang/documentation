@@ -3,6 +3,10 @@ title: "CherryStudio"
 description: "CherryStudio is an open-source AI chat client with deep CSS theme customization, including a Claude-style dark and light mode configuration."
 icon: "message"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/CherryStudio.md)
+</Note>
+
 
 # CherryStudio
 
@@ -10,7 +14,7 @@ icon: "message"
 
 ```css
 /* Claude 主题 2.0 */
-/* 主题变量 */
+/* Theme Variables */
 :root {
   --color-black-soft: #2a2b2a; /* 深灰黑色，接近炭黑 */
   --color-white-soft: #f8f7f2; /* 温暖的米色，略带象牙色调 */
@@ -19,9 +23,9 @@ icon: "message"
   --message-text-color-dark: hsl(50, 14%, 91%); /* 暖色调浅米白色 */
 }
 
-/* 深色主题 */
+/* Dark Theme */
 body[theme-mode='dark'] {
-  /* 颜色定义 */
+  /* Color Definitions */
   --color-background: #2b2b2b; /* 深炭灰色 */
   --color-background-soft: #303030; /* 稍浅的炭灰色 */
   --color-background-mute: #282c34; /* 带深蓝调的石墨灰 */
@@ -33,7 +37,7 @@ body[theme-mode='dark'] {
   color: var(--message-text-color-dark) !important;
 }
 
-/* 深色主题特定样式 */
+/* Dark Theme特定样式 */
 body[theme-mode='dark'] {
   #content-container {
     background-color: var(--chat-background-assistant) !important;
@@ -57,7 +61,7 @@ body[theme-mode='dark'] {
     color: var(--message-text-color-dark) !important;
   }
 
-  /* 用户消息样式 */
+  /* 用户Message样式 */
   .message.message-user,
   .message.message-user *,
   .message-user,
@@ -80,7 +84,7 @@ body[theme-mode='dark'] {
     color: var(--message-text-color-dark) !important;
   }
 
-  /* 代码样式 */
+  /* Code Styles */
   code {
     background-color: #e5e5e20d; /* 浅灰白色，7%透明度 */
     color: #ea928a; /* 淡珊瑚红色 */
@@ -92,7 +96,7 @@ body[theme-mode='dark'] {
     font-family: var(--font-family) !important;
   }
 
-  /* 深色模式下的文本颜色覆盖 */
+  /* 深色模式下的Text Color Override */
   p,
   span,
   div {
@@ -100,9 +104,9 @@ body[theme-mode='dark'] {
   }
 }
 
-/* 浅色主题 */
+/* Light Theme */
 body[theme-mode='light'] {
-  /* 颜色定义 */
+  /* Color Definitions */
   --color-white: #ffffff; /* 纯白色 */
   --color-background: hsl(55, 19%, 89%); /* 淡米黄灰色 */
   --color-background-soft: hsl(51, 16%, 85%); /* 浅麦秆黄色 */
@@ -114,7 +118,7 @@ body[theme-mode='light'] {
   font-family: var(--font-family) !important;
 }
 
-/* 浅色主题特定样式 */
+/* Light Theme特定样式 */
 body[theme-mode='light'] {
   #content-container {
     background-color: var(--chat-background-assistant) !important;
@@ -150,7 +154,7 @@ body[theme-mode='light'] {
     font-family: var(--font-family) !important;
   }
 
-  /* 代码样式 */
+  /* Code Styles */
   code {
     background-color: #3d39290d; /* 深棕褐色，5%透明度 */
     color: #7c1b13; /* 砖红褐色 */

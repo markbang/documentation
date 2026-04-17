@@ -14,7 +14,7 @@ sudo apt update
 sudo apt install caddy
 ```
 
-最简单的一个配置是这样的
+最简单的aConfigurationis这样的
 
 ```json
 example.com {

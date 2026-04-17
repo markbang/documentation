@@ -6,7 +6,7 @@ icon: "bolt"
 
 # Go gin
 
-gin 是一个使用最广泛的 go web 框架
+gin is the most widely-used go web Framework
 
 ## ginServer
 

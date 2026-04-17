@@ -7,19 +7,19 @@ icon: "bolt"
 
 # FastAPI
 
-FastAPI 是一个现代、高性能的 Python Web 框架，基于 Python 3.6+ 的类型提示构建。在 Github 上拥有超过 70k+ stars，是目前最流行的 Python 后端框架之一。
+FastAPI isa现代、High Performance的 Python Web Framework，基于 Python 3.6+ 的Type Hintsbuild。has over 70k+ stars on GitHub，is目前the most popular Python Backend Frameworks之一。
 
-## 核心特性
+## Core Features
 
-- **高性能**: 性能媲美 NodeJS 和 Go
-- **快速开发**: 提高开发效率 200%-300%
-- **自动文档**: 自动生成交互式 API 文档
-- **类型检查**: 基于 Pydantic 的数据验证
-- **异步支持**: 原生支持 async/await
+- **High Performance**: performance comparable to Node.js and Go
+- **Fast Development**: improve development efficiency 200%-300%
+- **Auto Docs**: 自动generates交互式 API Documentation
+- **Type Checking**: Pydantic-based data validation
+- **异步supports**: 原生supports async/await
 
-## 快速开始
+## Quick Start
 
-### 安装
+### Installation
 
 ```bash
 pip install fastapi
@@ -48,9 +48,9 @@ async def read_item(item_id: int, q: str = None):
 uvicorn main:app --reload
 ```
 
-访问 http://127.0.0.1:8000/docs 查看自动生成的 API 文档。
+访问 http://127.0.0.1:8000/docs 查看自动generates的 API Documentation。
 
-## 路径参数与查询参数
+## Path & Query Parameters
 
 ```python
 from typing import Optional
@@ -65,7 +65,7 @@ async def read_user(
     return {"user_id": user_id, "skip": skip, "limit": limit, "q": q}
 ```
 
-## 请求体
+## Request Body
 
 ```python
 from pydantic import BaseModel
@@ -81,7 +81,7 @@ async def create_item(item: Item):
     return item
 ```
 
-## 响应模型
+## Response Model
 
 ```python
 class UserOut(BaseModel):
@@ -90,10 +90,10 @@ class UserOut(BaseModel):
 
 @app.post("/users/", response_model=UserOut)
 async def create_user(user: User):
-    return user  # 自动过滤敏感字段
+    return user  # 自动Filtering敏感字段
 ```
 
-## 依赖注入
+## Dependency Injection
 
 ```python
 from fastapi import Depends
@@ -110,7 +110,7 @@ async def read_users(db = Depends(get_db)):
     return db.query_users()
 ```
 
-## 中间件
+## Middleware
 
 ```python
 from fastapi.middleware.cors import CORSMiddleware
@@ -124,7 +124,7 @@ app.add_middleware(
 )
 ```
 
-## 数据库集成
+## Database Integration
 
 ### SQLAlchemy
 
@@ -144,7 +144,7 @@ def get_db():
         db.close()
 ```
 
-## 认证与授权
+## Authentication & Authorization
 
 ```python
 from fastapi.security import OAuth2PasswordBearer
@@ -156,7 +156,7 @@ async def read_users_me(token: str = Depends(oauth2_scheme)):
     return {"token": token}
 ```
 
-## 文件上传
+## File Upload
 
 ```python
 from fastapi import File, UploadFile
@@ -166,13 +166,13 @@ async def create_upload_file(file: UploadFile = File(...)):
     return {"filename": file.filename}
 ```
 
-## 后台任务
+## Background Tasks
 
 ```python
 from fastapi import BackgroundTasks
 
 def send_email(email: str):
-    # 发送邮件逻辑
+    # send邮件逻辑
     pass
 
 @app.post("/send-notification/")
@@ -184,8 +184,8 @@ async def send_notification(
     return {"message": "Email will be sent"}
 ```
 
-## 学习资源
+## Resources
 
-- 官方文档: https://fastapi.tiangolo.com/
-- 中文文档: https://fastapi.tiangolo.com/zh/
+- Official Docs: https://fastapi.tiangolo.com/
+- Chinese localeDocumentation: https://fastapi.tiangolo.com/zh/
 - GitHub: https://github.com/tiangolo/fastapi

@@ -3,21 +3,25 @@ title: "Next.js"
 description: "Next.js is a React full-stack framework by Vercel with SSR, SSG, and API Routes, covering project setup, file-system routing, and data fetching."
 icon: "nextjs"
 ---
+<Note icon="language" title="Original Chinese Content">
+Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/Nextjs/index.md)
+</Note>
+
 
 ## Next.js
 
-Next.js 是近些年最火的 React 框架，由 Vercel 开发和维护。
+Next.js is近些年最火的 React Framework，由 Vercel 开发和维护。
 
-### 核心特性
+### Core Features
 
 - **混合渲染**：SSR、SSG、ISR 多种渲染模式
-- **文件路由**：基于文件系统的自动路由
+- **file路由**：基于file系统的自动路由
 - **API Routes**：内置 API 端点
-- **优化性能**：自动代码分割、图片优化
-- **TypeScript**：原生 TypeScript 支持
-- **零配置**：开箱即用的最佳实践
+- **优化性能**：自动code splitting、Image Optimization
+- **TypeScript**：原生 TypeScript supports
+- **零Configuration**：开箱即用的Best Practices
 
-### 快速开始
+### Quick Start
 
 ```bash
 # 创建新项目
@@ -36,20 +40,20 @@ npm run dev
 my-app/
 ├── app/              # App Router（推荐）
 │   ├── layout.tsx    # 根布局
-│   ├── page.tsx      # 首页
+│   ├── page.tsx      # Home
 │   └── api/          # API 路由
 ├── public/           # 静态资源
-├── components/       # 组件
-├── lib/              # 工具函数
-└── next.config.js    # Next.js 配置
+├── components/       # Component
+├── lib/              # Tool函数
+└── next.config.js    # Next.js Configuration
 ```
 
 ### App Router（Next.js 13+）
 
-#### 页面和布局
+#### Pages & Layouts
 
 ```tsx
-// app/page.tsx - 首页
+// app/page.tsx - Home
 export default function Home() {
   return <h1>Welcome to Next.js</h1>
 }
@@ -69,7 +73,7 @@ export default function About() {
 }
 ```
 
-#### 动态路由
+#### Dynamic Routes
 
 ```tsx
 // app/blog/[slug]/page.tsx
@@ -83,14 +87,14 @@ export default function Shop({ params }) {
 }
 ```
 
-#### 数据获取
+#### Data Fetching
 
 ```tsx
-// 服务端组件（默认）
+// Server Components (Default)（默认）
 async function getData() {
   const res = await fetch('https://api.example.com/data', {
     cache: 'force-cache', // 缓存
-    // next: { revalidate: 3600 } // ISR - 每小时重新验证
+    // next: { revalidate: 3600 } // ISR - 每小时重新Validation
   })
   return res.json()
 }
@@ -101,10 +105,10 @@ export default async function Page() {
 }
 ```
 
-#### 客户端组件
+#### Client Components
 
 ```tsx
-'use client' // 必须在顶部声明
+'use client' // 必须in顶部Declaration
 
 import { useState } from 'react'
 
@@ -121,12 +125,12 @@ export default function Counter() {
 #### Loading 和 Error
 
 ```tsx
-// app/loading.tsx - 加载状态
+// app/loading.tsx - loading states
 export default function Loading() {
   return <div>Loading...</div>
 }
 
-// app/error.tsx - 错误处理
+// app/error.tsx - error handling
 'use client'
 export default function Error({ error, reset }) {
   return (
@@ -154,7 +158,7 @@ export async function POST(request: Request) {
 }
 ```
 
-### 中间件
+### Middleware
 
 ```typescript
 // middleware.ts
@@ -162,7 +166,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  // 认证检查
+  // authentication检查
   const token = request.cookies.get('token')
   
   if (!token) {
@@ -177,7 +181,7 @@ export const config = {
 }
 ```
 
-### 图片优化
+### Image Optimization
 
 ```tsx
 import Image from 'next/image'
@@ -196,7 +200,7 @@ export default function Avatar() {
 }
 ```
 
-### 字体优化
+### Font Optimization
 
 ```tsx
 import { Inter, Roboto_Mono } from 'next/font/google'
@@ -213,7 +217,7 @@ export default function Layout({ children }) {
 }
 ```
 
-### 元数据
+### Metadata
 
 ```tsx
 // app/layout.tsx
@@ -225,7 +229,7 @@ export const metadata: Metadata = {
   keywords: ['Next.js', 'React'],
 }
 
-// 动态元数据
+// 动态Metadata
 export async function generateMetadata({ params }) {
   const post = await getPost(params.id)
   return {
@@ -235,7 +239,7 @@ export async function generateMetadata({ params }) {
 }
 ```
 
-### 环境变量
+### Environment Variables
 
 ```bash
 # .env.local
@@ -244,14 +248,14 @@ DATABASE_URL=postgresql://...
 ```
 
 ```tsx
-// 客户端可访问（NEXT_PUBLIC_ 前缀）
+// client accessible（NEXT_PUBLIC_ prefix）
 const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
-// 仅服务端可访问
+// server-only accessible
 const dbUrl = process.env.DATABASE_URL
 ```
 
-### 配置文件
+### Configuration File
 
 ```javascript
 // next.config.js
@@ -277,14 +281,14 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-### 部署
+### Deployment
 
 #### Vercel（推荐）
 ```bash
-# 安装 Vercel CLI
+# Installation Vercel CLI
 npm i -g vercel
 
-# 部署
+# Deployment
 vercel
 ```
 
@@ -300,7 +304,7 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-#### 静态导出
+#### Static Export
 ```javascript
 // next.config.js
 module.exports = {
@@ -313,16 +317,16 @@ npm run build
 # 输出到 out/ 目录
 ```
 
-### 性能优化
+### Performance Optimization
 
-- **代码分割**：自动按路由分割
-- **懒加载**：动态导入组件
-- **图片优化**：next/image 自动优化
-- **字体优化**：next/font 优化字体加载
-- **预取**：Link 组件自动预取
-- **缓存**：细粒度的缓存控制
+- **code splitting**：auto split by route
+- **lazy loading**：dynamic import components
+- **Image Optimization**：next/image 自动优化
+- **Font Optimization**：next/font 优化字体加载
+- **prefetch**：Link Component自动prefetch
+- **缓存**：fine-grained cache control
 
-### 常用库集成
+### Library Integrations
 
 #### Tailwind CSS
 ```bash
@@ -336,34 +340,34 @@ npm install prisma @prisma/client
 npx prisma init
 ```
 
-#### NextAuth.js 认证
+#### NextAuth.js authentication
 ```bash
 npm install next-auth
 ```
 
-### 最佳实践
+### Best Practices
 
-1. **服务端组件优先**：默认使用服务端组件
-2. **合理使用缓存**：配置适当的缓存策略
-3. **优化图片**：使用 next/image
-4. **代码组织**：按功能模块组织代码
-5. **TypeScript**：使用类型安全
-6. **错误处理**：使用 error.tsx 处理错误
-7. **加载状态**：使用 loading.tsx 提升体验
+1. **Server Components (Default)优先**：默认使用Server Components (Default)
+2. **use caching appropriately**：Configuration适当的缓存Strategy
+3. **优化图片**：use next/image
+4. **code organization**：按功能Module组织代码
+5. **TypeScript**：use type safety
+6. **error handling**：use error.tsx for error handling
+7. **loading states**：use loading.tsx for better UX
 
-### 常见问题
+### FAQ
 
-#### 水合错误（Hydration Error）
+#### Hydration Error（Hydration Error）
 - 确保服务端和客户端渲染一致
-- 避免在服务端使用浏览器 API
+- 避免in服务端使用浏览器 API
 
-#### 性能优化
-- 使用动态导入减少初始包大小
+#### Performance Optimization
+- 使用动态导入减少初始Package大小
 - 启用生产模式优化
 
-### 参考资源
+### References
 
-- [Next.js 官方文档](https://nextjs.org/docs)
+- [Next.js Official Docs](https://nextjs.org/docs)
 - [Next.js GitHub](https://github.com/vercel/next.js)
 - [Learn Next.js](https://nextjs.org/learn)
-- [App Router 文档](https://nextjs.org/docs/app)
+- [App Router Documentation](https://nextjs.org/docs/app)

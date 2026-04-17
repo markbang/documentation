@@ -4,13 +4,13 @@ description: "Scoop is a Windows command-line package manager like Homebrew, cov
 icon: "bucket"
 ---
 
-# Scoop-Windows 中的 brew
+# Scoop-Windows brew
 
-## 安装
+## Installation
 
-## 配置
+## Configuration
 
-使用 aria2
+using aria2
 
 ```bash
 scoop install aria2
@@ -34,17 +34,17 @@ scoop_branch          : master
 aria2-warning-enabled : False
 ```
 
-备份
+Backup
 
 ```bash
 scoop export > app.json
 scoop import > app.json
-# 会备份bucket和app，不包括config
+# backs up buckets and apps，excluding config
 ```
 
-## 常用应用
+## Common Apps
 
-## 未找到的应用
+## Apps Not Found via Scoop
 
 [雷神加速器](https://www.leigod.com/)
 
