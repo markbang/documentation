@@ -17,7 +17,7 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 /* Theme Variables */
 :root {
   --color-black-soft: #2a2b2a; /* 深灰黑色，接近炭黑 */
-  --color-white-soft: #f8f7f2; /* 温暖的米色，略带象牙色调 */
+  --color-white-soft: #f8f7f2; /* 温暖's 米色，略带象牙色调 */
   --font-family: 'SF Pro Rounded', 'LXGWWenKaiScreenR', -apple-system, BlinkMacSystemFont,
     system-ui, sans-serif;
   --message-text-color-dark: hsl(50, 14%, 91%); /* 暖色调浅米白色 */
@@ -27,8 +27,8 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 body[theme-mode='dark'] {
   /* Color Definitions */
   --color-background: #2b2b2b; /* 深炭灰色 */
-  --color-background-soft: #303030; /* 稍浅的炭灰色 */
-  --color-background-mute: #282c34; /* 带深蓝调的石墨灰 */
+  --color-background-soft: #303030; /* 稍浅's 炭灰色 */
+  --color-background-mute: #282c34; /* 带深蓝调's 石墨灰 */
   --navbar-background: var(--color-black-soft); /* 深灰黑色 */
   --chat-background: var(--color-black-soft); /* 深灰黑色 */
   --chat-background-user: #323332; /* 中深炭灰色 */
@@ -96,7 +96,7 @@ body[theme-mode='dark'] {
     font-family: var(--font-family) !important;
   }
 
-  /* 深色模式下的Text Color Override */
+  /* 深色模式下's Text Color Override */
   p,
   span,
   div {
@@ -111,10 +111,10 @@ body[theme-mode='light'] {
   --color-background: hsl(55, 19%, 89%); /* 淡米黄灰色 */
   --color-background-soft: hsl(51, 16%, 85%); /* 浅麦秆黄色 */
   --color-background-mute: #e4e1d7; /* 灰米色，带微暖调 */
-  --navbar-background: var(--color-white-soft); /* 温暖的米色 */
-  --chat-background: var(--color-white-soft); /* 温暖的米色 */
-  --chat-background-user: #f8f7f2; /* 温暖的米色，略带象牙色调 */
-  --chat-background-assistant: hsl(51, 24%, 95%); /* 非常浅的麦秆黄色 */
+  --navbar-background: var(--color-white-soft); /* 温暖's 米色 */
+  --chat-background: var(--color-white-soft); /* 温暖's 米色 */
+  --chat-background-user: #f8f7f2; /* 温暖's 米色，略带象牙色调 */
+  --chat-background-assistant: hsl(51, 24%, 95%); /* 非常浅's 麦秆黄色 */
   font-family: var(--font-family) !important;
 }
 
@@ -131,7 +131,7 @@ body[theme-mode='light'] {
   }
 
   .message-content-container {
-    background: hsl(40, 23%, 98%) !important; /* 极浅的米黄色，接近纯白 */
+    background: hsl(40, 23%, 98%) !important; /* 极浅's 米黄色，接近纯白 */
     font-family: var(--font-family) !important;
     box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.04) !important;
     border: 1px solid var(--color-border) !important;

@@ -14,7 +14,7 @@ MessagePush服务用于将Notification、alerts and other info to various termin
 
 ## Server 酱
 
-[Server酱](https://sct.ftqq.com/) isafree的微信MessagePush服务。
+[Server酱](https://sct.ftqq.com/) is afree's 微信MessagePush服务。
 
 ### 特点
 - 📱 push to WeChat
@@ -24,7 +24,7 @@ MessagePush服务用于将Notification、alerts and other info to various termin
 
 ### Usage
 
-1. 访问 [Server酱官网](https://sct.ftqq.com/) 登录
+1. Visit [Server酱官网](https://sct.ftqq.com/) 登录
 2. 扫码绑定微信
 3. 获取 SendKey
 
@@ -58,11 +58,11 @@ curl -X POST "https://sctapi.ftqq.com/YOUR_SENDKEY.send" \
 - Server Monitoring Alerts
 - 定时TaskNotification
 - 爬虫完成提醒
-- CI/CD buildNotification
+- CI/CD builtNotification
 
 ## Bark
 
-[Bark](https://github.com/Finb/Bark) is一款open-source的 iOS MessagePush应用。
+[Bark](https://github.com/Finb/Bark) is一款open-source's  iOS MessagePush应用。
 
 ### 特点
 - 📱 仅supports iOS
@@ -116,7 +116,7 @@ curl -X POST "https://api.day.app/YOUR_KEY" \
 send_bark("点击跳转", "内容", url="https://example.com")
 
 # auto-copy content
-send_bark("自动复制", "需要复制的内容", automaticallyCopy=1)
+send_bark("自动复制", "需要复制's 内容", automaticallyCopy=1)
 
 # 时效性Notification
 send_bark("重要Notification", "内容", level="timeSensitive")
@@ -124,7 +124,7 @@ send_bark("重要Notification", "内容", level="timeSensitive")
 
 ## [Telegram Bot](https://core.telegram.org/bots)
 
-Telegram Bot API is功能强大的MessagePush方式。
+Telegram Bot API is功能强大's MessagePush方式。
 
 ### Create Bot
 
@@ -184,7 +184,7 @@ curl -X POST "https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage" \
 ### Advanced Features
 
 ```python
-# send带Button的Message
+# send带Button's Message
 def send_with_buttons(bot, text, buttons):
     url = f"{bot.api_url}/sendMessage"
     keyboard = {
@@ -202,7 +202,7 @@ def send_with_buttons(bot, text, buttons):
 
 # 使用
 buttons = [
-    [{"text": "访问网站", "url": "https://example.com"}],
+    [{"text": "Visit网站", "url": "https://example.com"}],
     [{"text": "GitHub", "url": "https://github.com"}]
 ]
 send_with_buttons(bot, "选择aOperation：", buttons)
@@ -267,7 +267,7 @@ send_xizhi(
 
 ```python
 class NotificationManager:
-    """统一的MessagePush管理器"""
+    """统一's MessagePush管理器"""
     
     def __init__(self):
         self.server_chan_key = "YOUR_SENDKEY"
@@ -327,7 +327,7 @@ notifier.send("系统告警", "CPU 使用率超过 90%", channels=['wechat', 'te
 
 ## References
 
-- [Server酱Documentation](https://sct.ftqq.com/sendkey)
+- [Server酱documentation](https://sct.ftqq.com/sendkey)
 - [Bark GitHub](https://github.com/Finb/Bark)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
 - [息知官网](https://xz.qqoq.net)

@@ -14,19 +14,19 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 ## 网页Interactive Code Notes
 
-Jupyter Notebook is Jupyter 团队的第一代产物，算is最经典的一代，如果你学过 python，那你对 Jupyter Notebook 一定不陌生
+Jupyter Notebook is Jupyter 团队's 第一代产物，算is最经典's 一代，如果你学过 python，那你yes Jupyter Notebook 一定不陌生
 
 ## Jupyter Lab
 
-Jupyterlab is jupyternotebook 的进阶versions，提供更丰富的功能以及 UI
+Jupyterlab is jupyternotebook 's 进阶versions，提供更丰富's 功能以及 UI
 
 ## Jupyter Lite
 
-Jupyter Lite is Jupyter 团队自行开发的a基于浏览器的静态 Jupyter 交互环境，也就is说相当于只要有浏览器就能用，不需要服务器或者本地电脑的编程环境，也就is“Lite”的由来，变得更加轻量了。
+Jupyter Lite is Jupyter 团队自行开发's abuilt on浏览器's 静态 Jupyter 交互环境，也就is说相当于只要有浏览器就能用，不需要服务器或者本地电脑's 编程环境，也就is“Lite”'s 由来，变得更加轻量了。
 
 ### 优点
 
-这样轻量的应用，可以说is非常适合做网页in线代码edit器了
+这样轻量's 应用，可以说is非常适合做网页in线代码edit器了
 
 ```html
 <iframe src="https://repl.bangwu.top/repl/?kernel=python&toolbar=1"> </iframe>

@@ -12,9 +12,9 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 ![bangwu20250308194953](https://cdn.bangwu.top/img/202503082350366.webp)
 
-General Aptitude Test大概分为四个部分，语言表达能力【类似语文口语选择题】、数学能力【一些数学规律和简单的数学题】、逻辑推理能力【根据情境推断选择合适的答案】、数据Analysis能力【根据图表来Analysis答案】
+General Aptitude Test大概分为四个部分，语言表达能力【类似语文口语选择题】、数学能力【一些数学规律和简单's 数学题】、逻辑推理能力【根据情境推断选择合适's 答案】、数据Analysis能力【根据图表来Analysis答案】
 
-这个笔试比较简单，毕竟isGeneral Aptitude Test，不isTechnology岗所以没考algorithm problem，一开始in牛客考的有点吓人
+这个written exam比较简单，毕竟isGeneral Aptitude Test，不isTechnology岗所以没考algorithm problem，一开始in牛客考's 有点吓人
 
 > Lessons Learned
 

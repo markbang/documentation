@@ -10,9 +10,9 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # GitHub Actions
 
-GitHub Actions is GitHub 提供的 CI/CD 自动化Tool，可以自动执行build、Testing、Deployment等Workflow程。
+GitHub Actions is GitHub 提供's  CI/CD 自动化Tool，可以自动执行build、Testing、Deployment等Workflow程。
 
-对公开仓Libraryisfree不限额度的，私有仓Library每月有free额度。
+yes公开仓Libraryisfree不限额度's ，私有仓Library每月有free额度。
 
 ## Basic Concepts
 
@@ -20,13 +20,13 @@ GitHub Actions is GitHub 提供的 CI/CD 自动化Tool，可以自动执行build
 - **Job（Task）**：a set of steps executed on the same runner
 - **Step（Step）**：单个Task，可以is action 或 shell Command
 - **Action（Action）**：reusable smallest unit
-- **Runner（Runner）**：执行Workflow的服务器
+- **Runner（Runner）**：执行Workflow's 服务器
 
 ## Basic Syntax
 
 WorkflowConfiguration File使用 YAML 格式，存放in `.github/workflows/` 目录。
 
-### 最简单的Workflow
+### 最简单's Workflow
 
 ```yaml
 name: Hello World
@@ -34,7 +34,7 @@ name: Hello World
 on: [push]
 
 jobs:
-  build:
+  built:
     runs-on: ubuntu-latest
     steps:
       - name: Say hello
@@ -159,7 +159,7 @@ on:
     cache: 'pip'
 ```
 
-### 缓存Dependency
+### CachingDependency
 
 ```yaml
 - uses: actions/cache@v3
@@ -175,7 +175,7 @@ on:
 ```yaml
 - uses: actions/upload-artifact@v3
   with:
-    name: build-files
+    name: built-files
     path: dist/
 ```
 
@@ -184,7 +184,7 @@ on:
 ```yaml
 - uses: actions/download-artifact@v3
   with:
-    name: build-files
+    name: built-files
     path: dist/
 ```
 
@@ -209,7 +209,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run build
+          npm run built
       
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -225,7 +225,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### 自动generates Release Notes
+### automatically generates Release Notes
 
 ```yaml
 - name: Create Release
@@ -240,7 +240,7 @@ jobs:
 
 ## Self-hosted Runner
 
-自托管Runner允许in自己的服务器上运行Workflow。
+自托管Runner允许in自己's 服务器上RunWorkflow。
 
 ### 添加 Runner
 
@@ -264,10 +264,10 @@ tar xzf ./actions-runner-linux-x64-2.311.0.tar.gz
 # Configuration
 ./config.sh --url https://github.com/user/repo --token YOUR_TOKEN
 
-# 运行
+# Run
 ./run.sh
 
-# 作为服务运行
+# 作为服务Run
 sudo ./svc.sh install
 sudo ./svc.sh start
 ```
@@ -276,7 +276,7 @@ sudo ./svc.sh start
 
 ```yaml
 jobs:
-  build:
+  built:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -287,7 +287,7 @@ jobs:
 
 ```yaml
 jobs:
-  build:
+  built:
     runs-on: [self-hosted, linux, x64]
 ```
 
@@ -371,7 +371,7 @@ jobs:
             pm2 restart myapp
 ```
 
-### Docker build和Push
+### Docker built和Push
 
 ```yaml
 name: Docker Build
@@ -381,7 +381,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  built:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -421,7 +421,7 @@ jobs:
 
 ## Best Practices
 
-1. **使用缓存**：加速DependencyInstallation
+1. **使用Caching**：加速DependencyInstallation
 2. **矩阵build**：多环境Testing
 3. **并行执行**：多个独立 job
 4. **合理使用 if**：条件执行节省资源

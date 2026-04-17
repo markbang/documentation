@@ -3,10 +3,14 @@ title: "Rye"
 description: "Rye is a next-gen Python package manager and virtual environment tool, compared with pyenv, pipenv, uv, and pdm for dependency management."
 icon: "gear"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/apps/Rye.md)
+</Note>
+
 
 [Python package managers and virtual environments——V2EX](https://www.v2ex.com/t/1032069)
 
-Python的环境管理Tool可谓is多之又多
+Python's 环境管理Tool可谓is多之又多
 
 ![python-tools](https://cdn.bangwu.top/img/202503131258281.webp)
 
@@ -58,7 +62,7 @@ url = "https://pypi.org/simple/"
 rye add ipykernel
 ```
 
-### 我的Configuration
+### 我's Configuration
 
 ```toml
 [default]

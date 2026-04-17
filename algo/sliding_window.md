@@ -3,14 +3,18 @@ title: "Sliding window"
 description: "Sliding window algorithm using two pointers for subarray and substring problems, with a Python template, LeetCode examples, and O(n) analysis."
 icon: "window-maximize"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/algo/sliding_window.md)
+</Note>
+
 
 [leetcode.3](https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/)
 
-滑动窗口是一种常用的双指针技巧，适用于处理数组/字符串的子元素问题。通过维护一个窗口在数组上滑动，可以在O(n)时间复杂度内解决问题。
+滑动窗口是一种常用's 双指针技巧，适用于处理数组/字符串's 子元素问题。通过维护一个窗口在数组上滑动，可以在O(n)时间复杂度内解决问题。
 
 ### 基本思路
 
-1. 使用两个指针left和right表示窗口的左右边界
+1. 使用两个指针left和right表示窗口's 左右边界
 2. right指针不断右移扩大窗口
 3. 当窗口满足某个条件时，left指针右移缩小窗口
 4. 在移动过程中更新结果
@@ -20,17 +24,17 @@ icon: "window-maximize"
 ```python
 def sliding_window(s: str):
     left = 0
-    window = {}  # 窗口内的数据
+    window = {}  # 窗口内's 数据
     result = 0
     
     for right in range(len(s)):
-        # 1. 将right位置的元素加入窗口
+        # 1. 将right位置's 元素加入窗口
         c = s[right]
         window[c] = window.get(c, 0) + 1
         
         # 2. 判断窗口是否需要收缩
-        while 窗口需要收缩的条件:
-            # 3. 移出left位置的元素
+        while 窗口需要收缩's 条件:
+            # 3. 移出left位置's 元素
             d = s[left]
             left += 1
             window[d] -= 1
@@ -43,7 +47,7 @@ def sliding_window(s: str):
 
 ## 经典题目
 
-### 1. [LeetCode 3. 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+### 1. [LeetCode 3. 无重复字符's 最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
 ```python
 # leetcode.3 滑动窗口+哈希表 
@@ -125,7 +129,7 @@ class Solution:
         return result
 ```
 
-### 4. [LeetCode 209. 长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+### 4. [LeetCode 209. 长度最小's 子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 
 ```python
 class Solution:
@@ -145,7 +149,7 @@ class Solution:
         return 0 if result == float('inf') else result
 ```
 
-### 5. [LeetCode 567. 字符串的排列](https://leetcode.cn/problems/permutation-in-string/)
+### 5. [LeetCode 567. 字符串's 排列](https://leetcode.cn/problems/permutation-in-string/)
 
 ```python
 class Solution:
@@ -179,11 +183,11 @@ class Solution:
 
 ## 适用场景
 
-- 求连续子数组/子串的最值
+- 求连续子数组/子串's 最值
 - 字符串匹配问题
-- 固定长度窗口的问题
-- 满足某个条件的最长/最短子数组
+- 固定长度窗口's 问题
+- 满足某个条件's 最长/最短子数组
 
 ## 时间复杂度
 
-虽然有两层循环，但每个元素最多被访问两次（一次right，一次left），所以时间复杂度为O(n)。
+虽然有两层循环，但每个元素最多被Visit两次（一次right，一次left），所以时间复杂度为O(n)。

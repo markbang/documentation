@@ -65,7 +65,7 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 
 ```markdown
 [Link文本](https://example.com)
-[带title的Link](https://example.com "鼠标悬停显示")
+[带title's Link](https://example.com "鼠标悬停显示")
 
 # 自动Link
 <https://example.com>
@@ -80,7 +80,7 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 
 ```markdown
 ![替代文本](image.jpg)
-![带title的图片](image.jpg "图片title")
+![带title's 图片](image.jpg "图片title")
 
 # 图片Link
 [![图片](image.jpg)](https://example.com)
@@ -131,13 +131,13 @@ ___
 ### Table
 
 ```markdown
-| 左对齐 | 居中 | 右对齐 |
+| 左yes齐 | 居中 | 右yes齐 |
 |:-------|:----:|-------:|
 | 内容1  | 内容2 | 内容3 |
 | 内容4  | 内容5 | 内容6 |
 ```
 
-| 左对齐 | 居中 | 右对齐 |
+| 左yes齐 | 居中 | 右yes齐 |
 |:-------|:----:|-------:|
 | 内容1  | 内容2 | 内容3 |
 
@@ -162,7 +162,7 @@ ___
 
 ## Github Flavored Markdown (GFM)
 
-GitHub 对 Markdown 进行了Extension，增加了一些Features。
+GitHub yes Markdown 进行了Extension，增加了一些Features。
 
 ### syntax高亮
 
@@ -201,8 +201,8 @@ https://github.com
 
 ````markdown
 ```diff
-- Removed的行
-+ 添加的行
+- Removed's 行
++ 添加's 行
 ```
 ````
 
@@ -212,7 +212,7 @@ https://github.com
 <details>
 <summary>点击展开</summary>
 
-这里is隐藏的内容
+这里is隐藏's 内容
 
 </details>
 ```
@@ -221,19 +221,19 @@ https://github.com
 
 ```markdown
 > [!NOTE]
-> 有用的信息，用户应该知道。
+> 有用's 信息，用户应该知道。
 
 > [!TIP]
-> 帮助用户更成功的建议。
+> 帮助用户更成功's 建议。
 
 > [!IMPORTANT]
-> 用户成功的关键信息。
+> 用户成功's 关键信息。
 
 > [!WARNING]
-> 需要用户立即注意的紧急信息。
+> 需要用户立即注意's 紧急信息。
 
 > [!CAUTION]
-> 行动的负面潜in后果。
+> 行动's 负面潜in后果。
 ```
 
 ### 数学公式
@@ -292,7 +292,7 @@ Markdown supports直接使用 HTML：
 ```markdown
 [跳转到title](#titlename)
 
-# Chinese localetitle会被转为拼音或其他形式
+# Chinese title会被转为拼音或其他形式
 ```
 
 ### 徽章 Badge
@@ -307,7 +307,7 @@ Markdown supports直接使用 HTML：
 ```markdown
 [TOC]
 
-# 某些Editor Support自动generates目录
+# 某些Editor Supportautomatically generates目录
 ```
 
 ## 常用Tool
@@ -319,8 +319,8 @@ Markdown supports直接使用 HTML：
 
 ## Best Practices
 
-1. **保持简洁**：Markdown 的优势in于简单
-2. **使用title**：合理的层级结构
+1. **保持简洁**：Markdown 's 优势in于简单
+2. **使用title**：合理's 层级结构
 3. **代码高亮**：指定语言提升可读性
 4. **Image Optimization**：控制图片大小
 5. **预览检查**：编写后及时预览效果
@@ -330,6 +330,6 @@ Markdown supports直接使用 HTML：
 ## References
 
 - [Markdown 官方教程](https://www.markdownguide.org/)
-- [GitHub Markdown Documentation](https://docs.github.com/zh/get-started/writing-on-github)
+- [GitHub Markdown documentation](https://docs.github.com/zh/get-started/writing-on-github)
 - [CommonMark Specification](https://commonmark.org/)
 - [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)

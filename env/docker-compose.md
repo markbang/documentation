@@ -34,17 +34,17 @@ docker-compose up -d
 # 停止服务
 docker-compose down
 
-# 查看服务State
+# View服务State
 docker-compose ps
 
-# 查看Log
+# ViewLog
 docker-compose logs -f
 
 # 重启服务
 docker-compose restart
 
 # Build Image
-docker-compose build
+docker-compose built
 
 # 执行Command
 docker-compose exec service_name bash
@@ -79,8 +79,8 @@ volumes:
 
 ### 常用Configuration项
 
-- `image`: 使用的镜像
-- `build`: buildConfiguration
+- `image`: 使用's 镜像
+- `build`: builtConfiguration
 - `ports`: Port Mapping
 - `volumes`: 数据卷挂载
 - `environment`: Environment Variables
@@ -256,7 +256,7 @@ services:
       - webnet
 
   web:
-    build: .
+    built: .
     environment:
       DATABASE_URL: postgres://user:password@db:5432/mydb
       REDIS_URL: redis://redis:6379
@@ -314,16 +314,16 @@ services:
 
 ## Practical Tips
 
-### 查看服务Log
+### View服务Log
 
 ```bash
-# 查看所有服务Log
+# View所有服务Log
 docker-compose logs -f
 
-# 查看特定服务Log
+# View特定服务Log
 docker-compose logs -f web
 
-# 查看最后100行
+# View最后100行
 docker-compose logs --tail=100 web
 ```
 

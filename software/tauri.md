@@ -10,8 +10,8 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # Tauri
 
-Rust cross-platform app，although a relatively new framework，但is已经有较为成熟的产品，for example：[ChatWise](https://chatwise.app)、[HuLa](https://hulaspark.com/)，学习这种跨端Framework当然is要跨端才好，
-write once, build apps for multiple platforms
+Rust cross-platform app，although a relatively new framework，但is已经有较为成熟's 产品，for example：[ChatWise](https://chatwise.app)、[HuLa](https://hulaspark.com/)，学习这种跨端Framework当然is要跨端才好，
+write once, built apps for multiple platforms
 
 ## use GitHub Actions to auto-publish releases
 
@@ -59,7 +59,7 @@ jobs:
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
-          # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
+          # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builts.
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: install dependencies (ubuntu only)
@@ -135,7 +135,7 @@ jobs:
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
-          # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
+          # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builts.
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: install dependencies (ubuntu only)
@@ -149,7 +149,7 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
 
-      # If tagName and releaseId are omitted tauri-action will only build the app and won't try to upload any assets.
+      # If tagName and releaseId are omitted tauri-action will only built the app and won't try to upload any assets.
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -157,11 +157,11 @@ jobs:
           args: ${{ matrix.args }}
 ```
 
-if unfamiliar with[Github Action](https://github.com/features/actions)的可以去看我written by[intro guide](../env/github-workflow)
+if unfamiliar with[Github Action](https://github.com/features/actions)'s 可以去看我written by[intro guide](../env/github-workflow)
 
-使用上面的Workflow可以in push tag v\*的时候自动build并发布 Release 和generates changelog
+使用上面's Workflow可以in push tag v\*'s 时候自动build并发布 Release 和generates changelog
 
-changelog generates使用的is[Antfu changelogithub](https://github.com/antfu/changelogithub)采用的is[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)syntax，可以使用这种syntax来Commit`git message`generates好看的、easy-to-understand changelog
+changelog generates使用's is[Antfu changelogithub](https://github.com/antfu/changelogithub)采用's is[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)syntax，可以使用这种syntax来Commit`git message`generates好看's 、easy-to-understand changelog
 
 ![changelog_example](https://cdn.bangwu.top/img/o85kd-yqbangwu20250405111742.webp)
 
@@ -171,7 +171,7 @@ app signing
 
 如何Configuration latest.json
 
-how to build mobile app
+how to built mobile app
 
 how to auto-publish to platforms
 
@@ -183,4 +183,4 @@ otherwise there'll be errors publishing Release`Error permisson`
 
 ## 解决 Error: Cannot read properties of undefined (reading 'xxxxxx')
 
-这个报错很有可能is使用Plugin未加载导致的，initialize plugin in main.rs
+这个报错很有可能is使用Plugin未加载导致's ，initialize plugin in main.rs

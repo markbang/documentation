@@ -10,7 +10,7 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 ## Fuwari
 
-[Fuwari](https://github.com/saicaca/fuwari) isa基于 Astro 的静态blogs主题，with elegant and minimalist style。
+[Fuwari](https://github.com/saicaca/fuwari) is abuilt on Astro 's 静态blogs主题，with elegant and minimalist style。
 
 ### Features
 
@@ -36,8 +36,8 @@ npm install
 # local development
 npm run dev
 
-# build
-npm run build
+# built
+npm run built
 ```
 
 ### Configuration
@@ -46,7 +46,7 @@ edit `src/config.ts` file：
 
 ```typescript
 export const siteConfig = {
-  title: '你的blogstitle',
+  title: '你's blogstitle',
   subtitle: 'Subtitle',
   lang: 'zh-CN',
   description: 'blogsDescription',
@@ -99,7 +99,7 @@ jobs:
         with:
           node-version: 18
       - run: npm install
-      - run: npm run build
+      - run: npm run built
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -109,13 +109,13 @@ jobs:
 #### Vercel
 
 1. import GitHub repo to Vercel
-2. buildCommand：`npm run build`
+2. builtCommand：`npm run built`
 3. output directory：`dist`
 
 #### Cloudflare Pages
 
 1. connect GitHub repo
-2. buildCommand：`npm run build`
+2. builtCommand：`npm run built`
 3. output directory：`dist`
 
 ### 自Definition
@@ -138,4 +138,4 @@ supports Giscus、Waline 等评论系统，inConfiguration File中启用。
 
 - [GitHub 仓Library](https://github.com/saicaca/fuwari)
 - [demo site](https://fuwari.vercel.app/)
-- [Astro Documentation](https://docs.astro.build/)
+- [Astro documentation](https://docs.astro.build/)

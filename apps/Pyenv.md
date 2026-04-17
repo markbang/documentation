@@ -10,7 +10,7 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # [Pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#windows)
 
-Pyenv isa Python Version Manager，允许你in同一系统上轻松Installation和切换多个 Python versions。
+Pyenv is a Python Version Manager，允许你in同一系统上轻松Installation和切换多个 Python versions。
 
 ## Features
 
@@ -44,7 +44,7 @@ git clone https://github.com/pyenv-win/pyenv-win.git $HOME/.pyenv
 ### Linux/Mac
 
 ```bash
-# 使用官方Installation脚本
+# 使用官方Installationscripts
 curl https://pyenv.run | bash
 
 # 或使用 Homebrew (Mac)
@@ -62,7 +62,7 @@ eval "$(pyenv init -)"
 
 ## 基本使用
 
-### 查看可Installation的versions
+### View可Installation's versions
 
 ```bash
 # 列出所有可用versions
@@ -81,17 +81,17 @@ pyenv install 3.11.5
 # Installation最新versions
 pyenv install 3.11
 
-# 查看Installation进度
+# ViewInstallation进度
 pyenv install -v 3.11.5
 ```
 
-### 查看已Installationversions
+### View已Installationversions
 
 ```bash
 # 列出所有已Installationversions
 pyenv versions
 
-# 查看当前versions
+# View当前versions
 pyenv version
 ```
 
@@ -153,10 +153,10 @@ cd my_project
 pyenv local my-project-env
 ```
 
-### 查看versions来源
+### Viewversions来源
 
 ```bash
-# 查看当前versions及来源
+# View当前versions及来源
 pyenv version
 # 3.11.5 (set by /home/user/project/.python-version)
 ```
@@ -183,7 +183,7 @@ pyenv global 3.11.5
 ### 项目Configuration
 
 ```bash
-# 项目目录下的 .python-version file
+# 项目目录下's  .python-version file
 echo "3.11.5" > .python-version
 ```
 
@@ -203,7 +203,7 @@ export PYENV_VERSION=3.11.5
 ```bash
 # Ubuntu/Debian
 sudo apt update
-sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+sudo apt install -y make built-essential libssl-dev zlib1g-dev \
   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
   libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
   libffi-dev liblzma-dev
@@ -252,14 +252,14 @@ pyenv rehash
 
 ```bash
 # Common Commands速查
-pyenv install --list          # 查看可Installationversions
+pyenv install --list          # View可Installationversions
 pyenv install 3.11.5          # Installationversions
-pyenv versions                # 查看已Installationversions
+pyenv versions                # View已Installationversions
 pyenv global 3.11.5           # 全局切换
 pyenv local 3.11.5            # 项目切换
 pyenv uninstall 3.11.5        # 卸载versions
 pyenv rehash                  # 刷新 shims
-pyenv which python            # 查看 python 路径
+pyenv which python            # View python 路径
 ```
 
 ## References

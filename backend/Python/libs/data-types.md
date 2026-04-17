@@ -3,10 +3,14 @@ title: "Python data types"
 description: "Python built-in data types reference covering integers, floats, strings, lists, tuples, dictionaries, and sets with common methods and operation examples."
 icon: "list"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/data-types.md)
+</Note>
+
 
 # Python 数据类型
 
-Python 内置了丰富的数据类型，用于处理各种数据结构和场景。
+Python 内置了丰富's 数据类型，用于处理各种数据结构和场景。
 
 官方文档: https://docs.python.org/zh-cn/3.12/library/datatypes.html
 
@@ -51,7 +55,7 @@ is_empty = False
 fruits = ["apple", "banana", "cherry"]
 fruits.append("orange")      # 添加
 fruits.remove("banana")      # 删除
-fruits[0]                    # 索引访问
+fruits[0]                    # 索引Visit
 fruits[1:3]                  # 切片
 ```
 
@@ -74,17 +78,17 @@ s1 - s2      # 差集
 
 ### 字典 (Dict)
 ```python
-# 键值对
+# 键值yes
 user = {
     "name": "张三",
     "age": 25,
     "email": "zhangsan@example.com"
 }
-user["name"]           # 访问
-user.get("age")        # 安全访问
+user["name"]           # Visit
+user.get("age")        # 安全Visit
 user.keys()            # 所有键
 user.values()          # 所有值
-user.items()           # 所有键值对
+user.items()           # 所有键值yes
 ```
 
 ## 专用数据类型
@@ -159,7 +163,7 @@ class User:
 user = User("张三", 25)
 ```
 
-### typing - 类型提示
+### typing - type hints
 ```python
 from typing import List, Dict, Optional, Union
 

@@ -3,16 +3,20 @@ title: "PyTorch"
 description: "PyTorch deep learning framework guide covering CPU and GPU installation, tensor creation and operations, automatic differentiation, and neural network basics."
 icon: "fire"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/PyTorch.md)
+</Note>
+
 
 # PyTorch
 
-PyTorch 是一个开源的深度学习框架，由 Facebook AI Research 开发，广泛应用于学术研究和工业界。
+PyTorch 是一个开源's 深度学习框架，由 Facebook AI Research 开发，广泛应用于学术研究和工业界。
 
 ## 安装
 
 ### 自动安装
 
-访问官网选择配置: https://pytorch.org/get-started/locally/
+Visit官网选择配置: https://pytorch.org/get-started/locally/
 
 ```bash
 # CPU 版本
@@ -44,7 +48,7 @@ import torch
 
 print(torch.__version__)
 print(torch.cuda.is_available())  # True 表示 GPU 可用
-print(torch.cuda.get_device_name(0))  # 显示 GPU 名称
+print(torch.cuda.get_device_name(0))  # 显示 GPU Name
 ```
 
 ## 基础概念
@@ -75,7 +79,7 @@ if torch.cuda.is_available():
 ### 自动求导
 
 ```python
-# 需要梯度的张量
+# 需要梯度's 张量
 x = torch.tensor([1.0, 2.0], requires_grad=True)
 y = x ** 2
 z = y.sum()
@@ -247,7 +251,7 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed(42)
 ```
 
-### 查看模型结构
+### View模型结构
 
 ```python
 from torchsummary import summary

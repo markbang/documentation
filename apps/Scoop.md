@@ -3,6 +3,10 @@ title: "Scoop"
 description: "Scoop is a Windows command-line package manager like Homebrew, covering installation, aria2 acceleration, bucket management, and proxy setup."
 icon: "bucket"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/apps/Scoop.md)
+</Note>
+
 
 # Scoop-Windows brew
 

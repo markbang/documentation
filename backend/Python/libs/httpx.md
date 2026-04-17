@@ -3,18 +3,22 @@ title: "HTTPX"
 description: "HTTPX is a modern Python HTTP client replacing requests, with sync and async APIs, native HTTP/2 support, connection pooling, and fine-grained timeout control."
 icon: "globe"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/httpx.md)
+</Note>
+
 
 # HTTPX
 
-HTTPX 是一个功能完整的 Python HTTP 客户端库，支持同步和异步请求，是 requests 的现代替代品。
+HTTPX 是一个功能完整's  Python HTTP 客户端库，支持同步和异步请求，是 requests 's 现代替代品。
 
 ## 特性
 
-- **同步和异步**: 统一的 API，支持两种模式
+- **同步和异步**: 统一's  API，支持两种模式
 - **HTTP/2 支持**: 性能更优
 - **连接池**: 自动管理连接复用
-- **超时控制**: 细粒度的超时设置
-- **类型提示**: 完整的类型标注
+- **超时控制**: 细粒度's 超时设置
+- **type hints**: 完整's 类型标注
 
 ## 安装
 
@@ -38,7 +42,7 @@ print(response.json())
 data = {'key': 'value'}
 response = httpx.post('https://api.example.com/submit', json=data)
 
-# 带参数的请求
+# 带Parameters's 请求
 params = {'page': 1, 'size': 10}
 response = httpx.get('https://api.example.com/items', params=params)
 
@@ -69,7 +73,7 @@ async def fetch_data():
         response = await client.get('https://api.example.com/data')
         return response.json()
 
-# 运行
+# Run
 data = asyncio.run(fetch_data())
 ```
 
@@ -191,14 +195,14 @@ print(response.headers['content-type'])
 response.raise_for_status()  # 4xx/5xx 抛出异常
 ```
 
-## 与 requests 对比
+## 与 requests yes比
 
 | 特性 | requests | httpx |
 |------|----------|-------|
 | 同步请求 | ✅ | ✅ |
 | 异步请求 | ❌ | ✅ |
 | HTTP/2 | ❌ | ✅ |
-| 类型提示 | 部分 | 完整 |
+| type hints | 部分 | 完整 |
 | 维护状态 | 活跃 | 活跃 |
 
 ## 最佳实践
@@ -206,7 +210,7 @@ response.raise_for_status()  # 4xx/5xx 抛出异常
 1. **使用 Client 复用连接**: 提升性能
 2. **设置合理超时**: 避免请求挂起
 3. **异步场景优先**: 高并发时性能更好
-4. **错误处理**: 捕获异常并重试
+4. **Error handling**: 捕获异常并重试
 
 ```python
 import httpx

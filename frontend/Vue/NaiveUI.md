@@ -12,7 +12,7 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # Naive UI
 
-Naive UI isa Vue 3 ComponentLibrary，提供了丰富的Component和完善的 TypeScript supports。
+Naive UI is a Vue 3 ComponentLibrary，提供了丰富's Component和完善's  TypeScript supports。
 
 ## Features
 
@@ -504,5 +504,5 @@ import { Search } from '@vicons/ionicons5'
 
 - [Naive UI 官网](https://www.naiveui.com/)
 - [GitHub 仓Library](https://github.com/tusen-ai/naive-ui)
-- [ComponentDocumentation](https://www.naiveui.com/zh-CN/os-theme/components/button)
+- [Componentdocumentation](https://www.naiveui.com/zh-CN/os-theme/components/button)
 - [主题edit器](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)

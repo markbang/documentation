@@ -10,7 +10,7 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # Supervisor 进程管理
 
-Supervisor isa Python 编written byprocess management tool，for monitoring and controlling Unix/Linux processes on the system。
+Supervisor is a Python 编written byprocess management tool，for monitoring and controlling Unix/Linux processes on the system。
 
 [详细教程blogs文章](https://bangwu.top/posts/supervisor)
 
@@ -53,7 +53,7 @@ pip install supervisor
 [program:myapp]
 command=/usr/bin/python /path/to/app.py    ; 启动Command
 directory=/path/to/                        ; 工作目录
-user=www-data                              ; 运行用户
+user=www-data                              ; Run用户
 autostart=true                             ; 随supervisor启动
 autorestart=true                           ; 自动重启
 startsecs=10                               ; 启动10秒后无Exception才认为成功
@@ -79,7 +79,7 @@ sudo systemctl stop supervisor
 # 重启 supervisor
 sudo systemctl restart supervisor
 
-# 查看State
+# ViewState
 sudo systemctl status supervisor
 
 # 开机自启
@@ -102,10 +102,10 @@ sudo supervisorctl stop myapp
 # 重启程序
 sudo supervisorctl restart myapp
 
-# 查看所有程序State
+# View所有程序State
 sudo supervisorctl status
 
-# 查看特定程序State
+# View特定程序State
 sudo supervisorctl status myapp
 
 # 启动所有程序
@@ -117,9 +117,9 @@ sudo supervisorctl stop all
 # 重启所有程序
 sudo supervisorctl restart all
 
-# 查看Log
+# ViewLog
 sudo supervisorctl tail myapp
-sudo supervisorctl tail -f myapp  # 实时查看
+sudo supervisorctl tail -f myapp  # 实时View
 
 # 清空Log
 sudo supervisorctl clear myapp
@@ -206,7 +206,7 @@ username=admin
 password=password
 ```
 
-访问：http://localhost:9001
+Visit：http://localhost:9001
 
 ## Environment Variables
 
@@ -254,7 +254,7 @@ autorestart=true
 
 ## Fault排查
 
-### 查看Log
+### ViewLog
 
 ```bash
 # supervisor 主Log
@@ -263,7 +263,7 @@ sudo tail -f /var/log/supervisor/supervisord.log
 # 程序Log
 sudo tail -f /var/log/supervisor/myapp.log
 
-# 使用 supervisorctl 查看
+# 使用 supervisorctl View
 sudo supervisorctl tail -f myapp
 ```
 
@@ -272,7 +272,7 @@ sudo supervisorctl tail -f myapp
 1. **进程启动失败**
    - 检查Command路径is否正确
    - 检查用户权限
-   - 查看Logfile
+   - ViewLogfile
 
 2. **进程频繁重启**
    - 增加 `startsecs` 值
@@ -287,7 +287,7 @@ sudo supervisorctl tail -f myapp
 ## Best Practices
 
 1. **使用Configuration File分离**：每个程序aConfiguration File
-2. **设置合理的Log大小**：避免磁盘占满
+2. **设置合理's Log大小**：避免磁盘占满
 3. **使用专用用户**：提高安全性
 4. **进程Grouping**：方便批量管理
 5. **设置Environment Variables**：Configuration与代码分离

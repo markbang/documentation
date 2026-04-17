@@ -10,7 +10,7 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # DaisyUI
 
-DaisyUI isa基于 Tailwind CSS 的ComponentLibrary，提供了丰富的预设计Component。
+DaisyUI is abuilt on Tailwind CSS 's ComponentLibrary，提供了丰富's 预设计Component。
 
 ## Features
 
@@ -274,14 +274,14 @@ module.exports = {
 ## Best Practices
 
 1. **结合 Tailwind**：DaisyUI Component可与 Tailwind Tool类混用
-2. **主题一致性**：为整个项目选择合适的主题
-3. **Responsive Design**：使用 Tailwind 的响应式prefix
+2. **主题一致性**：为整个项目选择合适's 主题
+3. **Responsive Design**：使用 Tailwind 's 响应式prefix
 4. **减少定制**：尽量使用预设样式
-5. **load on demand**：Configuration PurgeCSS 移除未使用的样式
+5. **load on demand**：Configuration PurgeCSS 移除未使用's 样式
 
 ## References
 
 - [DaisyUI 官网](https://daisyui.com/)
-- [ComponentDocumentation](https://daisyui.com/components/)
+- [Componentdocumentation](https://daisyui.com/components/)
 - [主题list](https://daisyui.com/docs/themes/)
 - [GitHub 仓Library](https://github.com/saadeghi/daisyui)

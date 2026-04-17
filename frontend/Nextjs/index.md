@@ -10,16 +10,16 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 ## Next.js
 
-Next.js is近些年最火的 React Framework，由 Vercel 开发和维护。
+Next.js is近些年最火's  React Framework，由 Vercel 开发和维护。
 
 ### Core Features
 
 - **混合渲染**：SSR、SSG、ISR 多种渲染模式
-- **file路由**：基于file系统的自动路由
+- **file路由**：built onfile系统's 自动路由
 - **API Routes**：内置 API 端点
 - **优化性能**：自动code splitting、Image Optimization
 - **TypeScript**：原生 TypeScript supports
-- **零Configuration**：开箱即用的Best Practices
+- **零Configuration**：开箱即用's Best Practices
 
 ### Quick Start
 
@@ -31,7 +31,7 @@ cd my-app
 # 启动开发服务器
 npm run dev
 
-# 访问 http://localhost:3000
+# Visit http://localhost:3000
 ```
 
 ### 项目结构
@@ -93,7 +93,7 @@ export default function Shop({ params }) {
 // Server Components (Default)（默认）
 async function getData() {
   const res = await fetch('https://api.example.com/data', {
-    cache: 'force-cache', // 缓存
+    cache: 'force-cache', // Caching
     // next: { revalidate: 3600 } // ISR - 每小时重新Validation
   })
   return res.json()
@@ -299,7 +299,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run built
 EXPOSE 3000
 CMD ["npm", "start"]
 ```
@@ -313,7 +313,7 @@ module.exports = {
 ```
 
 ```bash
-npm run build
+npm run built
 # 输出到 out/ 目录
 ```
 
@@ -324,7 +324,7 @@ npm run build
 - **Image Optimization**：next/image 自动优化
 - **Font Optimization**：next/font 优化字体加载
 - **prefetch**：Link Component自动prefetch
-- **缓存**：fine-grained cache control
+- **Caching**：fine-grained cache control
 
 ### Library Integrations
 
@@ -348,7 +348,7 @@ npm install next-auth
 ### Best Practices
 
 1. **Server Components (Default)优先**：默认使用Server Components (Default)
-2. **use caching appropriately**：Configuration适当的缓存Strategy
+2. **use caching appropriately**：Configuration适当's CachingStrategy
 3. **优化图片**：use next/image
 4. **code organization**：按功能Module组织代码
 5. **TypeScript**：use type safety
@@ -370,4 +370,4 @@ npm install next-auth
 - [Next.js Official Docs](https://nextjs.org/docs)
 - [Next.js GitHub](https://github.com/vercel/next.js)
 - [Learn Next.js](https://nextjs.org/learn)
-- [App Router Documentation](https://nextjs.org/docs/app)
+- [App Router documentation](https://nextjs.org/docs/app)

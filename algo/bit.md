@@ -43,7 +43,7 @@ a = a ^ b
 
 ### 3. 判断第k位is否为1
 ```python
-# 判断n的第k位（从0开始）is否为1
+# 判断n's 第k位（从0开始）is否为1
 if n & (1 << k):
     print("第k位is1")
 ```
@@ -63,24 +63,24 @@ n = n & ~(1 << k)
 n = n ^ (1 << k)
 ```
 
-### 7. 取出最低位的1
+### 7. 取出最低位's 1
 ```python
 lowbit = n & (-n)
 ```
 
-### 8. 去掉最低位的1
+### 8. 去掉最低位's 1
 ```python
 n = n & (n - 1)
 ```
 
-### 9. 判断is否为2的幂次
+### 9. 判断is否为2's 幂次
 ```python
-# 2的幂次只有a1
+# 2's 幂次只有a1
 if n > 0 and (n & (n - 1)) == 0:
-    print("is2的幂次")
+    print("is2's 幂次")
 ```
 
-### 10. Calculation二进制中1的个数
+### 10. Calculation二进制中1's 个数
 ```python
 def count_ones(n):
     count = 0
@@ -92,11 +92,11 @@ def count_ones(n):
 
 ## 经典题目
 
-### [LeetCode 136. 只出现一次的数字](https://leetcode.cn/problems/single-number/)
+### [LeetCode 136. 只出现一次's 数字](https://leetcode.cn/problems/single-number/)
 
-**题目：**数组中除了a数字出现一次外，其余都出现两次，找出只出现一次的数字。
+**题目：**数组中除了a数字出现一次外，其余都出现两次，找出只出现一次's 数字。
 
-**解法：**利用异或的性质：a ^ a = 0, a ^ 0 = a
+**解法：**利用异或's 性质：a ^ a = 0, a ^ 0 = a
 
 ```python
 class Solution:
@@ -107,7 +107,7 @@ class Solution:
         return result
 ```
 
-### [LeetCode 191. 位1的个数](https://leetcode.cn/problems/number-of-1-bits/)
+### [LeetCode 191. 位1's 个数](https://leetcode.cn/problems/number-of-1-bits/)
 
 ```python
 class Solution:
@@ -119,7 +119,7 @@ class Solution:
         return count
 ```
 
-### [LeetCode 231. 2的幂](https://leetcode.cn/problems/power-of-two/)
+### [LeetCode 231. 2's 幂](https://leetcode.cn/problems/power-of-two/)
 
 ```python
 class Solution:
@@ -142,6 +142,6 @@ class Solution:
 ## Use Cases
 
 - **State压缩**：用ainteger表示多个布尔State
-- **set运算**：用位运算Implementationset的交、并、补
+- **set运算**：用位运算Implementationset's 交、并、补
 - **Permission Management**：用位表示不同权限
 - **Performance Optimization**：位运算速度快，可替代乘除运算

@@ -3,6 +3,10 @@ title: "MySQL"
 description: "MySQL learning notes covering CREATE/INSERT/UPDATE/DELETE statements, single and multi-table queries, index optimization, and user permissions."
 icon: "database"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/SQL/mysql.md)
+</Note>
+
 
 # 初识数据库
 

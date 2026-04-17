@@ -8,15 +8,15 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 </Note>
 
 
-我最后选择的is **object storage + CDN** 的图床Solution，当前主要用七牛云 OSS 配合 CDN。这样做的核心Goals不is“炫技”，而is把图片管理、访问速度和成本控制住。
+我最后选择's is **object storage + CDN** 's 图床Solution，当前主要用七牛云 OSS 配合 CDN。这样做's 核心Goals不is“炫技”，而is把图片管理、Visit速度和成本控制住。
 
 ## 这套Solution适合什么人
 
 - 有blogs或知识Library，需要长期托管图片
 - 想把截图、封面图、文章配图统一管理
-- 希望图片Link相对稳定，方便文章长期Reference
+- 希望图片Link相yes稳定，方便文章长期Reference
 
-## 我的基本思路
+## 我's 基本思路
 
 1. **存储层**：object storage负责托管原图。
 2. **分发层**：CDN 负责加速和 HTTPS。

@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Docker containerization guide covering image building, container creation with port mapping, volume mounting for persistence, and CLI commands."
+description: "Docker containerization guide covering image builting, container creation with port mapping, volume mounting for persistence, and CLI commands."
 icon: "container-storage"
 ---
 <Note icon="language" title="Original Chinese Content">
@@ -24,9 +24,9 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 
 ## Basic Concepts
 
-- **镜像 (Image)**：只读的模板，Package含运行容器所需的file系统
-- **容器 (Container)**：镜像的运行实例
-- **仓Library (Repository)**：存储镜像的地方，如 Docker Hub
+- **镜像 (Image)**：只读's 模板，Package含Run容器所需's file系统
+- **容器 (Container)**：镜像's Run实例
+- **仓Library (Repository)**：存储镜像's 地方，如 Docker Hub
 
 ## Common Commands
 
@@ -46,7 +46,7 @@ docker images
 docker rmi nginx:latest
 
 # Build Image
-docker build -t myapp:1.0 .
+docker built -t myapp:1.0 .
 
 # Export Image
 docker save -o nginx.tar nginx:latest
@@ -58,11 +58,11 @@ docker load -i nginx.tar
 ### Container Management
 
 ```bash
-# 运行容器
+# Run容器
 docker run -d --name mynginx -p 80:80 nginx
 
 # Parameter Description：
-# -d：后台运行
+# -d：后台Run
 # --name：指定容器name
 # -p：Port Mapping 宿主机端口:容器端口
 # -v：挂载卷 宿主机路径:容器路径
@@ -72,7 +72,7 @@ docker run -d --name mynginx -p 80:80 nginx
 # View Running Containers
 docker ps
 
-# View All Containers（Package括停止的）
+# View All Containers（Package括停止's ）
 docker ps -a
 
 # Stop Container
@@ -146,7 +146,7 @@ docker network connect mynet mynginx
 
 ## Dockerfile
 
-Dockerfile is用于Build Image的文本file。
+Dockerfile is用于Build Image's 文本file。
 
 ### Basic Structure
 
@@ -183,26 +183,26 @@ CMD ["python", "app.py"]
 - COPY：复制file到镜像
 - ADD：复制file，supportsURL和自动解压
 - RUN：执行Command（build时）
-- CMD：容器启动时执行的Command
+- CMD：容器启动时执行's Command
 - ENTRYPOINT：入口点，不会被docker runOverriding
 - ENV：设置Environment Variables
 - EXPOSE：Declaration端口
 - VOLUME：Definition数据卷
-- USER：指定运行用户
+- USER：指定Run用户
 - ARG：buildparameters
 
 ### Multi-stage Build
 
 ```dockerfile
-# buildPhase
-FROM node:18 AS builder
+# builtPhase
+FROM node:18 AS builter
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run built
 
-# 运行Phase
+# RunPhase
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
@@ -211,7 +211,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## .dockerignore
 
-类似 .gitignore，用于排除不需要复制到镜像的file。
+类似 .gitignore，用于排除不需要复制到镜像's file。
 
 ```
 node_modules
@@ -248,10 +248,10 @@ sudo systemctl restart docker
 ### Clean System
 
 ```bash
-# 清理未使用的容器、网络、镜像
+# 清理未使用's 容器、网络、镜像
 docker system prune -a
 
-# 查看磁盘占用
+# View磁盘占用
 docker system df
 ```
 
@@ -268,7 +268,7 @@ docker run -d --restart=always nginx
 docker run -d --memory="512m" --cpus="1.5" nginx
 ```
 
-### 查看容器IP
+### View容器IP
 
 ```bash
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name

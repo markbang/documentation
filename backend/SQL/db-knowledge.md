@@ -3,6 +3,10 @@ title: "Database principles"
 description: "Database principles course notes covering relational algebra, SQL queries with JOIN/GROUP BY, normalization to BCNF, ACID properties, and ER."
 icon: "graduation-cap"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/SQL/db-knowledge.md)
+</Note>
+
 
 # 数据库原理与应用考试相关-2023
 

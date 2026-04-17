@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS"
-description: "Tailwind CSS is a utility-first CSS framework for building interfaces with predefined classes, covering installation, responsive design, and theming."
+description: "Tailwind CSS is a utility-first CSS framework for builting interfaces with predefined classes, covering installation, responsive design, and theming."
 icon: "palette"
 ---
 <Note icon="language" title="Original Chinese Content">
@@ -12,11 +12,11 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 
 # Tailwind CSS
 
-Tailwind CSS isa功能类优先的 CSS Frameworks，通过组合原子化的Tool类来build界面。
+Tailwind CSS is a功能类优先's  CSS Frameworks，通过组合原子化's Tool类来build界面。
 
 ## Core Philosophy
 
-不同于传统的语义化 CSS Frameworks，Tailwind 提供底层的Tool类，让你直接in HTML 中编写样式。
+不同于传统's 语义化 CSS Frameworks，Tailwind 提供底层's Tool类，让你直接in HTML 中编写样式。
 
 ```html
 <!-- traditional approach -->
@@ -158,10 +158,10 @@ npx tailwindcss init -p
 <p class="font-normal">正常</p>
 <p class="font-bold">粗体</p>
 
-<!-- 对齐 -->
-<p class="text-left">左对齐</p>
+<!-- yes齐 -->
+<p class="text-left">左yes齐</p>
 <p class="text-center">居中</p>
-<p class="text-right">右对齐</p>
+<p class="text-right">右yes齐</p>
 
 <!-- 行高 -->
 <p class="leading-tight">紧凑行高</p>
@@ -202,7 +202,7 @@ npx tailwindcss init -p
 
 ## Responsive Design
 
-Tailwind 使用移动优先的Breakpoints系统。
+Tailwind 使用移动优先's Breakpoints系统。
 
 ```html
 <!-- 默认移动端，md 及以上为桌面端 -->
@@ -251,7 +251,7 @@ Tailwind 使用移动优先的Breakpoints系统。
 ## Dark Mode
 
 ```html
-<!-- 基于 class 的Dark Mode -->
+<!-- built on class 's Dark Mode -->
 <div class="bg-white dark:bg-gray-800 text-black dark:text-white">
   自适应Dark Mode
 </div>
@@ -339,7 +339,7 @@ module.exports = {
 ```html
 <article class="prose lg:prose-xl">
   <h1>Markdown title</h1>
-  <p>自动美化的Typography</p>
+  <p>自动美化's Typography</p>
 </article>
 ```
 
@@ -347,7 +347,7 @@ module.exports = {
 
 ### Extract Components
 
-使用 `@apply` 提取重复的Tool类：
+使用 `@apply` 提取重复's Tool类：
 
 ```css
 .card {
@@ -395,7 +395,7 @@ function Button({ primary, children }) {
 
 ### Production Optimization
 
-Tailwind 会自动移除未使用的样式。
+Tailwind 会自动移除未使用's 样式。
 
 ```javascript
 // tailwind.config.js

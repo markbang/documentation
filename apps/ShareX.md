@@ -3,10 +3,14 @@ title: "ShareX"
 description: "ShareX is an open-source screenshot and recording tool with automatic WebP compression via ffmpeg, covering action configuration and workflow."
 icon: "camera"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/apps/ShareX.md)
+</Note>
+
 
 # ShareX
 
-ShareXisavery powerfulopen-sourcescreenshot and sharing software，provides many customization features，我就is看上的它的can auto-compress screenshots to webp format，significantly reduces image size。software structure：
+ShareXisavery powerfulopen-sourcescreenshot and sharing software，provides many customization features，我就is看上's 它's can auto-compress screenshots to webp format，significantly reduces image size。software structure：
 
 ![](https://cdn.bangwu.top/img/202312181628293.webp)
 
@@ -19,7 +23,7 @@ then in ShareX action settings，添加aAction：
 ![chrome_1712151713](https://cdn.bangwu.top/img/chrome_1712151713.webp)
 
 - name: anything
-- file path: ffmpeg 的Installation路径，must point to ffmpeg executable
+- file path: ffmpeg 's Installation路径，must point to ffmpeg executable
 - parameters: `-i "$input" -q 75 "$output"` where -q 75 is以75%质量压缩
 - output file extension: webp
 - extension filter: png

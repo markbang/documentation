@@ -3,10 +3,14 @@ title: "WordCloud"
 description: "WordCloud is a Python library for word cloud visualizations, covering custom shape masks, color schemes, Chinese segmentation with jieba."
 icon: "cloud"
 ---
+<Note icon="language" title="Original Chinese Content">
+This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/wordcloud.md)
+</Note>
+
 
 # WordCloud 词云生成
 
-WordCloud 是一个用于生成词云图的 Python 库，可以将文本数据可视化为美观的词云图。
+WordCloud 是一个用于生成词云图's  Python 库，可以将文本数据可视化为美观's 词云图。
 
 ## 安装
 
@@ -52,7 +56,7 @@ wordcloud = WordCloud(
 
 ## 自定义样式
 
-### 基本参数
+### 基本Parameters
 
 ```python
 wordcloud = WordCloud(
@@ -118,7 +122,7 @@ wordcloud = WordCloud(font_path='simhei.ttf').generate_from_frequencies(word_fre
 
 ```python
 # 设置停用词
-stopwords = set(['的', '了', '在', '是', '我', '有'])
+stopwords = set([''s ', '了', '在', '是', '我', '有'])
 
 wordcloud = WordCloud(
     font_path='simhei.ttf',

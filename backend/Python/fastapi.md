@@ -1,21 +1,20 @@
 ---
 title: "FastAPI"
-description: "FastAPI is a modern high-performance Python web framework with async support, automatic API docs, Pydantic validation, and type-hint workflow."
+description: "Modern high-performance Python web framework with auto docs, async support, and type validation."
 icon: "bolt"
 ---
 
-
 # FastAPI
 
-FastAPI isa现代、High Performance的 Python Web Framework，基于 Python 3.6+ 的Type Hintsbuild。has over 70k+ stars on GitHub，is目前the most popular Python Backend Frameworks之一。
+FastAPI is a modern, high-performance Python web framework built on Python 3.6+ type hints. With over 70k+ stars on GitHub, it's one of the most popular Python backend frameworks today.
 
 ## Core Features
 
-- **High Performance**: performance comparable to Node.js and Go
-- **Fast Development**: improve development efficiency 200%-300%
-- **Auto Docs**: 自动generates交互式 API Documentation
+- **High Performance**: Performance comparable to Node.js and Go
+- **Fast Development**: Improves development efficiency 200%-300%
+- **Auto Docs**: Automatically generates interactive API documentation
 - **Type Checking**: Pydantic-based data validation
-- **异步supports**: 原生supports async/await
+- **Async Support**: Native async/await support
 
 ## Quick Start
 
@@ -42,13 +41,13 @@ async def read_item(item_id: int, q: str = None):
     return {"item_id": item_id, "q": q}
 ```
 
-### 运行
+### Running
 
 ```bash
 uvicorn main:app --reload
 ```
 
-访问 http://127.0.0.1:8000/docs 查看自动generates的 API Documentation。
+Visit http://127.0.0.1:8000/docs to see the auto-generated API documentation.
 
 ## Path & Query Parameters
 
@@ -90,7 +89,7 @@ class UserOut(BaseModel):
 
 @app.post("/users/", response_model=UserOut)
 async def create_user(user: User):
-    return user  # 自动Filtering敏感字段
+    return user  # Automatically filters sensitive fields
 ```
 
 ## Dependency Injection
@@ -172,7 +171,7 @@ async def create_upload_file(file: UploadFile = File(...)):
 from fastapi import BackgroundTasks
 
 def send_email(email: str):
-    # send邮件逻辑
+    # Send email logic
     pass
 
 @app.post("/send-notification/")
@@ -187,5 +186,5 @@ async def send_notification(
 ## Resources
 
 - Official Docs: https://fastapi.tiangolo.com/
-- Chinese localeDocumentation: https://fastapi.tiangolo.com/zh/
+- Chinese Docs: https://fastapi.tiangolo.com/zh/
 - GitHub: https://github.com/tiangolo/fastapi
