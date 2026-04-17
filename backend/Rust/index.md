@@ -1,6 +1,6 @@
 ---
 title: "Rust"
-description: "Rust backend development — IM bridges with Axum, desktop shells with Tauri, and async runtime patterns."
+description: "Rust backend development hub covering Axum IM bridges with Tokio async runtime, Tauri desktop shells, and a learning path from ownership to web services."
 icon: "rust"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Monorepo 架构"
-description: "Bun/Turborepo monorepo 模式 — 项目结构、共享包、CI/CD，来自 badmin、cyop 和 fullstack。"
+description: "Bun Workspace + Turborepo 任务编排的 Monorepo 全栈项目架构详解，涵盖标准目录结构、共享包（UI/DB/Auth/Contracts）设计、并行构建与 CI/CD 配置，来自 badmin、cyop 和 fullstack 三个项目实践。"
 icon: "cubes"
 ---
 

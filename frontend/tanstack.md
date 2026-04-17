@@ -1,6 +1,6 @@
 ---
 title: "TanStack Start + Hono"
-description: "Full-stack architecture using TanStack Start for the frontend and Hono for the API server, drawn from real project experience."
+description: "Full-stack monorepo architecture combining TanStack Start SSR with Hono API server, covering file-based routing, tRPC contracts, Drizzle ORM, and auth setup."
 icon: "code"
 ---
 
