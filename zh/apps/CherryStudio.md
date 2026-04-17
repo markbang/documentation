@@ -1,6 +1,6 @@
 ---
 title: "CherryStudio"
-description: "CherryStudio 是一款开源 AI 聊天客户端应用，支持通过自定义 CSS 样式深度定制界面外观，本文提供了一套完整的 Claude 风格主题 2.0 配置代码，涵盖深色模式（炭灰色背景）与浅色模式（米白色背景）的 CSS 变量定义、消息气泡样式、字体与代码块渲染配置。"
+description: "CherryStudio 是一款开源 AI 聊天客户端应用，支持通过自定义 CSS 样式深度定制界面外观，本文提供了一套完整的 Claude 风格主题 2.0 配置代码，涵盖深色模式炭灰色背景与浅色模式米白色背景的 CSS 变量定义、消息气泡样式、字体设置与代码块渲染配置。"
 icon: "message"
 ---
 

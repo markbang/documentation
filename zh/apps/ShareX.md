@@ -1,6 +1,6 @@
 ---
 title: "ShareX"
-description: "ShareX 是一款强大的开源截图与屏幕录制工具，支持通过 ffmpeg 自动将截图压缩为 WebP 格式以大幅减小图片体积，本文介绍 GitHub 下载安装（推荐 portable 版）、ffmpeg 动作配置参数（-q 质量参数与输出格式）以及截图后自动压缩的完整设置流程。"
+description: "ShareX 是一款强大的开源截图与屏幕录制工具，支持通过 ffmpeg 自动将截图压缩为 WebP 格式以大幅减小图片体积，本文介绍从 GitHub 下载安装（推荐 portable 版）、ffmpeg 动作配置参数（-q 质量参数与输出格式设置）以及截图后自动压缩的完整工作流程。"
 icon: "camera"
 ---
 

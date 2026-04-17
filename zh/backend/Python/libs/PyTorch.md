@@ -1,6 +1,6 @@
 ---
 title: "PyTorch"
-description: "PyTorch 深度学习框架入门实践笔记，由 Facebook AI Research (Meta) 开发并广泛应用于学术研究与工业界，涵盖通过官网自动选择配置的 CPU 与 GPU（CUDA 12.4）版本安装方法、手动下载 whl 文件离线安装、张量创建与基本运算操作以及自动求导与神经网络构建基础。"
+description: "PyTorch 深度学习框架入门实践笔记，由 Facebook AI Research（Meta）开发并广泛应用于学术研究与工业界，涵盖通过官网自动选择配置的 CPU 与 GPU（CUDA 12.4）版本安装方法、手动下载 whl 文件离线安装、张量创建与基本运算以及自动求导与神经网络构建基础。"
 icon: "brain"
 ---
 

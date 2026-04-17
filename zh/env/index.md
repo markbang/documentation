@@ -1,6 +1,6 @@
 ---
 title: "环境与部署"
-description: "环境配置与部署工具学习整理入口页，涵盖 Docker 容器化与 Docker Compose 编排、Caddy 自动 HTTPS 反向代理、Supervisor 进程守护管理、GitHub Actions CI/CD 自动化工具、Jupyter 交互式笔记本、CDN 加速方案以及 Fuwari 博客搭建与图床配置等。"
+description: "环境配置与部署工具学习整理入口页，涵盖 Docker 容器化与 Docker Compose 编排、Caddy 自动 HTTPS 反向代理、Supervisor 进程守护、GitHub Actions CI/CD 自动化、Jupyter 交互式笔记本、CDN 加速方案以及 Fuwari 博客搭建与图床配置等专题导航。"
 icon: "cloud"
 ---
 
