@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Docker containerization guide covering image builting, container creation with port mapping, volume mounting for persistence, and CLI commands."
+description: "Docker containerization guide covering image building, container creation with port mapping, volume mounting for persistence, and CLI commands."
 icon: "container-storage"
 ---
 <Note icon="language" title="Original Chinese Content">
