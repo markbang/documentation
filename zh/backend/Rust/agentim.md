@@ -1,6 +1,6 @@
 ---
 title: "AgentIM — Rust 多平台 IM 桥接"
-description: "Rust 构建的多平台 IM 桥接 — 连接 Telegram、Discord、飞书、Slack、钉钉、LINE、QQ 和企微到 AI 代理后端。"
+description: "AgentIM 是用 Rust（Axum + Tokio）构建的多平台 IM 桥接服务，通过 Webhook 和长轮询连接 Telegram、Discord、飞书、Slack、钉钉、LINE、QQ、企微共 8+ 平台到本地 AI 代理后端，支持会话持久化与上下文裁剪。"
 icon: "terminal"
 ---
 
