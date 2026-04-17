@@ -1,6 +1,6 @@
 ---
 title: "Go Gin"
-description: "Go Gin 是 Go 语言中使用最广泛的高性能 Web 框架，本文整理了通过 gin.Default() 创建路由引擎、定义 GET/POST 路由处理函数、使用 c.JSON 返回 JSON 响应以及 router.Run 启动 HTTP 服务等基础用法示例，适合快速上手 Go Web API 开发。"
+description: "Go Gin 高性能 Web 框架完整教程，从零开始详解路由分组创建、GET/POST 请求处理方法定义、JSON 响应格式化与 HTTP 服务器启动配置等核心用法，涵盖中间件绑定与请求参数校验，是快速上手 Go 语言 RESTful API 后端开发的实用入门指南。"
 icon: "bolt"
 ---
 

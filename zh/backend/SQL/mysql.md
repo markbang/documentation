@@ -1,6 +1,6 @@
 ---
 title: "MySQL"
-description: "MySQL 关系型数据库从入门到实践的学习笔记，涵盖数据库（DB）与数据库管理系统（DBMS）基础概念、CREATE DATABASE/TABLE 建库建表、INSERT/UPDATE/DELETE 增删改操作、SELECT 单表与多表连接查询、索引创建与查询优化策略以及事务处理与用户权限管理命令。"
+description: "MySQL 开源关系型数据库管理系统完整学习笔记，详细涵盖数据库与数据表创建及字段数据类型定义、INSERT/UPDATE/DELETE 数据增删改操作语法、SELECT 多条件筛选查询与多表连接查询、索引创建原理与 SQL 性能优化策略，以及事务隔离级别处理机制与用户权限管理命令详解。"
 icon: "database"
 ---
 
