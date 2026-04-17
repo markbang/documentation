@@ -16,6 +16,6 @@ Suitable for those with basic Python knowledge — syntax and package imports.
 
 1. Threading, multiprocessing, async introduction
 
-<Card title="Anti-Scraping Techniques" icon="shield" href="/en/backend/Python/spider/anti-spider">
+<Card title="Anti-Scraping Techniques" icon="shield" href="/backend/Python/spider/anti-spider">
 Headers parameters, IP proxies, Ajax data extraction, and more.
 </Card>

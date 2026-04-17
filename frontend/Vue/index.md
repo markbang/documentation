@@ -24,7 +24,7 @@ npm install
 npm run dev
 ```
 
-<Card title="Naive UI" icon="cube" href="/en/frontend/Vue/NaiveUI">
+<Card title="Naive UI" icon="cube" href="/frontend/Vue/NaiveUI">
 Vue 3 component library with full TypeScript support and theme customization.
 </Card>
 

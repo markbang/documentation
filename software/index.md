@@ -14,6 +14,6 @@ A Rust-based cross-platform app framework. Write once, build for multiple platfo
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/tauri-apps/tauri)
 
-<Card title="Tauri Practice" icon="laptop-code" href="/en/software/tauri">
+<Card title="Tauri Practice" icon="laptop-code" href="/software/tauri">
 Auto-release with GitHub Actions, SSR compatibility fixes, and more.
 </Card>

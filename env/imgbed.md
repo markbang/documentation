@@ -26,8 +26,8 @@ Parts of this page are still in their original Chinese. Key technical terms and 
 ## 配套Tool
 
 1. [PicGo](https://picgo.github.io/PicGo-Doc/)
-2. [ShareX](/en/apps/ShareX)
-3. [CDN Configuration](/en/env/CDN)
+2. [ShareX](/apps/ShareX)
+3. [CDN Configuration](/env/CDN)
 
 ## 使用建议
 

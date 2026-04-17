@@ -24,7 +24,7 @@ async def root():
     return {"message": "Hello World"}
 ```
 
-<Card title="FastAPI Details" icon="bolt" href="/en/backend/Python/fastapi">
+<Card title="FastAPI Details" icon="bolt" href="/backend/Python/fastapi">
 Route params, request bodies, dependency injection, middleware, and auth.
 </Card>
 
@@ -38,13 +38,13 @@ A full-stack web framework with built-in ORM, admin panel, and more.
 
 ## Web Scraping
 
-<Card title="Scraping Guide" icon="spider" href="/en/backend/Python/spider/index">
+<Card title="Scraping Guide" icon="spider" href="/backend/Python/spider/index">
 From basics to advanced techniques, anti-scraping strategies and real cases.
 </Card>
 
 ## Popular Libraries
 
-<Card title="Library Index" icon="cubes" href="/en/backend/Python/libs/index">
+<Card title="Library Index" icon="cubes" href="/backend/Python/libs/index">
 Notes on httpx, matplotlib, wordcloud, PyTorch, and more.
 </Card>
 

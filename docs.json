@@ -86,8 +86,8 @@
                 "group": "Home",
                 "icon": "rocket",
                 "pages": [
-                  "en/index",
-                  "en/code"
+                  "index",
+                  "code"
                 ]
               }
             ]
@@ -104,28 +104,28 @@
                     "group": "Python",
                     "icon": "python",
                     "pages": [
-                      "en/backend/Python/index",
-                      "en/backend/Python/fastapi",
+                      "backend/Python/index",
+                      "backend/Python/fastapi",
                       {
                         "group": "Web Scraping",
                         "icon": "spider",
                         "pages": [
-                          "en/backend/Python/spider/index",
-                          "en/backend/Python/spider/anti-spider"
+                          "backend/Python/spider/index",
+                          "backend/Python/spider/anti-spider"
                         ]
                       },
                       {
                         "group": "Libraries",
                         "icon": "cubes",
                         "pages": [
-                          "en/backend/Python/libs/index",
-                          "en/backend/Python/libs/httpx",
-                          "en/backend/Python/libs/wordcloud",
-                          "en/backend/Python/libs/matplotlib",
-                          "en/backend/Python/libs/PyTorch",
-                          "en/backend/Python/libs/python-notes",
-                          "en/backend/Python/libs/pyautogui",
-                          "en/backend/Python/libs/data-types"
+                          "backend/Python/libs/index",
+                          "backend/Python/libs/httpx",
+                          "backend/Python/libs/wordcloud",
+                          "backend/Python/libs/matplotlib",
+                          "backend/Python/libs/PyTorch",
+                          "backend/Python/libs/python-notes",
+                          "backend/Python/libs/pyautogui",
+                          "backend/Python/libs/data-types"
                         ]
                       }
                     ]
@@ -134,18 +134,18 @@
                     "group": "Go",
                     "icon": "golang",
                     "pages": [
-                      "en/backend/Go/index",
-                      "en/backend/Go/gin/index"
+                      "backend/Go/index",
+                      "backend/Go/gin/index"
                     ]
                   },
                   {
                     "group": "Databases",
                     "icon": "database",
                     "pages": [
-                      "en/backend/SQL/index",
-                      "en/backend/SQL/mysql",
-                      "en/backend/SQL/db-knowledge",
-                      "en/backend/SQL/sqlite"
+                      "backend/SQL/index",
+                      "backend/SQL/mysql",
+                      "backend/SQL/db-knowledge",
+                      "backend/SQL/sqlite"
                     ]
                   }
                 ]
@@ -158,23 +158,23 @@
                     "group": "Vue",
                     "icon": "vuejs",
                     "pages": [
-                      "en/frontend/Vue/index",
-                      "en/frontend/Vue/NaiveUI"
+                      "frontend/Vue/index",
+                      "frontend/Vue/NaiveUI"
                     ]
                   },
                   {
                     "group": "Next.js",
                     "icon": "nextjs",
                     "pages": [
-                      "en/frontend/Nextjs/index"
+                      "frontend/Nextjs/index"
                     ]
                   },
                   {
                     "group": "CSS Tools",
                     "icon": "palette",
                     "pages": [
-                      "en/frontend/TailwindCSS/index",
-                      "en/frontend/daisyui"
+                      "frontend/TailwindCSS/index",
+                      "frontend/daisyui"
                     ]
                   }
                 ]
@@ -183,17 +183,17 @@
                 "group": "Desktop",
                 "icon": "laptop",
                 "pages": [
-                  "en/software/index",
-                  "en/software/tauri"
+                  "software/index",
+                  "software/tauri"
                 ]
               },
               {
                 "group": "Algorithms",
                 "icon": "brain",
                 "pages": [
-                  "en/algo/index",
-                  "en/algo/sliding_window",
-                  "en/algo/bit"
+                  "algo/index",
+                  "algo/sliding_window",
+                  "algo/bit"
                 ]
               }
             ]
@@ -206,41 +206,41 @@
                 "group": "Software",
                 "icon": "app-store-ios",
                 "pages": [
-                  "en/apps/index",
-                  "en/apps/Apifox",
-                  "en/apps/Barrier",
-                  "en/apps/CherryStudio",
-                  "en/apps/Cursor",
-                  "en/apps/Pyenv",
-                  "en/apps/Rclone",
-                  "en/apps/Rye",
-                  "en/apps/Scoop",
-                  "en/apps/ShareX",
-                  "en/apps/Typora",
-                  "en/apps/Xizhi",
-                  "en/apps/iTab",
-                  "en/apps/starship"
+                  "apps/index",
+                  "apps/Apifox",
+                  "apps/Barrier",
+                  "apps/CherryStudio",
+                  "apps/Cursor",
+                  "apps/Pyenv",
+                  "apps/Rclone",
+                  "apps/Rye",
+                  "apps/Scoop",
+                  "apps/ShareX",
+                  "apps/Typora",
+                  "apps/Xizhi",
+                  "apps/iTab",
+                  "apps/starship"
                 ]
               },
               {
                 "group": "Environment & Deployment",
                 "icon": "cloud",
                 "pages": [
-                  "en/env/index",
-                  "en/env/docker",
-                  "en/env/docker-compose",
-                  "en/env/Caddy",
-                  "en/env/supervisor",
-                  "en/env/CDN",
-                  "en/env/Jupyter",
-                  "en/env/github-workflow",
-                  "en/env/markdown",
+                  "env/index",
+                  "env/docker",
+                  "env/docker-compose",
+                  "env/Caddy",
+                  "env/supervisor",
+                  "env/CDN",
+                  "env/Jupyter",
+                  "env/github-workflow",
+                  "env/markdown",
                   {
                     "group": "Blog Setup",
                     "icon": "pen-nib",
                     "pages": [
-                      "en/env/Fuwari",
-                      "en/env/imgbed"
+                      "env/Fuwari",
+                      "env/imgbed"
                     ]
                   }
                 ]
@@ -249,8 +249,8 @@
                 "group": "Job Hunting",
                 "icon": "briefcase",
                 "pages": [
-                  "en/env/exam",
-                  "en/env/interview"
+                  "env/exam",
+                  "env/interview"
                 ]
               }
             ]
@@ -263,33 +263,33 @@
                 "group": "About",
                 "icon": "user",
                 "pages": [
-                  "en/about/index",
-                  "en/about/site"
+                  "about/index",
+                  "about/site"
                 ]
               },
               {
                 "group": "Course Notes",
                 "icon": "book-open",
                 "pages": [
-                  "en/about/courses/web-design",
-                  "en/about/courses/info-analysis",
-                  "en/about/courses/info-processing",
-                  "en/about/courses/info-retrieval",
-                  "en/about/courses/info-management",
-                  "en/about/courses/game-theory",
-                  "en/about/courses/macro-economics",
-                  "en/about/courses/macro-economics-2",
-                  "en/about/courses/data-warehouse",
-                  "en/about/courses/data-visualization",
-                  "en/about/courses/data-mining",
-                  "en/about/courses/data-structure",
-                  "en/about/courses/e-commerce",
-                  "en/about/courses/knowledge-management",
-                  "en/about/courses/competitive-intelligence",
-                  "en/about/courses/mis",
-                  "en/about/courses/system-analysis",
-                  "en/about/courses/english-fiction",
-                  "en/about/courses/econometrics"
+                  "about/courses/web-design",
+                  "about/courses/info-analysis",
+                  "about/courses/info-processing",
+                  "about/courses/info-retrieval",
+                  "about/courses/info-management",
+                  "about/courses/game-theory",
+                  "about/courses/macro-economics",
+                  "about/courses/macro-economics-2",
+                  "about/courses/data-warehouse",
+                  "about/courses/data-visualization",
+                  "about/courses/data-mining",
+                  "about/courses/data-structure",
+                  "about/courses/e-commerce",
+                  "about/courses/knowledge-management",
+                  "about/courses/competitive-intelligence",
+                  "about/courses/mis",
+                  "about/courses/system-analysis",
+                  "about/courses/english-fiction",
+                  "about/courses/econometrics"
                 ]
               }
             ]
@@ -299,7 +299,7 @@
       {
         "language": "zh",
         "banner": {
-          "content": "你正在查看中文版本。[切换到英文 →](/en)",
+          "content": "你正在查看中文版本。[切换到英文 →](/)",
           "dismissible": true
         },
         "navbar": {

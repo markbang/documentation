@@ -10,15 +10,15 @@ Frontend development builds user interfaces and experiences, covering the visual
 
 <CardGroup cols={3}>
 
-<Card title="Vue" icon="vuejs" href="/en/frontend/Vue/index">
+<Card title="Vue" icon="vuejs" href="/frontend/Vue/index">
 Progressive JavaScript framework with Composition API.
 </Card>
 
-<Card title="Next.js" icon="nextjs" href="/en/frontend/Nextjs/index">
+<Card title="Next.js" icon="nextjs" href="/frontend/Nextjs/index">
 React full-stack framework with SSR/SSG/API Routes.
 </Card>
 
-<Card title="CSS Tools" icon="palette" href="/en/frontend/TailwindCSS/index">
+<Card title="CSS Tools" icon="palette" href="/frontend/TailwindCSS/index">
 Tailwind CSS and DaisyUI component library.
 </Card>
 

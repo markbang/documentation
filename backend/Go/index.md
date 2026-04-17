@@ -19,6 +19,6 @@ Go is friendly for Python learners to pick up, which is why I chose it.
 3. Gin + Gorm to build backend
 4. To be continued…
 
-<Card title="Gin Framework" icon="bolt" href="/en/backend/Go/gin/index">
+<Card title="Gin Framework" icon="bolt" href="/backend/Go/gin/index">
 Go's most popular web framework for building API services.
 </Card>

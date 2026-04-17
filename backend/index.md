@@ -8,15 +8,15 @@ Backend development handles server-side logic, database interactions, and API de
 
 <CardGroup cols={3}>
 
-<Card title="Python" icon="python" href="/en/backend/Python/index">
+<Card title="Python" icon="python" href="/backend/Python/index">
 FastAPI, web scraping, and popular libraries.
 </Card>
 
-<Card title="Go" icon="golang" href="/en/backend/Go/index">
+<Card title="Go" icon="golang" href="/backend/Go/index">
 Gin framework and concurrent programming.
 </Card>
 
-<Card title="Databases" icon="database" href="/en/backend/SQL/index">
+<Card title="Databases" icon="database" href="/backend/SQL/index">
 MySQL, SQLite, and core database concepts.
 </Card>
 

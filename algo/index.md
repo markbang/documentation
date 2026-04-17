@@ -24,11 +24,11 @@ Algorithm learning mainly follows open-source books on GitHub and Leetcode pract
 
 <CardGroup cols={2}>
 
-<Card title="Sliding Window" icon="window-maximize" href="/en/algo/sliding_window">
+<Card title="Sliding Window" icon="window-maximize" href="/algo/sliding_window">
 Two-pointer and sliding window patterns.
 </Card>
 
-<Card title="Bit Manipulation" icon="microchip" href="/en/algo/bit">
+<Card title="Bit Manipulation" icon="microchip" href="/algo/bit">
 Common bit tricks and problem types.
 </Card>
 

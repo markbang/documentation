@@ -24,31 +24,31 @@ For a comprehensive list, check [awesome-python-cn](https://github.com/jobbole/a
 
 <CardGroup cols={3}>
 
-<Card title="httpx" icon="bolt" href="/en/backend/Python/libs/httpx">
+<Card title="httpx" icon="bolt" href="/backend/Python/libs/httpx">
 Next-generation HTTP client with async support.
 </Card>
 
-<Card title="matplotlib" icon="chart-bar" href="/en/backend/Python/libs/matplotlib">
+<Card title="matplotlib" icon="chart-bar" href="/backend/Python/libs/matplotlib">
 Data visualization and charting.
 </Card>
 
-<Card title="wordcloud" icon="cloud" href="/en/backend/Python/libs/wordcloud">
+<Card title="wordcloud" icon="cloud" href="/backend/Python/libs/wordcloud">
 Word cloud generation and text visualization.
 </Card>
 
-<Card title="PyTorch" icon="microchip" href="/en/backend/Python/libs/PyTorch">
+<Card title="PyTorch" icon="microchip" href="/backend/Python/libs/PyTorch">
 Deep learning framework intro notes.
 </Card>
 
-<Card title="Python Notes" icon="notebook" href="/en/backend/Python/libs/python-notes">
+<Card title="Python Notes" icon="notebook" href="/backend/Python/libs/python-notes">
 Misc notes and common usage patterns.
 </Card>
 
-<Card title="Data Types" icon="list" href="/en/backend/Python/libs/data-types">
+<Card title="Data Types" icon="list" href="/backend/Python/libs/data-types">
 Python data types in detail.
 </Card>
 
-<Card title="pyautogui" icon="robot" href="/en/backend/Python/libs/pyautogui">
+<Card title="pyautogui" icon="robot" href="/backend/Python/libs/pyautogui">
 Automation scripts and GUI control.
 </Card>
 

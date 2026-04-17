@@ -15,15 +15,15 @@ MySQL is the most popular open-source relational database, widely used in web ap
 
 <CardGroup cols={3}>
 
-<Card title="MySQL Basics" icon="file-code" href="/en/backend/SQL/mysql">
+<Card title="MySQL Basics" icon="file-code" href="/backend/SQL/mysql">
 SQL syntax reference — CRUD to advanced queries.
 </Card>
 
-<Card title="Database Concepts" icon="lightbulb" href="/en/backend/SQL/db-knowledge">
+<Card title="Database Concepts" icon="lightbulb" href="/backend/SQL/db-knowledge">
 Core concepts — indexes, transactions, normalization.
 </Card>
 
-<Card title="SQLite" icon="cube" href="/en/backend/SQL/sqlite">
+<Card title="SQLite" icon="cube" href="/backend/SQL/sqlite">
 Lightweight embedded database for small apps.
 </Card>
 

@@ -8,35 +8,35 @@ When starting out with programming, you'll have many questions about environment
 
 <CardGroup cols={3}>
 
-<Card title="Docker" icon="container-storage" href="/en/env/docker">
+<Card title="Docker" icon="container-storage" href="/env/docker">
 Containerized deployment and app management.
 </Card>
 
-<Card title="Docker Compose" icon="layer-group" href="/en/env/docker-compose">
+<Card title="Docker Compose" icon="layer-group" href="/env/docker-compose">
 Multi-container orchestration and one-command deploy.
 </Card>
 
-<Card title="Caddy" icon="globe" href="/en/env/Caddy">
+<Card title="Caddy" icon="globe" href="/env/Caddy">
 Modern web server with automatic HTTPS.
 </Card>
 
-<Card title="Supervisor" icon="eye" href="/en/env/supervisor">
+<Card title="Supervisor" icon="eye" href="/env/supervisor">
 Process daemon and background service management.
 </Card>
 
-<Card title="CDN Setup" icon="network-wired" href="/en/env/CDN">
+<Card title="CDN Setup" icon="network-wired" href="/env/CDN">
 Domestic/overseas split CDN architecture.
 </Card>
 
-<Card title="Jupyter" icon="chart-line" href="/en/env/Jupyter">
+<Card title="Jupyter" icon="chart-line" href="/env/Jupyter">
 Interactive data analysis notebook.
 </Card>
 
-<Card title="GitHub Workflow" icon="code-branch" href="/en/env/github-workflow">
+<Card title="GitHub Workflow" icon="code-branch" href="/env/github-workflow">
 GitHub Actions CI/CD automation.
 </Card>
 
-<Card title="Markdown" icon="file-lines" href="/en/env/markdown">
+<Card title="Markdown" icon="file-lines" href="/env/markdown">
 Markdown writing tips and tools.
 </Card>
 
@@ -46,11 +46,11 @@ Markdown writing tips and tools.
 
 <CardGroup cols={2}>
 
-<Card title="Fuwari" icon="pen-nib" href="/en/env/Fuwari">
+<Card title="Fuwari" icon="pen-nib" href="/env/Fuwari">
 Astro-based blog theme.
 </Card>
 
-<Card title="Image Hosting" icon="image" href="/en/env/imgbed">
+<Card title="Image Hosting" icon="image" href="/env/imgbed">
 Qiniu OSS + DogeCloud CDN setup.
 </Card>
 
