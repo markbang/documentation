@@ -1,6 +1,6 @@
 ---
 title: "数据库原理"
-description: "数据库原理与应用课程复习笔记（2023 年考试版本），涵盖关系代数选择/投影/连接等基本运算与表达式编写、SQL 查询语句（SELECT/JOIN/GROUP BY/HAVING）、第一到第三范式与 BCNF 规范化理论、事务管理 ACID 四大特性、B+ 树索引原理以及 ER 实体关系图设计方法。"
+description: "数据库原理与应用课程复习笔记（2023 年考试版本），涵盖关系代数选择/投影/连接等基本运算与表达式编写、SQL 查询语句（SELECT/JOIN/GROUP BY/HAVING）、第一到第三范式与 BCNF 规范化理论、事务管理 ACID 四大特性与 B+ 树索引原理以及 ER 实体关系图。"
 icon: "book-open"
 ---
 

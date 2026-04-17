@@ -1,6 +1,6 @@
 ---
 title: "数据挖掘"
-description: "数据挖掘课程复习笔记，按课件顺序系统整理 CRISP-DM 标准流程六阶段、基本数据类型（依赖型与非依赖型）与相似度计算方法、Apriori 算法关联模式挖掘、K-Means 与层次聚类分析、决策树 ID3/C4.5 与朴素贝叶斯分类技术以及 TF-IDF 文本挖掘方法。"
+description: "数据挖掘课程复习笔记，按课件顺序系统整理 CRISP-DM 标准流程六阶段、非依赖型与依赖型基本数据类型与相似度距离计算方法、Apriori 算法关联模式挖掘、K-Means 与层次聚类分析、决策树 ID3/C4.5 与朴素贝叶斯分类技术以及 TF-IDF 文本挖掘方法。"
 icon: "magnifying-glass-chart"
 ---
 

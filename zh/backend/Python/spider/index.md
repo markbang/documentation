@@ -1,6 +1,6 @@
 ---
 title: "爬虫"
-description: "Python 爬虫技术从入门到进阶的学习笔记，涵盖使用 requests 库发送 HTTP 请求、BeautifulSoup 与 XPath 解析 HTML 页面、正则表达式提取目标数据、数据清洗与存储方法等核心抓取流程，以及应对 headers 验证、IP 封禁等常见反爬虫策略。"
+description: "Python 爬虫技术从入门到进阶的学习笔记，涵盖使用 requests 库发送 HTTP 请求、BeautifulSoup 与 XPath 解析 HTML 页面结构、正则表达式提取目标数据、数据清洗与存储方法等核心抓取流程，以及应对 headers 验证、IP 封禁等常见反爬虫策略的方法。"
 icon: "spider"
 ---
 
