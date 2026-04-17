@@ -4,7 +4,10 @@
   "name": "棒无の知识库",
   "description": "红温小丑：一个对小白友好的教程知识库，涵盖前后端、软件、环境、课程笔记与兴趣内容。",
   "logo": "/assets/joker.png",
-  "favicon": "/assets/joker.png",
+  "favicon": {
+    "light": "/assets/joker.png",
+    "dark": "/assets/joker.png"
+  },
   "colors": {
     "primary": "#14b8a6",
     "light": "#99f6e4",
@@ -12,9 +15,6 @@
   },
   "appearance": {
     "default": "system"
-  },
-  "search": {
-    "prompt": "搜索教程、软件、命令和知识点..."
   },
   "metadata": {
     "timestamp": true
@@ -33,7 +33,8 @@
         "light": "github-light",
         "dark": "github-dark"
       }
-    }
+    },
+    "latex": true
   },
   "navbar": {
     "links": [
@@ -258,5 +259,15 @@
         ]
       }
     ]
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "thumbnails": {
+    "background": "/assets/joker.png"
+  },
+  "fonts": {
+    "family": "Ubuntu",
+    "format": "woff2"
   }
 }
