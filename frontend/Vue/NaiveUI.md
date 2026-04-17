@@ -1,6 +1,6 @@
 ---
 title: "Naive UI"
-description: "Vue 3 组件库，完善的 TypeScript 支持与主题定制。"
+description: "Naive UI 是一个完善支持 TypeScript 的 Vue 3 UI 组件库，提供超过 80 个高质量组件，本文介绍通过 npm 安装与按需引入配置、全局主题定制方法以及 DataTable 表格、Form 表单、Dialog 对话框和 Message 消息提示等常用组件的基本使用示例。"
 icon: "cube"
 ---
 

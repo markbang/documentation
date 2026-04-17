@@ -1,3 +1,9 @@
+---
+title: "宏观经济学（下）"
+description: "宏观经济学下册复习笔记，涵盖名义 GDP 与实际 GDP 核算方法及 GDP 折算指数计算公式、三部门储蓄-投资恒等式分析、失业率与劳动参与率经典图解及快速计算技巧、CPI 消费价格指数编制方法、IS-LM 模型利率与产出均衡分析框架以及总供给-总需求 AD-AS 模型。"
+icon: "money-bill-trend-up"
+---
+
 开头引言：
 
 ![img](https://picx.zhimg.com/80/v2-5ec22c794360c3bb6b75718ddb359b5e_1440w.webp?source=1940ef5c)

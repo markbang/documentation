@@ -1,3 +1,9 @@
+---
+title: "Python 数据类型"
+description: "Python 内置数据类型详解与使用指南，涵盖整数、浮点数与复数等数字类型、字符串常用方法（upper/lower/split/strip/replace）、列表增删改查与切片操作、元组的不可变特性、字典键值对操作（get/items/keys/values）与集合的交并差运算等基础数据结构。"
+icon: "list"
+---
+
 # Python 数据类型
 
 Python 内置了丰富的数据类型，用于处理各种数据结构和场景。

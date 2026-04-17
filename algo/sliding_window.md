@@ -1,10 +1,8 @@
-[leetcode.3](https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/) | 
-
-#---
+---
 title: "滑动窗口"
-description: "双指针与滑动窗口题型整理。"
+description: "滑动窗口是双指针技巧的经典应用，适用于处理数组与字符串的连续子序列问题，本文整理了 left/right 双指针移动的通用模板代码、窗口扩张与收缩的条件判断逻辑、LeetCode 第 3 题无重复字符最长子串等典型题目的 Python 解法与 O(n) 时间复杂度分析。"
 icon: "window-maximize"
----算法
+---
 
 滑动窗口是一种常用的双指针技巧，适用于处理数组/字符串的子元素问题。通过维护一个窗口在数组上滑动，可以在O(n)时间复杂度内解决问题。
 

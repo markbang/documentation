@@ -1,3 +1,9 @@
+---
+title: "Web 设计与应用"
+description: "Web 设计与应用课程复习笔记，涵盖 HTML 超文本标记语言的基本结构与常用标签（标题、段落、链接、图片、表格、表单）、CSS 样式选择器与盒模型布局方法、JavaScript 基础语法与 DOM 操作等前端三剑客（HTML + CSS + JS）核心开发技术。"
+icon: "globe"
+---
+
 # Web 设计与应用
 
 前端三剑客：HTML + CSS + JavaScript

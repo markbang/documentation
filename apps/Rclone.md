@@ -1,6 +1,6 @@
 ---
 title: "Rclone"
-description: "云存储同步与文件管理。"
+description: "Rclone 是一款命令行云存储管理工具，打包了 40 多种云存储服务商的接口并提供统一访问界面，兼容 rsync、cp、mv 等 POSIX 命令，本文整理了官网安装流程、rclone config 配置管理、常用同步与复制命令以及结合 CDN 方案的对象存储文件同步。"
 icon: "cloud-arrow-up"
 ---
 
