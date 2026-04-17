@@ -1,6 +1,6 @@
 ---
 title: "Information retrieval"
-description: "Course notes on information retrieval covering document classification, ISBN/ISSN identification, Boolean search strategies, precision/recall metrics, and OPAC."
+description: "Course notes on information retrieval covering document classification, ISBN/ISSN identification, Boolean search, and precision/recall metrics."
 icon: "search"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "算法学习"
-description: "算法刷题学习路线与开源教程资源推荐，包含 Hello 算法（动画图解、多语言支持）、代码随想录（200 道经典题目刷题顺序、60w 字详细图解）和 labuladong 算法笔记（60 多篇原创文章）等优质教程链接，附 LeetCode 做题统计卡片以及滑动窗口与位运算专题导航入口。"
+description: "算法刷题学习路线与开源教程推荐，包含 Hello 算法、代码随想录、labuladong 笔记等资源链接，附 LeetCode 做题统计。"
 icon: "brain"
 ---
 

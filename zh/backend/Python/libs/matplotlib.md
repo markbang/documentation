@@ -1,6 +1,6 @@
 ---
 title: "Matplotlib"
-description: "Matplotlib 是 Python 最主流的 2D 绘图库，可生成出版物质量的图形，支持 Python 脚本、IPython Shell 和 Jupyter 等多种环境，本文介绍 pyplot 接口的基本用法，涵盖折线图、直方图、条形图与散点图的绘制方法与参数配置。"
+description: "Matplotlib 是 Python 主流 2D 绑图库，支持多种环境，本文介绍 pyplot 接口用法，涵盖折线图、直方图与散点图绑制。"
 icon: "chart-area"
 ---
 
