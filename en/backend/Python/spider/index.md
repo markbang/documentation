@@ -1,6 +1,6 @@
 ---
 title: "Web Scraping"
-description: "Python web scraping from basics to advanced."
+description: "Python web scraping guide covering HTTP requests, BeautifulSoup and XPath parsing, regex data extraction, data cleaning, and common anti-bot strategies."
 icon: "spider"
 ---
 

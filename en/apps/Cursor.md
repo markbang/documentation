@@ -1,6 +1,6 @@
 ---
 title: "AI IDE"
-description: "Cursor and Trae — AI-powered code editors."
+description: "Tips for using Cursor AI IDE effectively including code completion, project exploration, error explanation, and best practices for prompt context."
 icon: "wand-magic-sparkles"
 ---
 

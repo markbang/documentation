@@ -1,6 +1,6 @@
 ---
 title: "Tauri"
-description: "Rust cross-platform desktop development practice."
+description: "Build cross-platform desktop apps with Tauri using Rust and web technologies, covering project setup, frontend-backend IPC communication, and app packaging."
 icon: "laptop-code"
 ---
 

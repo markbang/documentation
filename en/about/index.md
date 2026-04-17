@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "About bangwu — intro and contact info."
+description: "About bangwu (markbang), an ECNUer focused on frontend and backend development, tooling, and documentation for this knowledge base."
 icon: "user"
 ---
 

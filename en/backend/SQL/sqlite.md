@@ -1,3 +1,9 @@
+---
+title: "SQLite"
+description: "SQLite lightweight embedded database guide covering zero-config architecture, Python sqlite3 module integration, basic SQL operations, and use case analysis."
+icon: "database"
+---
+
 # SQLite
 
 SQLite 是一个轻量级的嵌入式关系型数据库，无需独立服务器进程，直接读写磁盘文件。

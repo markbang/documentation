@@ -1,6 +1,6 @@
 ---
 title: "CDN Setup"
-description: "Domestic/overseas split CDN architecture."
+description: "Set up a split CDN architecture with domestic and overseas acceleration using object storage, DNS-based routing, and Rclone sync for blogs and doc sites."
 icon: "network-wired"
 ---
 

@@ -1,3 +1,9 @@
+---
+title: "Management information systems"
+description: "MIS course review covering information definitions, data-to-information transformation, system development methods, and decision support system architecture."
+icon: "building"
+---
+
 **考试题型**
 
 ------

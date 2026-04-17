@@ -1,6 +1,6 @@
 ---
 title: "Markdown Syntax"
-description: "Markdown writing tips and tools."
+description: "Markdown syntax reference covering headings, lists, links, images, code blocks, tables, blockquotes, GFM extensions like task lists, and editor recommendations."
 icon: "file-lines"
 ---
 

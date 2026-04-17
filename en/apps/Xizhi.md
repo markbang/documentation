@@ -1,6 +1,6 @@
 ---
 title: "Xizhi"
-description: "Multi-channel notification push service."
+description: "Set up Xizhi and Server Chan for multi-channel push notifications with Python code examples for automated monitoring alerts and scheduled reminders."
 icon: "bell"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Desktop Development"
-description: "Tauri cross-platform desktop app development."
+description: "Desktop development notes focused on Tauri framework for building cross-platform apps with Rust backend and web frontend, covering setup and IPC patterns."
 icon: "laptop"
 ---
 

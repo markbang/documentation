@@ -1,6 +1,6 @@
 ---
 title: "Next.js"
-description: "React full-stack framework with SSR/SSG/API Routes."
+description: "Next.js guide covering create-next-app setup, file-system routing, server-side rendering, static site generation, API Routes, and data fetching patterns."
 icon: "nextjs"
 ---
 

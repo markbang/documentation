@@ -1,6 +1,6 @@
 ---
 title: "Barrier"
-description: "Cross-device keyboard/mouse sharing software."
+description: "Set up Barrier to share one keyboard and mouse across multiple computers on Windows, macOS, and Linux with Scoop or manual installation."
 icon: "arrows-left-right"
 ---
 

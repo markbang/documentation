@@ -1,6 +1,6 @@
 ---
 title: "Algorithm Learning"
-description: "Algorithm practice and topic-based notes — sliding window, bit manipulation."
+description: "Algorithm study roadmap with curated resources from Hello Algorithm, labuladong, and LeetCode practice notes on sliding window and bit tricks."
 icon: "brain"
 ---
 

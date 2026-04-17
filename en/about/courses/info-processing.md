@@ -1,525 +1,307 @@
-# 信息处理与组织
+---
+title: "Information processing and organization"
+description: "Course notes on information organization covering cataloging, indexing, Dublin Core metadata, RDA resource description, and XML/RDF/OWL semantic encoding."
+icon: "tags"
+---
 
-> [!note]
-> 题型：名词解释（5x4）、论述（15x2）、编码（50，`xml`20, `rdf`20, `owl`10）
+<details>
+    <summary>写在前面</summary>
+系统分析与设计：重点由老师给出，本文章根据给出的重点来进行总结，理解或背诵自行解决 全文结合老师给的重点
+    PS：引言部分帮助理解
 
-## 信息组织概述
 
-> 信息组织、信息描述、信息揭示、元数据（五类）、DC
+![explorer_d5F5kaOfGm](https://cdn.bangwu.top/img/202312231959498.webp)
 
-`信息组织`：信息组织是指利用一定的规则、方法和技术对信息的外部特征和**内容特征**进行**描述**和**揭示**，并按给定的参数和序列公式排列，使信息从**无序**集合转换为**有序**集合。
+</details>
 
-`语义网`：就是能根据语义进行判断的智能网络，实现人与电脑的无障碍沟通。
+# 一、系统概要、信息、管理与信息系统
 
-`信息描述(著录)`：根据一定的描述规则和技术标准，对信息的**外在特征**和部分内容特征进行分析、选择和记录的过程。
+<details>
+    <summary>引言👈</summary>
+系统分析与设计：系统分析【理解需要做什么，详细说明需要做什么】+ 系统设计【详细说明系统将如何工作】
+</details>
 
-`信息揭示(标引)`：是在对信息的**内容特征**进行全面的、深层次分析与综合的基础上，根据特定的标引规则与工具，赋予信息内容特征以系统化代码或标识，以便将信息记录组织成**概念标识**系统的信息处理过程。
+## 1.1系统概要
 
-**`元数据`**：是描述其他数据的数据，或者说是用于提供某种资源的有关信息的结构化数据。
+> 系统是由相互联系和相互制约的若干要素组成的、具有特定功能的有机整体
 
-`元数据标准`：内容标准(RDA)、**结构标准(DC)**、显示标准(ISBD)、编码标准(MARC)、取值标准
+## 1.2信息概要
 
-`DC修饰词`：对元素进行限定和修饰，用来增加描述的准确性，分为元素限定词和编码体系修饰词。
+> **数据（**Data**）**是对客观事物的性质、状态以及相互关系等进行记载的物理符号或这些物理符号的组合，反映了客观事物属性的记录
+>
+> **信息（**Information**）**是经过加工后的数据，以有意义的形式加以排列和处理的数据（有意义的/被理解的数据）（who、when、where、what） 
+>
+> **知识**（Knowledge）是信息的集合，从相关信息中过滤、提炼及加工而得到的有用资料，使得信息变得有用（有用的信息），是人类关于自然界、人类社会及思维方式与运动规律的认识、经验的总和 （why、how to）
+>
+> **智慧**（Wisdom）是知识和信息经过人类大脑内化后转换为对事物理解和处理的能力 （What is best），人类独有的一种能力。
 
-`元素限定词`：元素限定词缩小了元素的含义范围，使其更具有**专指性**。
+**数据和信息可看作原材料和成品的关系**
 
-`编码体系修饰词`：有助于对所修饰术语值的理解，包括控制词表及正规的符号或解读方式。
+![chrome_etPYy1IlSL](https://cdn.bangwu.top/img/202312251927552.webp)
 
-`RDA(Resource Description and Access, 资源描述与检索)`：一个元数据内容标准，提供一套用于形成支持资源发现的数据的**规则和说明**。
+> **信息的属性**
 
-## 字符编码
+- 事实性、扩散性、传输性、共享性、增值性、不完全性、等级性、滞后性
 
-> 字符编码和 URI、汉字编码字符集、GB2312
+## 1.3信息系统
 
-`字节序`：多字节数据在计算机内存中存储或者网络传输时各字节的存储顺序。
+> **信息系统**：以计算机为基础，结合管理理论和方法，应用信息技术解决管理问题，为管理决策提供支持的系统。
 
-`字符集`：字符的合集，这些字符组成一套符号系统，可以组合起来形象的表达各种含义
+**信息系统的基本功能**：
 
-`编码字符集`：字符以及对应的编码集合
+- 数据的采集和输入
+- 数据的传输、存储、加工、维护和使用
 
-`字符编码`：把字符集中的字符表示为二进制位的有序集合，以便再计算机中存储、传递和处理
+**信息系统的结构**：【按照抽象程度分为三个结构】
 
-美国标准信息交换标准码(ASCII)，GBK，GB2312![bangwu20250105171710](https://cdn.bangwu.top/img/202501051717307.webp)
+1. 概念结构
+2. 基于管理职能的逻辑结构
+3. 基于计算机实现的物理结构【硬件结构+软件结构】
 
-`统一资源标识符(URI)`：用来标识抽象或实体资源的简洁字符串。
+![chrome_a2yNXHtbtG](https://cdn.bangwu.top/img/202312251952140.webp)
 
-`国际化资源标识符(IRIs)`：基于通用字符集的字符序列
+## 1.4信息系统与组织
 
-## xml
+> 信息系统在组织中的地位
 
-> 标记语言和命名空间
+- **战略型**：信息系统是这些企业核心竞争力的一部分
+- **转变型**：信息系统将逐步转变为企业未来成功的战略性支柱
+- **工厂型**：信息系统是企业顺利运作的保障
+- **支持型**：信息系统对企业当前运作和未来战略的影响不大
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-```
+# 二、信息系统建设概论
 
-XML 文档声明部分指明读取时所用的字符集，确保保存、读取时采用相同的字符集
+## 信息系统建模
 
-> 每个 XML 都有一个且只能有一个根元素，只有注释和处理指令可以不包含在根元素中
+> 信息系统领域常用模型：【理解即可】
 
-```xml
-<!--这是一个注释-->
-<![CDATA[
-这里的所有内容都会被XML解析器忽略
-]]>
-```
+| 模型名称                      | 用途                                           |
+| ----------------------------- | ---------------------------------------------- |
+| 业务流程图                    | 描述不同职能部门业务活动分工和活动过程         |
+| 数据流图                      | 描述数据的产生、处理、存储和去向的信息处理模型 |
+| 实体关系图                    | 描述系统中有价值的实体及其关系的数据模型       |
+| 组织结构图                    | 描述组织的部门及其从属关系的层次模型           |
+| 模块结构图                    | 描述软件功能模块及其调用关系的层次模型         |
+| 判定表、判定树                | 描述决策条件及其行动关系                       |
+| UML（类图、用例图、顺序图等） | 描述软件系统结构及行为的一组模型               |
+| 甘特图                        | 描述项目任务及其完成日期的项目计划模型         |
 
-> XML 模式定义文件(Schema)
+## 2.2信息系统开发方法与工具
 
-```xml
-<?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-</xs:schema>
-```
+> 信息系统的生命周期(System Development Life Cycle，SDLC)   设计=>评价=>设计
 
-以`.xsd`为扩展名，属性`xmlns:xs`以 url 为值，该 url 声明其`名称空间`
+基于**生命周期**的开发方法：原型法、迭代法、瀑布法等【管理信息系统已学，理解即可】
 
-通常使用一个简短的代号来代替 URI，这个代号称为`命名空间前缀`（下面的 river）
+基于**技术**的开发方法：面向过程、面向对象、面向服务
 
-```xml
-xmlns:river="http://www.myserver.com/"
-```
+# 三、系统规划与分析概述
 
-![xml数据类型](https://cdn.bangwu.top/img/202501061511721.webp)
+## 3.2信息系统规划的技术与方法
 
-使用`xs:element`来定义需要使用的子元素，`xs:element`包含的属性有
+> 战略目标集转移法【基本思想：将组织战略集转换成与它相关联和一致的信息系统战略集】
+>
+> 企业系统规划法【四个关键步骤：定义管理目标、定义管理功能组、定义数据分类、定义信息结构】
+>
+> 关键成功因素法【找出成功因素】
+>
+> 价值链分析法【企业进行的种种活动可以用一个价值链来表明，每个活动都有可能产生增值行为】
 
-1. `name`：用来定义元素名称，如：`<xs:element name="student_id" />`定义了`<student_id />`
-2. `type`：设置元素值的类型，可以是简单的和复杂的类型
-3. `maxOccurs`：设置元素可出现无数次，值为`unbounded`时，可以出现无数次
+## 3.5系统分析的任务、过程和方法
 
-内建类型：如`xs:string`、`xs:integer`、`xs:token`等
+> 系统分析的重要任务是识别和表达用户需求，分析领域业务，建立系统的逻辑模型。
 
-### restriction
+要解决以下问题：
 
-自定义类型可以对内建类型进行一些派生，如对`xs:integer`进行派生，限制范围在 300~500
+- 如何采集信息、理解和分析问题？
+- 如何进行需求分析、确定需求？
+- 如何表述需求？
 
-```xml
-<xs:simpleType>
-	<xs:restriction base=“xs:integer”>
-		<xs:maxInclusive value=“500”/>
-		<xs:minInclusive value=“300”/>
-	</xs:restriction>
-</xs:simpleType>
-```
-
-`minInclusive`、`maxInclusive`、`minExclusive`、`maxExclusive`，对`integer`进行约束其中`Inclusive`是可以包含边界值的
-
-`length`、`minLength`、`maxLength`，对`string`进行约束包含边界长度
-
-`totalDigits`、`fractionDigits`对`decimal`进行约束，`totalDigits`指定最多可包含多少位数，`fractionDigits`指定最多可包含多少位小数
-
-`enumeration`定义枚举约束，`pattern`定义正则表达式，`whiteSpace`空白处理
-
-### list
-
-由单个数据类型扩展出列表类型，使用时**必须指定列表元素的类型**，有两种方式指定类型
-
-```xml
-<xs:simpleType name="age_list_Type">
-	<xs:list>
-		<xs:simpleType>
-			<xs:restriction base="xs:int">
-				<xs:minExclusive value="0"/>
-				<xs:maxExclusive value="100"/>
-			</xs:restriction>
-		</xs:simpleType>
-	</xs:list>
-</xs:simpleType>
-<xs:element name="age_list" type="age_list_Type"/>
-<!-- OR -->
-<xs:simpleType name="age_Type">
-	<xs:restriction base="xs:int">
-		<xs:minExclusive value="0"/>
-		<xs:maxExclusive value="100"/>
-	</xs:restriction>
-</xs:simpleType>
-<xs:simpleType name="age_list_Type">
-	<xs:list itemType=“age_Type“/>
-</xs:simpleType>
-<xs:element name="age_list" type="age_list_Type"/>
-<!-- XML文档： -->
-<age_list >57  12  23  9  68</age_list ><!-- 列表类型的值以空白作为分隔符 -->
-```
-
-### complexType
-
-前面所提到的`simpleType`只能用来定义没有嵌套的元素，如果需要用到嵌套，就需要`complexType`来定义，简单类型的元素只包含文本值，没有子元素或属性。复杂类型的元素可以包含子元素、属性，或混合内容（文本和子元素混合）。
-
-和`simpleType`的定义一样，可以在`element`内定义，也可以单独定义引用使用。
-
-```xml
-<xs:element name="person">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="firstName" type="xs:string"/>
-      <xs:element name="lastName" type="xs:string"/>
-      <xs:element name="age" type="xs:integer"/>
-    </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-  </xs:complexType>
-</xs:element>
-<!-- OR -->
-<xs:complexType name="PersonType">
-  <xs:sequence>
-    <xs:element name="firstName" type="xs:string"/>
-    <xs:element name="lastName" type="xs:string"/>
-    <xs:element name="age" type="xs:integer"/>
-  </xs:sequence>
-  <xs:attribute name="id" type="xs:integer" use="required"/>
-</xs:complexType>
-
-<xs:element name="person" type="PersonType"/>
-```
-
-`complexType`的子元素结构可以使用 `sequence`、`choice` 或 `all` 结构化
-
-- **`sequence`**：子元素必须按定义的顺序出现。
-- **`choice`**：子元素中只能选择一个。
-- **`all`**：子元素可以无序出现，每个子元素最多只能出现一次。
-
-`attribute`定义元素属性，属性可以是可选（默认）、必需或带默认值
-
-```xml
-<xs:complexType>
-  <xs:attribute name="status" type="xs:string" default="active"/>
-</xs:complexType>
-```
-
-`mixed`允许元素既包含文本又包含子元素
-
-```xml
-<xs:complexType name="detail_type" mixed="true">
-  <xs:sequence>
-    <xs:element name="note" type="xs:string"/>
-  </xs:sequence>
-</xs:complexType>
-<xs:element name="description" type="detail_type" />
-<!-- XML -->
-<description>
-这是一些<note>这是另外一些</note>
-</description>
-```
-
-`group`元素组和属性组用于定义和复用一组元素或属性。这种机制有助于减少冗余，提高模式的可维护性。【了解一下就行，不用这个也能写出来，和 Python 定义方法一样】
-
-### 命名空间
-
-**命名空间（Namespace）** 是一种解决**命名冲突**的方法，尤其是在一个文档中使用多个来源的元素和属性时。命名空间通过为每个元素或属性分配一个唯一的标识符（URI）来区分相同名称的元素或属性，确保它们具有独特性。
-
-```xml
-<!-- 默认命名空间 无前缀 element 元素属于 http://example.com/ns1 命名空间 -->
-<root xmlns="http://example.com/ns1">
-  <element>Content</element>
-</root>
-<!-- html:table 属于 HTML 命名空间，svg:svg 属于 SVG 命名空间 -->
-<root xmlns:html="http://www.w3.org/TR/html4/"
-      xmlns:svg="http://www.w3.org/2000/svg">
-  <html:table>
-    <html:tr>
-      <html:td>HTML Table Cell</html:td>
-    </html:tr>
-  </html:table>
-  <svg:svg width="100" height="100">
-    <svg:circle cx="50" cy="50" r="40" stroke="black" fill="red"/>
-  </svg:svg>
-</root>
-```
-
-在 xsd 中使用`targetNamespace`来绑定命名空间
-
-```xml
-<!-- xsd -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://example.com/book"
-           xmlns="http://example.com/book"
-           elementFormDefault="qualified">
-  <xs:element name="book">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="title" type="xs:string"/>
-        <xs:element name="author" type="xs:string"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-</xs:schema>
-
-<!-- xml -->
-<book xmlns="http://example.com/book">
-  <title>XML Guide</title>
-  <author>John Doe</author>
-</book>
-```
-
-- `targetNamespace="http://example.com/book"` 将该模式绑定到命名空间，可以避免命名冲突
-- `elementFormDefault="qualified"` 要求所有元素都声明命名空间
-
-## rdf
-
-> 基本思想
-
-通过在 XML 中引用 RDF，可以将 XML 的**解析过程与解释过程相结合**。也就是说，RDF 可以帮助解析器在阅读 XML 的同时，获得 XML 所要表达的主题和对象，并可以根据它们的关系进行推理，从而做出基于语义的判断
-
-`RDF基本思想`：被描述的事物具有一些`属性(properties)`，这些属性各有其`值(values)`；对资源的描述可以通过对它作出指定了上述属性及值的**陈述**(statement)来进行。
-
-### 核心概念
-
-`资源`：资源是任何可以唯一标识的对象或概念，通常使用 URI 来唯一标识
-
-- 一个网页：`http://example.com/about`
-- 一个实体：`http://example.com/person/JohnDoe`
-
-`三元组`：SPO，主谓宾
-
-```xml
-John is the author of Book1
-<http://example.com/John> <http://example.com/isAuthorOf> <http://example.com/Book1> .
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/">
-  <rdf:Description rdf:about="http://example.com/John">
-    <ex:isAuthorOf rdf:resource="http://example.com/Book1"/>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-`图模型`：主语和宾语是节点，谓语是连接这些节点的有向边
-
-RDF 基本格式
-
-```xml
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:prefix="namespace-URI">
-  <!-- RDF 描述 -->
-</rdf:RDF>
-
-```
-
-描述一本书
-
-```xml
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/schema#">
-  <rdf:Description rdf:about="http://example.com/book1">
-    <ex:title>RDF Guide</ex:title>
-    <ex:author>John Doe</ex:author>
-    <ex:publicationYear>2023</ex:publicationYear>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-嵌套描述作者
-
-```xml
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/schema#">
-  <!-- 描述书 -->
-  <rdf:Description rdf:about="http://example.com/book1">
-    <ex:title>RDF Guide</ex:title>
-    <ex:author rdf:resource="http://example.com/person/JohnDoe"/>
-  </rdf:Description>
-
-  <!-- 描述作者 -->
-  <rdf:Description rdf:about="http://example.com/person/JohnDoe">
-    <ex:name>John Doe</ex:name>
-    <ex:profession>Writer</ex:profession>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-使用空节点，有时资源没有 URI，例如描述一本书，作者的信息没有 URI，仅描述为名字和职业
-
-```xml
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/schema#">
-  <rdf:Description rdf:about="http://example.com/book1">
-    <ex:title>RDF Guide</ex:title>
-    <ex:author>
-      <rdf:Description>
-        <ex:name>John Doe</ex:name>
-        <ex:profession>Writer</ex:profession>
-      </rdf:Description>
-    </ex:author>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-### RDF/XML 进阶
-
-`rdf:type`可以用来定义某个资源属于某个类
-
-```xml
-<rdf:Description rdf:about="资源URI">
-  <rdf:type rdf:resource="类URI"/>
-</rdf:Description>
-```
-
-`xml:base`基准 URI 应用于值为`IRIs`的所有`RDF/XML`属性，例如`rdf:about`、`rdf:resource`、`rdf:ID`、`rdf:datatype`等，假设我们描述一个人 `John` 和一本书 `RDF Guide`，URI 分别为 `http://example.com/person/John` 和 `http://example.com/#RDFGuide`
-
-```xml
-<rdf:RDF xml:base="http://example.com/"
-         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/schema#">
-  <rdf:Description rdf:about="person/John">
-    <ex:name>John</ex:name>
-  </rdf:Description>
-
-  <rdf:Description rdf:ID="RDFGuide">被解析为http://example.com/#RDFGuide
-    <ex:title>RDF Guide</ex:title>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-**`rdf:Bag`**、**`rdf:Seq`** 和 **`rdf:Alt`** 是三种用于表示集合（容器）的类型
-
-| 容器类型  | 顺序 | 重复 | 应用场景                     |
-| --------- | ---- | ---- | ---------------------------- |
-| `rdf:Bag` | 无序 | 允许 | 表示无序集合（如作者列表）   |
-| `rdf:Seq` | 有序 | 允许 | 表示有序集合（如章节、步骤） |
-| `rdf:Alt` | 可选 | 允许 | 表示可选集合（如多语言版本） |
-
-```xml
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="http://example.com/book1">
-    <dc:creator>
-      <rdf:Bag>
-        <rdf:li>John Doe</rdf:li>
-        <rdf:li>Jane Smith</rdf:li>
-        <rdf:li>John Doe</rdf:li> <!-- 成员可以重复 -->
-      </rdf:Bag>
-    </dc:creator>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-`<!DOCTYPE rdf:RDF [<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">]>` 是一个声明部分,在文档中，可以用 `&xsd;` 引用这个实体，代替完整的命名空间 URI
-
-```xml
-<!DOCTYPE rdf:RDF [
-  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
-]>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/schema#">
-  <rdf:Description rdf:about="http://example.com/resource1">
-    <ex:age rdf:datatype="&xsd;integer">25</ex:age>
-    <ex:height rdf:datatype="&xsd;float">5.9</ex:height>
-  </rdf:Description>
-</rdf:RDF>
-```
-
-### RDF Schema
-
-| 元素              | 描述                                         |
-| ----------------- | -------------------------------------------- |
-| `rdfs:Class`      | 定义一个类，类似于对象建模中的类或类别。     |
-| `rdf:Property`    | 定义一个属性，用于描述资源之间的关系。       |
-| `rdfs:subClassOf` | 表示一个类是另一个类的子类，支持类的继承。   |
-| `rdfs:domain`     | 指定属性的**域**（定义属性适用的资源类型）。 |
-| `rdfs:range`      | 指定属性的**范围**（定义属性值的类型）。     |
-| `rdfs:label`      | 为资源提供一个人类可读的标签。               |
-| `rdfs:comment`    | 提供对资源或属性的注释。                     |
-
-这部分没啥说的，要会用 RDF 来描述实例
-
-## owl
-
-> 本体
-
-`本体`：是形式化的术语词汇表，通常覆盖一个特定领域并为某个用户社区所共享。它们通过描述本体中术语间的关系来给术语下定义。
-
-- **类的声明**：使用`<owl:Class rdf:about="类名"/>`声明类。
-
-- **类层次结构**：通过`<rdfs:subClassOf>`定义类之间的父子关系，此关系具有传递性和自反性。
-
-  ```xml
-   <owl:Class rdf:about="Woman">
-     <rdfs:subClassOf rdf:resource="Person"/>
-   </owl:Class>
-  ```
-
-- **等价类**：若两个类包含完全相同个体，则使用`<owl:equivalentClass>`声明它们等价。
-
-  ```xml
-   <owl:Class rdf:about="Woman">
-     <rdfs:subClassOf rdf:resource="Person"/>
-   </owl:Class>
-  ```
-
-- **类不相交**：使用`<owl:AllDisjointClasses>`和`<owl:disjointWith>`声明类之间不相容，即不相交。
-
-  ```xml
-  <owl:Class rdf:about="Man">
-  	<owl:disjointWith rdf:resource="Woman"/>
-  </owl:Class>
-  ```
-
-后面高级类关系不考，同样也要会描述
-
-## 知识图谱
-
-> 概念和如何构建知识图谱
-
-`知识图谱(Knowledge Graph)`本质上是语义网络，是一种基于图的数据结构，由`节点(Point)`和`边(Edge)`组成。在知识图谱里，每个节点表示现实世界中存在的“实体”，每条边为实体与实体之间的“关系”。通俗地讲，知识图谱就是把所有不同种类的信息连接在一起而得到的一个关系网络。
-
-### 主要的构建和应用技术
-
-`实体识别`：从文本中发现命名实体，最典型的是人名、地名、机构名三类实体
-
-`关系抽取`：抽取出实体与实体之间的关系
-
-知识表示与存储，往往将知识图谱作为复杂的网络进行存储，网络的每个节点带有实体标签，每条边带有关系标签。
-
-知识图谱的主要应用有：实体链接、查询理解、自动问答、文档表示
-
-## 练习
-
-手写出以下要求的代码，给出一些必要代码
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-</xs:schema>
-<!-- 引用xsd 无命名空间 noNamespaceSchemaLocation -->
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="name.xsd">
-</root>
-<!-- 引用有命名空间 -->
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns="http://www.example.org/schema"
-      xsi:schemaLocation="http://www.example.org/schema file.xsd">
-</root>
-<!-- RDF -->
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-         xmlns:prefix="namespace-URI">
-</rdf:RDF>
-```
-
-### **XML 相关题目**
-
-1. **XML 基础知识**
-   - 设计一个 XML 文档，描述一本书的基本信息（如书名、作者、出版日期、ISBN）。
-   - 创建一个 XML 文档，表示一个学校的课程信息，包括课程名称、教师、学分、学生列表。
-2. **XML Schema (XSD)**
-   - 编写一个 XML Schema (XSD) 文件，验证学生成绩单的结构。每个成绩单包含学生姓名、学号、课程和成绩。
-   - 创建一个 XSD 文件来验证一个产品目录，其中包括产品名称、描述、价格、数量等字段。
-
-### **RDF 相关题目**
-
-1. **RDF 基础**
-
-   - 使用 RDF/XML 编写一个描述图书的 RDF 数据集。每本书应包括书名、作者、出版年份、ISBN 等信息。
-   - 定义一个 RDF 图谱，表示电影的基本信息（如电影名、导演、演员、发行年份），并包含一些样例数据。
-
-2. **RDFS 和类定义**
-
-   - 使用 RDFS 定义一个 RDF 本体，表示动物分类信息。包括 `Animal` 类及其子类（如 `Mammal`, `Bird`），并定义每个类的相关属性（如 `hasHabitat`, `hasLegs`）。
-   - 定义一个 RDF 类 `Person`，并为其添加属性 `hasAge` 和 `hasAddress`，表示一个人的年龄和地址。
-
-3. **RDF 属性和实例化**
-
-   - 使用 RDF/XML 语法定义一个资源 `John`，并为其指定类型为 `Person`，同时添加属性 `hasAge`（年龄为 30）。
-   - 使用 RDF/XML 创建一个实例 `Eagle`，类型为 `Bird`，并使用 `hasHabitat` 属性将其栖息地设置为“山脉”。
-
-4. **OWL 本体与推理**
-   - 使用 OWL 定义一个表示“公司”的本体，其中包括 `Employee` 类、`Manager` 类（`Employee` 的子类），以及相关属性 `worksFor`（员工与公司之间的关系）。
-   - 设计一个 OWL 本体，表示“医生”和“病人”之间的关系。医生和病人之间有一个 `treats` 属性。使用推理引擎推导出某个病人的医生。
+**系统分析的过程**：问题分析=>需求分析=>需求定义
+
+![chrome_TJOv3VWjMa](https://cdn.bangwu.top/img/202312282116857.webp)
+
+# 四、UML统一建模语言
+
+> 统一建模语言UML（unified modeling language）是一种基于面向对象的可视化的通用建模语言，用于对软件进行描述、可视化处理、构造和建立软件系统工作的文档。
+
+![chrome_ifV2TxayLC](https://cdn.bangwu.top/img/202312282119927.webp)
+
+**UML的构成**：
+
+- **事物(建模元素)**：UML模型中面向对象的基本模块，代表物理上或概念上的元素
+- **关系**：事物与事物之间的联系，根据耦合度从弱到强排列，分别是依赖、关联、聚合、组合、继承/泛化和实现关系
+- **图**：事物和关系的可视化表示
+
+理解以下几种图的构成及功能：
+
+![](https://cdn.bangwu.top/img/202312282122289.webp)
+
+![chrome_jZvHwR4mUu](https://cdn.bangwu.top/img/202312282124009.webp)
+
+![chrome_OR9CZVf3KJ](https://cdn.bangwu.top/img/202312282125853.webp)
+
+# 五、流程建模（理解为主）
+
+## 业务流程分析与建模
+
+> **跨职能流程图**【面向过程】
+
+➢ 也称泳道图，面向过程，能够展示工作流中每个步骤涉及的职能部门和工作事项
+➢ 能展示各个环节间的关系，同时还能展示为过程负责的执行者（比如说人或部门）
+➢ 适用于涉及多个部门或角色的场景
+
+> **UML活动图**【面向对象】
+
+➢ 面向对象，描述满足用例要求所要进行的活动以及活动间的约束关系，阐明了业务用例实现的工作流程
+➢ 活动图可用于需求获取、分析和设计的工作流中
+➢ 适合描述系统中多个对象跨多个用例的活动顺序
+
+![chrome_lUo0WXHplq](https://cdn.bangwu.top/img/202312282135023.webp)
+
+## 数据流程分断与建模
+
+> **数据流图（Data Flow Diagram，DFD）**，它从数据传递和加工角度，以图形方式来表达系统的逻辑功能、数据在系统内部的逻辑流向和逻辑变换过程。
+>
+> 数据流图用来记录系统中的数据是如何被采集、处理、保存和使用的
+
+![chrome_PqYiKwykhF](https://cdn.bangwu.top/img/202312282142173.webp)
+
+业务流程图和数据流图的区别：
+
+| 项目     | 业务流程图                                   | 数据流图                                                   |
+| -------- | -------------------------------------------- | ---------------------------------------------------------- |
+| 关注点   | 关注业务操作的顺序、活动以及角色之间的交互   | 关注数据如何在系统中流动以及如何被不同的过程或功能所处理   |
+| 组成要素 | 角色、活动、关系、交付物、分支等             | 外部实体、数据流、数据处理、数据存储                       |
+| 用途     | 用于描述、分析、优化和通信关于业务的工作流程 | 表达系统的逻辑功能、数据在系统内部的逻辑流向和逻辑变换过程 |
+| 表示方式 | 跨职能流程图、UML活动图                      | 数据流图                                                   |
+
+> **数据字典**：数据字典是对数据流图的补充描述，用来描述数据流程图中的数据流、数据存储、处理过程和外部实体的详细内容。
+
+![chrome_vldrNRO2S2](https://s2.loli.net/2023/12/28/WQlbOFfzs9D3uVX.webp)
+
+## 5.3业务规则表示
+
+> 从信息系统角度看，业务规则是描述和约束业务的语句，用来刻画业务的结构、控制和影响用户的行为。
+>
+> 处理复杂逻辑：【结构化语言+判定表+判定树】
+
+# 六、用例建模（理解为主）
+
+由于这章整章都需要理解，请看👉[课件](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC6%E7%AB%A0%20%E7%94%A8%E4%BE%8B%E5%BB%BA%E6%A8%A1.pdf)以及[课件补充](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC6%E8%AE%B2%E8%A1%A5%E5%85%85%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%9C%A8%E7%A4%BE%E4%BC%9A%E7%BB%93%E6%9E%84%E4%B8%AD%E7%9A%84%E5%88%86%E5%B8%83%E7%8E%B0%E8%B1%A1.pdf)
+
+# 七、领域对象建模（理解为主）
+
+## 7.1面向对象方法概述
+
+`对象`【对问题域中某个实体的抽象，由名称、属性和行为（方法）】、`类`【是指有相同属性和方法的一组对象的抽象概念】、`封装`【把对象的属性和方法结合为一个独立的整体，并尽可能隐藏对象的内部实现细节】、`继承`【指子类的对象拥有其父类的全部属性与方法】就不再做过多赘述
+
+> `多态`：指不同层次的子类可以共享父类中同一方法名称，但却可以各自按自己的需要实现不同的行为和执行不同的方法。【提高代码的扩展性】
+>
+> `对象关系`：继承、实现、关联、依赖。
+>
+> `对象之间的消息与协作`：【消息：对象之间必须要进行交互来实现复杂的行为，用消息message的形式提供信息】
+
+## 7.2领域对象建模
+
+> **领域对象**：也称实体类，就是问题域中有意义的概念类，是现实世界中存在的事物（things）或事件（events）
+>
+> **领域模型**：又称领域对象模型、分析对象模型，是对领域内的概念类或现实世界中对象的可视化表示。
+
+![chrome_j8NGPMnKOv](https://cdn.bangwu.top/img/202312282222288.webp)
+
+> **领域类图**（Domain Class Diagram）：分析阶段，用来表示特定领域内的概念以及这些概念之间的关系
+>
+> 主要包括：领域对象、领域对象之间的关系、关键属性【通常不包括方法】
+
+> **状态机图**（state machine diagram）关注对象的状态及转换，用于描述基于事件响应的对象动态行为和状态之间的关系【适合描述某个对象的内部逻辑， 即描述**一个对象跨多个用例**的行为。】
+
+![chrome_KbloAb2J39](https://cdn.bangwu.top/img/202312282227030.webp)
+
+# 八、面向对象设计
+
+## 8.1系统设计概述
+
+> **`系统设计`**又称为物理设计，就是根据新系统逻辑模型所提出的各项功能要求，结合实际条件，科学、合理地设计出新系统的解决方案，并为系统实施阶段的各项工作准备好必要的技术资料和有关文件。【系统设计对系统分析与系统实施起桥梁作用】
+
+![chrome_8qlu9OWbP4](https://cdn.bangwu.top/img/202312282230886.webp)
+
+## 8.3数据设计【这部分就是数据库知识，看看就行】
+
+设计关系数据模型顺序：
+
+1. 需求分析：确定应用程序需要存储的信息
+2. 定义实体：实体代表了业务环境中的一个对象；每个实体创建一张二维表
+3. 定义属性：即实体的特征; 每个属性对应表中的一列
+4. 确定键：确定每张表的主键和外键
+5. 定义关系：确定实体之间的关系；通过外键和参照完整性约束来实现和维护这些关系
+
+6. 规范化：通过分解表来消除数据冗余，提高数据一致性；通过正规化阶段，例如第一范式、第二范式等来进行
+
+7. 创建ER图（实体-关系图）
+8. 反规范化（如有必要）
+
+# 九、接口层设计
+
+> 接口设计是指系统与外界的交互设计【人机接口设计、软件接口设计】
+
+理解用户体验设计内容：
+
+![chrome_ehnsIEexa4](https://cdn.bangwu.top/img/202312282235109.webp)
+
+用户界面模型：**原型图**（Prototype）【就是用Axure设计出的原型】
+
+# 十、业务逻辑层设计
+
+## 10.1面向过程的设计
+
+> **模块结构图**(Structure Chart)描述系统的模块结构及模块间的联系
+
+模块结构图的主要成分：
+
+![chrome_nmzop6jwJh](https://cdn.bangwu.top/img/202312282242399.webp)
+
+例如：
+
+![chrome_DnlykHe8Is](https://cdn.bangwu.top/img/202312282243091.webp)
+
+## 10.2面向对象业务逻辑设计
+
+> **理解设计类图/包图/顺序图/通信图，无需绘图**
+
+这部分我也不知道要怎么表述，就看[课件](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC10%E7%AB%A0%20%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%B1%82%E8%AE%BE%E8%AE%A1.pdf)吧
+
+# 十一、系统实施
+
+## 系统实施阶段的任务
+
+> 系统实施是将系统设计阶段得到的设计方案转换为以计算机硬件为基础的能够实际运行的应用软件系统的过程。
+>
+> **主要任务**：硬件准备、软件准备（程序编写、测试和部署等）、人员培训和数据准备。实施完毕，系统才可上线。
+
+## 11.3系统测试
+
+> **白盒测试**：根据一个软件部件的内部控制结构，测试是否依据设计正确地执行【逻辑上面走程序的流程，检测是否能走通】
+
+例如：
+
+![chrome_6QurArE5Bv](https://cdn.bangwu.top/img/202312282251578.webp)
+
+就测试这个程序的条件分支是否能输出结果
+
+# 十二、系统运维与管理（自学）
+
+> 建议先看[课件](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC12%E7%AB%A0-%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4%E4%B8%8E%E7%AE%A1%E7%90%86%EF%BC%88%E8%87%AA%E5%AD%A6%EF%BC%89.pdf)然后再看下面的内容，也可以自己总结，其实也没什么，管理信息系统课好像学过
+
+## 12.1系统运维与管理概述
+
+> 系统运维与管理的主要任务是企业IT部门采用相关的方法、手段、技术、制度、流程和文档等，对软硬件运行环境、业务应用系统和运维人员进行综合的管理。
+>
+> 系统运维与管理主要由技术性运维和运维管理构成。
+
+## 12.2开发运维一体化DevOps
+
+> DevOps（Development & Operations), 即开发运维一体化，重视“软件开发人员（Dev）”和“IT运维技术人员（Ops）”之间沟通合作的文化、运动或惯例。通过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。
+
+![chrome_CQ4IBy2SVh](https://cdn.bangwu.top/img/202312282256832.webp)
+
+不是很重要，就是走流程。。。

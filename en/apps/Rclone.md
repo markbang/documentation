@@ -1,6 +1,6 @@
 ---
 title: "Rclone"
-description: "Cloud storage sync and file management."
+description: "Use Rclone to sync and manage files across 40+ cloud storage providers with a unified CLI, covering installation, config setup, and CDN workflows."
 icon: "cloud-arrow-up"
 ---
 

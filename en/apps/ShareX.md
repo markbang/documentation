@@ -1,6 +1,6 @@
 ---
 title: "ShareX"
-description: "Open-source screenshot tool with auto-compression."
+description: "Set up ShareX for screenshots with automatic WebP compression via ffmpeg, covering installation, action configuration, and quality parameter tuning."
 icon: "camera"
 ---
 

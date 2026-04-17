@@ -1,6 +1,6 @@
 ---
 title: "CherryStudio"
-description: "AI client with theme customization."
+description: "Customize CherryStudio AI chat client with a Claude-style CSS theme covering dark mode, light mode, message bubbles, and code block styling."
 icon: "message"
 ---
 

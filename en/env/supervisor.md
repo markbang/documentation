@@ -1,6 +1,6 @@
 ---
 title: "Supervisor"
-description: "Process daemon and background service management."
+description: "Set up Supervisor on Linux for process management covering installation, supervisord config, program definitions, supervisorctl commands, and autostart."
 icon: "eye"
 ---
 

@@ -1,3 +1,9 @@
+---
+title: "Macroeconomics (part 2)"
+description: "Course notes on macroeconomics covering GDP deflator calculations, savings-investment identity, unemployment rate, CPI, the IS-LM model, and AD-AS framework."
+icon: "money-bill-trend-up"
+---
+
 开头引言：
 
 ![img](https://picx.zhimg.com/80/v2-5ec22c794360c3bb6b75718ddb359b5e_1440w.webp?source=1940ef5c)

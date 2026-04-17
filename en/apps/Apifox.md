@@ -1,6 +1,6 @@
 ---
 title: "Apifox"
-description: "All-in-one API design, development, and testing platform."
+description: "Guide to Apifox for API design, debugging, Mock data simulation, and auto-generated documentation for individual and team development workflows."
 icon: "plug"
 ---
 

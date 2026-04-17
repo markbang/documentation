@@ -1,6 +1,6 @@
 ---
 title: "FastAPI"
-description: "Modern high-performance Python web framework with auto docs and type checking."
+description: "FastAPI tutorial covering installation with uvicorn, route and path parameters, Pydantic request validation, and async/await handling for Python web APIs."
 icon: "bolt"
 ---
 

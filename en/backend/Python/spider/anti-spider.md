@@ -1,6 +1,6 @@
 ---
 title: "Anti-Scraping Techniques"
-description: "Headers parameters, IP proxies, and Ajax data extraction."
+description: "Anti-scraping countermeasures for Python web scraping covering custom User-Agent headers, IP proxy rotation, and Ajax API interception with code examples."
 icon: "shield"
 ---
 

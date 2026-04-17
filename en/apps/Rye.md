@@ -1,6 +1,6 @@
 ---
 title: "Rye"
-description: "Next-gen Python package manager."
+description: "Compare Python package managers and set up Rye for project initialization, dependency management, and virtual environment handling with VSCode integration."
 icon: "gear"
 ---
 

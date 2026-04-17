@@ -1,3 +1,9 @@
+---
+title: "Econometrics"
+description: "Econometrics course notes covering OLS regression, residual sum of squares, heteroscedasticity White test, Durbin-Watson autocorrelation, and VIF diagnostics."
+icon: "chart-line"
+---
+
 ## 第二章: 一元线性回归模型
 
 ### 2.1 OLS(最小二乘法)

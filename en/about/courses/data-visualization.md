@@ -1,3 +1,9 @@
+---
+title: "Data visualization and informetrics"
+description: "Course notes on informetrics covering Lotka's law, Bradford's law, Zipf's law, literature half-life, and scientific information growth models."
+icon: "chart-bar"
+---
+
 # 数据可视化
 
 选择、名词解释

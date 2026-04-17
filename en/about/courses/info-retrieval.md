@@ -1,188 +1,355 @@
-# 信息检索
+---
+title: "Information retrieval"
+description: "Course notes on information retrieval covering document classification, ISBN/ISSN identifiers, Boolean search strategies, and precision/recall metrics."
+icon: "magnifying-glass"
+---
 
-消息-数据-信息-知识-智慧-文献
+# 博弈论
 
-> **文献是记录有知识的一切载体。**
+> [!note]
+> 简答题(每个要点 3 句话)、论述题(5 句话)、辨析题(与简答题相同)、计算题
 
-## 文献的分类
+## 导论
 
-1. 按载体形式：印刷型或称纸型（纸张），缩微型，电子型，声像型
-2. 出版形式（重要）：图书（篇幅达到48页以上），期刊（占比最大），报纸，会议文献，政府出版物，学位论文，档案，专利文献，标准文献，产品资料。【除图书与期刊外，都是特殊文献】
-3. 文献加工级别分类：零次文献（未公开的），一次文献（原始文献），二次文献（检索性文献，将一次文献组织起来），三次文献（参考性文献，类似于文献综述）
+指明决策的目的、指明决策层次
 
-文献类型的识别，如何识别。
+**必要**目标和**需要**目标
 
-`ISBN`（国际标准书号），`ISSN`（国际标准连续出版物号）`CN`（国内统一刊号）。只有ISSN而无国内统一刊号在国内被视为非法出版。
+决策者应该是做选择题，而不是做问答题
 
-## 信息检索概念
+策划也是年轻人从执行者走向决策者的必由之路
 
-> **概念**
+## 个体理性与社会合作
 
-- 广义：信息检索包含信息存贮和信息查找两个过程。
-- 狭义：信息检索仅仅指信息查找的过程。
+> 社会的基本问题
 
-文献标引——数据标注，查准率与查全率。
+**社会**是个体之间具有相互行动和相互依赖的群体
 
-信息检索工具（参考性工具书，检索性工具书）是在一次文献基础上加工而成的二次或三次文献。OPAC（联合公共目录检索系统）
+社会的两个基本问题：`协调`【如何形成一致预期】、`合作`【如何提供共赢激励】
 
-- 参考性工具：辞书、类书、政书、百科全书、年鉴、手册、表谱、图录、名录等
-- 检索性工具：书目、索引、文摘等
+协调问题的核心是预测，合作问题的核心是激励【个体理性、集体理性】
 
-**目录的作用**：揭示、报道单位出版物的外表特征。可以找到原文馆藏。
+协作博弈：一荣俱荣，一损俱损。双方都希望得到最有利于自己的协调结果
 
-**索引的作用**：从各个角度揭示文献的内容，为用户提供文献线索。
+> 个体理性行为
 
-> **文摘的作用**
+博弈论：分析理性人在存在相互依赖的情况下如何决策的理论工具
 
-1. **具有压缩、指引一次文献的功能**
-2. 便于相关文献集中阅读。掌握某一类信息的总体情况。
-3. 有些情况下是原始文献的代用品
-4. 避免漏检和误检
-5. **消除语言障碍**
+博弈论的基本假设：工具理性假设【所有人是工具理性的】、理性共知假设【工具理性是所有人的共同知识】、规则共知假设【博弈规则是所有人的共同知识】->“谁也不比谁傻”
 
-Web of Science，LISTA
+`约束条件`：技术性约束、制度性约束、信息约束、资源(收入/成本)约束
 
-## 信息检索原理及语言
+人们选择的不同，可能是由于偏好不同，也可能是由于面临的约束条件不同，如买车
 
-中国图书馆图书分类法，**主题词款目举例**。主题词与关键词最大的区别就是主题词经过了规范化处理。
+> 社会效率标准
 
-![bangwu_20240525153128](https://cdn.bangwu.top/img/bangwu_20240525153128.webp)
+`帕累托效率`：一种状态(资源配置、社会制度等)被称为`帕累托最优状态`，如果不存在另一种状态能使得没有任何人的处境变坏同时至少有一个人的处境变得更好【除非“损人”就不可能“利己”】
 
-主题检索语言：`关键词语言`、`标题词语言`、`单元词语言`、`叙词语言`
+![bangwu20250112085533](https://cdn.bangwu.top/img/202501120855047.webp)
 
-此处“主题”非彼处“主题”。中国期刊网的“主题”检索途径，似乎是主题语言，但却不是。新主题：包括一篇文章的所有主题特征，同时在检索过程中嵌入了专业词典、主题词表、中英文对照词典、停用词典等工具，并采用关键词截断算法，将低相关的文献进行进行截断。
+`卡尔多-希克斯标准`：如果一种变革使得受益者的所得足以弥补受损者的所失，这种变革就是一个`卡尔多-希克斯改进`。【状态 X 下，A 的收入是 100，B 的收入也是 100；在状态 Y 下，A 的收入是 1000，B 的收入是 99】“总财富最大化”
 
-DOI标识期刊，DOI是一个永久性的标识号。
+## 纳什均衡与囚徒困境博弈
 
-ORCID：其意义同科学文献领域的DOI（数字唯一标示符）是一样的。DOI好比是科技文献的身份证，一文一证；ORCID好比是科研人员的学术身份证，一人一证。
+![bangwu20250112090048](https://cdn.bangwu.top/img/202501120900987.webp)
 
-## 语义网络
+`反复剔除`不仅要求每个人是理性的，而且要求每个人知道其他人是理性的，甚至要求每个人知道每个人知道每个人是理性的，如此等等，即**理性是“共同知识”（理性共识）**
 
-**语义网络**是以图解的形式对知识进行表达， 知识中的概念、属性、实体以节点表示，概念与概念或实体之间存在关系则以弧 线表示，形成一幅网络结构形式的有向描述图。
+## 多重均衡与制度和文化
 
-本体提供领域中所有词汇对应的基本术语和关系从而描述该领域，再利用这些术语和关系结合形成规则，用以规范和定义必要词汇外延。
+社会制度和社会规范，通过写台哦人们的预期而形成一个特定的纳什均衡
 
-语义检索是把信息检索与人工智能技术、自然语言技术相结合的检索概念空间是一种包含语义关系的计算机可识别和操作的概念集合。
+## 许诺(威胁)与承诺
 
-本体提供一组术语和概念来描述某个领域，知识库则使用这些术语来表达该领域的事实。
+许诺或威胁是事前声称战略，其可信性取决于事前与事后最优选择是否一致。像考试博弈中部分学生 “报复” 威胁不可信，因无论老师判分如何，“报复” 都非最优。
 
-**中文核心期刊**【后面四个是国外四大检索工具】
+**承诺（威慑）**是使许诺（威胁）前后最优一致的行动，通过限制自身或对方自由增强可信度，成本越高越可信，如婚姻彩礼、订金等都是常见的承诺形式。
 
-![bangwu_20240525155212](https://cdn.bangwu.top/img/bangwu_20240525155212.webp)
+## 讨价还价与耐心
 
-检索字段解释，AND * OR 等等，给出检索式要能解释其中的意图。参考👉：https://zhuanlan.zhihu.com/p/690909739
+不是**零和博弈**而是**正和博弈**
 
-高校财经数据库，INFOBANK
+贴现因子
 
-专利分类：**发明专利、实用新型专利【有的国家没有此项】、外观设计专利**。专利特点：专有性、地域性、时间性。
+## 演化博弈与自发秩序
 
-IPC：国际专利分类。在专利检索上非常重要
+`ESS(演化稳定战略)`：社会（种群）中的稳定行为方式，能击败任何变异，可以持续存在、不断地复制自己。 ESS 一定是纳什均衡，但并非所有的纳什均衡都是 ESS，**单元均衡**
 
-常用标准检索数据库：中国知网，万方标准。标准有作废的问题。
+演化均衡不一定是帕累托最优均衡
 
-<details>
-    <summary>简短总结</summary>
-将内容分成几个主要部分进行复习：信息的定义、文献类型和特征、信息检索概念及工具、信息检索方法和技术、以及常见的数据库和评价公司信息的方法。
+一般地，一次性囚徒困境如果存在占优战略，该占优战略是 ESS
 
-### 1. 信息的定义
+## 支付矩阵计算
 
-**申农**: 信息是能够减少不确定性的任何事物。
+### 一、完全信息静态博弈
 
-**维纳**: 信息是我们在适应外部世界并使这种适应作用于外部世界的过程中，与外部世界交换的内容。
+> **博弈的支付矩阵和纳什均衡**
 
-**国标**: 信息是物质存在的一种方式、形式或运动状态，可以减少事件的不确定性。
+`纳什均衡`：如果别人的策略固定不动，那么我也没有动机改变。所有人都是如此
 
-### 2. 文献的定义和分类
+要会根据`支付矩阵`找出纳什均衡
 
-**文献**: 记录有知识的一切载体。
+无限策略的博弈和纳什均衡：
 
-**按载体形式分类**:
-- 印刷型（纸型）
-- 微缩型
-- 机读型（电子型）
-- 声像型（视听型）
+> 古诺双头垄断模型
 
-**按出版形式分类**:
-- 图书
-- 期刊
-- 报纸
-- 会议文献
-- 标准文献
-- 专利文献
-- 政府出版物
-- 学位论文
-- 档案
-- 产品资料
+$$
+P=a - bQ=a - b\times\frac{2(a - c_1 - c_2)}{3b}=\frac{a + 2c_1 + 2c_2}{3}
+$$
 
-**按文献加工级别分类**:
-- **零次文献**: 未经公开发表或交流的文献（实验记录、文章草稿、笔记等）。
-- **一次文献**: 原始文献，包含研究或研制成果（期刊论文、专利说明书、会议论文等）。
-- **二次文献**: 检索性文献，浓缩和组织一次文献（书目、文摘、索引等）。
-- **三次文献**: 参考性文献，综合一、二次文献的研究成果（综述、专题述评、数据手册等）。
+> 混合策略纳什均衡
 
-### 3. 信息检索的概念
+当纯策略纳什均衡不存在时，找不出纳什均衡的状况。固定一个不变，求另一个，然后画图找交点
 
-**广义信息检索**: 包含信息存储和信息查找两个过程。
+### 二、不完全信息静态博弈
 
-**狭义信息检索**: 仅指信息查找的过程。
+不同概率的支付矩阵，至少有一个参与者不能确定另一个参与者的收益函数
 
-**信息检索类型**:
-- **强相关检索**: 强调检索的准确性。
-- **弱相关检索**: 强调检索的全面性。
+n 个支付矩阵、无限策略
 
-### 4. 信息检索工具
+### 三、完全信息动态博弈
 
-**文献检索工具**: 基于特定需要，汇编知识材料，便于查找数据和文献线索。
+参与者的行动是**顺序发生的**，根据所有参与者的选择，每个参与者得到各自的结果。每一位参与者的支付函数在所有参与者之间是共同知识。
 
-**参考性工具书**: 辞书、百科全书、年鉴等。
+> 完全且**完美**信息的动态博弈
 
-**检索性工具书**: 书目、索引、文摘等。
+每一步当中，要选择行动的参与者都知道这一步之前博弈进行的过程
 
-### 5. 信息检索方法和技术
+> 完全但**不完美**信息的动态博弈
 
-**追溯法**: 从已有文献的参考文献入手，不断扩展检索线索。
+某些阶段，要选择行动的参与者不知道这一步之前的博弈过程
 
-**工具法**: 利用文摘、题录或索引等检索工具。包括顺查法、倒查法和抽查法。
+> **先行动的参与者支付在前**
 
-**布尔逻辑检索**: 使用布尔逻辑表达式（and、or、not）进行检索。
+![bangwu20250110085416](https://cdn.bangwu.top/img/202501100854552.webp)
 
-**截词检索**: 使用截词符号（*、？、$）进行部分词检索。
+古诺模型要联立
 
-**位置运算检索**: 表示检索词间的位置关系。
+> 有限重复博弈
 
-**限定检索**: 利用字段代码限制检索词的出现范围。
+把第二步结果代入第一步，列出矩阵
 
-### 6. 常见的数据库
+![bangwu20250110093036](https://cdn.bangwu.top/img/202501100930420.webp)
 
-**中文期刊数据库**:
-- 中国学术期刊全文数据库
-- 维普中文期刊数据库
-- 万方数字化期刊
-- 龙源期刊网
+> 无限重复博弈
 
-**国外数据库**:
-- Web of Science
-- IEEE
-- EBSCO
+贴现因子，短见的=0，长远的=1
 
-### 7. 评价公司信息的方法
+`子博弈精炼`：子博弈也是纳什均衡的
 
-**公司公众影响力**:
-- **媒体报道和社交媒体分析**: 查看公司新闻报道和社交媒体讨论。
-- **公司年报和公告**: 查看公司的年报和财务报表。
-- **第三方评估和排名**: 参考第三方机构的评估和排名（如财富杂志的“世界500强”）。
-- **公众舆情监测工具**: 使用舆情监测工具（如新浪舆情通）。
+### 四、不完全信息动态博弈
 
-**企业征信检索**:
-- **国家企业信用信息公示系统**
-- **企查查**
+参与人自己知道，其他参与人不知道——不完全信息
 
-**商标查询**:
-- **国家知识产权局商标局**
+行动有先后，后行动者能观测到先行动者的行动，但不能观测其类型
 
-**专利信息**:
-- **国家知识产权局专利检索系统**
-- **智慧芽**
-- **innojoy**
+**混同**、**分离**均衡
+= document.querySelectorAll('.myClass');
+const element = document.querySelector('.myClass');
 
-</details>
+// 修改内容
+element.textContent = '新文本';
+element.innerHTML = '<strong>粗体文本</strong>';
+
+// 修改样式
+element.style.color = 'red';
+element.classList.add('active');
+element.classList.remove('inactive');
+element.classList.toggle('highlight');
+
+// 修改属性
+element.setAttribute('data-id', '123');
+element.getAttribute('data-id');
+
+// 创建和删除元素
+const newDiv = document.createElement('div');
+newDiv.textContent = '新元素';
+document.body.appendChild(newDiv);
+element.remove();
+```
+
+### 事件处理
+
+```javascript
+// 点击事件
+button.addEventListener('click', function(e) {
+    console.log('按钮被点击了');
+});
+
+// 表单提交
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // 阻止默认行为
+    const formData = new FormData(form);
+    console.log(formData.get('username'));
+});
+
+// 键盘事件
+input.addEventListener('keyup', function(e) {
+    console.log('按键:', e.key);
+});
+
+// 鼠标事件
+element.addEventListener('mouseenter', function() {
+    this.style.backgroundColor = 'yellow';
+});
+```
+
+### 异步操作
+
+```javascript
+// Promise
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+// Async/Await
+async function fetchData() {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// 定时器
+setTimeout(() => {
+    console.log('3秒后执行');
+}, 3000);
+
+setInterval(() => {
+    console.log('每秒执行');
+}, 1000);
+```
+
+### 本地存储
+
+```javascript
+// localStorage - 永久存储
+localStorage.setItem('key', 'value');
+const value = localStorage.getItem('key');
+localStorage.removeItem('key');
+
+// sessionStorage - 会话存储
+sessionStorage.setItem('key', 'value');
+
+// 存储对象
+const user = { name: 'John', age: 30 };
+localStorage.setItem('user', JSON.stringify(user));
+const storedUser = JSON.parse(localStorage.getItem('user'));
+```
+
+## 实战示例
+
+### 待办事项列表
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>待办事项</title>
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>待办事项</h1>
+        <input type="text" id="todoInput" placeholder="输入待办事项">
+        <button onclick="addTodo()">添加</button>
+        <div id="todoList"></div>
+    </div>
+
+    <script>
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        function renderTodos() {
+            const list = document.getElementById('todoList');
+            list.innerHTML = '';
+            
+            todos.forEach((todo, index) => {
+                const div = document.createElement('div');
+                div.className = 'todo-item';
+                div.innerHTML = `
+                    <span class="${todo.completed ? 'completed' : ''}"
+                          onclick="toggleTodo(${index})">
+                        ${todo.text}
+                    </span>
+                    <button onclick="deleteTodo(${index})">删除</button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            
+            if (text) {
+                todos.push({ text, completed: false });
+                input.value = '';
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        function toggleTodo(index) {
+            todos[index].completed = !todos[index].completed;
+            saveTodos();
+            renderTodos();
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+        }
+
+        function saveTodos() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        renderTodos();
+    </script>
+</body>
+</html>
+```
+
+## 学习资源
+
+- [MDN Web Docs](https://developer.mozilla.org/zh-CN/) - 最权威的 Web 技术文档
+- [W3Schools](https://www.w3schools.com/) - 在线教程和实例
+- [FreeCodeCamp](https://www.freecodecamp.org/) - 免费编程课程
+- [CSS-Tricks](https://css-tricks.com/) - CSS 技巧和教程
+- [JavaScript.info](https://javascript.info/) - 现代 JavaScript 教程
+
+## 开发工具
+
+- **浏览器**：Chrome DevTools, Firefox DevTools
+- **编辑器**：VS Code, Sublime Text
+- **在线工具**：CodePen, JSFiddle, CodeSandbox
+
+## 最佳实践
+
+1. **语义化 HTML**：使用合适的标签
+2. **响应式设计**：适配不同设备
+3. **性能优化**：压缩资源，懒加载
+4. **可访问性**：支持屏幕阅读器
+5. **代码规范**：保持一致的编码风格
+6. **版本控制**：使用 Git 管理代码

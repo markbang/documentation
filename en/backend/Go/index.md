@@ -1,6 +1,6 @@
 ---
 title: "Go"
-description: "Go language learning path and Gin framework practice."
+description: "Go language learning path from syntax basics to Gin + Gorm backend development, with recommended tutorials and experience transitioning from Python."
 icon: "golang"
 ---
 

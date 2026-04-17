@@ -1,3 +1,9 @@
+---
+title: "Matplotlib"
+description: "Introduction to Matplotlib for Python 2D plotting covering pyplot basics, line charts, histograms, bar charts, and scatter plots with parameter configuration."
+icon: "chart-area"
+---
+
 # Matplotlib介绍
 
 ## 什么是Matplotlib

@@ -1,3 +1,9 @@
+---
+title: "Data mining"
+description: "Course notes on data mining covering CRISP-DM, Apriori association rules, K-Means clustering, decision trees, Naive Bayes, and TF-IDF text mining."
+icon: "magnifying-glass-chart"
+---
+
 # 数据挖掘
 
 以下是根据课件所示的总结，推荐看完课件再看总结。大体上还是以理解为主，自行斟酌。

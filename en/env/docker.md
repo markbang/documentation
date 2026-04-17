@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Containerized deployment and app management."
+description: "Docker essentials covering image pulling and building, container startup with port mapping, volume mounts for persistent storage, and daily management commands."
 icon: "container-storage"
 ---
 

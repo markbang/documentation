@@ -1,3 +1,9 @@
+---
+title: "Competitive intelligence"
+description: "Course notes on competitive intelligence covering the intelligence cycle, Porter's five forces, value chain analysis, and CI system architecture."
+icon: "eye"
+---
+
 # 竞争情报
 
 > [!note]

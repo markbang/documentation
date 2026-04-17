@@ -1,6 +1,6 @@
 ---
 title: "Bit Manipulation"
-description: "Common bit tricks and problem types."
+description: "Bit manipulation techniques and LeetCode problem patterns including parity checks, power-of-two detection, and Brian Kernighan's algorithm."
 icon: "microchip"
 ---
 

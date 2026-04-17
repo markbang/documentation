@@ -1,6 +1,6 @@
 ---
 title: "Software Tools"
-description: "Recommended software with configuration details and usage tips."
+description: "Curated software recommendations with setup guides covering Apifox, Barrier, CherryStudio, Cursor, Scoop, ShareX, Typora, and more desktop tools."
 icon: "app-store-ios"
 ---
 

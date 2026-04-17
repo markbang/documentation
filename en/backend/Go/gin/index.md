@@ -1,6 +1,6 @@
 ---
 title: "Go Gin"
-description: "Gos most popular web framework."
+description: "Get started with Go Gin web framework covering router setup with gin.Default(), GET/POST route handlers, JSON responses, and HTTP server configuration."
 icon: "bolt"
 ---
 

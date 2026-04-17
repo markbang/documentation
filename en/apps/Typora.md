@@ -1,6 +1,6 @@
 ---
 title: "Typora"
-description: "The most acclaimed Markdown editor."
+description: "Use Typora as a live-preview Markdown editor for blog drafts, course notes, and project docs with tips on heading hierarchy and image directory management."
 icon: "file-lines"
 ---
 

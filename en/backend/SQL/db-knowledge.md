@@ -1,3 +1,9 @@
+---
+title: "Database fundamentals"
+description: "Database principles course notes covering relational algebra, SQL queries with JOINs, normalization to BCNF, ACID transactions, and B+ tree indexes."
+icon: "book-open"
+---
+
 # 数据库原理与应用考试相关-2023
 
 \----------------------------------------

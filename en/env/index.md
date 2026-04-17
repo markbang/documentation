@@ -1,6 +1,6 @@
 ---
 title: "Environment & Deployment"
-description: "Environment setup, containerized deployment, and blog hosting."
+description: "Environment and deployment hub covering Docker, Docker Compose, Caddy reverse proxy, Supervisor, GitHub Actions, Jupyter, CDN acceleration, and blog setup."
 icon: "cloud"
 ---
 

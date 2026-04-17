@@ -1,6 +1,6 @@
 ---
 title: "Starship"
-description: "Cross-shell terminal prompt customization."
+description: "Install and configure Starship cross-shell prompt for PowerShell, Bash, and Zsh with Scoop setup, profile configuration, and timeout troubleshooting."
 icon: "terminal"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS"
-description: "Utility-first CSS framework for building interfaces."
+description: "Tailwind CSS setup guide with npm and PostCSS configuration, responsive breakpoints, dark mode support, and tailwind.config.js theme customization options."
 icon: "palette"
 ---
 

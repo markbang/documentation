@@ -1,3 +1,9 @@
+---
+title: "Python learning notes"
+description: "Miscellaneous Python notes and code snippets covering Pandas DataFrame usage, common error troubleshooting, and practical programming tips updated regularly."
+icon: "note-sticky"
+---
+
 # Python笔记
 
 ## 1.pd.DataFrame,

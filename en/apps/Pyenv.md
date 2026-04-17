@@ -1,6 +1,6 @@
 ---
 title: "Pyenv"
-description: "Python version manager."
+description: "Install and configure Pyenv to manage multiple Python versions on Windows (pyenv-win), Linux, and macOS with per-project version and virtualenv support."
 icon: "python"
 ---
 

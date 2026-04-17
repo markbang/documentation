@@ -1,6 +1,6 @@
 ---
 title: "DaisyUI"
-description: "Tailwind CSS-based component library with pre-designed components."
+description: "DaisyUI component library built on Tailwind CSS with pre-designed buttons, cards, modals, and navbars plus npm setup and theme switching configuration."
 icon: "palette"
 ---
 

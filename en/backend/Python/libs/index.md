@@ -1,6 +1,6 @@
 ---
 title: "Python Libraries"
-description: "Python third-party library notes and guides."
+description: "Python library reference covering httpx async HTTP client, matplotlib plotting, PyTorch deep learning, WordCloud generation, and PyAutoGUI automation."
 icon: "cubes"
 ---
 

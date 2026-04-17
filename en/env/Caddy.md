@@ -1,6 +1,6 @@
 ---
 title: "Caddy"
-description: "Modern web server with automatic HTTPS."
+description: "Configure Caddy web server with automatic HTTPS certificate management, Caddyfile syntax for reverse proxy, static file hosting, and common deployment setups."
 icon: "globe"
 ---
 

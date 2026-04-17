@@ -1,301 +1,354 @@
-<details>
-    <summary>写在前面</summary>
-系统分析与设计：重点由老师给出，本文章根据给出的重点来进行总结，理解或背诵自行解决 全文结合老师给的重点
-    PS：引言部分帮助理解
+---
+title: "System analysis and design"
+description: "Course notes on system analysis covering system definitions, data flow diagrams, ER modeling, structured analysis, and object-oriented UML design methods."
+icon: "diagram-project"
+---
 
+以下文章来自[青灰色的风](https://www.cnblogs.com/68786C)然后我再结合今年（2024年上半年）上课新增的小说进行的补充
 
-![explorer_d5F5kaOfGm](https://cdn.bangwu.top/img/202312231959498.webp)
+英语短篇小说佳作欣赏
+==========
 
-</details>
+> 如果你是SL老师的学生，恭喜你遇到一位很棒的英语老师，也欢迎你继续阅读这篇笔记，希望这篇笔记能够帮助到你，可以点个赞👍让我知道你来过。如果你愿意分享自己的笔记或感悟，也欢迎留言给我:)
 
-# 一、系统概要、信息、管理与信息系统
+本门课程考试考什么？
+==========
 
-<details>
-    <summary>引言👈</summary>
-系统分析与设计：系统分析【理解需要做什么，详细说明需要做什么】+ 系统设计【详细说明系统将如何工作】
-</details>
+2023学年第一学期考试情况分享 感谢 @SeeSeen
+----------------------------
 
-## 1.1系统概要
+第一部分`10`个选择题，一方面是要**词汇量**，另一方面是**对文章内容的了解掌握**；
 
-> 系统是由相互联系和相互制约的若干要素组成的、具有特定功能的有机整体
+第二部分`10`个`选词填空`，分别是 style , theme , foreshadowing , conflict , setting 等等这种，比较简单；
 
-## 1.2信息概要
+第三部分`3`个写作题（大致意思）  
+1、Is the house a haunted house?`(The Rocking-Horse Winner)`  
+2、Please comment on her writing?`(The Garden Party)`  
+3、Do you think the story is still meaning nowadays?`(Lottery)`
 
-> **数据（**Data**）**是对客观事物的性质、状态以及相互关系等进行记载的物理符号或这些物理符号的组合，反映了客观事物属性的记录
->
-> **信息（**Information**）**是经过加工后的数据，以有意义的形式加以排列和处理的数据（有意义的/被理解的数据）（who、when、where、what） 
->
-> **知识**（Knowledge）是信息的集合，从相关信息中过滤、提炼及加工而得到的有用资料，使得信息变得有用（有用的信息），是人类关于自然界、人类社会及思维方式与运动规律的认识、经验的总和 （why、how to）
->
-> **智慧**（Wisdom）是知识和信息经过人类大脑内化后转换为对事物理解和处理的能力 （What is best），人类独有的一种能力。
+本门课程课上学什么？
+==========
 
-**数据和信息可看作原材料和成品的关系**
+The writer, the narrator and the reader 作者、叙述者与读者
+-------------------------------------------------
 
-![chrome_etPYy1IlSL](https://cdn.bangwu.top/img/202312251927552.webp)
+### A Piece of Yellow Soap
 
-> **信息的属性**
+小说概要：收债的“我”在面对一位坚强的妇女时不知所措。
 
-- 事实性、扩散性、传输性、共享性、增值性、不完全性、等级性、滞后性
+1.  What sex is the narrator?
+2.  What age-group would you put the narrator in?
+3.  What is the narrator’s occupation?
+4.  From the information provided, what do you think the narrator believes in?
+5.  Come up with three adjectives to describe the kind of person the narrator is.
+6.  What kind of narration in the novel?
+7.  Does soap really have such power?
+8.  What does soap symbolise?
 
-## 1.3信息系统
+点击查看答案
 
-> **信息系统**：以计算机为基础，结合管理理论和方法，应用信息技术解决管理问题，为管理决策提供支持的系统。
+```bash
+1. Male.
 
-**信息系统的基本功能**：
+2. Middle-age people.
 
-- 数据的采集和输入
-- 数据的传输、存储、加工、维护和使用
+3. Milkman.
 
-**信息系统的结构**：【按照抽象程度分为三个结构】
+4. Maybe she believes in Christianism. "not sure that I believe in Heaven or God myself."
 
-1. 概念结构
-2. 基于管理职能的逻辑结构
-3. 基于计算机实现的物理结构【硬件结构+软件结构】
+5. Naive anxious, Worried, Confused
 
-![chrome_a2yNXHtbtG](https://cdn.bangwu.top/img/202312251952140.webp)
+6. This is a first-person narrative.
 
-## 1.4信息系统与组织
+7. No. Soap does not have the power, it was this woman's strength, self-reliance and her behavior in the face of the milkman that gave him a huge shock, making him dare not face this woman,and then he transfered this emotion to this soap, making it feel that soap had great power.The power of soap is the power of compassion, evoked by the hard lives of the people at the bottom.
 
-> 信息系统在组织中的地位
+8. Soap -> A symbol of poverty and despair.
 
-- **战略型**：信息系统是这些企业核心竞争力的一部分
-- **转变型**：信息系统将逐步转变为企业未来成功的战略性支柱
-- **工厂型**：信息系统是企业顺利运作的保障
-- **支持型**：信息系统对企业当前运作和未来战略的影响不大
+```
 
-# 二、信息系统建设概论
+### The Washwoman
 
-## 信息系统建模
+小说概要：儿子不讲信用，不管自己的当洗衣女工的辛勤工作的母亲。
 
-> 信息系统领域常用模型：【理解即可】
+《洗衣女工》是根据真实故事改编的，由艾萨克·巴舍维斯·辛格（Isaac Bashevis Singer）撰写，对一个小男孩和一个年迈的洗衣妇之间的关系的辛酸描述。
 
-| 模型名称                      | 用途                                           |
-| ----------------------------- | ---------------------------------------------- |
-| 业务流程图                    | 描述不同职能部门业务活动分工和活动过程         |
-| 数据流图                      | 描述数据的产生、处理、存储和去向的信息处理模型 |
-| 实体关系图                    | 描述系统中有价值的实体及其关系的数据模型       |
-| 组织结构图                    | 描述组织的部门及其从属关系的层次模型           |
-| 模块结构图                    | 描述软件功能模块及其调用关系的层次模型         |
-| 判定表、判定树                | 描述决策条件及其行动关系                       |
-| UML（类图、用例图、顺序图等） | 描述软件系统结构及行为的一组模型               |
-| 甘特图                        | 描述项目任务及其完成日期的项目计划模型         |
+这个故事突出了 **20 世纪初美国工人阶级，特别是妇女所面临的斗争和艰辛。** 这个故事是根据辛格自己在纽约市一个犹太移民家庭长大的经历以及他对为家人工作的洗衣女工的回忆。
 
-## 2.2信息系统开发方法与工具
+1.  Describe the kind of person the washwoman is.
+2.  Describe the author's attitude towards the washwoman.
+3.  Who is the narrator?
+4.  What is the theme of novel?
+5.  在小说结尾，作者沉思着说，她的灵魂进入了所有圣灵相遇的领域，无论他们在地球上扮演什幺角色。你认为作者的母亲会同意他的观点吗？用文章中的例子来支持你的回答。
+6.  在小说结尾中，她过着她的生活，做她的工作没有怨恨。用怨恨这个词的含义来解释这个说法。
 
-> 信息系统的生命周期(System Development Life Cycle，SDLC)   设计=>评价=>设计
+*   在这篇小说中，洗衣女工面临哪些困难？她如何应对这些挑战？
+*   作者如何描述洗衣女郎？为什幺描述对叙事很重要？
+*   在文章中间，作者的母亲说，洗衣女的儿子对自己的母亲不忠，对所有母亲都是侮辱。儿子对母亲不忠吗？用例子来解释你的观点。
 
-基于**生命周期**的开发方法：原型法、迭代法、瀑布法等【管理信息系统已学，理解即可】
+点击查看答案
 
-基于**技术**的开发方法：面向过程、面向对象、面向服务
+```bash
+1. Kindly, honest and dependable.
 
-# 三、系统规划与分析概述
+2. the narrator admire her sense of duty and pride in her work.
 
-## 3.2信息系统规划的技术与方法
+3. The author of the story - Isaac Singer - is the narrator.
 
-> 战略目标集转移法【基本思想：将组织战略集转换成与它相关联和一致的信息系统战略集】
->
-> 企业系统规划法【四个关键步骤：定义管理目标、定义管理功能组、定义数据分类、定义信息结构】
->
-> 关键成功因素法【找出成功因素】
->
-> 价值链分析法【企业进行的种种活动可以用一个价值链来表明，每个活动都有可能产生增值行为】
+4. The story touches on the themes of guilt, regret, and the passage of time.
 
-## 3.5系统分析的任务、过程和方法
+   他为在她活着的时候没有完全欣赏她而感到内疚，并为他没有做更多的事情来帮助她而感到遗憾。这种遗憾感强调了故事的中心主题之一：重视人际关系的重要性，而不是将人视为理所当然。
 
-> 系统分析的重要任务是识别和表达用户需求，分析领域业务，建立系统的逻辑模型。
+   He feels guilty for not fully appreciating her while she was alive and regrets that he did not do more to help her. This sense of regret underscores one of the central themes of the story: the importance of valuing human connections and not taking people for granted.
 
-要解决以下问题：
+5. Rancor means bitterness or resentment. The statement that the washwoman lives her life and does her work without rancor means that she does not hold any bitterness or resentment towards her circumstances, despite the hardships she faces. She accepts her lot in life and makes the best of it, without allowing negative emotions to consume her.
 
-- 如何采集信息、理解和分析问题？
-- 如何进行需求分析、确定需求？
-- 如何表述需求？
+6. It is difficult to say whether the author's mother would agree with him that the washwoman's soul passed into holy spheres. However, earlier in the essay, she does express admiration and respect for the washwoman's hard work and resilience. Therefore, it is possible that she too would believe in the washwoman's inherent goodness and spirituality.
 
-**系统分析的过程**：问题分析=>需求分析=>需求定义
+```
 
-![chrome_TJOv3VWjMa](https://cdn.bangwu.top/img/202312282116857.webp)
+* * *
 
-# 四、UML统一建模语言
+### The Rocking-Horse Winner
 
-> 统一建模语言UML（unified modeling language）是一种基于面向对象的可视化的通用建模语言，用于对软件进行描述、可视化处理、构造和建立软件系统工作的文档。
+"D.H. 劳伦斯的短篇小说《摇马赢家》讲述了一个名叫保罗的小男孩决心为家人带来好运的故事。尽管保罗生活在一个看似舒适的家庭中，但他的家庭一直在经济不安全的情况下挣扎，而这一切都源于他母亲对财富和地位的贪得无厌。她认为他们的不幸源于缺乏运气，尤其是保罗的父亲。
 
-![chrome_ifV2TxayLC](https://cdn.bangwu.top/img/202312282119927.webp)
+保罗开始沉迷于证明自己有运气。他发现，骑上自己的玩具摇摆马，就能预测赛马的胜负。在家里的园丁巴塞特和叔叔奥斯卡的帮助下，保罗开始赌马，并积累了一大笔钱。
 
-**UML的构成**：
+保罗的动机是为了更多的钱而停止房子里的鬼魂低语，他相信这会给母亲带来幸福，结束她对孩子们的冷漠态度。尽管赢得了巨额奖金，但压力和母亲的持续不满让保罗倍感沉重。
 
-- **事物(建模元素)**：UML模型中面向对象的基本模块，代表物理上或概念上的元素
-- **关系**：事物与事物之间的联系，根据耦合度从弱到强排列，分别是依赖、关联、聚合、组合、继承/泛化和实现关系
-- **图**：事物和关系的可视化表示
+为了赢得最后的胜利，保罗疯狂地骑着他的摇摆木马，最终预测出了德比大赛的冠军马拉巴尔。然而，巨大的压力导致保罗发烧倒下。他成功地为母亲筹到了一大笔钱，却因此付出了生命的代价。故事的结尾充满了悲剧性的讽刺：保罗不顾一切地试图确保家庭的经济未来和母亲的爱，最终导致自己英年早逝，给母亲留下了金钱，却没有留下她从未真正欣赏过的儿子。
 
-理解以下几种图的构成及功能：
+Symbol 象征
+---------
 
-![](https://cdn.bangwu.top/img/202312282122289.webp)
+### Old Man at the Bridge
 
-![chrome_jZvHwR4mUu](https://cdn.bangwu.top/img/202312282124009.webp)
+小说概要：在西班牙横跨河流的浮桥边，叙述者被派去执行过桥的任务，他遇到了一位七十六岁的老人。这位老人已经离开了他的家乡圣卡洛斯，在那里他照顾动物。他告诉叙述者，他是最后一个离开小镇的人。他多次回到他最喜欢的话题：他照顾镇上的动物。他有两只山羊和一只猫，还有四对鸽子。但他太老了，已经走不动了。
 
-![chrome_OR9CZVf3KJ](https://cdn.bangwu.top/img/202312282125853.webp)
+1.  What do all the animals in the novel symbolise?
+2.  What writing style of Hemingway's does this novel reflect?
 
-# 五、流程建模（理解为主）
+点击查看答案
 
-## 业务流程分析与建模
+```bash
 
-> **跨职能流程图**【面向过程】
+1. "Goat" -> The animals who can't escape. Sacrificial animals. Scape goats who are innocent victims.
+   "Cat" -> Ominousness and fear in people's hearts.
+   "Dove" -> The peace that people are committed to and eternally pursuing, which in this context is ironic. The doves will fly away.
 
-➢ 也称泳道图，面向过程，能够展示工作流中每个步骤涉及的职能部门和工作事项
-➢ 能展示各个环节间的关系，同时还能展示为过程负责的执行者（比如说人或部门）
-➢ 适用于涉及多个部门或角色的场景
+2. 冰山理论 Iceberg Theory
+   放弃描写战争的宏大场面，只选择了这样一个渺小而又平凡的场面作为创作素材。
+   Abandon the view of the war and only describe the dialogue between the narrator and the old man.
 
-> **UML活动图**【面向对象】
+The Bridge is a final Bridge between life and death.
 
-➢ 面向对象，描述满足用例要求所要进行的活动以及活动间的约束关系，阐明了业务用例实现的工作流程
-➢ 活动图可用于需求获取、分析和设计的工作流中
-➢ 适合描述系统中多个对象跨多个用例的活动顺序
+```
 
-![chrome_lUo0WXHplq](https://cdn.bangwu.top/img/202312282135023.webp)
+> 海明威的冰山理论 [https://en.wikipedia.org/wiki/Iceberg\_theory](https://en.wikipedia.org/wiki/Iceberg_theory)
 
-## 数据流程分断与建模
+* * *
 
-> **数据流图（Data Flow Diagram，DFD）**，它从数据传递和加工角度，以图形方式来表达系统的逻辑功能、数据在系统内部的逻辑流向和逻辑变换过程。
->
-> 数据流图用来记录系统中的数据是如何被采集、处理、保存和使用的
+Tone 作者的态度
+----------
 
-![chrome_PqYiKwykhF](https://cdn.bangwu.top/img/202312282142173.webp)
+### The Summer of the Beautiful White Horse
 
-业务流程图和数据流图的区别：
+《美丽白马的夏天》由一个名叫阿拉姆的九岁亚美尼亚男孩讲述，他是加罗拉尼亚部落的成员，生活在加利福尼亚州圣华金山谷郁郁葱葱的果园和葡萄园中。一天早上，亚兰在凌晨四点被他十三岁的表弟穆拉德叫醒，除了阿兰姆之外，所有人都认为他痴呆了，并且对动物有办法。亚兰惊讶地看到穆拉德坐在一匹美丽的白马上。亚兰一直想骑一匹白马，但他家里太穷了，买不起。然而，尽管贫穷，加罗格拉尼亚部落以其诚实和信任而闻名，因此，穆拉德会偷走这匹马是不可想象的。亚兰觉得他的表弟不可能偷马。
 
-| 项目     | 业务流程图                                   | 数据流图                                                   |
-| -------- | -------------------------------------------- | ---------------------------------------------------------- |
-| 关注点   | 关注业务操作的顺序、活动以及角色之间的交互   | 关注数据如何在系统中流动以及如何被不同的过程或功能所处理   |
-| 组成要素 | 角色、活动、关系、交付物、分支等             | 外部实体、数据流、数据处理、数据存储                       |
-| 用途     | 用于描述、分析、优化和通信关于业务的工作流程 | 表达系统的逻辑功能、数据在系统内部的逻辑流向和逻辑变换过程 |
-| 表示方式 | 跨职能流程图、UML活动图                      | 数据流图                                                   |
+穆拉德的疯狂行为被认为是他们的叔叔霍斯罗夫的自然后裔，尽管他的父亲佐拉布是一个务实的人。 科斯罗夫叔叔是一个大个子，总是愤怒、不耐烦、易怒。他会咆哮着让每个人都停止说话，并说这没有伤害，不要注意它。事实上，有一天，当他的儿子来告诉他们他们的房子着火了时，科斯罗夫吼道：“够了。这无妨”。
 
-> **数据字典**：数据字典是对数据流图的补充描述，用来描述数据流程图中的数据流、数据存储、处理过程和外部实体的详细内容。
+亚兰被邀请与穆拉德一起骑马。穆拉德偷马的想法从阿兰姆的脑海中消失了，因为他觉得除非他们提出卖掉马，否则不会变成偷马。他们喜欢骑马几个小时。
 
-![chrome_vldrNRO2S2](https://s2.loli.net/2023/12/28/WQlbOFfzs9D3uVX.webp)
+骑了一会儿，穆拉德想一个人骑马。亚兰姆也有同样的渴望，但当他坐在马上踢肌肉时，它抬起头来，哼哼唧唧地向前跑去，最终把亚兰从背上摔了下来。半小时后，他们找到了这匹马，把它藏在一个名叫 Fetvajian 的农民的废弃葡萄园的谷仓里，这曾经是他的骄傲。
 
-## 5.3业务规则表示
+那天下午，一位名叫约翰·拜罗（John Byro）的亚述农民——加罗格拉尼亚人的亚述朋友——来到亚兰的家。他向阿兰姆的母亲报告说，他一个月前被盗的白马仍然不见了。听到这句话，亚兰得出结论，穆拉德一定有这匹马很久了。拜罗来的时候，正在阿兰姆家的科斯罗夫大喊“没有坏处”，以至于拜罗被迫离开以避免回应。
 
-> 从信息系统角度看，业务规则是描述和约束业务的语句，用来刻画业务的结构、控制和影响用户的行为。
->
-> 处理复杂逻辑：【结构化语言+判定表+判定树】
+亚兰跑到穆拉德身边，告诉他拜罗的到来。亚兰还恳求穆拉德在学会骑马之前不要归还马匹。穆拉德不同意说亚兰至少需要一年的时间才能学会，但他承诺他最多会保留六个月。这成了例行公事。穆拉德每天都来接阿兰骑马，每次尝试后，亚兰姆都会不断地从马背上摔下来。两周后，当他们打算把马带回藏身之处时，他们在路上遇到了约翰·拜罗。农夫非常惊讶。他认出了他的马，但拒绝相信男孩们偷了它。后来，男孩们悄悄地把马还了回去。当天下午，拜罗来到阿兰姆家，通知被盗的马已经归还。他感谢上帝，因为这匹马的脾气也变得更好了，也表现得很好。
 
-# 六、用例建模（理解为主）
+Modernisim 现代
+-------------
 
-由于这章整章都需要理解，请看👉[课件](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC6%E7%AB%A0%20%E7%94%A8%E4%BE%8B%E5%BB%BA%E6%A8%A1.pdf)以及[课件补充](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC6%E8%AE%B2%E8%A1%A5%E5%85%85%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%9C%A8%E7%A4%BE%E4%BC%9A%E7%BB%93%E6%9E%84%E4%B8%AD%E7%9A%84%E5%88%86%E5%B8%83%E7%8E%B0%E8%B1%A1.pdf)
+### The Screat Life of Walter Mitty
 
-# 七、领域对象建模（理解为主）
+常常心不在焉的主人公沃尔特·米蒂在开车送妻子去城途中又一次习惯性陷入了充满英雄情结的白日梦。  
+他把自己幻想为一位英勇的海军飞机指挥官，果断地带领部下穿越重重风暴和迷雾。  
+作为海军飞机指挥官全速飞行穿越风暴的幻觉产生于他驾车飞速行驶的过程中；
 
-## 7.1面向对象方法概述
+妻子在美发店下车之后，他又陷入了第二场白日梦。这一次他摇身一变成为了一位医术高超、闻名遐迩的外科医生，仅仅用一支钢笔就不费吹灰之力地修好了出了故障的麻醉机，并在众名医束手无策的情况下挥洒自如地为垂死的著名银行家施行手术。  
+把自己想象成外科医生的幻觉则来源于他所戴的白手套、妻子所提及的医生以及刚刚路过的一家医院；
 
-`对象`【对问题域中某个实体的抽象，由名称、属性和行为（方法）】、`类`【是指有相同属性和方法的一组对象的抽象概念】、`封装`【把对象的属性和方法结合为一个独立的整体，并尽可能隐藏对象的内部实现细节】、`继承`【指子类的对象拥有其父类的全部属性与方法】就不再做过多赘述
+从停车场出来之后，行走在大街上，他又开始了第三场白日梦，这次他是一位百发百中的神枪手，在法庭上为自己辩护，并狠狠地教训了凶暴的地方检察官。  
+产生作为神枪手出现在法庭上的幻觉则是因为报童的叫卖中提及的有关庭判的头条新闻；
 
-> `多态`：指不同层次的子类可以共享父类中同一方法名称，但却可以各自按自己的需要实现不同的行为和执行不同的方法。【提高代码的扩展性】
->
-> `对象关系`：继承、实现、关联、依赖。
->
-> `对象之间的消息与协作`：【消息：对象之间必须要进行交互来实现复杂的行为，用消息message的形式提供信息】
+在第四场白日梦中他又成了英国皇家空军的轰炸机机长，准备穿越德的炮弹封锁执行一项自杀式的军火运输任务。  
+而成为英国皇家空军的轰炸机机长的幻觉来自于一张旧报纸上的文字和图片。
 
-## 7.2领域对象建模
+故事末尾的最后一场白日梦中，他则变成了一个永不低头的死刑犯，面对着行刑队，始终保持神秘莫测、桀骜不驯。  
+妻子准备给他买精神药物
 
-> **领域对象**：也称实体类，就是问题域中有意义的概念类，是现实世界中存在的事物（things）或事件（events）
->
-> **领域模型**：又称领域对象模型、分析对象模型，是对领域内的概念类或现实世界中对象的可视化表示。
+Daydream
 
-![chrome_j8NGPMnKOv](https://cdn.bangwu.top/img/202312282222288.webp)
+Style 风格
+--------
 
-> **领域类图**（Domain Class Diagram）：分析阶段，用来表示特定领域内的概念以及这些概念之间的关系
->
-> 主要包括：领域对象、领域对象之间的关系、关键属性【通常不包括方法】
+### Araby 意识流
 
-> **状态机图**（state machine diagram）关注对象的状态及转换，用于描述基于事件响应的对象动态行为和状态之间的关系【适合描述某个对象的内部逻辑， 即描述**一个对象跨多个用例**的行为。】
+孤儿主角被邻居姐姐吸引，想要去阿拉比集市购买物品送给她，结果姑父来的很晚，去了又被成年人的爱情所打击，最终成长。
 
-![chrome_KbloAb2J39](https://cdn.bangwu.top/img/202312282227030.webp)
+通过使用第一人称叙事，乔伊斯传达了年轻男主的困惑思想和梦想。乔伊斯利用这种对叙述者感受的熟悉，在读者中唤起了一种类似于男孩在故事转折点的“顿悟”的反应——一个突然的洞察力和理解的时刻。
 
-# 八、面向对象设计
+通过使用第一人称叙事，乔伊斯传达了他年轻男主角的混乱思想和梦想。乔伊斯利用这种对叙述者感受的熟悉，在读者中唤起了一种类似于男孩的'顿悟'的反应——在故事的转折点上突然的洞察力和理解的时刻“（5）。如果没有观众对男孩的压力有同理心的联系，就不会与他的发展有任何联系，乔伊斯在最后主要使用它来创建他的角色的顿悟和并行主题。
 
-## 8.1系统设计概述
+Details 细节
+-------
 
-> **`系统设计`**又称为物理设计，就是根据新系统逻辑模型所提出的各项功能要求，结合实际条件，科学、合理地设计出新系统的解决方案，并为系统实施阶段的各项工作准备好必要的技术资料和有关文件。【系统设计对系统分析与系统实施起桥梁作用】
+### The Open Window
 
-![chrome_8qlu9OWbP4](https://cdn.bangwu.top/img/202312282230886.webp)
+姑姑在焦急地等待丈夫归来，小姑娘在想着如何捉弄无聊的客人，客人在自顾自沉浸在对自己病体的自怨自艾中。
 
-## 8.3数据设计【这部分就是数据库知识，看看就行】
+创造真实感所需的所有细节：打开的窗户、棕色的西班牙猎犬、白大褂，甚至是所谓的沼泽的泥土。透过悲剧的幽灵镜头，所有普通的细节，包括阿姨的评论和行为，都呈现出一种令人毛骨悚然的基调。
 
-设计关系数据模型顺序：
+＂ｓｅｌｆ-ｐｏｓｓｅｓｓｅｄ 女孩
 
-1. 需求分析：确定应用程序需要存储的信息
-2. 定义实体：实体代表了业务环境中的一个对象；每个实体创建一张二维表
-3. 定义属性：即实体的特征; 每个属性对应表中的一列
-4. 确定键：确定每张表的主键和外键
-5. 定义关系：确定实体之间的关系；通过外键和参照完整性约束来实现和维护这些关系
+Character and characterization
+------------------------------
 
-6. 规范化：通过分解表来消除数据冗余，提高数据一致性；通过正规化阶段，例如第一范式、第二范式等来进行
+### Mr.Know-All
 
-7. 创建ER图（实体-关系图）
-8. 反规范化（如有必要）
+妻子背叛 ， 凯兰达没有说出真相
 
-# 九、接口层设计
+1.  Mr. Max Kelada: Mr. Kelada is the central character in "Mr. Know-All." He is portrayed as a gregarious, talkative, and confident man who is proud of his accomplishments. He is also shown to be a bit of a show-off, often bragging about his knowledge and experiences. He is a skilled storyteller and enjoys being the center of attention. However, his arrogance and tendency to exaggerate his stories often rub other people the wrong way.
+    
+2.  Mrs. Ramsay: Mrs. Ramsay is the wife of the narrator and is depicted as a kind and gentle woman who is always trying to make everyone feel comfortable. She is a good listener and is empathetic to other people's needs. She is also shown to be quite perceptive, noticing things that other people miss.
+    
+3.  The narrator: The narrator is an unnamed character who is traveling on a ship with Mr. Kelada and his wife. He is initially put off by Mr. Kelada's arrogance and is skeptical of his stories. However, as the story progresses, the narrator's opinion of Mr. Kelada changes, and he comes to appreciate his wit and intelligence.
+    
+4.  Mr. and Mrs. Ramsay's cabin-mate: This character is not named in the story, but he is portrayed as a quiet and reserved man who is uncomfortable with Mr. Kelada's constant talking. He is also shown to be quite judgmental, often making assumptions about people based on their appearance.
+    
 
-> 接口设计是指系统与外界的交互设计【人机接口设计、软件接口设计】
+Overall, the characters in "Mr. Know-All" are well-drawn and multi-dimensional, with their personalities and actions driving the story forward. The story explores themes of cultural differences, prejudice, and the importance of keeping an open mind.
 
-理解用户体验设计内容：
+* * *
 
-![chrome_ehnsIEexa4](https://cdn.bangwu.top/img/202312282235109.webp)
+1.  Paul's mother - Greediness and Materialism: Paul's mother is a greedy and materialistic woman who is obsessed with wealth and status. She constantly complains about their financial situation and always wants more money. She is also emotionally distant from her children and does not show them any affection.
+    
+2.  Paul - Obsessive and Determined: Paul is a determined and obsessive young boy who is fixated on winning money for his mother. He is willing to do whatever it takes to win, even if it means sacrificing his own health and well-being. He is also sensitive and perceptive, as he is able to sense the winning horses.
+    
+3.  Uncle Oscar - Cynical and Practical: Uncle Oscar is a practical man who is skeptical of Paul's ability to predict the winning horses. He is also cynical about the value of wealth and material possessions, which is in contrast to Paul's mother.
+    
+4.  Paul's sisters - Naive and Innocent: Paul's sisters are young and innocent, and they are not aware of the family's financial troubles. They are also naive about their mother's behavior and do not understand why she is always unhappy.
+    
 
-用户界面模型：**原型图**（Prototype）【就是用Axure设计出的原型】
+Attentive and kind
 
-# 十、业务逻辑层设计
+### The Swing
 
-## 10.1面向过程的设计
+"The Swing" by Mary Gavell is a poignant story about an elderly woman who begins to experience vivid dreams after many years of being preoccupied with the responsibilities of life. With her son James grown and her husband Julius withdrawing into himself due to old age, she finds herself alone and reflective.
 
-> **模块结构图**(Structure Chart)描述系统的模块结构及模块间的联系
+One night, she hears the familiar creak of an old swing in their yard, a swing her husband had lovingly installed for their son when he was a child. Initially, she thinks it's just the wind, but she eventually goes outside to investigate and discovers her son James, appearing as a child, joyfully swinging. They engage in heartfelt conversations reminiscent of their past, discussing various topics like airplanes, stars, and schoolyard troubles.
 
-模块结构图的主要成分：
+These nightly visits from young James bring her immense joy and a sense of purpose. However, one night, James tells her that he won't be able to visit anymore. She bravely accepts this, cherishing their final moments together. After he leaves, she breaks down in tears, overwhelmed by the reality of his departure.
 
-![chrome_nmzop6jwJh](https://cdn.bangwu.top/img/202312282242399.webp)
+Julius, her husband, finds her in the yard. Despite his usual demeanor, he gently points out that James left his red jacket behind, symbolizing the lasting presence of their son's memory. The story beautifully explores themes of memory, loss, and the enduring bond between a mother and her child.
 
-例如：
+"玛丽-盖维尔（Mary Gavell）的《秋千》是一个凄美的故事，讲述了一位老妇人在多年被生活的重担压得喘不过气来之后，开始做一些生动的梦。她的儿子詹姆斯已经长大成人，丈夫朱利叶斯也因年事已高而变得孤僻，她发现自己变得孤独而多愁善感。
 
-![chrome_DnlykHe8Is](https://cdn.bangwu.top/img/202312282243091.webp)
+一天晚上，她听到院子里一个老秋千发出熟悉的嘎吱声，这是她丈夫在儿子小时候为他精心安装的秋千。起初，她以为只是风吹的声音，但最终她走到外面一看，发现儿子詹姆斯正以孩童的姿态快乐地荡秋千。他们进行了真挚的对话，回忆过去，讨论飞机、星星和校园烦恼等各种话题。
 
-## 10.2面向对象业务逻辑设计
+小詹姆斯每晚的来访给她带来了无尽的欢乐和使命感。然而，一天晚上，詹姆斯告诉她，他不能再来看她了。她勇敢地接受了这个事实，珍惜他们在一起的最后时光。他离开后，她泪流满面，被他离开的现实压得喘不过气来。
 
-> **理解设计类图/包图/顺序图/通信图，无需绘图**
+她的丈夫朱利叶斯在院子里找到了她。尽管朱利叶斯平时很有风度，但他还是温和地指出，詹姆斯留下了他的红色夹克，象征着他们对儿子永恒的记忆。这个故事很好地探讨了记忆、失去以及母子间永恒纽带的主题。
 
-这部分我也不知道要怎么表述，就看[课件](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC10%E7%AB%A0%20%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%B1%82%E8%AE%BE%E8%AE%A1.pdf)吧
+Irony 讽刺
+-----
 
-# 十一、系统实施
+### The chaser
 
-## 系统实施阶段的任务
+the irony is that Alan is desperate for a love potion to manipulate Diana into loving him back, yet what he fails to recognize is that the potion will most likely make Diana obsessed with him. The old man predicts that Alan will soon find her obsession suffocating which is why the old man is sure Alan will also be needing the poison in the future.
 
-> 系统实施是将系统设计阶段得到的设计方案转换为以计算机硬件为基础的能够实际运行的应用软件系统的过程。
->
-> **主要任务**：硬件准备、软件准备（程序编写、测试和部署等）、人员培训和数据准备。实施完毕，系统才可上线。
+### The Lottery
 
-## 11.3系统测试
+The story is set in a small village where the annual lottery is about to take place. Villagers gather in the town square, chatting casually while children play. Mr. Summers, who organizes the community events, conducts the lottery with a black box that is old and worn, yet the villagers are resistant to replacing it. Each villager draws a slip of paper from the black box, and the person who draws a paper with a black spot is stoned to death. Old Man Warner, the oldest villager, fervently supports the lottery and criticizes those who question its necessity. Tessie Hutchinson becomes the "winner" of the lottery and is subsequently stoned to death by the villagers, including her own family. The story explores themes of blind adherence to tradition and the dark consequences that can result. The title "The Lottery" gives a misleading impression of a game of chance, but it is actually a violent ritual of sacrifice.
 
-> **白盒测试**：根据一个软件部件的内部控制结构，测试是否依据设计正确地执行【逻辑上面走程序的流程，检测是否能走通】
+故事发生在一个小村庄，那里即将举行一年一度的抽签仪式。村民们聚集在镇广场上，一边闲聊，一边和孩子们玩耍。组织社区活动的萨默斯先生用一个又旧又破的黑盒子进行抽奖，但村民们都不愿意更换它。每个村民都会从黑盒子里抽出一张纸条，抽到有黑点的纸条的人就会被乱石砸死。最年长的村民华纳老人狂热地支持彩票，并批评那些质疑彩票必要性的人。泰西-哈钦森成了彩票的 "赢家"，随后被村民用石头砸死，包括她自己的家人。故事探讨了盲目坚持传统的主题以及可能导致的黑暗后果。彩票》的标题给人一种机会游戏的误导印象，但它实际上是一种暴力的献祭仪式。
 
-例如：
+Conflict 冲突
+-----------
 
-![chrome_6QurArE5Bv](https://cdn.bangwu.top/img/202312282251578.webp)
+### The Phoenix
 
-就测试这个程序的条件分支是否能输出结果
+人与自然的冲突 There are two conflicts occurring in The Phoenix. One conflict is Man versus Self. Poldero has a greed for profit and goes to extremes to gain profits when the phoenix stops bringing him such. This leads into the second conflict, Man versus Nature.
 
-# 十二、系统运维与管理（自学）
+Setting 设定，背景
+-------
 
-> 建议先看[课件](https://alist.bangwu.top/%E9%98%BF%E9%87%8C%E4%BA%91-%E6%A3%92%E6%97%A0/%E8%AF%BE%E4%BB%B6/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%E7%AC%AC12%E7%AB%A0-%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4%E4%B8%8E%E7%AE%A1%E7%90%86%EF%BC%88%E8%87%AA%E5%AD%A6%EF%BC%89.pdf)然后再看下面的内容，也可以自己总结，其实也没什么，管理信息系统课好像学过
+### The Garden Party
 
-## 12.1系统运维与管理概述
+死神是一个伟大的平等主义者，在他的王国里，没有阶级差别。所有的人，无论贫富贵贱，最终都会来到这个王国。从某种意义上说，通过与死亡的接触，劳拉已经从她的梦幻世界———园会世界———完全苏醒过来，进入了现实世界，顿悟了事物的真谛。死亡非但没有给她带来恐惧，相反却促使她去思考生活到底是什么。虽然她无法解释生与死的哲学意义，但却十分明白，这两者之间的界限是微乎其微的———生与死常常是携手而行。
 
-> 系统运维与管理的主要任务是企业IT部门采用相关的方法、手段、技术、制度、流程和文档等，对软硬件运行环境、业务应用系统和运维人员进行综合的管理。
->
-> 系统运维与管理主要由技术性运维和运维管理构成。
+### The  Landlady
 
-## 12.2开发运维一体化DevOps
+《房东太太》是罗尔德·达尔创作的一篇令人毛骨悚然的短篇小说，讲述了一位名叫比利·韦弗的年轻人到巴斯出差的故事。年仅十七岁的比利被指引去一家酒吧住宿，但却被一家看似迷人的家庭旅馆所吸引。这家旅馆由一位古怪的房东太太经营，尽管其氛围诡异，但比利还是被一种无法解释的力量所驱使，决定留下来。
 
-> DevOps（Development & Operations), 即开发运维一体化，重视“软件开发人员（Dev）”和“IT运维技术人员（Ops）”之间沟通合作的文化、运动或惯例。通过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。
+在见到房东太太后，比利被她奇怪的举止所震惊。她坚持说自己对客人非常挑剔，并透露之前只有两位房客，分别是穆兰德先生和坦普尔先生。房东太太对之前客人的令人不安的评论以及她对动物标本的痴迷开始让比利感到不安。
 
-![chrome_CQ4IBy2SVh](https://cdn.bangwu.top/img/202312282256832.webp)
+随着故事的发展，比利意识到之前客人的名字之所以熟悉，是因为他们在报纸上被报道为失踪者。房东太太的言论和她宠物的不自然静止（实际上是标本）暗示了一个可怕的结局。故事在一个不祥的音符中结束，让读者推测比利也可能成为房东太太的永久“客人”之一。
 
-不是很重要，就是走流程。。。
+这个黑暗的故事结合了悬疑和微妙的恐怖，展示了达尔在营造逐渐逼近的恐惧氛围方面的技巧，并给读者留下了深刻的印象。
+
+## 选词填空可能的单词
+
+1. **Character** - 人物
+2. **Plot** - 情节
+3. **Narrative** - 叙事
+4. **Tone** - 语调
+5. **Mood** - 氛围
+6. **Symbolism** - 象征
+7. **Imagery** - 意象
+8. **Point of View (POV)** - 视角
+9. **Irony** - 讽刺
+10. **Allegory** - 寓言
+11. **Metaphor** - 隐喻
+12. **Simile** - 明喻
+13. **Allusion** - 典故
+14. **Juxtaposition** - 并列
+15. **Motif** - 主旨
+16. **Flashback** - 倒叙
+17. **Suspense** - 悬念
+18. **Dialogue** - 对话
+19. **Exposition** - 阐述
+20. **Climax** - 高潮
+21. **Resolution** - 解决
+22. **Protagonist** - 主角
+23. **Antagonist** - 反派
+24. **Dynamic Character** - 动态人物
+25. **Static Character** - 静态人物
+26. **Foil** - 衬托角色
+27. **Epiphany** - 顿悟
+28. **Understatement** - 低调陈述
+29. **Hyperbole** - 夸张
+30. **Theme Statement** - 主题陈述
+31. **Diction** - 措辞
+32. **Syntax** - 句法
+33. **Subplot** - 次要情节
+34. **Tone Shift** - 语调转变
+35. **Voice** - 叙述声音
+36. **Archetype** - 原型
+37. **Context** - 上下文
+38. **Denouement** - 结局
+39. **Setting Description** - 场景描写
+40. **Conflict Resolution** - 冲突解决
+41. **Narrative Technique** - 叙事技巧
+42. **Pathetic Fallacy** - 移情
+43. **Stream of Consciousness** - 意识流
+44. **Intertextuality** - 互文性
+45. **Ambiguity** - 模棱两可
+46. **Paradox** - 悖论
+47. **Onomatopoeia** - 拟声词
+48. **Personification** - 拟人
+49. **Oxymoron** - 矛盾修饰法
+50. **Genre** - 体裁
+
+本文转自 [青灰色的风原文](https://www.cnblogs.com/68786C/p/17494450.html)，并在原版基础上稍作修改。如有侵权，请联系删除。
+
+
