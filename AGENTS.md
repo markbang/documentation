@@ -1,33 +1,24 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
-
 # Documentation project instructions
 
 ## About this project
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Run `mint dev` to preview locally
-- Run `mint broken-links` to check links
-
-## Terminology
-
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- This is the Mintlify deployment repository for 棒无の知识库
+- Configuration lives in `docs.json` at the repository root
+- Content lives as `.md` / `.mdx` pages in the repository root and nested folders
+- Run `npm run dev` to preview locally
+- Run `npm run validate` and `npm run lint` before finishing changes
 
 ## Style preferences
 
-{/* Add any project-specific style rules below */}
-
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
+- Primary audience is Chinese readers learning software, development, and CS topics
+- Keep headings concise and practical
+- Prefer active voice and direct instructions
 - Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
+- Bold UI labels when referencing interface text
+- Use code formatting for commands, file names, paths, and identifiers
 
 ## Content boundaries
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Preserve existing technical meaning when cleaning up older notes
+- Prefer small, mechanical compatibility fixes over broad rewrites
+- Keep links working and favor local links for internal references

@@ -1,55 +1,28 @@
-# Mintlify Starter Kit
+# 棒无の知识库文档站
 
-Use the starter kit to get your docs deployed and ready to customize.
+这是部署到 Mintlify 的正式文档仓库。
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## 本地开发
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+要求：Node.js `>= 20.17.0`
 
 ```bash
-npx skills add https://mintlify.com/docs
+npm run dev
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+## 校验
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
+```bash
+npm run validate
+npm run lint
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+> 仓库中的 `javascripts/` 与 `stylesheets/` 资源会被 Mintlify 自动加载，因此 MathJax、统计脚本与自定义样式都已经直接跟随仓库发布。
 
-```
-mint dev
-```
+## 部署说明
 
-View your local preview at `http://localhost:3000`.
+1. 在 Mintlify 后台连接 `markbang/documentation`。
+2. 仓库根目录就是文档根目录，无需再额外指定 `docs/` 子目录。
+3. 将自定义域名配置为 `base.bangwu.top`。
 
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+线上地址：<https://base.bangwu.top>

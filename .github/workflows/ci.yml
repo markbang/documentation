@@ -1,0 +1,24 @@
+name: validate-docs
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  mintlify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate Mintlify config
+        run: npm run validate
+      - name: Check broken links
+        run: npm run lint

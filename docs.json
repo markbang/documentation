@@ -1,68 +1,300 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "棒无の知识库",
+  "description": "红温小丑：一个对小白友好的教程知识库，涵盖前后端、软件、环境、课程笔记与兴趣内容。",
+  "logo": "/assets/joker.png",
+  "favicon": "/assets/joker.png",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#14b8a6",
+    "light": "#99f6e4",
+    "dark": "#0f766e"
   },
-  "favicon": "/favicon.svg",
+  "appearance": {
+    "default": "system"
+  },
+  "search": {
+    "prompt": "搜索教程、软件、命令和知识点..."
+  },
+  "metadata": {
+    "timestamp": true
+  },
+  "seo": {
+    "indexing": "all",
+    "metatags": {
+      "og:site_name": "棒无の知识库",
+      "twitter:card": "summary_large_image"
+    }
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      }
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "博客",
+        "href": "https://bangwu.top"
+      },
+      {
+        "type": "discord",
+        "href": "https://discord.gg/Eb3jEZNtRv"
+      }
+    ],
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/markbang/documentation"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/markbang/documentation",
+      "twitter": "https://twitter.com/markbangwu",
+      "website": "https://bangwu.top",
+      "discord": "https://discord.gg/Eb3jEZNtRv"
+    },
+    "links": [
+      {
+        "header": "站点",
+        "items": [
+          {
+            "label": "首页",
+            "href": "https://base.bangwu.top"
+          },
+          {
+            "label": "博客",
+            "href": "https://bangwu.top"
+          },
+          {
+            "label": "Mintlify 仓库",
+            "href": "https://github.com/markbang/documentation"
+          }
+        ]
+      },
+      {
+        "header": "联系",
+        "items": [
+          {
+            "label": "Discord",
+            "href": "https://discord.gg/Eb3jEZNtRv"
+          },
+          {
+            "label": "Email",
+            "href": "mailto:markbang35@gmail.com"
+          }
+        ]
+      }
+    ]
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "开始",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "首页",
+            "root": "index",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "code"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "技术",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "后端",
+            "root": "backend/index",
             "pages": [
-              "api-reference/introduction"
+              {
+                "group": "Python",
+                "root": "backend/Python/index",
+                "pages": [
+                  "backend/Python/fastapi",
+                  {
+                    "group": "爬虫",
+                    "root": "backend/Python/spider/index",
+                    "pages": [
+                      "backend/Python/spider/anti-spider"
+                    ]
+                  },
+                  {
+                    "group": "常用库",
+                    "root": "backend/Python/libs/index",
+                    "pages": [
+                      "backend/Python/libs/httpx",
+                      "backend/Python/libs/wordcloud",
+                      "backend/Python/libs/matplotlib",
+                      "backend/Python/libs/PyTorch",
+                      "backend/Python/libs/Python笔记",
+                      "backend/Python/libs/pyautogui脚本",
+                      "backend/Python/libs/数据类型"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Go",
+                "root": "backend/Go/index",
+                "pages": [
+                  "backend/Go/gin/index"
+                ]
+              },
+              {
+                "group": "数据库",
+                "root": "backend/SQL/index",
+                "pages": [
+                  "backend/SQL/Mysql基础语法",
+                  "backend/SQL/数据库知识点",
+                  "backend/SQL/Sqlite"
+                ]
+              }
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "前端",
+            "root": "frontend/index",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              {
+                "group": "Vue",
+                "root": "frontend/Vue/index",
+                "pages": [
+                  "frontend/Vue/NaiveUI"
+                ]
+              },
+              "frontend/Nextjs/index",
+              "frontend/TailwindCSS/index",
+              "frontend/daisyui"
+            ]
+          },
+          {
+            "group": "客户端",
+            "root": "software/index",
+            "pages": [
+              "software/tauri"
+            ]
+          },
+          {
+            "group": "算法",
+            "root": "algo/index",
+            "pages": [
+              "algo/sliding_window",
+              "algo/bit"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "工具与环境",
+        "groups": [
+          {
+            "group": "软件",
+            "root": "apps/index",
+            "pages": [
+              "apps/Apifox",
+              "apps/Barrier",
+              "apps/CherryStudio",
+              "apps/Cursor",
+              "apps/Pyenv",
+              "apps/Rclone",
+              "apps/Rye",
+              "apps/Scoop",
+              "apps/ShareX",
+              "apps/Typora",
+              "apps/Xizhi",
+              "apps/iTab",
+              "apps/starship"
+            ]
+          },
+          {
+            "group": "环境",
+            "root": "env/index",
+            "pages": [
+              "env/笔试",
+              "env/面经",
+              "env/markdown",
+              "env/github-workflow",
+              "env/Caddy",
+              "env/supervisor",
+              {
+                "group": "博客",
+                "pages": [
+                  "env/Fuwari",
+                  "env/imgbed"
+                ]
+              },
+              {
+                "group": "Docker",
+                "pages": [
+                  "env/docker",
+                  "env/docker-compose"
+                ]
+              },
+              "env/Jupyter",
+              "env/CDN"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "课程与关于",
+        "groups": [
+          {
+            "group": "关于",
+            "root": "about/index",
+            "pages": [
+              "about/site",
+              {
+                "group": "课程复习",
+                "pages": [
+                  "about/courses/Web设计与应用",
+                  "about/courses/信息分析",
+                  "about/courses/信息处理与组织",
+                  "about/courses/信息检索",
+                  "about/courses/信息管理概论",
+                  "about/courses/博弈论",
+                  "about/courses/宏观经济学",
+                  "about/courses/宏观经济学2",
+                  "about/courses/数据仓库",
+                  "about/courses/数据可视化",
+                  "about/courses/数据挖掘",
+                  "about/courses/数据结构与算法",
+                  "about/courses/电子商务",
+                  "about/courses/知识管理",
+                  "about/courses/竞争情报",
+                  "about/courses/管理信息系统",
+                  "about/courses/系统分析与设计",
+                  "about/courses/英语短篇小说佳作欣赏",
+                  "about/courses/计量经济学"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "兴趣",
+        "groups": [
+          {
+            "group": "一人之下",
+            "root": "yrzx/index",
+            "pages": [
+              {
+                "group": "人物",
+                "pages": [
+                  "yrzx/zcl",
+                  "yrzx/fbb"
+                ]
+              },
+              "yrzx/yiren",
+              "yrzx/xiutie",
+              "yrzx/立场"
             ]
           }
         ]
@@ -71,52 +303,16 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "博客",
+          "href": "https://bangwu.top",
+          "icon": "book-open"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "源码",
+          "href": "https://github.com/markbang/documentation",
+          "icon": "github"
         }
       ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
     }
   }
 }

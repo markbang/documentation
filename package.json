@@ -1,0 +1,13 @@
+{
+  "name": "documentation",
+  "private": true,
+  "engines": {
+    "node": ">=20.17.0"
+  },
+  "scripts": {
+    "dev": "npx --yes mint@4.2.520 dev",
+    "validate": "npx --yes mint@4.2.520 validate",
+    "lint": "npx --yes mint@4.2.520 broken-links",
+    "build": "npm run validate && npm run lint"
+  }
+}
