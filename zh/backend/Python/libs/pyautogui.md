@@ -1,6 +1,6 @@
 ---
 title: "PyAutoGUI"
-description: "PyAutoGUI 是一个纯 Python 的 GUI 自动化工具库，相当于 Python 版的按键精灵，通过编程即可控制鼠标移动点击、键盘输入与快捷键组合、屏幕截图与图像识别定位等操作来实现自动化测试与重复任务处理，本文整理了 pip 安装方式与鼠标键盘操作等常用自动化代码示例。"
+description: "PyAutoGUI 是 Python GUI 自动化库，可控制鼠标、键盘与屏幕截图，本文整理安装方式与鼠标键盘等常用自动化代码示例。"
 icon: "robot"
 ---
 

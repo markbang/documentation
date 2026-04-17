@@ -1,6 +1,6 @@
 ---
 title: "息知"
-description: "息知等多渠道消息推送服务整理，涵盖 Server 酱（微信推送免费服务）的登录绑定与 SendKey 获取流程，以及使用 Python requests 库调用推送 API 发送 Markdown 格式通知的代码示例，适用于监控告警、定时提醒与系统状态通知等自动化场景。"
+description: "息知等消息推送服务整理，涵盖 Server 酱微信推送的绑定与 SendKey 获取，及 Python 调用 API 发送通知的代码示例。"
 icon: "bell"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "位运算"
-description: "位运算常见技巧与 LeetCode 题型整理笔记，涵盖按位与（&）、按位或（|）、按位异或（^）、取反（~）、左移（<<）右移（>>）等基础运算符说明，以及判断奇偶性（n&1）、不用临时变量交换两数、检测是否为 2 的幂、Brian Kernighan 算法统计二进制 1 的个数等实用方法。"
+description: "位运算常见技巧与 LeetCode 题型整理，涵盖按位与或异或、左移右移运算符、判断奇偶与 2 的幂、Brian Kernighan 算法等。"
 icon: "microchip"
 ---
 

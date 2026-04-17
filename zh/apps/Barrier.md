@@ -1,6 +1,6 @@
 ---
 title: "Barrier"
-description: "Barrier 是 Synergy 的开源替代品，可以用一套键盘和鼠标跨多台电脑操作，支持 Windows、macOS 和 Linux，本文介绍通过 Scoop 命令行安装与 GitHub Releases 手动安装两种方式，以及 Scoop 版本可能遇到的局域网连接兼容性问题与解决方案。"
+description: "Barrier 是 Synergy 的开源替代，用一套键鼠跨多台电脑操作，支持 Windows/macOS/Linux，本文介绍安装方法与常见问题。"
 icon: "arrows-left-right"
 ---
 

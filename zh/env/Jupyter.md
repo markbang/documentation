@@ -1,6 +1,6 @@
 ---
 title: "Jupyter"
-description: "Jupyter Notebook 是广泛用于数据科学、机器学习实验与交互式教学的可视化笔记本工具，支持在浏览器中编写运行代码并即时查看输出结果，本文介绍 pip 安装与 jupyter notebook 启动方法、远程服务器 SSH 隧道访问配置、Cell 运行与编辑常用键盘快捷键以及 Python 内核管理。"
+description: "Jupyter Notebook 交互式笔记本使用指南，涵盖安装启动方法、远程 SSH 隧道访问配置、常用快捷键速查与 Python 内核管理。"
 icon: "chart-line"
 ---
 

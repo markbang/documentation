@@ -1,6 +1,6 @@
 ---
 title: "Macroeconomics (part 1)"
-description: "Course notes on macroeconomics part 1 covering GDP definitions, income and expenditure accounting methods, nominal vs real GDP, and CPI calculation approaches."
+description: "Course notes on macroeconomics part 1 covering GDP definitions, income and expenditure accounting, nominal vs real GDP, and CPI calculation."
 icon: "chart-line"
 ---
 

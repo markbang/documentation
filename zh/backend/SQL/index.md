@@ -1,6 +1,6 @@
 ---
 title: "数据库"
-description: "数据库技术学习整理入口页，涵盖 MySQL 关系型数据库的建库建表、CRUD 操作与用户权限管理命令，SQLite 轻量级嵌入式数据库的零配置使用与 Python 集成方法，以及数据库原理课程中关系代数运算、SQL 语句编写、范式规范化理论与事务 ACID 特性等核心概念笔记。"
+description: "数据库技术入口页，涵盖 MySQL 建表与 CRUD 操作、SQLite 嵌入式用法与 Python 集成，以及关系代数与范式等原理笔记。"
 icon: "database"
 ---
 

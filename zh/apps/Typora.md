@@ -1,6 +1,6 @@
 ---
 title: "Typora"
-description: "Typora 是一款所见即所得的 Markdown 编辑器，最大特点是边写边渲染、无需在源码与预览视图间切换，对表格、代码块与 LaTeX 数学公式的支持比较完整，本文介绍写博客草稿、整理课程笔记与维护项目文档等适用场景，以及标题层级规范与图片附件目录管理建议。"
+description: "Typora 是所见即所得的 Markdown 编辑器，边写边渲染，本文介绍博客与课程笔记等适用场景及图片目录管理建议。"
 icon: "file-lines"
 ---
 

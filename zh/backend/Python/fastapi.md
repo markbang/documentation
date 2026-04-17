@@ -1,6 +1,6 @@
 ---
 title: "FastAPI"
-description: "FastAPI 是基于 Python 3.6+ 类型提示构建的现代高性能 Web 框架，GitHub 70k+ stars，性能媲美 NodeJS 和 Go，本文涵盖 pip 安装与 uvicorn 启动、路由定义与路径参数、请求体与 Pydantic 数据验证、异步 async/await 处理等核心用法。"
+description: "FastAPI 是基于类型提示的现代高性能 Python Web 框架，本文涵盖安装启动、路由定义、Pydantic 验证与 async/await 异步处理。"
 icon: "bolt"
 ---
 

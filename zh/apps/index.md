@@ -1,6 +1,6 @@
 ---
 title: "软件工具"
-description: "受 pseudoyu 启发整理的常用软件推荐与配置汇总，涵盖 Apifox API 调试、Barrier 跨设备共享、CherryStudio AI 客户端、Cursor 编辑器、Scoop 包管理器、ShareX 截图压缩、Typora 写作等桌面端工具与浏览器扩展的详细配置说明。"
+description: "常用软件推荐与配置汇总，涵盖 Apifox、Barrier、CherryStudio、Cursor、Scoop、ShareX、Typora 等工具的安装与配置说明。"
 icon: "app-store-ios"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Caddy"
-description: "Caddy 是一款用 Go 编写的现代 Web 服务器，最大特点是自动申请和续期 HTTPS 证书，无需手动配置 Let's Encrypt，本文介绍安装方法、Caddyfile 配置语法、反向代理到本地服务的设置方法以及静态文件托管与常见部署场景下的配置示例。"
+description: "Caddy 是自动 HTTPS 的现代 Web 服务器，本文介绍安装方法、Caddyfile 配置语法、反向代理设置与静态文件托管部署示例。"
 icon: "globe"
 ---
 
