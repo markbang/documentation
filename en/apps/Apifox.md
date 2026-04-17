@@ -1,6 +1,6 @@
 ---
 title: "Apifox"
-description: "All-in-one API design, development, and testing platform."
+description: "Apifox is an all-in-one API platform combining Postman, Swagger, Mock, and JMeter for REST API design, debugging, testing, and documentation."
 icon: "plug"
 ---
 

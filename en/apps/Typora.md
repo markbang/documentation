@@ -1,6 +1,6 @@
 ---
 title: "Typora"
-description: "The most acclaimed Markdown editor."
+description: "Typora is a WYSIWYG Markdown editor that renders as you type, with support for tables, code blocks, and LaTeX formulas for document writing."
 icon: "file-lines"
 ---
 

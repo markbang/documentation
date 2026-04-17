@@ -1,6 +1,6 @@
 ---
 title: "AI IDE"
-description: "Cursor and Trae — AI-powered code editors."
+description: "Cursor and Trae are AI-powered code editors integrating code completion, context-aware Q&A, multi-file refactoring, and intelligent editing."
 icon: "wand-magic-sparkles"
 ---
 

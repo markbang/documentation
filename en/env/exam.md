@@ -1,6 +1,6 @@
 ---
 title: "Exam Records"
-description: "Company exam reviews and lessons learned."
+description: "Company aptitude test and coding exam reviews with lessons learned, covering algorithm problems, aptitude sections, and practical test-taking tips."
 icon: "file-pen"
 ---
 

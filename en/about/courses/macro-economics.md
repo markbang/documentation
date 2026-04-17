@@ -1,3 +1,9 @@
+---
+title: "Macroeconomics (part 1)"
+description: "Course notes on macroeconomics part 1 covering GDP definitions, income and expenditure accounting methods, nominal vs real GDP, and CPI calculation approaches."
+icon: "chart-line"
+---
+
 ## 第一章 宏观经济的基本指标及其衡量
 
 ### 国内生产总值

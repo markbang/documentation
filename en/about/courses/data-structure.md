@@ -1,3 +1,9 @@
+---
+title: "Data structures and algorithms"
+description: "Course notes on data structures covering complexity analysis, linked lists, stacks, binary tree traversals, BFS/DFS graph search, and sorting algorithms."
+icon: "sitemap"
+---
+
 <details>
     <summary>写在前面</summary>
 数据结构与算法课程重点均由老师给出

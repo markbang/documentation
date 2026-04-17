@@ -1,3 +1,9 @@
+---
+title: "Econometrics"
+description: "Course notes on econometrics covering OLS regression, multiple linear regression, heteroscedasticity tests, Durbin-Watson autocorrelation, and VIF detection."
+icon: "chart-line"
+---
+
 ## 第二章: 一元线性回归模型
 
 ### 2.1 OLS(最小二乘法)

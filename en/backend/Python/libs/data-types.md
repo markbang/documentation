@@ -1,3 +1,9 @@
+---
+title: "Python data types"
+description: "Python built-in data types reference covering integers, floats, strings, lists, tuples, dictionaries, and sets with common methods and operation examples."
+icon: "list"
+---
+
 # Python 数据类型
 
 Python 内置了丰富的数据类型，用于处理各种数据结构和场景。

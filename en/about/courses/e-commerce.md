@@ -1,3 +1,9 @@
+---
+title: "E-commerce"
+description: "Course notes on e-commerce covering digital payment concepts, B2C and B2B business models, SSL/SET security protocols, and network marketing strategies."
+icon: "cart-shopping"
+---
+
 一．名词解释（20分）
 
 1. > 电子支付

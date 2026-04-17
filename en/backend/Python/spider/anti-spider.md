@@ -1,6 +1,6 @@
 ---
 title: "Anti-Scraping Techniques"
-description: "Headers parameters, IP proxies, and Ajax data extraction."
+description: "Anti-scraping techniques covering User-Agent and Referer header spoofing, IP proxy rotation to avoid bans, and Ajax data extraction methods."
 icon: "shield"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Algorithm Learning"
-description: "Algorithm practice and topic-based notes — sliding window, bit manipulation."
+description: "Algorithm learning roadmap with open-source resources like Hello Algo, Code Carried Away, and labuladong's notes, plus LeetCode tracking."
 icon: "brain"
 ---
 

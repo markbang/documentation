@@ -1,6 +1,6 @@
 ---
 title: "Starship"
-description: "Cross-shell terminal prompt customization."
+description: "Starship is a cross-shell terminal prompt tool supporting PowerShell, Bash, and Zsh, with Scoop installation and profile configuration guide."
 icon: "terminal"
 ---
 

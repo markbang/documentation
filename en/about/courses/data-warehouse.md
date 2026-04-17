@@ -1,3 +1,9 @@
+---
+title: "Data warehouse"
+description: "Course notes on data warehousing covering OLTP vs OLAP, ETL pipeline design, star and snowflake schema modeling, and multidimensional OLAP operations."
+icon: "warehouse"
+---
+
 <details>
     <summary>写在前面</summary>
 数据仓库按照老师上课的顺序来，这个顺序也是比较合理的  PS：每章的引言部分对理解章节很重要

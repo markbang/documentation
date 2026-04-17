@@ -1,3 +1,9 @@
+---
+title: "Data visualization and informetrics"
+description: "Course notes on informetrics covering Lotka's law, Bradford's journal distribution law, Zipf's word frequency law, and citation analysis."
+icon: "chart-pie"
+---
+
 # 数据可视化
 
 选择、名词解释

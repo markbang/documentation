@@ -1,6 +1,6 @@
 ---
 title: "Software Tools"
-description: "Recommended software with configuration details and usage tips."
+description: "Curated software recommendations with configuration guides covering API tools, screen sharing, AI editors, package managers, and screenshot tools."
 icon: "app-store-ios"
 ---
 

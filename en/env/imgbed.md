@@ -1,6 +1,6 @@
 ---
 title: "Image Hosting"
-description: "Qiniu OSS + DogeCloud CDN setup."
+description: "Image hosting setup using Qiniu cloud storage with CDN acceleration, covering bucket config, custom domain binding, PicGo upload, and WebP."
 icon: "image"
 ---
 

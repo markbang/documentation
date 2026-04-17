@@ -1,6 +1,6 @@
 ---
 title: "Xizhi"
-description: "Multi-channel notification push service."
+description: "Notification push services including Server酱 for WeChat alerts, with API setup, Python requests integration, and Markdown message delivery."
 icon: "bell"
 ---
 

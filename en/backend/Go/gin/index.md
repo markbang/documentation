@@ -1,6 +1,6 @@
 ---
 title: "Go Gin"
-description: "Gos most popular web framework."
+description: "Go Gin is the most popular web framework for Go, covering router setup, GET/POST handlers, JSON responses, and HTTP server startup basics."
 icon: "bolt"
 ---
 

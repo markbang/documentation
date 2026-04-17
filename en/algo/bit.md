@@ -1,6 +1,6 @@
 ---
 title: "Bit Manipulation"
-description: "Common bit tricks and problem types."
+description: "Bit manipulation techniques and LeetCode patterns covering AND, OR, XOR operators, parity checks, power-of-two tests, and bit counting."
 icon: "microchip"
 ---
 

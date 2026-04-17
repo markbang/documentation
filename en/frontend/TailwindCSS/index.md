@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS"
-description: "Utility-first CSS framework for building interfaces."
+description: "Tailwind CSS is a utility-first CSS framework for building interfaces with predefined classes, covering installation, responsive design, and theming."
 icon: "palette"
 ---
 

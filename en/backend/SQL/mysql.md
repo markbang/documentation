@@ -1,3 +1,9 @@
+---
+title: "MySQL"
+description: "MySQL learning notes covering CREATE/INSERT/UPDATE/DELETE statements, single and multi-table queries, index optimization, and user permissions."
+icon: "database"
+---
+
 # 初识数据库
 
 ## 什么是数据库

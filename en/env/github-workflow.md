@@ -1,6 +1,6 @@
 ---
 title: "GitHub Actions"
-description: "GitHub CI/CD automation tool."
+description: "GitHub Actions CI/CD automation using YAML workflow files, covering structure, event triggers like push and pull_request, and deployment setups."
 icon: "code-branch"
 ---
 

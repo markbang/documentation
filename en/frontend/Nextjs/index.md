@@ -1,6 +1,6 @@
 ---
 title: "Next.js"
-description: "React full-stack framework with SSR/SSG/API Routes."
+description: "Next.js is a React full-stack framework by Vercel with SSR, SSG, and API Routes, covering project setup, file-system routing, and data fetching."
 icon: "nextjs"
 ---
 

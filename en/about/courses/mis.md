@@ -1,3 +1,9 @@
+---
+title: "Management information systems"
+description: "Course notes on management information systems covering data-to-information transformation, system development methods, decision support, and expert systems."
+icon: "network-wired"
+---
+
 **考试题型**
 
 ------
