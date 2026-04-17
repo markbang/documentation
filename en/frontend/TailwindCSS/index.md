@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS"
-description: "Utility-first CSS framework for building interfaces."
+description: "Tailwind CSS is a utility-first CSS framework for composing classes in HTML, covering npm setup, responsive breakpoints, dark mode, and theming."
 icon: "palette"
 ---
 

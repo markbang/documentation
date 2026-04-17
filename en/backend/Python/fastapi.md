@@ -1,6 +1,6 @@
 ---
 title: "FastAPI"
-description: "Modern high-performance Python web framework with auto docs and type checking."
+description: "FastAPI is a modern high-performance Python web framework covering installation, route definitions, Pydantic validation, and async support."
 icon: "bolt"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Go Gin"
-description: "Gos most popular web framework."
+description: "Go Gin web framework for building high-performance APIs, with route engine examples, GET/POST handlers, JSON responses, and HTTP servers."
 icon: "bolt"
 ---
 

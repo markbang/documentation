@@ -1,6 +1,6 @@
 ---
 title: "Vue.js"
-description: "Vue 3 progressive framework, Composition API and ecosystem."
+description: "Vue.js 3 framework notes covering Composition API, component communication, Vue Router, Pinia state management, and Naive UI components."
 icon: "vuejs"
 ---
 

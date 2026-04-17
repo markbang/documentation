@@ -1,3 +1,9 @@
+---
+title: "MySQL"
+description: "MySQL notes from basics to practice covering CREATE/INSERT/UPDATE/DELETE operations, single and multi-table JOIN queries, and transactions."
+icon: "database"
+---
+
 # 初识数据库
 
 ## 什么是数据库

@@ -1,6 +1,6 @@
 ---
 title: "Caddy"
-description: "Modern web server with automatic HTTPS."
+description: "Caddy is a modern Go-based web server with automatic HTTPS via Let's Encrypt, covering Caddyfile config, reverse proxy, and static hosting."
 icon: "globe"
 ---
 

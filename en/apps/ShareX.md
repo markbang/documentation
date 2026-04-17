@@ -1,6 +1,6 @@
 ---
 title: "ShareX"
-description: "Open-source screenshot tool with auto-compression."
+description: "ShareX is an open-source screenshot and screen recording tool with WebP compression, portable install, action config, and post-capture automation."
 icon: "camera"
 ---
 

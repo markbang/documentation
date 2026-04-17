@@ -1,3 +1,9 @@
+---
+title: "Information analysis"
+description: "Course notes on patent law, research design variables, probability sampling, Cronbach alpha, Pearson correlation, regression, and t-tests."
+icon: "chart-pie"
+---
+
 <details>
     <summary>写在前面</summary>
 <p>信息分析复习由知识点和SPSS相结合，然后按照课件进行总结。本文只是自己总结，可能去看课件会更好一点</p>

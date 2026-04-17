@@ -1,6 +1,6 @@
 ---
 title: "Scoop"
-description: "Windows command-line package manager."
+description: "Scoop is a Windows command-line package manager covering installation, aria2 download acceleration, bucket management, and proxy configuration."
 icon: "bucket"
 ---
 

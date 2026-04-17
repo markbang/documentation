@@ -1,3 +1,9 @@
+---
+title: "Python data types"
+description: "Reference guide to Python built-in data types including numbers, string methods, list slicing, tuples, dictionary operations, and set algebra."
+icon: "list"
+---
+
 # Python 数据类型
 
 Python 内置了丰富的数据类型，用于处理各种数据结构和场景。

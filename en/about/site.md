@@ -1,6 +1,6 @@
 ---
 title: "Site Info"
-description: "Knowledge base scope, formatting conventions, and maintenance."
+description: "Knowledge base overview covering four content sections, page conventions, reading flow, and maintenance principles for this Mintlify site."
 icon: "book-open"
 ---
 

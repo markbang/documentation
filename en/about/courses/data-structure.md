@@ -1,3 +1,9 @@
+---
+title: "Data structures and algorithms"
+description: "Exam review of algorithm complexity, linked lists, stacks, queues, binary tree traversals, BFS/DFS graph search, sorting, and recursion."
+icon: "sitemap"
+---
+
 <details>
     <summary>写在前面</summary>
 数据结构与算法课程重点均由老师给出

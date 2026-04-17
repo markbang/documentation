@@ -1,3 +1,9 @@
+---
+title: "HTTPX"
+description: "HTTPX is a modern Python HTTP client with unified sync and async APIs, native HTTP/2 support, connection pooling, and request examples."
+icon: "bolt"
+---
+
 # HTTPX
 
 HTTPX 是一个功能完整的 Python HTTP 客户端库，支持同步和异步请求，是 requests 的现代替代品。

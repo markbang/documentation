@@ -1,6 +1,6 @@
 ---
 title: "Markdown Syntax"
-description: "Markdown writing tips and tools."
+description: "Markdown syntax cheatsheet covering headings, lists, links, images, code blocks, tables, blockquotes, GFM extensions, and editor recommendations."
 icon: "file-lines"
 ---
 

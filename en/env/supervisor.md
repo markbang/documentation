@@ -1,6 +1,6 @@
 ---
 title: "Supervisor"
-description: "Process daemon and background service management."
+description: "Supervisor is a Linux process daemon for running, monitoring, and auto-restarting services, covering installation, config syntax, and commands."
 icon: "eye"
 ---
 

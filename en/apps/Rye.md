@@ -1,6 +1,6 @@
 ---
 title: "Rye"
-description: "Next-gen Python package manager."
+description: "Rye is a next-generation Python package manager and virtual environment tool, with installation, dependency management, and VSCode config."
 icon: "gear"
 ---
 

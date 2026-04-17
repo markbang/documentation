@@ -1,6 +1,6 @@
 ---
 title: "Python Libraries"
-description: "Python third-party library notes and guides."
+description: "Python third-party library guides covering httpx, matplotlib, PyTorch, WordCloud, PyAutoGUI, and more with an awesome-python-cn resource link."
 icon: "cubes"
 ---
 

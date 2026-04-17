@@ -1,6 +1,6 @@
 ---
 title: "Databases"
-description: "MySQL, SQLite, and core database concepts."
+description: "Database learning hub covering MySQL CRUD and permissions, SQLite embedded usage with Python, and theory on relational algebra and ACID."
 icon: "database"
 ---
 

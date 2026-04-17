@@ -1,6 +1,6 @@
 ---
 title: "Anti-Scraping Techniques"
-description: "Headers parameters, IP proxies, and Ajax data extraction."
+description: "Python anti-bot bypass techniques covering custom headers, IP proxy rotation, and DevTools methods for capturing Ajax API endpoints."
 icon: "shield"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Backend"
-description: "Backend development notes covering Python, Go, and databases."
+description: "Backend development notes covering Python with FastAPI and web scraping, Go with Gin framework, and databases including MySQL and SQLite."
 icon: "server"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Jupyter"
-description: "Interactive data analysis notebook."
+description: "Jupyter Notebook interactive environment for data science, covering installation, remote SSH access, cell shortcuts, and kernel management."
 icon: "chart-line"
 ---
 

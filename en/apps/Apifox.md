@@ -1,6 +1,6 @@
 ---
 title: "Apifox"
-description: "All-in-one API design, development, and testing platform."
+description: "Apifox is an all-in-one platform combining API design, debugging, Mock data generation, and auto-documentation for backend development."
 icon: "plug"
 ---
 

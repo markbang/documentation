@@ -1,3 +1,9 @@
+---
+title: "PyTorch"
+description: "Getting started with PyTorch deep learning framework covering CPU and CUDA installation, tensor creation, autograd differentiation, and neural nets."
+icon: "brain"
+---
+
 # PyTorch
 
 PyTorch 是一个开源的深度学习框架，由 Facebook AI Research 开发，广泛应用于学术研究和工业界。

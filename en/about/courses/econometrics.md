@@ -1,3 +1,9 @@
+---
+title: "Econometrics"
+description: "Course notes on OLS derivation, linear regression estimation, significance testing, White heteroscedasticity, and Durbin-Watson diagnosis."
+icon: "chart-line"
+---
+
 ## 第二章: 一元线性回归模型
 
 ### 2.1 OLS(最小二乘法)

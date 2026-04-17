@@ -1,6 +1,6 @@
 ---
 title: "iTab"
-description: "Browser start page service that frees up your bookmarks."
+description: "iTab is a customizable browser new-tab page with Chrome/Edge extensions for organizing frequent sites into visual navigation cards by workflow."
 icon: "compass"
 ---
 

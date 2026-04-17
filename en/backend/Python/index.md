@@ -1,6 +1,6 @@
 ---
 title: "Python"
-description: "Python backend development and web scraping."
+description: "Python backend development hub covering FastAPI web framework, web scraping techniques, and third-party libraries like httpx and PyTorch."
 icon: "python"
 ---
 

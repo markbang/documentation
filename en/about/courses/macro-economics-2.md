@@ -1,3 +1,9 @@
+---
+title: "Macroeconomics (part 2)"
+description: "Review notes on nominal vs real GDP, saving-investment identity, unemployment diagrams, CPI compilation, IS-LM model, and AD-AS analysis."
+icon: "money-bill-trend-up"
+---
+
 开头引言：
 
 ![img](https://picx.zhimg.com/80/v2-5ec22c794360c3bb6b75718ddb359b5e_1440w.webp?source=1940ef5c)

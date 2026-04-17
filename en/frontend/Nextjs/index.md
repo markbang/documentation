@@ -1,6 +1,6 @@
 ---
 title: "Next.js"
-description: "React full-stack framework with SSR/SSG/API Routes."
+description: "Next.js is a React full-stack framework supporting SSR, SSG, and API Routes, covering file-system routing, data fetching, and rendering."
 icon: "nextjs"
 ---
 

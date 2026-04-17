@@ -1,6 +1,6 @@
 ---
 title: "CDN Setup"
-description: "Domestic/overseas split CDN architecture."
+description: "Guide to building a split CDN acceleration setup with object storage, CDN cache rules, DNS smart routing, and Rclone file sync for blogs."
 icon: "network-wired"
 ---
 

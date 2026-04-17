@@ -1,6 +1,6 @@
 ---
 title: "Docker Compose"
-description: "Multi-container orchestration and one-command deploy."
+description: "Docker Compose orchestration guide using YAML to define services, networks, and volumes, with one-command deployment and port mapping."
 icon: "layer-group"
 ---
 

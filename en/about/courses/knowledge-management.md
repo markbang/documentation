@@ -1,3 +1,9 @@
+---
+title: "Knowledge management"
+description: "Course notes on tacit vs explicit knowledge, the SECI model, knowledge sharing incentives, and organizational learning for transformation."
+icon: "lightbulb"
+---
+
 # 知识管理
 
 <audio controls>

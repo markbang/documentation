@@ -1,6 +1,6 @@
 ---
 title: "Fuwari"
-description: "Astro-based blog theme."
+description: "Fuwari is a clean Astro-based blog theme covering project initialization, directory structure, article frontmatter fields, custom styling, and deployment."
 icon: "pen-nib"
 ---
 

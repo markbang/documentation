@@ -1,3 +1,9 @@
+---
+title: "Macroeconomics (part 1)"
+description: "Review notes on GDP definitions, stock vs flow distinctions, income and expenditure accounting, GDP deflator, and CPI index calculation."
+icon: "money-bill-trend-up"
+---
+
 ## 第一章 宏观经济的基本指标及其衡量
 
 ### 国内生产总值

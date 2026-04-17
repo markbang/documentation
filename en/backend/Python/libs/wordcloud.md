@@ -1,3 +1,9 @@
+---
+title: "WordCloud"
+description: "WordCloud is a Python library for generating word cloud images, covering custom masks, color schemes, jieba Chinese segmentation, and Matplotlib."
+icon: "cloud"
+---
+
 # WordCloud 词云生成
 
 WordCloud 是一个用于生成词云图的 Python 库，可以将文本数据可视化为美观的词云图。

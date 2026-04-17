@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Containerized deployment and app management."
+description: "Docker containerization guide covering images, containers, registries, docker build/run, port mapping, volume mounts, and networking commands."
 icon: "container-storage"
 ---
 

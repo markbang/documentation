@@ -1,3 +1,9 @@
+---
+title: "Systems analysis and design"
+description: "Course notes on system characteristics, the DIKW hierarchy, requirements analysis with data flow diagrams, ER modeling, and UML design."
+icon: "diagram-project"
+---
+
 <details>
     <summary>写在前面</summary>
 系统分析与设计：重点由老师给出，本文章根据给出的重点来进行总结，理解或背诵自行解决 全文结合老师给的重点

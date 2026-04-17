@@ -1,3 +1,9 @@
+---
+title: "Web design and development"
+description: "Course notes on HTML structure and tags, CSS selectors and box model layout, JavaScript basics and DOM manipulation for interactive pages."
+icon: "globe"
+---
+
 # Web 设计与应用
 
 前端三剑客：HTML + CSS + JavaScript

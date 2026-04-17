@@ -1,6 +1,6 @@
 ---
 title: "Exam Records"
-description: "Company exam reviews and lessons learned."
+description: "Written exam retrospectives from campus recruitment, covering algorithm coding, CS fundamentals, solution analysis, and common pitfalls."
 icon: "file-pen"
 ---
 

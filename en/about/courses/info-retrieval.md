@@ -1,3 +1,9 @@
+---
+title: "Information retrieval"
+description: "Course notes on document classification, ISBN/ISSN identifiers, Boolean search strategies, precision and recall metrics, and OPAC catalogs."
+icon: "magnifying-glass"
+---
+
 # 信息检索
 
 消息-数据-信息-知识-智慧-文献

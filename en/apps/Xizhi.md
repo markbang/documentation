@@ -1,6 +1,6 @@
 ---
 title: "Xizhi"
-description: "Multi-channel notification push service."
+description: "Xizhi and Server Chan notification services for sending alerts to WeChat, with account binding, SendKey setup, and Python code examples."
 icon: "bell"
 ---
 

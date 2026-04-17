@@ -1,3 +1,9 @@
+---
+title: "Information processing and organization"
+description: "Course notes on metadata standards, Dublin Core elements, RDA resource description rules, and XML/RDF/OWL semantic web encoding techniques."
+icon: "tags"
+---
+
 # 信息处理与组织
 
 > [!note]

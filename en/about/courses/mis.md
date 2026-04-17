@@ -1,3 +1,9 @@
+---
+title: "Management information systems"
+description: "Course notes on data-to-information transformation, IS as organizational solutions, prototyping methods, and DSS expert system architecture."
+icon: "building"
+---
+
 **考试题型**
 
 ------

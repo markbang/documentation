@@ -1,6 +1,6 @@
 ---
 title: "Pyenv"
-description: "Python version manager."
+description: "Pyenv is a Python version manager for installing, switching, and pinning project-specific versions with virtual environment and cross-OS setup."
 icon: "python"
 ---
 

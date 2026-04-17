@@ -1,6 +1,6 @@
 ---
 title: "Go"
-description: "Go language learning path and Gin framework practice."
+description: "Go language learning roadmap from a Python developer perspective, covering Tour of Go syntax, Gin web framework, and Gorm ORM services."
 icon: "golang"
 ---
 

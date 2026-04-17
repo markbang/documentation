@@ -1,6 +1,6 @@
 ---
 title: "Rclone"
-description: "Cloud storage sync and file management."
+description: "Rclone is a command-line cloud storage manager supporting 40+ providers, covering installation, config setup, sync commands, and CDN integration."
 icon: "cloud-arrow-up"
 ---
 

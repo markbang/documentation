@@ -1,6 +1,6 @@
 ---
 title: "Frontend"
-description: "Frontend development covering Vue, Next.js, and CSS tools."
+description: "Frontend development notes covering Vue 3 with Naive UI, Next.js with SSR/SSG, Tailwind CSS utility styling, and DaisyUI component library."
 icon: "browser"
 ---
 

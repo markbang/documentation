@@ -1,3 +1,9 @@
+---
+title: "Matplotlib"
+description: "Matplotlib is the leading Python 2D plotting library covering pyplot basics, line charts, histograms, bar charts, and scatter plot creation."
+icon: "chart-area"
+---
+
 # Matplotlib介绍
 
 ## 什么是Matplotlib

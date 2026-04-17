@@ -1,3 +1,9 @@
+---
+title: "PyAutoGUI"
+description: "PyAutoGUI is a Python GUI automation library for mouse control, keyboard input, hotkey combos, screenshot capture, and image-based location."
+icon: "robot"
+---
+
 # pyautogui介绍
 
 PyAutoGUI是一个纯Python的`GUI`（图形用户界面（Graphical User Interface，简称 GUI，又称图形用户接口）是指采用图形方式显示的计算机操作用户界面。）自动化工具，通过它可以让程序自动控制鼠标和键盘的一系列操作来达到自动化测试的目的。算是python版的按键精灵。

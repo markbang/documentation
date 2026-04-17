@@ -1,6 +1,6 @@
 ---
 title: "Naive UI"
-description: "Vue 3 component library with full TypeScript support and theme customization."
+description: "Naive UI is a Vue 3 component library with TypeScript support, covering tree-shaking setup, theme customization, and DataTable/Form examples."
 icon: "cube"
 ---
 
