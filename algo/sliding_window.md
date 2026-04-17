@@ -3,23 +3,19 @@ title: "Sliding window"
 description: "Sliding window algorithm using two pointers for subarray and substring problems, with a Python template, LeetCode examples, and O(n) analysis."
 icon: "window-maximize"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/algo/sliding_window.md)
-</Note>
-
 
 [leetcode.3](https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/)
 
-滑动窗口是一种常用's 双指针技巧，适用于处理数组/字符串's 子元素问题。通过维护一个窗口在数组上滑动，可以在O(n)时间复杂度内解决问题。
+The sliding window technique is a common two-pointer pattern for array and string problems. By maintaining a window that moves across the sequence, many problems can be solved in `O(n)` time.
 
-### 基本思路
+### Core idea
 
-1. 使用两个指针left和right表示窗口's 左右边界
-2. right指针不断右移扩大窗口
-3. 当窗口满足某个条件时，left指针右移缩小窗口
-4. 在移动过程中更新结果
+1. Use two pointers, `left` and `right`, to represent the window boundaries.
+2. Move `right` to expand the window.
+3. When the window satisfies a shrink condition, move `left` to contract it.
+4. Update the answer while the window changes.
 
-### 模板代码
+### Template code
 
 ```python
 def sliding_window(s: str):
@@ -45,9 +41,9 @@ def sliding_window(s: str):
     return result
 ```
 
-## 经典题目
+## Classic problems
 
-### 1. [LeetCode 3. 无重复字符's 最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+### 1. [LeetCode 3. Longest substring without repeating characters](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
 ```python
 # leetcode.3 滑动窗口+哈希表 
@@ -62,7 +58,7 @@ class Solution:
         return res
 ```
 
-### 2. [LeetCode 76. 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
+### 2. [LeetCode 76. Minimum window substring](https://leetcode.cn/problems/minimum-window-substring/)
 
 ```python
 class Solution:
@@ -96,7 +92,7 @@ class Solution:
         return "" if length == float('inf') else s[start:start+length]
 ```
 
-### 3. [LeetCode 438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/)
+### 3. [LeetCode 438. Find all anagrams in a string](https://leetcode.cn/problems/find-all-anagrams-in-a-string/)
 
 ```python
 class Solution:
@@ -129,7 +125,7 @@ class Solution:
         return result
 ```
 
-### 4. [LeetCode 209. 长度最小's 子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+### 4. [LeetCode 209. Minimum size subarray sum](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 
 ```python
 class Solution:
@@ -149,7 +145,7 @@ class Solution:
         return 0 if result == float('inf') else result
 ```
 
-### 5. [LeetCode 567. 字符串's 排列](https://leetcode.cn/problems/permutation-in-string/)
+### 5. [LeetCode 567. Permutation in string](https://leetcode.cn/problems/permutation-in-string/)
 
 ```python
 class Solution:
@@ -181,13 +177,13 @@ class Solution:
         return False
 ```
 
-## 适用场景
+## Typical use cases
 
-- 求连续子数组/子串's 最值
-- 字符串匹配问题
-- 固定长度窗口's 问题
-- 满足某个条件's 最长/最短子数组
+- Finding the best value over a continuous subarray or substring
+- String matching problems
+- Fixed-length window problems
+- Longest or shortest subarray satisfying a condition
 
-## 时间复杂度
+## Time complexity
 
-虽然有两层循环，但每个元素最多被Visit两次（一次right，一次left），所以时间复杂度为O(n)。
+Although there are two loops, each element is visited at most twice—once by `right` and once by `left`—so the overall time complexity is `O(n)`.

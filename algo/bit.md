@@ -1,113 +1,55 @@
 ---
-title: "Bit Manipulation"
-description: "Bit manipulation techniques and LeetCode patterns covering AND, OR, XOR operators, parity checks, power-of-two tests, and bit counting."
+title: "Bit manipulation"
+description: "Bitwise operations guide covering AND/OR/XOR, common tricks like checking powers of two, and LeetCode examples using low-level binary manipulation."
 icon: "microchip"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/algo/bit.md)
-</Note>
 
+# Bit manipulation
 
-# 位运算
+Bitwise operations work directly on binary bits. They are efficient and commonly used for algorithm optimization.
 
-位运算is a way of operating directly on binary bits，high efficiency，commonly used in algorithm optimization。
+## Basic bit operators
 
-## 基础位Operators
+| Operators | Name | Description | Example |
+| --------- | ---- | ----------- | ------- |
+| `&` | Bitwise AND | The result is `1` only when both bits are `1` | `5 & 3 = 1` (101 & 011 = 001) |
+| `|` | Bitwise OR | The result is `1` when either bit is `1` | `5 | 3 = 7` (101 | 011 = 111) |
+| `^` | Bitwise XOR | The result is `1` when the bits are different | `5 ^ 3 = 6` (101 ^ 011 = 110) |
+| `~` | Bitwise NOT | Flip `0` to `1` and `1` to `0` | `~5 = -6` |
+| `<<` | Left shift | Shift left by `n` bits, equivalent to multiplying by `2^n` | `5 << 1 = 10` |
+| `>>` | Right shift | Shift right by `n` bits, roughly equivalent to dividing by `2^n` | `5 >> 1 = 2` |
 
-| Operators | name | Description | 示例 |
-|--------|------|------|------|
-| `&` | 按位与 | 两位都为1时结果为1 | `5 & 3 = 1` (101 & 011 = 001) |
-| `|` | 按位或 | 有一位为1时结果为1 | `5 | 3 = 7` (101 | 011 = 111) |
-| `^` | 按位异或 | 两位不同时结果为1 | `5 ^ 3 = 6` (101 ^ 011 = 110) |
-| `~` | 按位取反 | 0变1，1变0 | `~5 = -6` |
-| `<<` | 左移 | 二进制左移n位，相当于乘以2^n | `5 << 1 = 10` |
-| `>>` | 右移 | 二进制右移n位，相当于除以2^n | `5 >> 1 = 2` |
+## Common tricks
 
-## Common Techniques
+### 1. Check odd or even
+### 2. Swap two numbers without a temporary variable
+### 3. Check whether the k-th bit is `1`
+### 4. Set the k-th bit to `1`
+### 5. Set the k-th bit to `0`
+### 6. Flip the k-th bit
+### 7. Extract the lowest `1` bit
+### 8. Remove the lowest `1` bit
+### 9. Check whether a number is a power of two
+### 10. Count the number of `1` bits in binary
 
-### 1. 判断奇偶性
-```python
-# 判断nis否为奇数
-if n & 1:
-    print("奇数")
-else:
-    print("偶数")
-```
+## Classic problems
 
-### 2. 交换两个数（不用临时Variable）
-```python
-a = a ^ b
-b = a ^ b
-a = a ^ b
-```
+### [LeetCode 136. Single Number](https://leetcode.cn/problems/single-number/)
 
-### 3. 判断第k位is否为1
-```python
-# 判断n's 第k位（从0开始）is否为1
-if n & (1 << k):
-    print("第k位is1")
-```
+**Problem:** every number in the array appears twice except one. Find the one that appears only once.
 
-### 4. 将第k位设为1
-```python
-n = n | (1 << k)
-```
-
-### 5. 将第k位设为0
-```python
-n = n & ~(1 << k)
-```
-
-### 6. 将第k位取反
-```python
-n = n ^ (1 << k)
-```
-
-### 7. 取出最低位's 1
-```python
-lowbit = n & (-n)
-```
-
-### 8. 去掉最低位's 1
-```python
-n = n & (n - 1)
-```
-
-### 9. 判断is否为2's 幂次
-```python
-# 2's 幂次只有a1
-if n > 0 and (n & (n - 1)) == 0:
-    print("is2's 幂次")
-```
-
-### 10. Calculation二进制中1's 个数
-```python
-def count_ones(n):
-    count = 0
-    while n:
-        n = n & (n - 1)
-        count += 1
-    return count
-```
-
-## 经典题目
-
-### [LeetCode 136. 只出现一次's 数字](https://leetcode.cn/problems/single-number/)
-
-**题目：**数组中除了a数字出现一次外，其余都出现两次，找出只出现一次's 数字。
-
-**解法：**利用异或's 性质：a ^ a = 0, a ^ 0 = a
+**Idea:** use the XOR properties `a ^ a = 0` and `a ^ 0 = a`.
 
 ```python
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        result = 0
+        ans = 0
         for num in nums:
-            result ^= num
-        return result
+            ans ^= num
+        return ans
 ```
 
-### [LeetCode 191. 位1's 个数](https://leetcode.cn/problems/number-of-1-bits/)
+### [LeetCode 191. Number of 1 Bits](https://leetcode.cn/problems/number-of-1-bits/)
 
 ```python
 class Solution:
@@ -119,7 +61,7 @@ class Solution:
         return count
 ```
 
-### [LeetCode 231. 2's 幂](https://leetcode.cn/problems/power-of-two/)
+### [LeetCode 231. Power of Two](https://leetcode.cn/problems/power-of-two/)
 
 ```python
 class Solution:
@@ -127,21 +69,20 @@ class Solution:
         return n > 0 and (n & (n - 1)) == 0
 ```
 
-### [LeetCode 338. 比特位计数](https://leetcode.cn/problems/counting-bits/)
+### [LeetCode 338. Counting Bits](https://leetcode.cn/problems/counting-bits/)
 
 ```python
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        # dp[i] = dp[i & (i-1)] + 1
-        result = [0] * (n + 1)
+        dp = [0] * (n + 1)
         for i in range(1, n + 1):
-            result[i] = result[i & (i - 1)] + 1
-        return result
+            dp[i] = dp[i >> 1] + (i & 1)
+        return dp
 ```
 
-## Use Cases
+## Typical use cases
 
-- **State压缩**：用ainteger表示多个布尔State
-- **set运算**：用位运算Implementationset's 交、并、补
-- **Permission Management**：用位表示不同权限
-- **Performance Optimization**：位运算速度快，可替代乘除运算
+- **State compression**: represent multiple boolean states with one integer
+- **Set operations**: implement intersection, union, and complement through bit masks
+- **Permission systems**: store different permissions as bits
+- **Performance optimization**: use fast bitwise operations to replace some multiply/divide cases

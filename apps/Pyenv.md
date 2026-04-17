@@ -3,28 +3,24 @@ title: "Pyenv"
 description: "Pyenv is a Python version manager for installing and switching between multiple Python versions on the same system with per-project settings."
 icon: "python"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/Pyenv.md)
-</Note>
-
 
 # [Pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#windows)
 
-Pyenv is a Python Version Manager，允许你in同一系统上轻松Installation和切换多个 Python versions。
+Pyenv is a Python version manager that makes it easy to install and switch between multiple Python versions on the same machine.
 
 ## Features
 
-- 📦 管理多个 Python versions
-- 🔄 快速切换 Python versions
-- 🎯 为项目设置特定versions
-- 🌐 supports虚拟环境
-- 🪟 cross-platformsupports（Windows/Linux/Mac）
+- 📦 Manage multiple Python versions
+- 🔄 Switch versions quickly
+- 🎯 Pin a specific version for each project
+- 🌐 Support virtual environments
+- 🪟 Cross-platform support for Windows, Linux, and macOS
 
 ## Installation
 
 ### Windows
 
-使用 [pyenv-win](https://github.com/pyenv-win/pyenv-win)：
+Use [pyenv-win](https://github.com/pyenv-win/pyenv-win):
 
 ```powershell
 # 使用 pip Installation
@@ -34,14 +30,14 @@ pip install pyenv-win --target $HOME/.pyenv
 git clone https://github.com/pyenv-win/pyenv-win.git $HOME/.pyenv
 ```
 
-添加Environment Variables：
+Add environment variables:
 ```powershell
 [System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
 [System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
 [System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
 ```
 
-### Linux/Mac
+### Linux/macOS
 
 ```bash
 # 使用官方Installationscripts
@@ -51,7 +47,7 @@ curl https://pyenv.run | bash
 brew install pyenv
 ```
 
-Configuration Shell（添加到 `~/.bashrc` 或 `~/.zshrc`）：
+Configure your shell by adding the following to `~/.bashrc` or `~/.zshrc`:
 
 ```bash
 export PYENV_ROOT="$HOME/.pyenv"
@@ -60,9 +56,9 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 ```
 
-## 基本使用
+## Basic usage
 
-### View可Installation's versions
+### Show installable versions
 
 ```bash
 # 列出所有可用versions
@@ -72,7 +68,7 @@ pyenv install --list
 pyenv install --list | grep 3.11
 ```
 
-### Installation Python versions
+### Install Python versions
 
 ```bash
 # Installation特定versions
@@ -85,7 +81,7 @@ pyenv install 3.11
 pyenv install -v 3.11.5
 ```
 
-### View已Installationversions
+### Show installed versions
 
 ```bash
 # 列出所有已Installationversions
@@ -95,7 +91,7 @@ pyenv versions
 pyenv version
 ```
 
-### 切换 Python versions
+### Switch Python versions
 
 ```bash
 # 全局切换（所有 shell）
@@ -108,15 +104,15 @@ pyenv local 3.10.12
 pyenv shell 3.9.18
 ```
 
-### 卸载versions
+### Uninstall a version
 
 ```bash
 pyenv uninstall 3.9.18
 ```
 
-## Advanced Usage
+## Advanced usage
 
-### 为项目设置versions
+### Set a version for a project
 
 ```bash
 # in项目目录下
@@ -128,9 +124,9 @@ cat .python-version
 # 3.11.5
 ```
 
-### 虚拟环境
+### Virtual environments
 
-结合 pyenv-virtualenv 使用：
+Use it together with `pyenv-virtualenv`:
 
 ```bash
 # Installation pyenv-virtualenv
@@ -153,7 +149,7 @@ cd my_project
 pyenv local my-project-env
 ```
 
-### Viewversions来源
+### Show where the current version comes from
 
 ```bash
 # View当前versions及来源
@@ -161,16 +157,16 @@ pyenv version
 # 3.11.5 (set by /home/user/project/.python-version)
 ```
 
-### 刷新 shims
+### Refresh shims
 
 ```bash
 # 重新generates shims（Installation新Package后）
 pyenv rehash
 ```
 
-## Configuration File
+## Configuration files
 
-### 全局Configuration
+### Global configuration
 
 ```bash
 # 设置全局versions
@@ -180,14 +176,14 @@ pyenv global 3.11.5
 ~/.pyenv/version
 ```
 
-### 项目Configuration
+### Project configuration
 
 ```bash
 # 项目目录下's  .python-version file
 echo "3.11.5" > .python-version
 ```
 
-### Shell Configuration
+### Shell configuration
 
 ```bash
 # 临时设置
@@ -196,9 +192,9 @@ export PYENV_VERSION=3.11.5
 
 ## FAQ
 
-### Installation失败
+### Installation failed
 
-**Linux Dependency缺失：**
+**Missing Linux dependencies:**
 
 ```bash
 # Ubuntu/Debian
@@ -213,7 +209,7 @@ sudo yum install gcc zlib-devel bzip2 bzip2-devel readline-devel \
   sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel
 ```
 
-### versions切换不生效
+### Version switching does not take effect
 
 ```bash
 # 确保 pyenv in PATH 中
@@ -226,29 +222,29 @@ source ~/.bashrc  # 或 ~/.zshrc
 pyenv rehash
 ```
 
-### Windows 路径Issue
+### Windows path issues
 
-确保Environment VariablesConfiguration正确，并重启终端。
+Make sure the environment variables are configured correctly, then restart the terminal.
 
-## 与其他ToolComparison
+## Comparison with other tools
 
-| Tool | 特点 | Applicable Scenarios |
+| Tool | Characteristics | Suitable scenarios |
 |------|------|---------|
-| **pyenv** | 多versions管理 | 需要频繁切换 Python versions |
-| **venv** | 内置虚拟环境 | 简单项目隔离 |
-| **conda** | 科学Calculation环境 | 数据科学、机器学习 |
-| **poetry** | Dependency管理 + 打Package | 现代 Python 项目 |
-| **pipenv** | Pipfile 管理 | Dependency锁定 |
+| **pyenv** | Multi-version management | Frequent switching between Python versions |
+| **venv** | Built-in virtual environments | Simple project isolation |
+| **conda** | Scientific computing environment | Data science and machine learning |
+| **poetry** | Dependency management + packaging | Modern Python projects |
+| **pipenv** | Pipfile-based management | Dependency locking |
 
-## Best Practices
+## Best practices
 
-1. **为每个项目设置 local versions**：避免全局versionsConflict
-2. **使用虚拟环境**：结合 pyenv-virtualenv
-3. **Commit .python-version**：团队协作时统一versions
-4. **定期更新 pyenv**：获取新versionssupports
-5. **记录Dependency**：使用 requirements.txt 或 Pipfile
+1. **Set a local version for every project** to avoid global version conflicts.
+2. **Use virtual environments** together with `pyenv-virtualenv`.
+3. **Commit `.python-version`** when the team should use the same version.
+4. **Update pyenv regularly** to get support for new versions.
+5. **Record dependencies** with `requirements.txt` or `Pipfile`.
 
-## 实用Command总结
+## Quick reference
 
 ```bash
 # Common Commands速查

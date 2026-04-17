@@ -4,21 +4,21 @@ description: "Algorithm learning roadmap with open-source resources like Hello A
 icon: "brain"
 ---
 
-Algorithm learning mainly follows open-source books on GitHub and Leetcode practice.
+Algorithm study here mainly follows open-source books on GitHub together with LeetCode practice.
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/bangwu?theme=nord&font=Readex%20Pro&ext=activity&site=cn)
 
-## Recommended Resources
+## Recommended resources
 
 <Accordions>
 <Accordion title="Hello Algo" icon="book-open">
-[Hello Algo](https://github.com/krahets/hello-algo): Animated illustrations, one-click-run data structures and algorithms tutorial. Supports Java, C++, Python, Go, JS, TS, C#, Swift, Rust, Dart, Zig. Very beginner-friendly with active community updates — highly recommended.
+[Hello Algo](https://github.com/krahets/hello-algo): An animated, beginner-friendly data structures and algorithms tutorial with one-click runnable examples. It supports Java, C++, Python, Go, JS, TS, C#, Swift, Rust, Dart, and Zig.
 </Accordion>
-<Accordion title="Code Carried Away" icon="list-check">
-[代码随想录](https://github.com/youngyangyang04/leetcode-master): 200 classic problems in order, 60w+ characters of detailed explanations, video breakdowns, 50+ mind maps, multi-language support.
+<Accordion title="Code Thinking Record" icon="list-check">
+[Code Thinking Record](https://github.com/youngyangyang04/leetcode-master): A classic structured problem set with detailed explanations, videos, mind maps, and multi-language support.
 </Accordion>
 <Accordion title="labuladong's Algorithm Notes" icon="pen-nib">
-[labuladong](https://github.com/labuladong/fucking-algorithm): 60+ original articles based on LeetCode problems, covering all patterns and techniques — easy to understand, not just code dumps.
+[labuladong](https://github.com/labuladong/fucking-algorithm): Original articles built around LeetCode problems, focused on patterns, intuition, and transferable problem-solving techniques.
 </Accordion>
 </Accordions>
 

@@ -3,25 +3,20 @@ title: "Supervisor"
 description: "Supervisor is a Linux process manager for running and auto-restarting background services, covering installation, config files, and CLI usage."
 icon: "eye"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/supervisor.md)
-</Note>
+# Supervisor process management
 
+Supervisor is a Python-based process management tool for monitoring and controlling Unix/Linux processes on a system.
 
-# Supervisor 进程管理
+[Detailed tutorial blog post](https://bangwu.top/posts/supervisor)
 
-Supervisor is a Python 编written byprocess management tool，for monitoring and controlling Unix/Linux processes on the system。
+## Overview
 
-[详细教程blogs文章](https://bangwu.top/posts/supervisor)
-
-## 简介
-
-Supervisor 可以：
-- 自动启动、停止、重启进程
-- 监控进程State，崩溃后自动重启
-- 提供 Web 界面管理
-- 记录进程输出Log
-- 进程Grouping管理
+Supervisor can:
+- start, stop, and restart processes automatically
+- monitor process status and restart crashed processes automatically
+- provide a web management interface
+- record process output logs
+- manage processes in groups
 
 ## Installation
 
@@ -43,11 +38,11 @@ pip install supervisor
 
 ## Configuration File
 
-主Configuration File位置：
+Main configuration file location:
 - Ubuntu: `/etc/supervisor/supervisord.conf`
-- 自Definition程序Configuration: `/etc/supervisor/conf.d/*.conf`
+- Per-program config files: `/etc/supervisor/conf.d/*.conf`
 
-### 基本Configuration结构
+### Basic configuration structure
 
 ```ini
 [program:myapp]
@@ -67,7 +62,7 @@ environment=PATH="/usr/local/bin"          ; Environment Variables
 
 ## Common Commands
 
-### 管理 Supervisor 服务
+### Manage the Supervisor service
 
 ```bash
 # 启动 supervisor
@@ -86,7 +81,7 @@ sudo systemctl status supervisor
 sudo systemctl enable supervisor
 ```
 
-### 管理进程
+### Manage processes
 
 ```bash
 # 重新加载Configuration
@@ -125,9 +120,9 @@ sudo supervisorctl tail -f myapp  # 实时View
 sudo supervisorctl clear myapp
 ```
 
-## Configuration示例
+## Configuration examples
 
-### Python Web 应用
+### Python web app
 
 ```ini
 [program:flask_app]
@@ -143,7 +138,7 @@ stdout_logfile=/var/log/supervisor/flask_app.log
 environment=FLASK_ENV="production",SECRET_KEY="your-secret"
 ```
 
-### Node.js 应用
+### Node.js app
 
 ```ini
 [program:nodejs_app]
@@ -175,7 +170,7 @@ redirect_stderr=true
 stdout_logfile=/var/log/celery/worker.log
 ```
 
-### 进程组
+### Process groups
 
 ```ini
 [group:myproject]
@@ -195,9 +190,9 @@ command=/usr/bin/celery beat
 ...
 ```
 
-## Web 界面
+## Web interface
 
-启用 Web 管理界面：
+Enable the web management interface:
 
 ```ini
 [inet_http_server]
@@ -231,7 +226,7 @@ stderr_logfile_maxbytes=50MB
 stderr_logfile_backups=10
 ```
 
-## 优雅关闭
+## Graceful shutdown
 
 ```ini
 [program:myapp]
@@ -241,7 +236,7 @@ stopasgroup=true                    ; 停止整个进程组
 killasgroup=true                    ; 杀死整个进程组
 ```
 
-## 多进程管理
+## Multi-process management
 
 ```ini
 [program:worker]
@@ -252,7 +247,7 @@ autostart=true
 autorestart=true
 ```
 
-## Fault排查
+## Troubleshooting
 
 ### ViewLog
 
@@ -269,16 +264,16 @@ sudo supervisorctl tail -f myapp
 
 ### FAQ
 
-1. **进程启动失败**
-   - 检查Command路径is否正确
-   - 检查用户权限
+1. **Process fails to start**
+   - Check whether the command path is correct
+   - Check user permissions
    - ViewLogfile
 
-2. **进程频繁重启**
-   - 增加 `startsecs` 值
-   - 检查程序本身is否有Issue
+2. **Process restarts too often**
+   - Increase the `startsecs` value
+   - Check whether the program itself has an issue
 
-3. **Configuration不生效**
+3. **Configuration does not take effect**
    ```bash
    sudo supervisorctl reread
    sudo supervisorctl update
@@ -286,23 +281,23 @@ sudo supervisorctl tail -f myapp
 
 ## Best Practices
 
-1. **使用Configuration File分离**：每个程序aConfiguration File
-2. **设置合理's Log大小**：避免磁盘占满
-3. **使用专用用户**：提高安全性
-4. **进程Grouping**：方便批量管理
-5. **设置Environment Variables**：Configuration与代码分离
-6. **监控告警**：结合监控系统使用
-7. **定期BackupConfiguration**：versions控制Configuration File
+1. **Separate config files**: use one config file per program.
+2. **Set reasonable log sizes** to avoid filling up the disk.
+3. **Use dedicated users** for better security.
+4. **Use process groups** for easier batch management.
+5. **Use environment variables** to separate config from code.
+6. **Add alerting** by integrating with monitoring systems.
+7. **Back up configurations regularly** and keep them under version control.
 
 ## Alternatives
 
-- **systemd**：Linux 系统服务管理
-- **PM2**：Node.js 进程管理器
-- **circus**：Python 进程管理
-- **monit**：系统监控和进程管理
+- **systemd**: Linux service management
+- **PM2**: Node.js process manager
+- **circus**: Python process management
+- **monit**: system monitoring and process management
 
 ## References
 
 - [Supervisor Official Docs](http://supervisord.org/)
-- [Configuration File详解](http://supervisord.org/configuration.html)
-- [详细blogs教程](https://bangwu.top/posts/supervisor)
+- [Configuration file reference](http://supervisord.org/configuration.html)
+- [Detailed blog tutorial](https://bangwu.top/posts/supervisor)

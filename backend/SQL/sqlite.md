@@ -3,26 +3,22 @@ title: "SQLite"
 description: "SQLite is a lightweight embedded database reading and writing disk files, covering Python sqlite3 integration, basic SQL operations, and use cases."
 icon: "file-code"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/SQL/sqlite.md)
-</Note>
-
 
 # SQLite
 
-SQLite 是一个轻量级's 嵌入式关系型数据库，无需独立服务器进程，直接读写磁盘文件。
+SQLite is a lightweight embedded relational database. It does not require a standalone server process and reads from or writes to a disk file directly.
 
-## 特点
+## Features
 
-- **零配置**: 无需安装和管理
-- **单文件**: 整个数据库存储在一个文件中
-- **跨平台**: 支持所有主流操作系统
-- **自包含**: 不依赖外部库
-- **事务支持**: 完整's  ACID 特性
+- **Zero configuration**: no installation or admin service required
+- **Single file**: the entire database lives in one file
+- **Cross-platform**: works on all major operating systems
+- **Self-contained**: no external service dependency
+- **Transactional**: supports full ACID behavior
 
-## Python 中使用
+## Using SQLite in Python
 
-### 基本操作
+### Basic operations
 
 ```python
 import sqlite3
@@ -53,7 +49,7 @@ conn.commit()
 conn.close()
 ```
 
-### 上下文管理器
+### Context manager
 
 ```python
 with sqlite3.connect('example.db') as conn:
@@ -62,7 +58,7 @@ with sqlite3.connect('example.db') as conn:
     results = cursor.fetchall()
 ```
 
-## 常用命令
+## Common commands
 
 ```sql
 -- View所有表
@@ -79,27 +75,27 @@ with sqlite3.connect('example.db') as conn:
 .read data.sql
 ```
 
-## 性能优化
+## Performance tips
 
-1. **使用事务**: 批量操作时提升性能
-2. **创建索引**: 加速查询
-3. **使用 WAL 模式**: 提高并发性能
+1. **Use transactions** for batch operations.
+2. **Create indexes** to speed up queries.
+3. **Enable WAL mode** to improve concurrent read/write behavior.
 
 ```python
 # 启用 WAL 模式
 conn.execute('PRAGMA journal_mode=WAL')
 ```
 
-## 适用场景
+## Good use cases
 
-- 移动应用本地存储
-- 桌面应用数据管理
-- 小型 Web 应用
-- 嵌入式设备
-- 测试和原型开发
+- Local storage for mobile apps
+- Desktop app data management
+- Small web applications
+- Embedded devices
+- Testing and prototyping
 
-## 限制
+## Limitations
 
-- 不适合高并发写入
-- 数据库大小建议不超过 1TB
-- 不支持用户权限管理
+- Not ideal for high-concurrency writes
+- Recommended database size is typically below 1 TB
+- No built-in user permission management

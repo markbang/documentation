@@ -3,30 +3,25 @@ title: "GitHub Actions"
 description: "GitHub Actions CI/CD automation using YAML workflow files, covering structure, event triggers like push and pull_request, and deployment setups."
 icon: "code-branch"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/github-workflow.md)
-</Note>
-
-
 # GitHub Actions
 
-GitHub Actions is GitHub 提供's  CI/CD 自动化Tool，可以自动执行build、Testing、Deployment等Workflow程。
+GitHub Actions is GitHub’s CI/CD automation tool. It can automatically run workflows for building, testing, deployment, and more.
 
-yes公开仓Libraryisfree不限额度's ，私有仓Library每月有free额度。
+Public repositories are free to use, while private repositories come with a monthly free quota.
 
 ## Basic Concepts
 
-- **Workflow（Workflow）**：自动化Process，由a或多个 job 组成
+- **Workflow**: an automated process made up of one or more jobs
 - **Job（Task）**：a set of steps executed on the same runner
-- **Step（Step）**：单个Task，可以is action 或 shell Command
+- **Step**: a single task, which can be either an action or a shell command
 - **Action（Action）**：reusable smallest unit
-- **Runner（Runner）**：执行Workflow's 服务器
+- **Runner**: the server that executes the workflow
 
 ## Basic Syntax
 
-WorkflowConfiguration File使用 YAML 格式，存放in `.github/workflows/` 目录。
+Workflow configuration files use YAML and live in the `.github/workflows/` directory.
 
-### 最简单's Workflow
+### Simplest workflow
 
 ```yaml
 name: Hello World
@@ -41,7 +36,7 @@ jobs:
         run: echo "Hello, World!"
 ```
 
-### 完整示例
+### Complete example
 
 ```yaml
 name: CI
@@ -81,7 +76,7 @@ jobs:
         run: npm test
 ```
 
-## 触发Event
+## Trigger events
 
 ### Push Event
 
@@ -107,7 +102,7 @@ on:
     branches: [ main ]
 ```
 
-### 定时Task
+### Scheduled tasks
 
 ```yaml
 on:
@@ -115,7 +110,7 @@ on:
     - cron: '30 5 * * 1-5'  # 工作日早上5:30
 ```
 
-### 手动触发
+### Manual trigger
 
 ```yaml
 on:
@@ -131,9 +126,9 @@ on:
           - production
 ```
 
-## 常用 Actions
+## Common actions
 
-### Checkout 代码
+### Checkout code
 
 ```yaml
 - uses: actions/checkout@v4
@@ -141,7 +136,7 @@ on:
     fetch-depth: 0  # 获取完整History
 ```
 
-### 设置 Node.js
+### Set up Node.js
 
 ```yaml
 - uses: actions/setup-node@v4
@@ -150,7 +145,7 @@ on:
     cache: 'npm'
 ```
 
-### 设置 Python
+### Set up Python
 
 ```yaml
 - uses: actions/setup-python@v4
@@ -170,7 +165,7 @@ on:
       ${{ runner.os }}-node-
 ```
 
-### 上传build产物
+### Upload build artifacts
 
 ```yaml
 - uses: actions/upload-artifact@v3
@@ -179,7 +174,7 @@ on:
     path: dist/
 ```
 
-### Downloadbuild产物
+### Download build artifacts
 
 ```yaml
 - uses: actions/download-artifact@v3
@@ -188,9 +183,9 @@ on:
     path: dist/
 ```
 
-## 自动发布 Release
+## Automatically publish a release
 
-### 创建 Release
+### Create a release
 
 ```yaml
 name: Release
@@ -240,13 +235,13 @@ jobs:
 
 ## Self-hosted Runner
 
-自托管Runner允许in自己's 服务器上RunWorkflow。
+Self-hosted runners let you run workflows on your own servers.
 
-### 添加 Runner
+### Add a runner
 
-1. 进入仓Library Settings → Actions → Runners → New self-hosted runner
-2. 根据提示in服务器上Installation和Configuration
-3. 启动 runner
+1. Go to **Repository Settings → Actions → Runners → New self-hosted runner**.
+2. Follow the prompts to install and configure it on your server.
+3. Start the runner.
 
 ### Installation（Linux）
 
@@ -272,7 +267,7 @@ sudo ./svc.sh install
 sudo ./svc.sh start
 ```
 
-### 使用 Self-hosted Runner
+### Use a self-hosted runner
 
 ```yaml
 jobs:
@@ -283,7 +278,7 @@ jobs:
       - run: ./build.sh
 ```
 
-### Tag选择
+### Label selection
 
 ```yaml
 jobs:
@@ -291,13 +286,13 @@ jobs:
     runs-on: [self-hosted, linux, x64]
 ```
 
-## Secrets 管理
+## Secrets management
 
-### 添加 Secret
+### Add a secret
 
 Settings → Secrets and variables → Actions → New repository secret
 
-### 使用 Secret
+### Use a secret
 
 ```yaml
 steps:
@@ -307,7 +302,7 @@ steps:
     run: ./deploy.sh
 ```
 
-## 矩阵build
+## Matrix builds
 
 ```yaml
 jobs:
@@ -324,7 +319,7 @@ jobs:
       - run: npm test
 ```
 
-## 条件执行
+## Conditional execution
 
 ```yaml
 steps:
@@ -341,9 +336,9 @@ steps:
     run: echo "Cleanup"
 ```
 
-## 实用示例
+## Practical examples
 
-### 自动Deployment到服务器
+### Automatically deploy to a server
 
 ```yaml
 name: Deploy
@@ -371,7 +366,7 @@ jobs:
             pm2 restart myapp
 ```
 
-### Docker built和Push
+### Build and push Docker images
 
 ```yaml
 name: Docker Build
@@ -400,7 +395,7 @@ jobs:
           tags: user/app:latest
 ```
 
-### 代码检查
+### Code checks
 
 ```yaml
 name: Lint
@@ -421,13 +416,13 @@ jobs:
 
 ## Best Practices
 
-1. **使用Caching**：加速DependencyInstallation
-2. **矩阵build**：多环境Testing
-3. **并行执行**：多个独立 job
-4. **合理使用 if**：条件执行节省资源
-5. **保护 secrets**：不要inLog中输出
-6. **使用官方 actions**：更可靠和维护良好
-7. **限制权限**：按需设置 permissions
+1. **Use caching** to speed up dependency installation.
+2. **Use matrix builds** for multi-environment testing.
+3. **Run jobs in parallel** when they are independent.
+4. **Use `if` wisely** to save resources with conditional execution.
+5. **Protect secrets** and never print them in logs.
+6. **Prefer official actions** because they are more reliable and better maintained.
+7. **Limit permissions** and grant only what each workflow needs.
 
 ## References
 

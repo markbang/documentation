@@ -3,27 +3,21 @@ title: "Scoop"
 description: "Scoop is a Windows command-line package manager like Homebrew, covering installation, aria2 acceleration, bucket management, and proxy setup."
 icon: "bucket"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/apps/Scoop.md)
-</Note>
 
-
-# Scoop-Windows brew
+# Scoop - Windows Homebrew
 
 ## Installation
 
 ## Configuration
 
-using aria2
+Enable `aria2`:
 
 ```bash
 scoop install aria2
 scoop config aria2-warning-enabled false
 ```
 
-bucket
-
-proxy
+Useful things to configure include buckets and proxy settings.
 
 ```bash
 ❯ scoop config
@@ -38,7 +32,7 @@ scoop_branch          : master
 aria2-warning-enabled : False
 ```
 
-Backup
+### Backup
 
 ```bash
 scoop export > app.json
@@ -46,20 +40,14 @@ scoop import > app.json
 # backs up buckets and apps，excluding config
 ```
 
-## Common Apps
+## Common apps
 
-## Apps Not Found via Scoop
+## Apps not found via Scoop
 
-[雷神加速器](https://www.leigod.com/)
-
-[滴答清单](https://dida365.com/)
-
-[Cisco Anyconnect](https://www.cisco.com/c/zh_cn/support/security/anyconnect-secure-mobility-client-v4-x/model.html#~tab-downloads)
-
-[纯粹直播](https://github.com/liuchuancong/pure_live)
-
-[火绒](https://huorong.cn)
-
-[微信输入法](https://z.weixin.qq.com)
-
-[坚果云](https://www.jianguoyun.com)
+- [Leigod Accelerator](https://www.leigod.com/)
+- [Dida365](https://dida365.com/)
+- [Cisco Anyconnect](https://www.cisco.com/c/zh_cn/support/security/anyconnect-secure-mobility-client-v4-x/model.html#~tab-downloads)
+- [Pure Live](https://github.com/liuchuancong/pure_live)
+- [Huorong](https://huorong.cn)
+- [WeChat Input Method](https://z.weixin.qq.com)
+- [Jianguoyun](https://www.jianguoyun.com)

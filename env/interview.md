@@ -3,38 +3,34 @@ title: "Interview Experience"
 description: "Technical interview reviews with round-by-round analysis covering algorithm questions, system design, project deep-dives, and improvement areas."
 icon: "comments"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/interview.md)
-</Note>
 
-
-# My Interview Experience
+# My interview experience
 
 ## 2025-03-11 ByteDance Test Development Intern
 
-Studied testing/dev knowledge intensely before the interview. Total duration: 30 min
+I reviewed testing and development topics intensively before the interview. Total duration: 30 minutes.
 
-1.  grilled on visualization project【项目难点】
-2. Database table design【classroom, student course selection tables】
-3. SQL problem: find top 20 students by course grade【couldn't write it, forgot MySQL😭】
-4. Logic problem——27 个小球，where有ais假's (质量不一样)，how to use balance scale to find fake ball，how to weigh, how many times【initially remembered seeing similar ones，但isis 8 个小球，332 split this way 😮‍💨 couldn't figure it out after long thinking】
-5. Algorithm problem——merge two sorted arrays【着急忙慌想用`sort`+`set`，还is需要多刷算法】
-6. 做完Algorithm problem，另一位面试官问刚刚's Logic problem如果明确要求假's 小球is重，how to modify【couldn't think of approach】
-7. Q&A round问了字节测开都is用什么语言和Framework，测开有开发自己's TestingPlatform吗【answer: no mandatory language requirement，develop platform based on needs】
+1. They drilled into my data visualization project, especially the difficult parts.
+2. They asked about database table design, such as classroom tables and student course-selection tables.
+3. They gave me an SQL problem: find the top 20 students by course score. I could not write it because I had forgotten too much MySQL.
+4. There was a logic puzzle: among 27 balls, one is fake and has a different weight. How would you use a balance scale to find it, and how many weighings would it take? I vaguely remembered a similar 8-ball problem, but I still could not work it out.
+5. There was also an algorithm problem about merging two sorted arrays. I panicked and almost wanted to use `sort` + `set`, which reminded me that I still need much more algorithm practice.
+6. After the algorithm question, another interviewer returned to the ball puzzle and asked how the solution would change if the fake ball were known to be heavier. I still could not come up with a good approach.
+7. In the Q&A round, I asked what languages and frameworks ByteDance test development usually uses, and whether they build internal testing platforms. The answer was that there is no mandatory language and the platform work depends on actual needs.
 
-As expected, very poor — couldn't answer well. A 1-hour interview ended in 30 min，But it was my first interview, okay — many areas to improve. Keep going!
+The result was as bad as I expected. I answered poorly, and a one-hour interview ended after only 30 minutes. Still, it was my first interview, so it was a useful wake-up call. There is a lot to improve.
 
 ## 2025-04-17 Shanghai Yonyou Government Software Co. Implementation Consultant Intern
 
-This interview was unexpected — got the chance a month later，total duration 30 min
+This interview also lasted about 30 minutes, and the whole experience felt a bit unexpected.
 
-1. brief self-introduction，then asked about my project【at this point realized meeting recording wasn't on】
-2. what did you learn in data mining and deep learning、management-related courses【主要is一些Basic Concepts，felt interviewer didn't know】
-3. Asked about work in the data visualization project【问我 Vue is什么？？？】
-4. Python libraries I know【self-studied, httpx, selenium and common libraries】
-5. Modeling competition related content、主要应用？【answered: no real-world application，solve specific problems】
-6. Office skills？？？【Word、PPT、Excel，问这个instantly felt it was low-quality】
-7. 问我Course schedule and available internship duration【need graduation certificate for full-time conversion】
-8. Q&A round问了企业中项目's 实施主要is怎么实施's 【answered: SQL-related？我觉得应该is项目管理's 一些】
+1. I gave a short self-introduction and then they asked about my project. At that point I realized the meeting recording was not turned on.
+2. They asked what I had learned from data mining, deep learning, and management-related courses. Most of my answer was basic concepts, and it felt like the interviewer was not very familiar with the subject either.
+3. They asked about the visualization project and even asked me what Vue was.
+4. They asked which Python libraries I knew. I mentioned libraries I had studied on my own, such as `httpx`, `selenium`, and other common tools.
+5. They asked about modeling competitions and their real-world applications. I answered honestly that they mostly solve specific problems and are not always directly applied in production.
+6. They asked about Office skills—Word, PowerPoint, Excel—which made the interview feel much less technical.
+7. They also asked about my class schedule and how long I would be available for an internship, mentioning the graduation certificate requirement for full-time conversion.
+8. In the Q&A round, they asked how enterprise projects are typically implemented. I guessed they might be referring to project management rather than SQL.
 
-这个面试我还is觉得's 挺莫名其妙's ，The interviewer looked like a very conservative programmer，like an old state-owned enterprise employee，然后Felt my skills didn't match this position，主要is SQL 相关's syntax也忘了，这个还is需要加强一下，然后大概就is这样，This interview had no pressure，No nervousness in my second interview，Feels like an HR round
+Overall, the interview felt strange. The interviewer gave me the impression of a very conservative programmer, almost like someone from a traditional state-owned enterprise environment. I also felt that my skill set did not match the role very well. My weak point was still SQL syntax, which I clearly need to review. On the positive side, I felt no pressure at all this time. Since it was my second interview, I was not nervous anymore. It almost felt like an HR screening round.

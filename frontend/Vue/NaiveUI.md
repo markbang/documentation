@@ -3,25 +3,20 @@ title: "Naive UI"
 description: "Naive UI is a TypeScript-friendly Vue 3 component library with 80+ components, covering installation, theme customization, and common usage."
 icon: "cube"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/Vue/NaiveUI.md)
-</Note>
-
-
 ![TypeScript](https://cdn.bangwu.top/img/TypeScript.png)
 
 # Naive UI
 
-Naive UI is a Vue 3 ComponentLibrary，提供了丰富's Component和完善's  TypeScript supports。
+Naive UI is a Vue 3 component library with a rich component set and strong TypeScript support.
 
 ## Features
 
 - 🎨 **customizable theme**：complete theme system
 - 📦 **Tree Shaking**：load on demand，small size
 - 🔧 **TypeScript**：complete type definitions
-- 🌙 **Dark Mode**：内置Dark Theme
-- 🎯 **无Dependency**：no third-party UI library dependency
-- 📱 **响应式**：mobile-friendly
+- 🌙 **Dark Mode**: built-in dark theme support
+- 🎯 **No extra UI dependencies**: no third-party UI framework dependency
+- 📱 **Responsive**: mobile-friendly layout support
 
 ## Installation
 
@@ -44,7 +39,7 @@ app.use(naive)
 app.mount('#app')
 ```
 
-### On-demand Import (Recommended)（推荐）
+### On-demand import (recommended)
 
 ```vue
 <script setup>
@@ -61,7 +56,7 @@ import { NButton, NSpace, NCard } from 'naive-ui'
 
 ### Auto Import
 
-使用 `unplugin-auto-import` 和 `unplugin-vue-components`：
+Use `unplugin-auto-import` and `unplugin-vue-components`:
 
 ```bash
 npm install -D unplugin-vue-components unplugin-auto-import
@@ -422,7 +417,7 @@ async function fetchData() {
 
 ## Layout Components
 
-### Layout 布局
+### Layout
 
 ```vue
 <template>
@@ -473,7 +468,7 @@ async function fetchData() {
 
 ## Icons
 
-Naive UI 推荐使用 [xicons](https://www.xicons.org/)：
+Naive UI recommends using [xicons](https://www.xicons.org/):
 
 ```bash
 npm install @vicons/ionicons5
@@ -493,16 +488,16 @@ import { Search } from '@vicons/ionicons5'
 
 ## Best Practices
 
-1. **On-demand Import (Recommended)**：使用Auto ImportPlugin
-2. **主题一致性**：统一Configuration主题
-3. **全局Configuration**：使用 ConfigProvider
-4. **类型supports**：充分利用 TypeScript
-5. **Responsive Design**：使用Grid系统
-6. **国际化**：Configuration locale
+1. **Use on-demand import** with auto-import plugins.
+2. **Keep the theme consistent** across the app.
+3. **Use global configuration** through `ConfigProvider`.
+4. **Take advantage of TypeScript support**.
+5. **Use the grid system** for responsive design.
+6. **Configure locale settings** for internationalization.
 
 ## References
 
-- [Naive UI 官网](https://www.naiveui.com/)
-- [GitHub 仓Library](https://github.com/tusen-ai/naive-ui)
+- [Naive UI website](https://www.naiveui.com/)
+- [GitHub repository](https://github.com/tusen-ai/naive-ui)
 - [Componentdocumentation](https://www.naiveui.com/zh-CN/os-theme/components/button)
-- [主题edit器](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)
+- [Theme editor](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)

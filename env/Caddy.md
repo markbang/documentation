@@ -3,12 +3,8 @@ title: "Caddy"
 description: "Caddy is a modern Go web server with automatic HTTPS certificate management, covering Caddyfile syntax, reverse proxy setup, and file hosting."
 icon: "globe"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/env/Caddy.md)
-</Note>
 
-
-# Web 服务器
+# Web server
 
 ```bash
 sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
@@ -18,7 +14,7 @@ sudo apt update
 sudo apt install caddy
 ```
 
-最简单's aConfigurationis这样's 
+The simplest configuration looks like this:
 
 ```json
 example.com {
@@ -26,4 +22,4 @@ example.com {
 }
 ```
 
-只需要解析 DNS ip 为服务器地址即可，自动 https，非常简单
+Just point the domain's DNS record to your server IP. Caddy will handle HTTPS automatically, which makes the setup very straightforward.

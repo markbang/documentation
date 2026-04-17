@@ -3,24 +3,20 @@ title: "Python learning notes"
 description: "Miscellaneous Python notes and code snippets covering pd.DataFrame creation, Pandas tips, common error troubleshooting, and useful patterns."
 icon: "note-sticky"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/python-notes.md)
-</Note>
 
+# Python notes
 
-# PythonNotes
+## 1. `pd.DataFrame`
 
-## 1.pd.DataFrame,
+This is the standard Pandas format for creating a `DataFrame`. Remember the capitalization: `DataFrame`. Each column in a `DataFrame` is a `Series`.
 
-这是Pandas创建DataFrame's 格式,记得大写
-DF's 每一列就是一个Series
+## 2. Reading text-based data files
 
-## 2.读入文本格式数据文件
+`pandas.read_table()` is the more general API for reading text files.
 
-pandas.read_table():更通用's 文本读取代码
-主要's 区别在于默认's sep="/t",即tab	
+The main difference is that its default `sep` is `"/t"`, meaning tab-separated data.
 
-## pd.read_csv()
+## `pd.read_csv()`
 
 ```python
 pd.read_csv(
@@ -39,12 +35,13 @@ pd.read_csv(
 )：读取csv格式文件，但也可通用于文本文件读取
 ```
 
-4.![image-20230924212132039](https://bangwu.oss-cn-shanghai.aliyuncs.com/img/image-20230924212132039.png)
+4. ![image-20230924212132039](https://bangwu.oss-cn-shanghai.aliyuncs.com/img/image-20230924212132039.png)
 
-## describe命令
+## `describe` command
 
-一次性输出常用's 集中趋势和离散趋势汇总指标
-百分位数's 输出为其特色功能
+This command outputs common summary statistics for central tendency and dispersion in one go.
+
+Percentile output is one of its most useful features.
 
 ```python
 df.describe(
@@ -57,7 +54,7 @@ df.describe(
 )
 ```
 
-## 单变量's 评数统计
+## Univariate frequency statistics
 
 ```python
 Series.value_counts(
@@ -69,7 +66,7 @@ Series.value_counts(
 )
 ```
 
-## 交叉表
+## Crosstab
 
 ```python
 pd.crosstab(
@@ -92,4 +89,3 @@ pd.crosstab(
 		
 	)
 ```
-

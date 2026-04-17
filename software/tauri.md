@@ -3,14 +3,9 @@ title: "Tauri"
 description: "Tauri is a Rust-based cross-platform desktop framework smaller than Electron, covering project setup, Rust-JS communication, and app packaging."
 icon: "laptop-code"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/software/tauri.md)
-</Note>
-
-
 # Tauri
 
-Rust cross-platform app，although a relatively new framework，但is已经有较为成熟's 产品，for example：[ChatWise](https://chatwise.app)、[HuLa](https://hulaspark.com/)，学习这种跨端Framework当然is要跨端才好，
+Tauri is a Rust-based cross-platform app framework. Although it is relatively new, it already has mature products built with it, such as [ChatWise](https://chatwise.app) and [HuLa](https://hulaspark.com/). If you want to learn a cross-platform framework, it makes sense to pick one that truly ships across platforms.
 write once, built apps for multiple platforms
 
 ## use GitHub Actions to auto-publish releases
@@ -157,11 +152,11 @@ jobs:
           args: ${{ matrix.args }}
 ```
 
-if unfamiliar with[Github Action](https://github.com/features/actions)'s 可以去看我written by[intro guide](../env/github-workflow)
+If you are not familiar with [GitHub Actions](https://github.com/features/actions), you can read my [intro guide](../env/github-workflow).
 
-使用上面's Workflow可以in push tag v\*'s 时候自动build并发布 Release 和generates changelog
+With the workflow above, pushing a tag like `v*` can automatically build the app, publish a release, and generate a changelog.
 
-changelog generates使用's is[Antfu changelogithub](https://github.com/antfu/changelogithub)采用's is[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)syntax，可以使用这种syntax来Commit`git message`generates好看's 、easy-to-understand changelog
+The changelog is generated with [Antfu changelogithub](https://github.com/antfu/changelogithub), which follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) format. Using that commit style makes the generated changelog much cleaner and easier to read.
 
 ![changelog_example](https://cdn.bangwu.top/img/o85kd-yqbangwu20250405111742.webp)
 
@@ -169,18 +164,18 @@ changelog generates使用's is[Antfu changelogithub](https://github.com/antfu/ch
 
 app signing
 
-如何Configuration latest.json
+How to configure `latest.json`
 
 how to built mobile app
 
 how to auto-publish to platforms
 
-### Github Action Release 仓Libraryallow read/write permissions
+### Allow GitHub Actions release permissions to read and write the repository
 
 otherwise there'll be errors publishing Release`Error permisson`
 
 ## Fix: Next.js SSR window is not defined
 
-## 解决 Error: Cannot read properties of undefined (reading 'xxxxxx')
+## Fix: `Cannot read properties of undefined (reading 'xxxxxx')`
 
-这个报错很有可能is使用Plugin未加载导致's ，initialize plugin in main.rs
+This error is often caused by a plugin not being loaded. Initialize the plugin in `main.rs`.

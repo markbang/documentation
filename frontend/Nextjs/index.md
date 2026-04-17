@@ -3,23 +3,18 @@ title: "Next.js"
 description: "Next.js is a React full-stack framework by Vercel with SSR, SSG, and API Routes, covering project setup, file-system routing, and data fetching."
 icon: "nextjs"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/Nextjs/index.md)
-</Note>
-
-
 ## Next.js
 
-Next.js is近些年最火's  React Framework，由 Vercel 开发和维护。
+Next.js is one of the most popular React frameworks in recent years, developed and maintained by Vercel.
 
 ### Core Features
 
-- **混合渲染**：SSR、SSG、ISR 多种渲染模式
-- **file路由**：built onfile系统's 自动路由
-- **API Routes**：内置 API 端点
-- **优化性能**：自动code splitting、Image Optimization
-- **TypeScript**：原生 TypeScript supports
-- **零Configuration**：开箱即用's Best Practices
+- **Hybrid rendering**: supports SSR, SSG, and ISR
+- **File-based routing**: automatic routing built on the file system
+- **API Routes**: built-in API endpoints
+- **Performance optimizations**: automatic code splitting and image optimization
+- **TypeScript**: first-class TypeScript support
+- **Zero config**: sensible defaults out of the box
 
 ### Quick Start
 
@@ -34,7 +29,7 @@ npm run dev
 # Visit http://localhost:3000
 ```
 
-### 项目结构
+### Project structure
 
 ```
 my-app/
@@ -122,7 +117,7 @@ export default function Counter() {
 }
 ```
 
-#### Loading 和 Error
+#### Loading and error UI
 
 ```tsx
 // app/loading.tsx - loading states
@@ -283,7 +278,7 @@ module.exports = nextConfig
 
 ### Deployment
 
-#### Vercel（推荐）
+#### Vercel (recommended)
 ```bash
 # Installation Vercel CLI
 npm i -g vercel
@@ -321,9 +316,9 @@ npm run built
 
 - **code splitting**：auto split by route
 - **lazy loading**：dynamic import components
-- **Image Optimization**：next/image 自动优化
-- **Font Optimization**：next/font 优化字体加载
-- **prefetch**：Link Component自动prefetch
+- **Image optimization**: `next/image` handles optimization automatically
+- **Font optimization**: `next/font` improves font loading
+- **Prefetching**: the `Link` component prefetches automatically
 - **Caching**：fine-grained cache control
 
 ### Library Integrations
@@ -347,10 +342,10 @@ npm install next-auth
 
 ### Best Practices
 
-1. **Server Components (Default)优先**：默认使用Server Components (Default)
-2. **use caching appropriately**：Configuration适当's CachingStrategy
-3. **优化图片**：use next/image
-4. **code organization**：按功能Module组织代码
+1. **Prefer Server Components first** when possible.
+2. **Use caching appropriately** and choose a sensible caching strategy.
+3. **Optimize images** with `next/image`.
+4. **Organize code by feature modules**.
 5. **TypeScript**：use type safety
 6. **error handling**：use error.tsx for error handling
 7. **loading states**：use loading.tsx for better UX
@@ -358,12 +353,12 @@ npm install next-auth
 ### FAQ
 
 #### Hydration Error（Hydration Error）
-- 确保服务端和客户端渲染一致
-- 避免in服务端使用浏览器 API
+- Make sure server and client rendering stay consistent.
+- Avoid using browser APIs on the server.
 
 #### Performance Optimization
-- 使用动态导入减少初始Package大小
-- 启用生产模式优化
+- Use dynamic imports to reduce the initial bundle size.
+- Enable production optimizations.
 
 ### References
 

@@ -3,14 +3,12 @@ title: "CherryStudio"
 description: "CherryStudio is an open-source AI chat client with deep CSS theme customization, including a Claude-style dark and light mode configuration."
 icon: "message"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/CherryStudio.md)
-</Note>
-
 
 # CherryStudio
 
-[https://github.com/CherryHQ/cherry-studio]
+GitHub repository: [https://github.com/CherryHQ/cherry-studio](https://github.com/CherryHQ/cherry-studio)
+
+The following CSS is a Claude-style theme preset for CherryStudio, with both dark and light variants.
 
 ```css
 /* Claude 主题 2.0 */

@@ -3,20 +3,15 @@ title: "Docker Compose"
 description: "Docker Compose orchestration guide using YAML to define services, networks, and volumes for one-command multi-container application deployment."
 icon: "layer-group"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/docker-compose.md)
-</Note>
-
-
 # Docker Compose
 
-Docker Compose is for defining and running multi-container Docker applications tool，通过 YAML fileConfiguration应用服务。
+Docker Compose is a tool for defining and running multi-container Docker applications through YAML service definitions.
 
 ## Installation
 
-Docker Desktop 已内置 Docker Compose。
+Docker Desktop already includes Docker Compose.
 
-### Linux 独立Installation
+### Standalone Linux installation
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
@@ -25,7 +20,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 
-## 基本Command
+## Basic commands
 
 ```bash
 # 启动服务
@@ -77,19 +72,19 @@ volumes:
   db_data:
 ```
 
-### 常用Configuration项
+### Common configuration fields
 
-- `image`: 使用's 镜像
+- `image`: image to use
 - `build`: builtConfiguration
 - `ports`: Port Mapping
-- `volumes`: 数据卷挂载
+- `volumes`: volume mounts
 - `environment`: Environment Variables
 - `depends_on`: Dependencies
-- `networks`: 网络Configuration
-- `restart`: 重启Strategy
-- `command`: Overriding默认Command
+- `networks`: network configuration
+- `restart`: restart policy
+- `command`: override the default command
 
-## 常用服务Configuration
+## Common service configurations
 
 ## MySQL
 
@@ -238,7 +233,7 @@ volumes:
   open-webui:
 ```
 
-## 完整 Web 应用栈
+## Full web application stack
 
 ```yaml
 version: '3.8'
@@ -294,7 +289,7 @@ volumes:
 
 ## Environment Variablesfile
 
-创建 `.env` file：
+Create a `.env` file:
 
 ```env
 MYSQL_ROOT_PASSWORD=root_password
@@ -302,7 +297,7 @@ MYSQL_DATABASE=mydb
 REDIS_PASSWORD=redis_password
 ```
 
-in docker-compose.yml 中使用：
+Use it in `docker-compose.yml` like this:
 
 ```yaml
 services:
@@ -314,7 +309,7 @@ services:
 
 ## Practical Tips
 
-### View服务Log
+### View service logs
 
 ```bash
 # View所有服务Log
@@ -327,20 +322,20 @@ docker-compose logs -f web
 docker-compose logs --tail=100 web
 ```
 
-### Extension服务
+### Scale services
 
 ```bash
 # 启动3个web服务实例
 docker-compose up -d --scale web=3
 ```
 
-### 只重建特定服务
+### Rebuild only a specific service
 
 ```bash
 docker-compose up -d --build web
 ```
 
-### 清理资源
+### Clean up resources
 
 ```bash
 # 停止并Remove Container、网络
@@ -355,13 +350,13 @@ docker-compose down --rmi all
 
 ## Best Practices
 
-1. **使用 .env file**管理Sensitive Info
-2. **使用命名卷**持久化数据
-3. **Definition网络**隔离服务
-4. **设置 restart: always** 保证服务可用
-5. **使用 depends_on** DeclarationDependencies
-6. **添加健康检查** health check
-7. **Limit Resources使用** deploy.resources
+1. **Use `.env` files** for sensitive information.
+2. **Use named volumes** for persistent data.
+3. **Define networks** to isolate services.
+4. **Set `restart: always`** when high availability matters.
+5. **Use `depends_on`** to declare dependencies.
+6. **Add health checks**.
+7. **Use `deploy.resources`** to limit resources when appropriate.
 
 ## References
 

@@ -3,21 +3,16 @@ title: "DaisyUI"
 description: "DaisyUI is a Tailwind CSS component library with pre-designed buttons, cards, modals, and navbars, covering installation, themes, and examples."
 icon: "palette"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/daisyui.md)
-</Note>
-
-
 # DaisyUI
 
-DaisyUI is abuilt on Tailwind CSS 's ComponentLibrary，提供了丰富's 预设计Component。
+DaisyUI is a component library built on Tailwind CSS, offering many pre-designed components.
 
 ## Features
 
 - 🎨 **pure CSS components**：no JavaScript dependency
-- 🎭 **30+ 主题**：built-in multiple themes，supports深色模式
+- 🎭 **30+ themes**: multiple built-in themes with dark mode support
 - 🧩 **semantic class names**：easy to understand and use
-- 🎯 **Tailwind 兼容**：perfect integration Tailwind CSS
+- 🎯 **Tailwind-compatible**: integrates cleanly with Tailwind CSS
 - 📦 **lightweight**：load on demand，small size
 
 ## Installation
@@ -171,13 +166,13 @@ module.exports = {
 
 ## Theme Switching
 
-### HTML Property方式
+### Using an HTML attribute
 
 ```html
 <html data-theme="dark">
 ```
 
-### JavaScript 切换
+### Switching with JavaScript
 
 ```javascript
 // 切换主题
@@ -225,7 +220,7 @@ module.exports = {
 }
 ```
 
-## 实用Tool类
+## Useful utility classes
 
 ```html
 <!-- Space -->
@@ -273,15 +268,15 @@ module.exports = {
 
 ## Best Practices
 
-1. **结合 Tailwind**：DaisyUI Component可与 Tailwind Tool类混用
-2. **主题一致性**：为整个项目选择合适's 主题
-3. **Responsive Design**：使用 Tailwind 's 响应式prefix
-4. **减少定制**：尽量使用预设样式
-5. **load on demand**：Configuration PurgeCSS 移除未使用's 样式
+1. **Combine with Tailwind**: DaisyUI components work well with Tailwind utility classes.
+2. **Keep themes consistent** across the whole project.
+3. **Use Tailwind responsive prefixes** for responsive design.
+4. **Avoid unnecessary customization** and start with presets.
+5. **Load on demand** by configuring PurgeCSS to remove unused styles.
 
 ## References
 
-- [DaisyUI 官网](https://daisyui.com/)
+- [DaisyUI website](https://daisyui.com/)
 - [Componentdocumentation](https://daisyui.com/components/)
-- [主题list](https://daisyui.com/docs/themes/)
-- [GitHub 仓Library](https://github.com/saadeghi/daisyui)
+- [Theme list](https://daisyui.com/docs/themes/)
+- [GitHub repository](https://github.com/saadeghi/daisyui)

@@ -3,14 +3,10 @@ title: "Anti-Scraping Techniques"
 description: "Anti-scraping techniques covering User-Agent and Referer header spoofing, IP proxy rotation to avoid bans, and Ajax data extraction methods."
 icon: "shield"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/backend/Python/spider/anti-spider.md)
-</Note>
 
+# Header parameters
 
-# Headers Parameters
-
-in`requests.get()`method，后面有关反爬's parameters，where就有 headers，Usage也很简单，`headers=adictionary`这个dictionary用来储存一些parameters，伪造request headers来让网站认为is真人Visit，而不is机器人。
+In the `requests.get()` method, one of the most common anti-scraping-related arguments is `headers`. The usage is simple: pass `headers=a dictionary`. This dictionary stores request headers that help make a crawler look like a real browser instead of a bot.
 
 ```python
 headers = {
@@ -23,40 +19,46 @@ requests.get(url,headers=headers)
 
 ## User-Agent
 
-everyone is familiar with User-Agent，这is爬虫's 第一步，most websites check User-Agent，setting it is simple，就is打开开发者Tool，find and copy-paste from network requests。因为 User-Agent 一般都is固定's ，里面Package含's 只is一些浏览器型号之类's ，目's is确保你这个请求is真人，所以`my_fake_useragent`library was created accordingly。
+Almost every crawler starts with the `User-Agent`. Most websites check it first. The easiest way to get one is to open the browser developer tools, inspect a network request, and copy the value. Since a `User-Agent` is usually just browser and system metadata, its main purpose is to make your request look like it came from a real user.
+
+That is exactly why libraries like `my_fake_useragent` exist.
 
 ```python
 from my_fake_useragent import UserAgent
 headers = {'User-Agent': UserAgent(family='chrome').random()}
 ```
 
-this way randomizes User-Agent，more convenient and solves some UA anti-scraping。
+This gives you a randomized `User-Agent`, which is often more convenient and can bypass some basic UA checks.
 
-## cookie
+## Cookie
 
-cookie everyone is familiar with this too，cookie 就is你in该网站上's 身份信息，show your cookie，服务器就会知道这is你，then provides related services。
+Cookies are also very common in scraping. A cookie is essentially your identity on a site. Once the server sees your cookie, it can recognize the current session and return content tied to that identity.
 
 ## Referer
 
-Referer related to anti-hotlinking(anti-hotlinking：trace source，当前本次请求's 上一级is谁 A ->B ->C )添加 Referer 就is确定is不is根据它所要's 网站跳转到请求网站's ，如果不is，then deny access。for example一些视频网站's 视频网址，如果不is从视频网站跳转过去，大部分可能就is拒绝请求或者返回a假响应。
+`Referer` is often related to anti-hotlinking. It tells the server which page the current request came from. In a path like `A -> B -> C`, the `Referer` for `C` is `B`. Many sites use this to check whether a request really originated from an expected page. If not, they may deny access or return fake data.
 
-这里我会拿豆瓣做a实例解析，interested can check it out，[Link]()。
+A typical example is video sites: direct requests to media URLs may fail unless the request appears to come from the site itself.
+
+Here I use Douban as an example. If you are interested, you can explore it further yourself: [Link]().
 
 ## Content-type
 
-Content-type is
+`Content-type` determines how the server interprets the request body and how the client should interpret the response.
 
-# Common Parameters
+# Common parameters
 
-in browser developer mode，我们不光只看到前面所提到's 那几个parameters，还有很多很多其它's parameters，那具体's a网站我怎么知道要添加哪些parameters呢？
+In the browser developer tools, you will see many more headers than just the ones above. So how do you decide which ones are actually necessary?
 
-普通网站一般添加a User-Agent 就行了，sites requiring account info add cookie，other cases are rare，遇到is都试一试就行。（这里还有a万能Method，yes，就is用**selenium**Simulation，but writing it is more troublesome）所以建议还is先试试能不能行，**selenium**as last resort。
+For ordinary sites, adding a `User-Agent` is often enough. Sites that require login usually also need cookies. Other cases vary by site, so the practical approach is to test a few combinations. There is also a universal fallback: use **selenium** to simulate real browser behavior. It is more cumbersome to write, so it is usually best kept as the last resort.
 
-# Ajax 介绍
+# Ajax overview
 
-Ajax 即 Asynchronous Javascript And XML（Asynchronous JavaScript and XML）in 2005 年被 Jesse James Garrett 提出's 新术语，用来Description一种使用现有Technologyset's ‘新’Method，Package括: HTML 或 XHTML, CSS, JavaScript, DOM, XML, XSLT, 以及最重要's  XMLHttpRequest。**by exchanging small amounts of data with server in background，Ajax can make pages update asynchronously，meaning without reloading the entire page，can update part of the page。**
+Ajax stands for Asynchronous JavaScript and XML. The term was proposed by Jesse James Garrett in 2005 to describe a “new” way of using existing web technologies such as HTML/XHTML, CSS, JavaScript, DOM, XML, XSLT, and—most importantly—`XMLHttpRequest`.
 
-当然，Ajax 原理我们不需要知道，只需要了解它's 形式，能in网页中找到就行，下面isa简单's  Ajax 示例：
+The key idea is that a page can exchange small amounts of data with the server in the background. That allows part of the page to update without refreshing the entire page.
+
+In practice, you do not need to master all the underlying theory. You just need to recognize what Ajax requests look like in the browser. Here is a simple example:
 
 ```html
 <html>
@@ -93,34 +95,34 @@ Ajax 即 Asynchronous Javascript And XML（Asynchronous JavaScript and XML）in 
 </html>
 ```
 
-simply put，就is向服务器send数据请求，then reloads the data。for example：如果我们通过“traditional approach”Implementation上图's product review pagination，each pagination re-fetches header, sidebar, footer from server，extra waste of bandwidth, server resources, and user wait time。if using ajax for no-refresh pagination，each time only fetches from server“product review area”info only，saves resources accordingly。so ajax no-refresh pagination has its necessity。
+Simply put, Ajax sends a request to the server and then refreshes only the data that changed. For example, if you implemented product review pagination the traditional way, every page switch would fetch the header, sidebar, footer, and review area again. That wastes bandwidth, server resources, and user time. With Ajax pagination, only the review section needs to be fetched and re-rendered.
 
-# 判断、查找Method
+# How to identify and find Ajax requests
 
-## 判断
+## Identify them
 
-判断网页数据is否使用 Ajax，check after triggering events，判断网页is否发生刷新State。if page doesn't refresh，数据就automatically generates，Description数据's 加载is通过 Ajax generates并渲染到网页上's ；otherwise，数据is通过服务器后台generates并加载's 。
+To determine whether a page is using Ajax, trigger the relevant action and watch whether the page fully reloads. If the page does not refresh but the data updates, the content is probably being fetched and rendered with Ajax. If the whole page reloads, the data is likely being generated server-side in the traditional way.
 
-## 查找Method
+## How to find them
 
-使用 Ajax Method，as mentioned above，会向服务器send请求，那我们就根据这个Features来破招。send请求，要么is`get`要么is`post`then in the fetched web source`Ctrl+F`search for`get、post`then quickly locate the Ajax function（if you have better methods，welcome to share in comments），观察它is向哪里send请求，then get`url`后，我们模仿给服务器send请求，then get the data。
+As mentioned above, Ajax still has to send a request to the server. That is your entry point. The request is usually either `GET` or `POST`, so a quick method is to inspect the fetched page source or scripts and search for `get` or `post`. Once you locate the Ajax function, look at where it sends the request, extract the `url`, and then mimic that request yourself to retrieve the data.
 
 # Solutions
 
-# Practical Cases
+# Practical cases
 
-I encountered this typical case when scraping a website，感兴趣's 可以点击[Link]()前往。
+I ran into this kind of situation while scraping a site. If you are interested, you can check it here: [Link]().
 
-# IP Anti-Scraping Mechanisms
+# IP anti-scraping mechanisms
 
-# How to Switch IP
+# How to switch IPs
 
-# How to Get IP Proxies
+# How to get proxy IPs
 
-## proxy_pool(free)
+## `proxy_pool` (free)
 
-proxy_pool is GitHub 上's afree & open-source's  IP proxy pool创建，原理is爬取各大 IP Proxy网站上
+`proxy_pool` is a free and open-source proxy pool project on GitHub. Its basic idea is to crawl public proxy websites and aggregate usable IPs.
 
-## IP proxy provider(Paid)
+## Paid proxy providers
 
-## Self-built IP Proxy
+## Self-built proxy IPs

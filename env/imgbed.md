@@ -3,34 +3,30 @@ title: "Image Hosting"
 description: "Image hosting setup using Qiniu cloud storage with CDN acceleration, covering bucket config, custom domain binding, PicGo upload, and WebP."
 icon: "image"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/imgbed.md)
-</Note>
 
+I eventually settled on an **object storage + CDN** image hosting setup. Right now I mainly use Qiniu object storage with CDN acceleration. The goal is not to be flashy—the point is to keep image management, access speed, and cost under control.
 
-我最后选择's is **object storage + CDN** 's 图床Solution，当前主要用七牛云 OSS 配合 CDN。这样做's 核心Goals不is“炫技”，而is把图片管理、Visit速度和成本控制住。
+## Who this setup is for
 
-## 这套Solution适合什么人
+- Anyone running a blog or knowledge base and needing long-term image hosting
+- Anyone who wants to manage screenshots, cover images, and article illustrations in one place
+- Anyone who wants relatively stable image URLs that are easy to reference over time
 
-- 有blogs或知识Library，需要长期托管图片
-- 想把截图、封面图、文章配图统一管理
-- 希望图片Link相yes稳定，方便文章长期Reference
+## My basic approach
 
-## 我's 基本思路
+1. **Storage layer**: object storage keeps the original images.
+2. **Delivery layer**: CDN handles acceleration and HTTPS.
+3. **Upload tools**: upload directly from local tools such as screenshot apps or image uploaders.
+4. **Compression strategy**: treat screenshots and custom graphics differently to keep file sizes down.
 
-1. **存储层**：object storage负责托管原图。
-2. **分发层**：CDN 负责加速和 HTTPS。
-3. **上传Tool**：本地通过图床Tool或截图Tool直传。
-4. **压缩Strategy**：截图和自制图片分开处理，尽量减小体积。
-
-## 配套Tool
+## Related tools
 
 1. [PicGo](https://picgo.github.io/PicGo-Doc/)
 2. [ShareX](/apps/ShareX)
 3. [CDN Configuration](/env/CDN)
 
-## 使用建议
+## Practical tips
 
-- 先统一图片命名和目录结构，再开始大量上传。
-- 尽量in上传前做压缩，能省不少带宽和存储成本。
-- 一定要关注anti-hotlinking、流量告警和账单阈值设置。
+- Standardize naming and directory structure before doing large-scale uploads.
+- Compress images before uploading whenever possible to save bandwidth and storage.
+- Pay close attention to hotlink protection, traffic alerts, and billing thresholds.

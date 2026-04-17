@@ -3,105 +3,100 @@ title: "CDN Setup"
 description: "Domestic and overseas split CDN architecture using object storage with intelligent DNS routing for global acceleration and Rclone file sync."
 icon: "network-wired"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/CDN.md)
-</Note>
+Currently using's CDN Solution from:https://www.eallion.com/cdn-cname-cloudflare/
 
-
-目前使用's  CDN Solution来自：https://www.eallion.com/cdn-cname-cloudflare/
-
-一下is CDN 结构图，目's 就is解决全球 CDN 并且成本低
+Take a look at the CDN structure diagram. Our goal is to solve the global CDN problem at a low cost.
 
 ![cdn_dns](https://cdn.bangwu.top/img/cdn_dns.png)
 
-前文Backup
+Previous articleBackup
 
 ### Introduction
 
 domestic and overseas traffic splitting，not only reduces costs，but also improves website performance，optimizes TTFB。
 
-不记得is什么时候开始有了a这样's 闪念，然后就去search for了一下。
-结果发现网上's 教程都比较老旧。where讲得比较多's is通过 CloudFlare for SaaS 接入 CNAME，但is都supports普通's 域名，and can't access R2 or Workers。
+I don't remember when I started having such thoughts, so I went to search for it.
+It turns out that the tutorials online are quite old. Where most of the talk's is access to CNAME is through Cloudflare for SaaS, but it doesn't support regular domain names, and can't access R2 or Workers.
 
-从功能's 优先级上来说，我最需要's is分区解析功能，这就导致不能把域名's  NS 转入 Cloudflare。
-Cloudflare 's  DNS 确实非常优秀，but Cloudflare doesn't support geo-based resolution，it has CNAME flattening，不过它会把所有中国大陆地区's  IP 解析到联通。
-相反国内's  DNS 服务商's 分区解析就做得好，可能也is因为国内's 域名更需要这种功能吧。
-Can't fully commit，but want to use Cloudflare，so have to use some tricks。
+In terms of function's priority, I need the partition resolution function most, which results in the inability to transfer the domain name's NS to Cloudflare.
+Cloudflare's DNS is indeed excellent, but Cloudflare doesn't support geo-based resolution, it has CNAME flattening, but it will resolve all mainland China's IPs to China Unicom.
+On the contrary, domestic DNS service providers do a good job in partition resolution, maybe because domestic domain names need this function more.
+Can't fully commit, but want to use Cloudflare, so have to use some tricks.
 
-2022 年 3 月份，CloudFlare 宣布更改了 CloudFlare for SaaS 's 收费Strategy，每个账户可以有 100 个域名free额度，and charges $0.1/month per extra domain。we use Cloudflare for SaaS to connect domains via CNAME，享受 Cloudflare 强大's 边缘Calculation能力。
+In March 2022, Cloudflare announced changes to Cloudflare for SaaS's charging strategy. Each account can have 100 free domain names, and charges $0.1/month per extra domain. We use Cloudflare for SaaS to connect domains via CNAME and enjoy Cloudflare's powerful edge calculation capabilities.
 
-yes于小网站，比如本blogs，以上服务都isfree's ，free额度：
+Yes for small websites, such as this blogs, the above services are free's, free quota:
 
-- DNSPod：用's 专业版，但freeversions也有分区解析
-- Tencent云 COS：50G/月；200 万请求
-- Tencent云 CDN：10G/月
-- Cloudflare CDN：正常使用无上限
-- Cloudflare R2: 10G/月； 100 万/1000 万请求
-- Backblaze B2: 10G/月； 与 Cloudflare 有 [流量联盟](https://www.backblaze.com/cloud-storage/integrations)
+- DNSPod: Use's professional version, but freeversions also has partition resolution
+- Tencent Cloud COS: 50G/month; 2 million requests
+- Tencent Cloud CDN: 10G/month
+- Cloudflare CDN: No upper limit for normal use
+- Cloudflare R2: 10G/month; 1 million/10 million requests
+- Backblaze B2: 10G/month; has [Traffic Alliance] with Cloudflare(https://www.backblaze.com/cloud-storage/integrations)
 
-关于Tencent云's Configuration略过，这里只讲 Cloudflare 's 部分。
-前提需要 Cloudflare 账号中已经有a可用's 域名。
-这个域名用来提供 `回退源` （Fallback Origin），假设这个域名is `example.com` 。
+I skip Tencent Cloud's Configuration and only talk about Cloudflare's part here.
+The prerequisite is that you already have an available domain name in your Cloudflare account.
+This domain name is used to provide `回退源` (Fallback Origin), assuming this domain name is `example.com`.
 
-### 创建 R2 并绑定自Definition域名
+### Create R2 and bind a custom domain name
 
-1. 登录控制面板：https://dash.cloudflare.com/ ，Cloudflare 已supportsChinese ；
-2. 创建 R2 存储桶's Method这里略过，如创建：`r2-blog-test`；
-3. in `R2` `设置` `公开Visit` `自Definition域` `连接域` 为刚才创建's  R2 添加自Definition域名：
+1. Log in to the control panel: https://dash.cloudflare.com/, Cloudflare supportsChinese;
+2. Create R2 bucket's Method is skipped here, for example, create: `r2-blog-test`;
+3. in `R2` `设置` `公开Visit` `自Definition域` `连接域` Add a custom domain name to the 's R2 you just created:
 
 [![/assets/images/posts/2023/07/r2_custom_hostname.png](https://www.eallion.com/assets/images/posts/2023/07/r2_custom_hostname.png)](https://www.eallion.com/assets/images/posts/2023/07/r2_custom_hostname.png)
 
-然后该域名's  DNS 就会自动出现一条解析：
+Then the domain name's DNS will automatically appear with a resolution:
 
 [![/assets/images/posts/2023/07/custom_hostname_dns.png](https://www.eallion.com/assets/images/posts/2023/07/custom_hostname_dns.png)](https://www.eallion.com/assets/images/posts/2023/07/custom_hostname_dns.png)
 
-### 订阅 CloudFlare for SaaS
+### Subscribe to Cloudflare for SaaS
 
-1. in `Zones` 中选择 `example.com` 这个域名；
-2. in该域名's  `SSL/TLS` 中选择 `自Definition主机名`；
-3. 选择 Enable 订阅。可以使用 Paypal 订阅。
+1. Select the domain name `example.com` in `Zones`;
+2. Select `自Definition主机名` in the domain name's `SSL/TLS`;
+3. Select Enable Subscription. Subscriptions can be made using Paypal.
 
 [![/assets/images/posts/2023/07/enable_cloudflare_saas.png](https://www.eallion.com/assets/images/posts/2023/07/enable_cloudflare_saas.png)](https://www.eallion.com/assets/images/posts/2023/07/enable_cloudflare_saas.png)
 
-### 添加自Definition域名
+### Add custom domain name
 
-订阅成功后，先添加 `回退源`：`images.example.com`，这个回源域名is绑定in R2 上's 自Definition域名。
+After the subscription is successful, first add `回退源`:`images.example.com`. This return-to-origin domain name is bound in R2's self-defined domain name.
 
 [![/assets/images/posts/2023/07/cf_callback_hostname.png](https://www.eallion.com/assets/images/posts/2023/07/cf_callback_hostname.png)](https://www.eallion.com/assets/images/posts/2023/07/cf_callback_hostname.png)
 
-然后点击 `添加自Definition主机名` ，填入 CDN 域名，如 `images.eallion.com` ，Validation方式推荐 TXT Validation。
+Then click `添加自Definition主机名` and fill in the CDN domain name, such as `images.eallion.com`. The recommended validation method is TXT Validation.
 
 [![/assets/images/posts/2023/07/add_custom_hostname.png](https://www.eallion.com/assets/images/posts/2023/07/add_custom_hostname.png)](https://www.eallion.com/assets/images/posts/2023/07/add_custom_hostname.png)
 
-添加后，需要Validation域名，去自己's 域名解析控制台，如 DNSPod ，添加 2 条 TXT 记录。
-等待 `证书State` 和 `主机名State` 都变成 `有效`。
+After adding, you need to validate the domain name. Go to your own domain name resolution console, such as DNSPod, and add 2 TXT records.
+Wait for both `证书State` and `主机名State` to become `有效`.
 
 [![/assets/images/posts/2023/07/cf_dns_txt_records.png](https://www.eallion.com/assets/images/posts/2023/07/cf_dns_txt_records.png)](https://www.eallion.com/assets/images/posts/2023/07/cf_dns_txt_records.png)
 
-### 解析 CNAME
+### Parse CNAME
 
-`回退源State` `证书State` 和 `主机名State` 都变成 `有效` 后，就去自己's 域名解析控制台添加 CNAME 解析。
-把用于生产环境's  `images.eallion.com` CNAME 指向 `images.example.com`。
+After `回退源State` `证书State` and `主机名State` become `有效`, go to your own domain name resolution console to add CNAME resolution.
+Point the production environment's `images.eallion.com` CNAME to `images.example.com`.
 
 [![/assets/images/posts/2023/07/dns_cname_records.png](https://www.eallion.com/assets/images/posts/2023/07/dns_cname_records.png)](https://www.eallion.com/assets/images/posts/2023/07/dns_cname_records.png)
 
-一般's 教程到这里就结束了。
-但is这样isVisit不了 R2 里面's 资源's 。
-最重要's 一步，用 Worker Proxy R2。
+Normally's tutorial ends here.
+But this way isVisit doesn't work with R2's resources.
+The most important step, use Worker Proxy R2.
 
-### 新建 Worker Proxy R2
+### Create new Worker Proxy R2
 
-官方有documentation介绍怎么通过 Worker Visit R2：
-Use R2 from Workers：https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
+There is official documentation on how to pass Worker Visit R2:
+Use R2 from Workers:https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
 
-按照documentation教程一步一步来就可以了。
-如果比较懒，也不想鉴权。那用我's 精简代码就可以了。
-直接去掉了 `DELETE` 和 `PUT` 's 代码，只保留了 `GET`。
-不用 Wrangle CLI scripts也可以in后台手动创建 Worker。
+Just follow the documentation tutorial step by step.
+If you are lazy, you don’t want to authenticate. Then just use my streamlined code.
+The `DELETE` and `PUT` 's codes are directly removed, leaving only `GET`.
+Workers can be created manually in the background without Wrangle CLI scripts.
 
-左侧切换到 `Worker 和 Pages` 分栏，`创建应用程序`，随便取个名字，随便选个模板Deployment就可以了，后面再改代码。
+Switch to the `Worker 和 Pages` column on the left, `创建应用程序`, just give it a name, choose a template Deployment, and change the code later.
 
-点击 `快速edit` 把以下代码复制到 `worker.js` 中，保存并Deployment：
+Click `快速edit` to copy the following code to `worker.js`, save and Deployment:
 
 ```javascript
 var worker_default = {
@@ -126,40 +121,40 @@ var worker_default = {
 export { worker_default as default };
 ```
 
-Deployment成功后返回。
-in当前 Worker 's 设置中，`Variable` `R2 存储桶绑定` 添加绑定：
+Returned after Deployment is successful.
+In the current Worker 's settings, `Variable` `R2 存储桶绑定` add binding:
 
 - `Variablename`：`MY_BUCKET`
-- `R2 存储桶`：选择yes应's 桶
+- `R2 存储桶`: Select yes should's bucket
 
 [![/assets/images/posts/2023/07/r2_binding.png](https://www.eallion.com/assets/images/posts/2023/07/r2_binding.png)](https://www.eallion.com/assets/images/posts/2023/07/r2_binding.png)
 
-### Workers 路由
+### Workers routing
 
-回到 Zones 中，选择域名，添加 Workers 路由：
+Go back to Zones, select the domain name, and add Workers routing:
 
-- `路由`：一定要填生产环境用's 域名，不要填 Cloudflare 's 源域名，如：`images.eallion.com/*`；
-- `Worker`：选择上一步创建's  Worker；
-- `环境`：Production。
+- `路由`: Be sure to fill in the production environment's domain name, do not fill in Cloudflare's source domain name, such as: `images.eallion.com/*`;
+- `Worker`: Select the previous step to create's Worker;
+- `环境`：Production.
 
 [![/assets/images/posts/2023/07/r2_worker_router.png](https://www.eallion.com/assets/images/posts/2023/07/r2_worker_router.png)](https://www.eallion.com/assets/images/posts/2023/07/r2_worker_router.png)
 
-至此，你应该就能以 CNAME 's 方式Visit Cloudflare R2 里面's 内容了。
+At this point, you should be able to visit Cloudflare R2's content using CNAME's method.
 
 - https://images.eallion.com/eallion.jpg
 
 ### Worker Proxy Backblaze B2
 
-其实有 R2 就够了，但is可能会因为各种各样's 原因需要用到 B2。
+In fact, R2 is enough, but B2 may be needed for various reasons.
 
-其实is差不多's 。
+Actually it's pretty much the same.
 
-Backblaze 官方也有documentation介绍如何通过 Cloudflare Worker Visit B2。
-Docs：[Integrate Cloudflare Workers with Backblaze B2](https://www.backblaze.com/docs/cloud-storage-integrate-cloudflare-workers-with-backblaze-b2)
+Backblaze also has official documentation introducing how to visit B2 through Cloudflare Worker.
+Docs: [Integrate Cloudflare Workers with Backblaze B2](https://www.backblaze.com/docs/cloud-storage-integrate-cloudflare-workers-with-backblaze-b2)
 
-简要介绍一下怎么做吧：（还is建议看Official Docs比较好。）
+Let’s briefly introduce how to do it: (It is also recommended to read Official Docs.)
 
-##### 1、新建 Cloudflare Worker，`worker.js`
+##### 1. Create a new Cloudflare Worker, `worker.js`
 
 ```javascript
 (() => {
@@ -603,7 +598,7 @@ Docs：[Integrate Cloudflare Workers with Backblaze B2](https://www.backblaze.co
 })();
 ```
 
-##### 2、设置 Worker Environment Variables
+##### 2. Set Worker Environment Variables
 
 - `ALLOW_LIST_BUCKET`：true
 - `B2_APPLICATION_KEY`：K004WJZP11111111111111111111Q
@@ -611,52 +606,52 @@ Docs：[Integrate Cloudflare Workers with Backblaze B2](https://www.backblaze.co
 - `B2_ENDPOINT`：s3.us-west-004.backblazeb2.com
 - `BUCKET_NAME`：eallion-static
 
-APP KEY 和 ID 要去 Backblaze 后台generates，`B2_ENDPOINT` 要去自己's  B2 存储桶里View。
+The APP KEY and ID need to be generated in the Backblaze backend, and `B2_ENDPOINT` needs to be viewed in its own B2 bucket.
 
-##### 3、手动添加 CNAME 解析到 B2
+##### 3. Manually add CNAME to resolve to B2
 
 [![/assets/images/posts/2023/07/b2_cf_record.png](https://www.eallion.com/assets/images/posts/2023/07/b2_cf_record.png)](https://www.eallion.com/assets/images/posts/2023/07/b2_cf_record.png)
 
-- `类型`：选 `CNAME`
-- `name`：用于 `回退源`，如：`b2.example.com` ，就填入 `b2`
-- `内容`：填入自己 B2 存储桶分配's  `S3 URL` ，有's 教程这里written byis `Friendly URL` ，没必要，还要多一步反代。
+- `类型`: Select `CNAME`
+- `name`: used for `回退源`, such as: `b2.example.com`, fill in `b2`
+- `内容`: Fill in your own B2 bucket allocation's `S3 URL`, there's a tutorial here written byis `Friendly URL`, it's not necessary, there is one more step to reverse generation.
 
 [![/assets/images/posts/2023/07/backblaze_url.png](https://www.eallion.com/assets/images/posts/2023/07/backblaze_url.png)](https://www.eallion.com/assets/images/posts/2023/07/backblaze_url.png)
 
-##### 4、Configuration回退源
+##### 4. Configuration fallback source
 
-`Zones` 中's 域名为 Backblaze B2 设置's  CNAME nameis什么，那回退源就填什么，如：`b2.example.com`。
-参考前文即可。
+`Zones`'s domain name is Backblaze B2. Set's CNAME name is whatever it is, then fill in whatever the fallback source is, such as: `b2.example.com`.
+Just refer to the previous article.
 
-##### 5、Configuration自Definition主机名
+##### 5. Configuration self-defined host name
 
-参考前文。
+Refer to the previous article.
 
-##### 6、Configuration Worker 路由
+##### 6. Configuration Worker routing
 
-- `路由`：一定要填生产环境用's 域名，不要填 Cloudflare 's 源域名；
-- `Worker`：选择上一步创建's  Worker；
-- `环境`：Production。
+- `路由`: Be sure to fill in the production environment's domain name, do not fill in Cloudflare's source domain name;
+- `Worker`: Select the previous step to create's Worker;
+- `环境`：Production.
 
-为 Backblaze B2 添加 Worker 路由与 Cloudflare R2 不同，需要添加 2 条：
+Adding Worker routes for Backblaze B2 is different from Cloudflare R2. You need to add 2 items:
 
-- `b2.example.com/*` 也需要加入 Worker 路由中
+- `b2.example.com/*` also needs to be added to the Worker route
 - `images.eallion.com/*`
 
 :::
 
-CDN 证书自动更换
+CDN certificate automatic replacement
 
-以上算is解决了基本's Issue，但is还有a痛点就is SSL 证书Issue，CF is提供free续签更新永不过期证书's ，但is国内 CDN 厂商一般都需要手动上传自己申请's 证书。。。这个确实不太方便，所以想着能不能找个Solutions：
+The above has solved the basic issue, but there is still a pain point with the SSL certificate issue. CF offers free renewal and update of never-expired certificates, but domestic CDN manufacturers generally need to manually upload their own application's certificates. . . This is really inconvenient, so I was wondering if I could find some solutions:
 
-::: details 自动更新证书scripts
+::: details Automatically update certificate scripts
 
-起因：因为Configuration国内 CDN 基本都is需要手动上传证书，但is我申请's 域名证书都is基本三个月保质期's ，所以就想着写个自动scripts自动更新证书。
-环境：
-1panel（国产面板，自动申请证书，还有其他强大功能，挺方便's ）
+Cause: Because Configuration domestic CDN basically requires manual uploading of certificates, but the domain name certificate I applied for basically has a three-month shelf life, so I thought of writing an automatic script to automatically update the certificate.
+Environment:
+1panel (domestic panel, automatic application for certificates, and other powerful functions, very convenient's)
 
-以我用's 多吉云为例，其他厂家都可以去找到相应's  SDK。
-代码如下：
+I use Duojiyun as an example. Other manufacturers can find the corresponding SDK.
+The code is as follows:
 
 ```python
 from hashlib import sha1
@@ -731,6 +726,6 @@ api = dogecloud_api('/cdn/domain/config.json?domain=cdn.example.com', {
 
 ```
 
-基本Implementation思路就is先Removed现有证书，然后添加读取's 证书，然后上传并激活上传后's 证书，这样就Implementation CDN 证书自动Configuration了。可以利用 1panel 自动定时执行scripts功能每隔a月执行一次，以此更新证书。真is又Implementation了a奇奇怪怪's 使用小技巧 ✊✊✊
+The basic implementation idea is to first remove the existing certificate, then add the read's certificate, then upload and activate the uploaded's certificate, so that the Implementation CDN certificate is automatically configured. You can use 1panel to automatically execute scripts every one month to update the certificate. It's really Implementation again a Qiweiwei's tips ✊✊✊
 
 :::

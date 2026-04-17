@@ -3,20 +3,16 @@ title: "Python data types"
 description: "Python built-in data types reference covering integers, floats, strings, lists, tuples, dictionaries, and sets with common methods and operation examples."
 icon: "list"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/data-types.md)
-</Note>
 
+# Python data types
 
-# Python 数据类型
+Python ships with a rich set of built-in data types for different kinds of data structures and use cases.
 
-Python 内置了丰富's 数据类型，用于处理各种数据结构和场景。
+Official docs: https://docs.python.org/zh-cn/3.12/library/datatypes.html
 
-官方文档: https://docs.python.org/zh-cn/3.12/library/datatypes.html
+## Basic data types
 
-## 基本数据类型
-
-### 数字类型
+### Numeric types
 ```python
 # 整数
 x = 10
@@ -26,7 +22,7 @@ y = 3.14
 z = 1 + 2j
 ```
 
-### 字符串
+### Strings
 ```python
 s = "Hello World"
 s1 = 'Python'
@@ -41,15 +37,15 @@ s.strip()      # 去除首尾空格
 s.replace("Hello", "Hi")  # 替换
 ```
 
-### 布尔类型
+### Booleans
 ```python
 is_valid = True
 is_empty = False
 ```
 
-## 容器类型
+## Container types
 
-### 列表 (List)
+### List
 ```python
 # 可变、有序
 fruits = ["apple", "banana", "cherry"]
@@ -59,14 +55,14 @@ fruits[0]                    # 索引Visit
 fruits[1:3]                  # 切片
 ```
 
-### 元组 (Tuple)
+### Tuple
 ```python
 # 不可变、有序
 point = (10, 20)
 x, y = point  # 解包
 ```
 
-### 集合 (Set)
+### Set
 ```python
 # 无序、不重复
 s1 = {1, 2, 3}
@@ -76,7 +72,7 @@ s1 & s2      # 交集
 s1 - s2      # 差集
 ```
 
-### 字典 (Dict)
+### Dictionary
 ```python
 # 键值yes
 user = {
@@ -91,9 +87,9 @@ user.values()          # 所有值
 user.items()           # 所有键值yes
 ```
 
-## 专用数据类型
+## Specialized data types
 
-### datetime - 日期时间
+### `datetime` - date and time
 ```python
 from datetime import datetime, date, timedelta
 
@@ -107,9 +103,9 @@ now.strftime("%Y-%m-%d %H:%M:%S")
 datetime.strptime("2024-01-01", "%Y-%m-%d")
 ```
 
-### collections - 容器扩展
+### `collections` - container extensions
 
-#### defaultdict
+#### `defaultdict`
 ```python
 from collections import defaultdict
 
@@ -117,7 +113,7 @@ d = defaultdict(list)
 d['key'].append(1)  # 不存在时自动创建空列表
 ```
 
-#### Counter
+#### `Counter`
 ```python
 from collections import Counter
 
@@ -126,7 +122,7 @@ counter = Counter(words)
 counter.most_common(1)  # [('apple', 2)]
 ```
 
-#### deque - 双端队列
+#### `deque` - double-ended queue
 ```python
 from collections import deque
 
@@ -137,7 +133,7 @@ q.pop()          # 右侧删除
 q.popleft()      # 左侧删除
 ```
 
-### enum - 枚举
+### `enum` - enumerations
 ```python
 from enum import Enum
 
@@ -150,7 +146,7 @@ print(Color.RED)      # Color.RED
 print(Color.RED.value)  # 1
 ```
 
-### dataclasses - 数据类
+### `dataclasses` - data classes
 ```python
 from dataclasses import dataclass
 
@@ -163,7 +159,7 @@ class User:
 user = User("张三", 25)
 ```
 
-### typing - type hints
+### `typing` - type hints
 ```python
 from typing import List, Dict, Optional, Union
 
@@ -174,7 +170,7 @@ def get_user(user_id: int) -> Optional[User]:
     return user if user_id > 0 else None
 ```
 
-## 类型转换
+## Type conversion
 
 ```python
 # 转整数
@@ -197,20 +193,20 @@ tuple([1, 2])  # (1, 2)
 set([1, 1, 2]) # {1, 2}
 ```
 
-## 常用操作
+## Common patterns
 
-### 列表推导式
+### List comprehensions
 ```python
 squares = [x**2 for x in range(10)]
 evens = [x for x in range(10) if x % 2 == 0]
 ```
 
-### 字典推导式
+### Dictionary comprehensions
 ```python
 square_dict = {x: x**2 for x in range(5)}
 ```
 
-### 生成器表达式
+### Generator expressions
 ```python
 gen = (x**2 for x in range(10))  # 惰性求值
 ```

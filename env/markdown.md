@@ -3,18 +3,13 @@ title: "Markdown Syntax"
 description: "Markdown syntax reference covering headings, lists, links, images, code blocks, tables, blockquotes, and GFM extensions like task lists."
 icon: "file-lines"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/markdown.md)
-</Note>
-
-
 # Markdown syntax
 
-Markdown is a lightweight markup language，for formatting text。它simple and easy to learn，widely used for document writing、blogs、forums, etc.。
+Markdown is a lightweight markup language for formatting text. It is simple, easy to learn, and widely used for documents, blogs, and forums.
 
 ## Basic Syntax
 
-### title
+### Headings
 
 ```markdown
 # 一级title
@@ -25,7 +20,7 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 ###### 六级title
 ```
 
-### 强调
+### Emphasis
 
 ```markdown
 *斜体* 或 _斜体_
@@ -34,11 +29,11 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 ~~Removed线~~
 ```
 
-效果：*斜体*、**粗体**、***粗斜体***、~~Removed线~~
+Rendered output: *italic*, **bold**, ***bold italic***, ~~strikethrough~~
 
 ### list
 
-#### 无序list
+#### Unordered lists
 
 ```markdown
 - 项目1
@@ -51,7 +46,7 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 + 或者加号
 ```
 
-#### 有序list
+#### Ordered lists
 
 ```markdown
 1. 第一项
@@ -76,7 +71,7 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 [ref]: https://example.com
 ```
 
-### 图片
+### Images
 
 ```markdown
 ![替代文本](image.jpg)
@@ -86,7 +81,7 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 [![图片](image.jpg)](https://example.com)
 ```
 
-### Reference
+### Blockquotes
 
 ```markdown
 > 这is一段Reference
@@ -97,15 +92,15 @@ Markdown is a lightweight markup language，for formatting text。它simple and 
 >>> 第三级
 ```
 
-### 代码
+### Code
 
-#### 行内代码
+#### Inline code
 
 ```markdown
 使用 `反引号` Package裹代码
 ```
 
-#### 代码块
+#### Code blocks
 
 ````markdown
 ```python
@@ -118,7 +113,7 @@ console.log("Hello World");
 ```
 ````
 
-### 分割线
+### Horizontal rules
 
 ```markdown
 ---
@@ -128,31 +123,31 @@ ___
 
 ---
 
-### Table
+### Tables
 
 ```markdown
-| 左yes齐 | 居中 | 右yes齐 |
+| Left aligned | Centered | Right aligned |
 |:-------|:----:|-------:|
-| 内容1  | 内容2 | 内容3 |
+| Content 1 | Content 2 | Content 3 |
 | 内容4  | 内容5 | 内容6 |
 ```
 
-| 左yes齐 | 居中 | 右yes齐 |
+| Left aligned | Centered | Right aligned |
 |:-------|:----:|-------:|
-| 内容1  | 内容2 | 内容3 |
+| Content 1 | Content 2 | Content 3 |
 
-### Tasklist
+### Task lists
 
 ```markdown
 - [x] FinishedTask
-- [ ] 未完成Task
+- [ ] Unfinished task
 - [ ] 另aTask
 ```
 
 - [x] FinishedTask
-- [ ] 未完成Task
+- [ ] Unfinished task
 
-### 脚注
+### Footnotes
 
 ```markdown
 这is一段文字[^1]
@@ -162,9 +157,9 @@ ___
 
 ## Github Flavored Markdown (GFM)
 
-GitHub yes Markdown 进行了Extension，增加了一些Features。
+GitHub extends Markdown with several extra features.
 
-### syntax高亮
+### Syntax highlighting
 
 ````markdown
 ```python
@@ -173,7 +168,7 @@ def hello():
 ```
 ````
 
-### 表情符号
+### Emoji
 
 ```markdown
 :smile: :heart: :+1: :rocket:
@@ -181,64 +176,64 @@ def hello():
 
 :smile: :heart: :+1: :rocket:
 
-[表情符号list](https://github.com/ikatyang/emoji-cheat-sheet)
+[Emoji list](https://github.com/ikatyang/emoji-cheat-sheet)
 
-### @提及和#Reference
+### @mentions and issue references
 
 ```markdown
 @username
 #123
 ```
 
-### 自动Link
+### Automatic links
 
-GitHub 会自动将 URL 转为Link：
+GitHub automatically converts URLs into links:
 ```markdown
 https://github.com
 ```
 
-### Diff 代码块
+### Diff code blocks
 
 ````markdown
 ```diff
-- Removed's 行
-+ 添加's 行
+- Removed line
++ Added line
 ```
 ````
 
-### 折叠内容
+### Collapsible content
 
 ```markdown
 <details>
 <summary>点击展开</summary>
 
-这里is隐藏's 内容
+This is hidden content
 
 </details>
 ```
 
-### Alert Warning框（GitHub新Features）
+### Alert boxes (newer GitHub feature)
 
 ```markdown
 > [!NOTE]
-> 有用's 信息，用户应该知道。
+> Useful information users should know.
 
 > [!TIP]
-> 帮助用户更成功's 建议。
+> Suggestions that help users succeed.
 
 > [!IMPORTANT]
-> 用户成功's 关键信息。
+> Critical information for successful use.
 
 > [!WARNING]
-> 需要用户立即注意's 紧急信息。
+> Urgent information that needs immediate attention.
 
 > [!CAUTION]
-> 行动's 负面潜in后果。
+> Potential negative consequences of an action.
 ```
 
-### 数学公式
+### Mathematical formulas
 
-使用 LaTeX syntax：
+Use LaTeX syntax:
 
 ```markdown
 行内公式：$E = mc^2$
@@ -249,7 +244,7 @@ $$
 $$
 ```
 
-### Mermaid 图表
+### Mermaid diagrams
 
 ````markdown
 ```mermaid
@@ -261,11 +256,11 @@ graph TD
 ```
 ````
 
-## 高级技巧
+## Advanced tips
 
-### HTML 嵌入
+### HTML embedding
 
-Markdown supports直接使用 HTML：
+Markdown also supports raw HTML directly:
 
 ```markdown
 <div align="center">
@@ -277,9 +272,9 @@ Markdown supports直接使用 HTML：
 <mark>高亮文本</mark>
 ```
 
-### 字符转义
+### Escaping characters
 
-使用反斜杠转义特殊字符：
+Use backslashes to escape special characters:
 
 ```markdown
 \* 不is斜体
@@ -287,7 +282,7 @@ Markdown supports直接使用 HTML：
 \[ 不isLink
 ```
 
-### 锚点Link
+### Anchor links
 
 ```markdown
 [跳转到title](#titlename)
@@ -295,14 +290,14 @@ Markdown supports直接使用 HTML：
 # Chinese title会被转为拼音或其他形式
 ```
 
-### 徽章 Badge
+### Badges
 
 ```markdown
 ![GitHub stars](https://img.shields.io/github/stars/user/repo)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ```
 
-### 目录generates
+### Table of contents
 
 ```markdown
 [TOC]
@@ -310,26 +305,26 @@ Markdown supports直接使用 HTML：
 # 某些Editor Supportautomatically generates目录
 ```
 
-## 常用Tool
+## Common tools
 
-- **edit器**：Typora, VS Code, Obsidian
-- **in线edit**：StackEdit, Dillinger
-- **格式化**：Prettier, markdownlint
-- **Transformation**：Pandoc (Markdown to PDF/Word/HTML)
+- **Editors**: Typora, VS Code, Obsidian
+- **Online editors**: StackEdit, Dillinger
+- **Formatting**: Prettier, markdownlint
+- **Conversion**: Pandoc (Markdown to PDF/Word/HTML)
 
 ## Best Practices
 
-1. **保持简洁**：Markdown 's 优势in于简单
-2. **使用title**：合理's 层级结构
-3. **代码高亮**：指定语言提升可读性
-4. **Image Optimization**：控制图片大小
-5. **预览检查**：编写后及时预览效果
-6. **versions控制**：Markdown 适合 Git 管理
-7. **Link检查**：确保Link有效
+1. **Keep it simple**: Markdown works best when it stays lightweight.
+2. **Use headings well**: keep the hierarchy clear.
+3. **Use code highlighting**: specify languages for better readability.
+4. **Optimize images**: keep image sizes under control.
+5. **Preview often**: check the rendered result after writing.
+6. **Version control**: Markdown works very well with Git.
+7. **Check links**: make sure all links work.
 
 ## References
 
-- [Markdown 官方教程](https://www.markdownguide.org/)
+- [Markdown Guide](https://www.markdownguide.org/)
 - [GitHub Markdown documentation](https://docs.github.com/zh/get-started/writing-on-github)
 - [CommonMark Specification](https://commonmark.org/)
 - [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)

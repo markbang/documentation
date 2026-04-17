@@ -3,30 +3,26 @@ title: "Xizhi"
 description: "Notification push services including Server酱 for WeChat alerts, with API setup, Python requests integration, and Markdown message delivery."
 icon: "bell"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/Xizhi.md)
-</Note>
 
+# Message push services
 
-# MessagePush服务
+Message push services deliver notifications, alerts, and other information to different devices in real time. They are commonly used for monitoring alerts, scheduled reminders, and system notifications.
 
-MessagePush服务用于将Notification、alerts and other info to various terminals in real-time，commonly used for monitoring alerts、scheduled reminders、系统Notification等场景。
+## ServerChan
 
-## Server 酱
+[ServerChan](https://sct.ftqq.com/) is a free WeChat notification service.
 
-[Server酱](https://sct.ftqq.com/) is afree's 微信MessagePush服务。
-
-### 特点
-- 📱 push to WeChat
-- 🆓 free额度充足
-- 🔧 simple and easy to use
-- 📊 supports Markdown
+### Features
+- 📱 Pushes to WeChat
+- 🆓 Generous free quota
+- 🔧 Simple to use
+- 📊 Supports Markdown
 
 ### Usage
 
-1. Visit [Server酱官网](https://sct.ftqq.com/) 登录
-2. 扫码绑定微信
-3. 获取 SendKey
+1. Visit the [ServerChan website](https://sct.ftqq.com/) and sign in.
+2. Bind your WeChat account by scanning the QR code.
+3. Get your `SendKey`.
 
 ```python
 import requests
@@ -54,29 +50,29 @@ curl -X POST "https://sctapi.ftqq.com/YOUR_SENDKEY.send" \
   -d "desp=Testing内容"
 ```
 
-### Use Cases
-- Server Monitoring Alerts
-- 定时TaskNotification
-- 爬虫完成提醒
-- CI/CD builtNotification
+### Use cases
+- Server monitoring alerts
+- Scheduled task notifications
+- Spider completion reminders
+- CI/CD build notifications
 
 ## Bark
 
-[Bark](https://github.com/Finb/Bark) is一款open-source's  iOS MessagePush应用。
+[Bark](https://github.com/Finb/Bark) is an open-source iOS push notification app.
 
-### 特点
-- 📱 仅supports iOS
-- 🔓 free & open-source
-- 🔔 supports自Definition铃声
-- 🎨 supportsIcons和Grouping
-- 🔐 end-to-end encryption
+### Features
+- 📱 iOS only
+- 🔓 Free and open-source
+- 🔔 Supports custom sounds
+- 🎨 Supports icons and grouping
+- 🔐 End-to-end encryption
 
 ### Installation
-in App Store search forDownload Bark
+Search for Bark in the App Store and install it.
 
 ### Usage
 
-after getting the push address：
+After getting the push address:
 
 ```python
 import requests
@@ -109,7 +105,7 @@ curl -X POST "https://api.day.app/YOUR_KEY" \
   -d '{"title":"title","body":"内容","sound":"alarm"}'
 ```
 
-### 进阶功能
+### Advanced features
 
 ```python
 # with redirect link
@@ -124,14 +120,14 @@ send_bark("重要Notification", "内容", level="timeSensitive")
 
 ## [Telegram Bot](https://core.telegram.org/bots)
 
-Telegram Bot API is功能强大's MessagePush方式。
+The Telegram Bot API is a powerful way to send notifications.
 
-### Create Bot
+### Create a bot
 
-1. in Telegram search for `@BotFather`
-2. send `/newbot` Create Bot
-3. get Bot Token
-4. send `/getid` 给 `@userinfobot` get Chat ID
+1. Search for `@BotFather` in Telegram.
+2. Send `/newbot` to create a bot.
+3. Get the bot token.
+4. Send `/getid` to `@userinfobot` to get your chat ID.
 
 ### Usage
 
@@ -181,7 +177,7 @@ curl -X POST "https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage" \
   -d "text=Hello World"
 ```
 
-### Advanced Features
+### Advanced features
 
 ```python
 # send带Button's Message
@@ -208,28 +204,28 @@ buttons = [
 send_with_buttons(bot, "选择aOperation：", buttons)
 ```
 
-## [息知](https://xz.qqoq.net)
+## [Xizhi](https://xz.qqoq.net)
 
-息知isaaggregated push platform，supports多种Push方式。
+Xizhi is an aggregated push platform that supports multiple notification channels.
 
-### 特点
-- 🔗 aggregates multiple push methods
-- 📱 supports iOS、Android、Web
-- 🆓 free使用
-- 🔔 supports多种Message类型
+### Features
+- 🔗 Aggregates multiple push methods
+- 📱 Supports iOS, Android, and Web
+- 🆓 Free to use
+- 🔔 Supports different message types
 
-### Supported Push Methods
-- iOS/Android App
-- 企业微信
-- 钉钉
-- 飞书
-- 邮件
+### Supported push methods
+- iOS/Android app
+- WeCom
+- DingTalk
+- Feishu
+- Email
 - Webhook
 
 ### Usage
 
-1. 注册并创建应用
-2. 获取Push地址
+1. Register and create an app.
+2. Get the push URL.
 
 ```python
 import requests
@@ -256,14 +252,14 @@ send_xizhi(
 
 ## Comparison
 
-| 服务 | Platform | free | 特点 | Applicable Scenarios |
+| Service | Platform | Free | Strength | Suitable scenarios |
 |------|------|------|------|---------|
-| **Server酱** | 微信 | ✅ | simple and easy to use | 国内用户，微信Notification |
-| **Bark** | iOS | ✅ | open-source，隐私 | iOS 用户 |
-| **Telegram** | cross-platform | ✅ | 功能强大 | 国际用户，需要翻墙 |
-| **息知** | cross-platform | ✅ | 多渠道Aggregation | 企业应用 |
+| **ServerChan** | WeChat | ✅ | Simple and convenient | Domestic users, WeChat notifications |
+| **Bark** | iOS | ✅ | Open-source and privacy-friendly | iOS users |
+| **Telegram** | Cross-platform | ✅ | Very powerful | International users who can access Telegram |
+| **Xizhi** | Cross-platform | ✅ | Multi-channel aggregation | Enterprise or multi-channel use |
 
-## Comprehensive Example
+## Comprehensive example
 
 ```python
 class NotificationManager:
@@ -307,27 +303,27 @@ notifier = NotificationManager()
 notifier.send("系统告警", "CPU 使用率超过 90%", channels=['wechat', 'telegram'])
 ```
 
-## Best Practices
+## Best practices
 
-1. **Choose the Right Service**：根据用户群体和使用场景
-2. **Exception Handling**：Push可能失败，需要捕获Exception
-3. **Rate Limits**：避免频繁Push造成骚扰
-4. **Sensitive Info**：注意不要Push敏感数据
-5. **Multi-channel Backup**：重要Notification使用多个渠道
-6. **Tiered Notifications**：区分普通Notification和紧急告警
+1. **Choose the right service** for your audience and scenario.
+2. **Handle exceptions** because push requests can fail.
+3. **Respect rate limits** to avoid notification spam.
+4. **Avoid sending sensitive information** whenever possible.
+5. **Use multi-channel backup** for important alerts.
+6. **Separate regular notifications from urgent alerts**.
 
-## Use Cases
+## Use cases
 
-- 📊 **监控告警**：服务器、应用性能监控
-- ⏰ **scheduled reminders**：每日报表、定时Task
-- 🔔 **EventNotification**：用户注册、订单变更
-- 🐛 **Error Reports**：系统Exception、bug Notification
-- 📈 **Data Reports**：日报、周报Push
-- 🤖 **自动化Notification**：CI/CD、爬虫完成
+- 📊 **Monitoring alerts**: servers and application performance
+- ⏰ **Scheduled reminders**: daily reports and timed tasks
+- 🔔 **Event notifications**: user registration or order changes
+- 🐛 **Error reporting**: exceptions and bug alerts
+- 📈 **Data reports**: daily or weekly summaries
+- 🤖 **Automation notifications**: CI/CD and spider completion
 
 ## References
 
-- [Server酱documentation](https://sct.ftqq.com/sendkey)
+- [ServerChan documentation](https://sct.ftqq.com/sendkey)
 - [Bark GitHub](https://github.com/Finb/Bark)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
-- [息知官网](https://xz.qqoq.net)
+- [Xizhi website](https://xz.qqoq.net)

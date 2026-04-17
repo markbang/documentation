@@ -3,32 +3,28 @@ title: "HTTPX"
 description: "HTTPX is a modern Python HTTP client replacing requests, with sync and async APIs, native HTTP/2 support, connection pooling, and fine-grained timeout control."
 icon: "globe"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/httpx.md)
-</Note>
-
 
 # HTTPX
 
-HTTPX 是一个功能完整's  Python HTTP 客户端库，支持同步和异步请求，是 requests 's 现代替代品。
+HTTPX is a full-featured Python HTTP client library with both synchronous and asynchronous APIs. It is often treated as the modern alternative to `requests`.
 
-## 特性
+## Features
 
-- **同步和异步**: 统一's  API，支持两种模式
-- **HTTP/2 支持**: 性能更优
-- **连接池**: 自动管理连接复用
-- **超时控制**: 细粒度's 超时设置
-- **type hints**: 完整's 类型标注
+- **Sync and async APIs**: one consistent interface for both styles
+- **HTTP/2 support**: better performance where supported
+- **Connection pooling**: automatic connection reuse
+- **Timeout control**: fine-grained timeout settings
+- **Type hints**: complete type annotations
 
-## 安装
+## Installation
 
 ```bash
 pip install httpx
 ```
 
-## 同步请求
+## Synchronous requests
 
-### 基本用法
+### Basic usage
 
 ```python
 import httpx
@@ -51,7 +47,7 @@ headers = {'Authorization': 'Bearer token'}
 response = httpx.get('https://api.example.com/user', headers=headers)
 ```
 
-### 使用 Client
+### Using `Client`
 
 ```python
 # 复用连接
@@ -60,9 +56,9 @@ with httpx.Client() as client:
     r2 = client.get('https://example.com/api')
 ```
 
-## 异步请求
+## Asynchronous requests
 
-### 基本用法
+### Basic usage
 
 ```python
 import httpx
@@ -77,7 +73,7 @@ async def fetch_data():
 data = asyncio.run(fetch_data())
 ```
 
-### 并发请求
+### Concurrent requests
 
 ```python
 async def fetch_multiple():
@@ -90,9 +86,9 @@ async def fetch_multiple():
         return [r.json() for r in responses]
 ```
 
-## 高级功能
+## Advanced features
 
-### 超时设置
+### Timeout settings
 
 ```python
 # 全局超时
@@ -103,7 +99,7 @@ response = httpx.get('https://example.com', timeout=timeout)
 response = httpx.get('https://example.com', timeout=30.0)
 ```
 
-### 认证
+### Authentication
 
 ```python
 # Basic Auth
@@ -115,7 +111,7 @@ headers = {'Authorization': f'Bearer {token}'}
 response = httpx.get('https://api.example.com', headers=headers)
 ```
 
-### 文件上传
+### File uploads
 
 ```python
 files = {'file': open('report.pdf', 'rb')}
@@ -129,7 +125,7 @@ files = [
 response = httpx.post('https://api.example.com/upload', files=files)
 ```
 
-### 流式下载
+### Streaming downloads
 
 ```python
 with httpx.stream('GET', 'https://example.com/large-file.zip') as r:
@@ -138,7 +134,7 @@ with httpx.stream('GET', 'https://example.com/large-file.zip') as r:
             f.write(chunk)
 ```
 
-### Cookie 管理
+### Cookie management
 
 ```python
 cookies = {'session_id': 'abc123'}
@@ -150,7 +146,7 @@ with httpx.Client(cookies=cookies) as client:
     client.get('https://example.com/page2')
 ```
 
-### 代理设置
+### Proxy settings
 
 ```python
 proxies = {
@@ -160,7 +156,7 @@ proxies = {
 response = httpx.get('https://example.com', proxies=proxies)
 ```
 
-### 重试机制
+### Retry handling
 
 ```python
 import httpx
@@ -171,7 +167,7 @@ client = httpx.Client(transport=transport)
 response = client.get('https://example.com')
 ```
 
-## 响应处理
+## Response handling
 
 ```python
 response = httpx.get('https://api.example.com/data')
@@ -195,22 +191,22 @@ print(response.headers['content-type'])
 response.raise_for_status()  # 4xx/5xx 抛出异常
 ```
 
-## 与 requests yes比
+## Compared with `requests`
 
-| 特性 | requests | httpx |
+| Feature | requests | httpx |
 |------|----------|-------|
-| 同步请求 | ✅ | ✅ |
-| 异步请求 | ❌ | ✅ |
+| Synchronous requests | ✅ | ✅ |
+| Asynchronous requests | ❌ | ✅ |
 | HTTP/2 | ❌ | ✅ |
-| type hints | 部分 | 完整 |
-| 维护状态 | 活跃 | 活跃 |
+| Type hints | Partial | Complete |
+| Maintenance status | Active | Active |
 
-## 最佳实践
+## Best practices
 
-1. **使用 Client 复用连接**: 提升性能
-2. **设置合理超时**: 避免请求挂起
-3. **异步场景优先**: 高并发时性能更好
-4. **Error handling**: 捕获异常并重试
+1. **Reuse connections with `Client`** for better performance.
+2. **Set sensible timeouts** to avoid hanging requests.
+3. **Prefer async in high-concurrency scenarios**.
+4. **Handle errors explicitly** and retry where appropriate.
 
 ```python
 import httpx
@@ -228,7 +224,7 @@ async def safe_fetch(url: str, max_retries: int = 3):
             await asyncio.sleep(2 ** attempt)
 ```
 
-## 参考资源
+## References
 
-- 官方文档: https://www.python-httpx.org/
+- Official docs: https://www.python-httpx.org/
 - GitHub: https://github.com/encode/httpx

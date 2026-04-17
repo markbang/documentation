@@ -3,20 +3,16 @@ title: "PyTorch"
 description: "PyTorch deep learning framework guide covering CPU and GPU installation, tensor creation and operations, automatic differentiation, and neural network basics."
 icon: "fire"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/PyTorch.md)
-</Note>
-
 
 # PyTorch
 
-PyTorch 是一个开源's 深度学习框架，由 Facebook AI Research 开发，广泛应用于学术研究和工业界。
+PyTorch is an open-source deep learning framework developed by Facebook AI Research and widely used in both academic research and industry.
 
-## 安装
+## Installation
 
-### 自动安装
+### Automatic installation
 
-Visit官网选择配置: https://pytorch.org/get-started/locally/
+Choose the right command from the official website: https://pytorch.org/get-started/locally/
 
 ```bash
 # CPU 版本
@@ -26,11 +22,11 @@ pip install torch torchvision torchaudio
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 ```
 
-### 手动安装 GPU 版本
+### Manual GPU installation
 
-下载地址: https://download.pytorch.org/whl/torch/
+Download page: https://download.pytorch.org/whl/torch/
 
-需要下载三个包（注意 Python 版本和 CUDA 版本）:
+You need to download three packages, making sure the Python and CUDA versions match:
 - `torch-2.4.1+cu124-cp312-cp312-win_amd64.whl`
 - `torchvision-0.19.1+cu124-cp312-cp312-win_amd64.whl`
 - `torchaudio-2.4.1+cu124-cp312-cp312-win_amd64.whl`
@@ -41,7 +37,7 @@ pip install torchvision-0.19.1+cu124-cp312-cp312-win_amd64.whl
 pip install torchaudio-2.4.1+cu124-cp312-cp312-win_amd64.whl
 ```
 
-### 验证安装
+### Verify the installation
 
 ```python
 import torch
@@ -51,9 +47,9 @@ print(torch.cuda.is_available())  # True 表示 GPU 可用
 print(torch.cuda.get_device_name(0))  # 显示 GPU Name
 ```
 
-## 基础概念
+## Basic concepts
 
-### Tensor 张量
+### Tensors
 
 ```python
 import torch
@@ -76,7 +72,7 @@ if torch.cuda.is_available():
     x = x.to('cuda')
 ```
 
-### 自动求导
+### Automatic differentiation
 
 ```python
 # 需要梯度's 张量
@@ -89,9 +85,9 @@ z.backward()
 print(x.grad)  # 梯度: [2.0, 4.0]
 ```
 
-## 构建神经网络
+## Building neural networks
 
-### 简单模型
+### Simple model
 
 ```python
 import torch.nn as nn
@@ -112,7 +108,7 @@ class SimpleNet(nn.Module):
 model = SimpleNet()
 ```
 
-### 卷积神经网络
+### Convolutional neural network
 
 ```python
 class CNN(nn.Module):
@@ -139,7 +135,7 @@ class CNN(nn.Module):
         return x
 ```
 
-## 训练模型
+## Training a model
 
 ```python
 import torch.optim as optim
@@ -168,9 +164,9 @@ for epoch in range(10):
             print(f'Epoch: {epoch}, Loss: {loss.item()}')
 ```
 
-## 数据加载
+## Data loading
 
-### Dataset 和 DataLoader
+### `Dataset` and `DataLoader`
 
 ```python
 from torch.utils.data import Dataset, DataLoader
@@ -190,7 +186,7 @@ dataset = CustomDataset(data, labels)
 dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
 ```
 
-### 图像数据增强
+### Image augmentation
 
 ```python
 from torchvision import transforms
@@ -204,7 +200,7 @@ transform = transforms.Compose([
 ])
 ```
 
-## 保存和加载模型
+## Saving and loading models
 
 ```python
 # 保存模型
@@ -220,9 +216,9 @@ torch.save(model, 'model_complete.pth')
 model = torch.load('model_complete.pth')
 ```
 
-## Jupyter Notebook 配置
+## Jupyter Notebook setup
 
-创建 PyTorch 专用内核:
+Create a dedicated PyTorch kernel:
 
 ```bash
 # 创建虚拟环境
@@ -239,11 +235,11 @@ pip install torch torchvision jupyter ipykernel
 python -m ipykernel install --user --name=pytorch --display-name "Python (PyTorch)"
 ```
 
-参考: https://blog.csdn.net/ccaoshangfei/article/details/126521809
+Reference: https://blog.csdn.net/ccaoshangfei/article/details/126521809
 
-## 常用技巧
+## Useful tips
 
-### 设置随机种子
+### Set the random seed
 
 ```python
 torch.manual_seed(42)
@@ -251,7 +247,7 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed(42)
 ```
 
-### View模型结构
+### Show model structure
 
 ```python
 from torchsummary import summary
@@ -259,7 +255,7 @@ from torchsummary import summary
 summary(model, input_size=(1, 28, 28))
 ```
 
-### 冻结部分层
+### Freeze part of the model
 
 ```python
 # 冻结前两层
@@ -270,9 +266,9 @@ for param in model.fc2.parameters():
     param.requires_grad = True
 ```
 
-## 学习资源
+## Learning resources
 
-- 官方文档: https://pytorch.org/docs/
-- 官方教程: https://pytorch.org/tutorials/
-- 中文文档: https://pytorch-cn.readthedocs.io/
+- Official docs: https://pytorch.org/docs/
+- Official tutorials: https://pytorch.org/tutorials/
+- Chinese docs: https://pytorch-cn.readthedocs.io/
 - GitHub: https://github.com/pytorch/pytorch

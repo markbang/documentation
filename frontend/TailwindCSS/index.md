@@ -3,20 +3,15 @@ title: "Tailwind CSS"
 description: "Tailwind CSS is a utility-first CSS framework for building interfaces with predefined classes, covering installation, responsive design, and theming."
 icon: "palette"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/frontend/TailwindCSS/index.md)
-</Note>
-
-
 ![Tailwindcss6](https://cdn.bangwu.top/img/Tailwindcss6.png)
 
 # Tailwind CSS
 
-Tailwind CSS is a功能类优先's  CSS Frameworks，通过组合原子化's Tool类来build界面。
+Tailwind CSS is a utility-first CSS framework for building interfaces by combining atomic utility classes.
 
 ## Core Philosophy
 
-不同于传统's 语义化 CSS Frameworks，Tailwind 提供底层's Tool类，让你直接in HTML 中编写样式。
+Unlike traditional semantic CSS frameworks, Tailwind provides low-level utility classes so you can style directly in HTML.
 
 ```html
 <!-- traditional approach -->
@@ -73,7 +68,7 @@ npx tailwindcss init -p
 
 ## Common Utility Classes
 
-### 布局
+### Layout
 
 ```html
 <!-- Flexbox -->
@@ -115,7 +110,7 @@ npx tailwindcss init -p
 </div>
 ```
 
-### 尺寸
+### Sizing
 
 ```html
 <!-- Width -->
@@ -130,7 +125,7 @@ npx tailwindcss init -p
 <div class="min-h-screen">最小 100vh</div>
 ```
 
-### 颜色
+### Colors
 
 ```html
 <!-- 文字颜色 -->
@@ -168,7 +163,7 @@ npx tailwindcss init -p
 <p class="leading-loose">宽松行高</p>
 ```
 
-### 边框和圆角
+### Borders and border radius
 
 ```html
 <!-- 边框 -->
@@ -182,7 +177,7 @@ npx tailwindcss init -p
 <div class="rounded-full">全圆角</div>
 ```
 
-### 阴影
+### Shadows
 
 ```html
 <div class="shadow">默认阴影</div>
@@ -192,7 +187,7 @@ npx tailwindcss init -p
 <div class="shadow-none">无阴影</div>
 ```
 
-### 透明度
+### Opacity
 
 ```html
 <div class="opacity-0">完全透明</div>
@@ -202,7 +197,7 @@ npx tailwindcss init -p
 
 ## Responsive Design
 
-Tailwind 使用移动优先's Breakpoints系统。
+Tailwind uses a mobile-first breakpoint system.
 
 ```html
 <!-- 默认移动端，md 及以上为桌面端 -->
@@ -347,7 +342,7 @@ module.exports = {
 
 ### Extract Components
 
-使用 `@apply` 提取重复's Tool类：
+Use `@apply` to extract repeated utility classes:
 
 ```css
 .card {
@@ -357,7 +352,7 @@ module.exports = {
 
 ### Conditional Classes
 
-使用 `clsx` 或 `classnames` Library：
+Use the `clsx` or `classnames` library:
 
 ```tsx
 import clsx from 'clsx'
@@ -395,7 +390,7 @@ function Button({ primary, children }) {
 
 ### Production Optimization
 
-Tailwind 会自动移除未使用's 样式。
+Tailwind automatically removes unused styles.
 
 ```javascript
 // tailwind.config.js
@@ -408,20 +403,20 @@ module.exports = {
 
 ### JIT Mode
 
-Just-In-Time 模式默认启用，按需generates样式。
+Just-In-Time mode is enabled by default and generates styles on demand.
 
 ## Editor Support
 
 ### VS Code Extensions
 
-- **Tailwind CSS IntelliSense**：自动补全和预览
-- **Headwind**：自动Sorting类名
+- **Tailwind CSS IntelliSense**: autocomplete and previews
+- **Headwind**: automatically sorts class names
 
 ## FAQ
 
 ### Style Priority
 
-使用 `!` prefix强制应用样式：
+Use the `!` prefix to force a style to apply:
 
 ```html
 <div class="!text-red-500">
@@ -439,17 +434,17 @@ Just-In-Time 模式默认启用，按需generates样式。
 
 ## Best Practices
 
-1. **保持一致性**：遵循设计系统
-2. **避免过度Abstraction**：不要过早Extract Components
-3. **使用响应式**：移动优先设计
-4. **利用Configuration**：Custom Theme颜色和Space
-5. **edit器辅助**：Installation IntelliSense Plugin
-6. **Component化**：复杂Component提取为独立file
+1. **Stay consistent** and follow the design system.
+2. **Avoid over-abstraction** and do not extract components too early.
+3. **Use responsive design** with a mobile-first mindset.
+4. **Use configuration well** for custom theme colors and spacing.
+5. **Use editor support** by installing the IntelliSense extension.
+6. **Componentize complex UI** by extracting it into separate files.
 
 ## References
 
-- [Tailwind CSS 官网](https://tailwindcss.com/)
-- [Tailwind UI](https://tailwindui.com/) - 官方ComponentLibrary
-- [Headless UI](https://headlessui.com/) - 无样式Component
-- [Tailwind Play](https://play.tailwindcss.com/) - in线edit器
+- [Tailwind CSS website](https://tailwindcss.com/)
+- [Tailwind UI](https://tailwindui.com/) - official component library
+- [Headless UI](https://headlessui.com/) - unstyled components
+- [Tailwind Play](https://play.tailwindcss.com/) - online editor
 - [Awesome Tailwind](https://github.com/aniftyco/awesome-tailwindcss)

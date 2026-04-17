@@ -3,102 +3,102 @@ title: "Rclone"
 description: "Rclone is a command-line tool for managing files on 40+ cloud storage services with a unified interface, supporting rsync-like sync, copy, and mount operations."
 icon: "cloud-arrow-up"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/Rclone.md)
-</Note>
-
 
 # Rclone
 
-Rcloneisacommand-line program，for managing cloud storage files。他打Package了provides unified access interfaces for various cloud storage providers。rclonesupports40多种cloud storage products，including object storage、enterprise and consumer file storage、services and standard transfer protocols。Rcloneconforms to Unix POSIX，supportswith common shell tools，比如rsync、cp、 mv、mount、ls、ncdu、tree、rm 和cat等交互。for example, can fill gaps in[CDNSolution里's object storage sync](../env/CDN)
+Rclone is a command-line tool for managing cloud storage files. It provides a unified interface for many providers, including object storage, enterprise and consumer file services, and standard transfer protocols. It follows Unix-style conventions and works well with common shell tools such as `rsync`, `cp`, `mv`, `mount`, `ls`, `ncdu`, `tree`, `rm`, and `cat`.
+
+It is especially useful for tasks like synchronizing objects in a [CDN workflow](../env/CDN).
 
 ## Installation
 
-官网DownloadLink：https://rclone.org/downloads/
+Official download page: https://rclone.org/downloads/
 
-跟着基本教程来就可以Installation好了，Windows用户最好添加以下PathEnvironment Variables，使用更方便。
+Follow the official installation guide. On Windows, adding Rclone to your `PATH` makes it much easier to use.
 
-## 基本Command
+## Basic commands
 
-| Command               | Description                       |
+| Command | Description |
 | ------------------ | -------------------------- |
-| rclone config      | 添加、Removed、管理网盘等Operation |
-| rclone config file | 显示Configuration File's 路径         |
-| rclone config show | 显示Configuration File信息           |
+| rclone config | Add, remove, or manage remotes |
+| rclone config file | Show the path to the config file |
+| rclone config show | Display the current config file contents |
 
 ```shell
 rclone [功能Option] <Configurationname:路径> <Configurationname:路径> [parameters] [parameters]
 ```
 
-## 功能
+## Common operations
 
-| Command          | Description                                                         |
+| Command | Description |
 | ------------- | ------------------------------------------------------------ |
-| rclone copy   | 复制                                                         |
-| rclone move   | 移动，如果要in移动后Removed空源目录，加上 –delete-empty-src-dirs parameters |
-| rclone sync   | 同步：将源目录同步到Goals目录，只更改Goals目录                 |
-| rclone size   | View网盘file占用大小                                         |
-| rclone delete | Removed路径下's file内容                                         |
-| rclone purge  | Removed路径及其所有file内容                                     |
-| rclone mkdir  | 创建目录                                                     |
-| rclone rmdir  | Removed目录                                                     |
-| rclone rmdirs | Removed指定环境下's 空目录。如果加上 –leave-root parameters，则不会Removed根目录 |
-| rclone check  | 检查源和目's 地址数据is否匹配                                 |
-| rclone ls     | 列出指定路径下's 所有's file以及file大小和路径                 |
-| rclone lsl    | 比上面多a显示上传时间                                     |
-| rclone lsd    | 列出指定路径下's 目录                                         |
-| rclone lsf    | 列出指定路径下's 目录和file                                   |
+| rclone copy | Copy files |
+| rclone move | Move files; add `--delete-empty-src-dirs` if you also want to remove empty source directories afterward |
+| rclone sync | Sync the source directory to the target directory; only the target side is modified |
+| rclone size | Show the total size used by a remote path |
+| rclone delete | Delete file contents under a path |
+| rclone purge | Delete a path and everything inside it |
+| rclone mkdir | Create a directory |
+| rclone rmdir | Remove a directory |
+| rclone rmdirs | Remove empty directories in the given path; with `--leave-root`, the root directory is preserved |
+| rclone check | Verify whether source and target data match |
+| rclone ls | List all files with size and path |
+| rclone lsl | Same as above, but also shows upload time |
+| rclone lsd | List directories |
+| rclone lsf | List both directories and files |
 
-## 后面parameters
+## Useful flags
 
-| Command                               | Description                                                         |
+| Command | Description |
 | ---------------------------------- | ------------------------------------------------------------ |
-| -n = –dry-run                      | TestingRun，ViewRclonin实际Run中会进行哪些Operation                |
-| -P = –progress                     | 显示实时传输进度，500mS刷新一次，否则默认1分钟刷新一次       |
-| –cache-chunk-size 5M               | 块's 大小，默认5M越大上传越快，占用内存越多，太大可能会导致进程中断 |
-| –onedrive-chunk-size 100M          | 提高OneDrive上传速度适用于G口宽带服务器（默认为320KB）       |
-| –drive-chunk-size 64M              | 提高Google Drive上传速度适用于G口宽带服务器（默认为8M）      |
-| –cache-chunk-total-size SizeSuffix | 块可以in本地磁盘上占用's 总大小，默认10G                      |
-| –transfers=N                       | 并行file数，默认为4                                          |
-| –config string                     | 指定Configuration File路径，string为Configuration File路径                       |
-| –ignore-errors                     | 跳过Error                                                     |
-| –size-only                         | 根据file大小校验，不校验hash                                 |
-| –drive-server-side-across-configs  | 服务端yes服务端传输                                           |
+| -n = –dry-run | Dry run mode; preview what Rclone would do |
+| -P = –progress | Show live transfer progress, refreshed every 500 ms instead of once per minute |
+| –cache-chunk-size 5M | Chunk size; larger values usually upload faster but use more memory |
+| –onedrive-chunk-size 100M | Increase OneDrive upload speed on high-bandwidth servers |
+| –drive-chunk-size 64M | Increase Google Drive upload speed on high-bandwidth servers |
+| –cache-chunk-total-size SizeSuffix | Total local disk space that chunks may use |
+| –transfers=N | Number of parallel file transfers; default is 4 |
+| –config string | Specify a custom config file path |
+| –ignore-errors | Continue when errors occur |
+| –size-only | Validate only by file size, not by hash |
+| –drive-server-side-across-configs | Use server-side transfer across configs when supported |
 
-## Log
+## Logs
 
-有4个级别's Log记录：`ERROR` `NOTICE` `INFO` `DEBUG`
-默认情况下`Rclon`将generates`ERROR` `NOTICE`Log
+Rclone supports four log levels: `ERROR`, `NOTICE`, `INFO`, and `DEBUG`.
 
-| Command             | Description                                      |
+By default, Rclone emits `ERROR` and `NOTICE` logs.
+
+| Command | Description |
 | ---------------- | ----------------------------------------- |
-| -q               | rclone将仅generatesERRORMessage                   |
-| -v               | rclone将generatesERROR NOTICE INFO Message        |
-| -vv              | rclone 将generatesERROR NOTICE INFO DEBUG Message |
-| –log-level LEVEL | 标志控制Log级别                          |
+| -q | Output only `ERROR` messages |
+| -v | Output `ERROR`, `NOTICE`, and `INFO` messages |
+| -vv | Output `ERROR`, `NOTICE`, `INFO`, and `DEBUG` messages |
+| –log-level LEVEL | Set the log level explicitly |
 
 ## Filtering
 
-| Command     | Description                                                         |
+| Command | Description |
 | -------- | ------------------------------------------------------------ |
-| –exclude | 排除file或目录                                               |
-| –include | Package含file或目录                                               |
-| –filter  | fileFiltering规则，相当于上面两个Option's 其它Usage。Package含规则以+开头，排除规则以-开头 |
+| –exclude | Exclude a file or directory |
+| –include | Include a file or directory |
+| –filter | Use filter rules; rules beginning with `+` include, and rules beginning with `-` exclude |
 
-## Environment Variables
+## Environment variables
 
-`rclone`中's 每个Option都可以通过Environment Variables设置。Environment Variables's name可以通过长Optionname进行Transformation，Removed`--`prefix，更改`-`为`_`大写并添加prefix`RCLONE_`Environment Variables's 优先级会低于Command行Option，即通过Command行追加相应's Option时会OverridingEnvironment Variables设定's 值。
-比如设置最小上传大小`--min-size 50`使用Environment Variablesis`RCLONE_MIN_SIZE=50`当Environment Variables设置后，inCommand行中使用`--min-size 100`那么此时Environment Variables's 值就会被Overriding
+Almost every `rclone` option can also be configured through environment variables. The variable name is derived from the long option name: remove the `--` prefix, replace `-` with `_`, convert to uppercase, and add the `RCLONE_` prefix.
 
-## 常用Environment Variables
+Environment variables have lower priority than command-line flags. For example, if you set `RCLONE_MIN_SIZE=50` but run `rclone` with `--min-size 100`, the command-line value wins.
 
-| Command                          | Description                                                         |
+## Common environment variables
+
+| Command | Description |
 | ----------------------------- | ------------------------------------------------------------ |
-| RCLONE_CONFIG                 | 自DefinitionConfiguration File路径                                           |
-| RCLONE_CONFIG_PASS            | 若 rclone 进行了加密设置，把此Environment Variables设置为密码，可自动解密Configuration File |
-| RCLONE_RETRIES                | 上传失败重试次数，默认 3 次                                  |
-| RCLONE_RETRIES_SLEEP          | 上传失败重试等待时间，默认禁用，单位s、m、h分别代表秒、分钟、小时 |
-| CLONE_TRANSFERS               | 并行上传file数                                               |
-| RCLONE_CACHE_CHUNK_SIZE       | 块's 大小，默认5M                                             |
-| RCLONE_CACHE_CHUNK_TOTAL_SIZE | 块可以in本地磁盘上占用's 总大小，默认10G                      |
-| RCLONE_IGNORE_ERRORS=true     | 跳过Error                                                     |
+| RCLONE_CONFIG | Custom config file path |
+| RCLONE_CONFIG_PASS | Password used to decrypt an encrypted config file |
+| RCLONE_RETRIES | Number of retries after upload failure; default is 3 |
+| RCLONE_RETRIES_SLEEP | Delay between retries; suffixes `s`, `m`, and `h` mean seconds, minutes, and hours |
+| CLONE_TRANSFERS | Number of parallel uploads |
+| RCLONE_CACHE_CHUNK_SIZE | Chunk size |
+| RCLONE_CACHE_CHUNK_TOTAL_SIZE | Total local space available for chunks |
+| RCLONE_IGNORE_ERRORS=true | Skip errors |

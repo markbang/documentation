@@ -3,11 +3,6 @@ title: "Docker"
 description: "Docker containerization guide covering image building, container creation with port mapping, volume mounting for persistence, and CLI commands."
 icon: "container-storage"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/env/docker.md)
-</Note>
-
-
 # Docker
 
 Docker is an open-sourceapplication container engine，lets developers package apps and dependencies into portable containers。
@@ -24,9 +19,9 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 
 ## Basic Concepts
 
-- **镜像 (Image)**：只读's 模板，Package含Run容器所需's file系统
-- **容器 (Container)**：镜像's Run实例
-- **仓Library (Repository)**：存储镜像's 地方，如 Docker Hub
+- **Image**: a read-only template containing the filesystem needed to run a container
+- **Container**: a running instance of an image
+- **Repository**: a place to store images, such as Docker Hub
 
 ## Common Commands
 
@@ -146,7 +141,7 @@ docker network connect mynet mynginx
 
 ## Dockerfile
 
-Dockerfile is用于Build Image's 文本file。
+A Dockerfile is a text file used to build an image.
 
 ### Basic Structure
 
@@ -176,19 +171,19 @@ EXPOSE 8000
 CMD ["python", "app.py"]
 ```
 
-### 常用Directives
+### Common directives
 
-- FROM：指定基础镜像
-- WORKDIR：设置工作目录
-- COPY：复制file到镜像
-- ADD：复制file，supportsURL和自动解压
-- RUN：执行Command（build时）
-- CMD：容器启动时执行's Command
-- ENTRYPOINT：入口点，不会被docker runOverriding
-- ENV：设置Environment Variables
-- EXPOSE：Declaration端口
-- VOLUME：Definition数据卷
-- USER：指定Run用户
+- FROM: specify the base image
+- WORKDIR: set the working directory
+- COPY: copy files into the image
+- ADD: copy files, with support for URLs and automatic extraction
+- RUN: execute commands during the build
+- CMD: the default command run when the container starts
+- ENTRYPOINT: the entry point, not replaced by normal `docker run` arguments
+- ENV: set environment variables
+- EXPOSE: declare ports
+- VOLUME: define a data volume
+- USER: specify the runtime user
 - ARG：buildparameters
 
 ### Multi-stage Build
@@ -211,7 +206,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## .dockerignore
 
-类似 .gitignore，用于排除不需要复制到镜像's file。
+This works like `.gitignore`, excluding files that do not need to be copied into the image.
 
 ```
 node_modules
@@ -224,7 +219,7 @@ __pycache__
 
 ## Image Registry Mirror
 
-### Configuration镜像源（Linux）
+### Configure image mirrors (Linux)
 
 edit /etc/docker/daemon.json：
 
@@ -237,7 +232,7 @@ edit /etc/docker/daemon.json：
 }
 ```
 
-重启 Docker：
+Restart Docker:
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart docker
@@ -268,13 +263,13 @@ docker run -d --restart=always nginx
 docker run -d --memory="512m" --cpus="1.5" nginx
 ```
 
-### View容器IP
+### View container IP
 
 ```bash
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
 ```
 
-## 常见应用Deployment
+## Common deployment examples
 
 ### Nginx
 

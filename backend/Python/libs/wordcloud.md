@@ -3,26 +3,22 @@ title: "WordCloud"
 description: "WordCloud is a Python library for word cloud visualizations, covering custom shape masks, color schemes, Chinese segmentation with jieba."
 icon: "cloud"
 ---
-<Note icon="language" title="Original Chinese Content">
-This page contains content originally written in Chinese. Some technical terms and explanations are best understood in their original language. [View Chinese version →](/zh/backend/Python/libs/wordcloud.md)
-</Note>
 
+# WordCloud
 
-# WordCloud 词云生成
+WordCloud is a Python library for generating word cloud images. It can turn text data into visually appealing word clouds.
 
-WordCloud 是一个用于生成词云图's  Python 库，可以将文本数据可视化为美观's 词云图。
-
-## 安装
+## Installation
 
 ```bash
 pip install wordcloud
 ```
 
-中文字体支持需要额外配置字体路径。
+Chinese text support requires an additional font path configuration.
 
-## 基本使用
+## Basic usage
 
-### 简单词云
+### Simple word cloud
 
 ```python
 from wordcloud import WordCloud
@@ -41,7 +37,7 @@ plt.show()
 wordcloud.to_file('wordcloud.png')
 ```
 
-### 从文件读取
+### Read from a file
 
 ```python
 with open('text.txt', 'r', encoding='utf-8') as f:
@@ -54,9 +50,9 @@ wordcloud = WordCloud(
 ).generate(text)
 ```
 
-## 自定义样式
+## Custom styles
 
-### 基本Parameters
+### Basic parameters
 
 ```python
 wordcloud = WordCloud(
@@ -73,7 +69,7 @@ wordcloud = WordCloud(
 )
 ```
 
-### 配色方案
+### Color schemes
 
 ```python
 # 使用 matplotlib 配色
@@ -85,9 +81,9 @@ wordcloud = WordCloud(
 )
 ```
 
-## 高级功能
+## Advanced features
 
-### 使用遮罩图片
+### Use a mask image
 
 ```python
 from PIL import Image
@@ -104,7 +100,7 @@ wordcloud = WordCloud(
 ).generate(text)
 ```
 
-### 自定义词频
+### Custom word frequencies
 
 ```python
 # 使用字典设置词频
@@ -118,7 +114,7 @@ word_freq = {
 wordcloud = WordCloud(font_path='simhei.ttf').generate_from_frequencies(word_freq)
 ```
 
-### 停用词过滤
+### Stopword filtering
 
 ```python
 # 设置停用词
@@ -134,9 +130,9 @@ with open('stopwords.txt', 'r', encoding='utf-8') as f:
     stopwords = set(f.read().splitlines())
 ```
 
-## 中文文本处理
+## Chinese text processing
 
-### 使用 jieba 分词
+### Use `jieba` for tokenization
 
 ```python
 import jieba
@@ -157,7 +153,7 @@ wordcloud = WordCloud(
 ).generate(text_seg)
 ```
 
-### 完整示例
+### Complete example
 
 ```python
 import jieba
@@ -196,9 +192,9 @@ plt.savefig('wordcloud.png', dpi=300, bbox_inches='tight')
 plt.show()
 ```
 
-## 实用技巧
+## Practical tips
 
-### 提取关键词
+### Extract keywords
 
 ```python
 import jieba.analyse
@@ -212,7 +208,7 @@ wordcloud = WordCloud(
 ).generate_from_frequencies(word_freq)
 ```
 
-### 多种形状
+### Multiple shapes
 
 ```python
 from PIL import Image
@@ -229,18 +225,18 @@ mask = create_circle_mask()
 wordcloud = WordCloud(font_path='simhei.ttf', mask=mask).generate(text)
 ```
 
-## 常见问题
+## Common issues
 
-### 中文显示方块
-- 原因: 未指定中文字体
-- 解决: 设置 `font_path='simhei.ttf'`
+### Chinese text shows as squares
+- Cause: no Chinese font specified
+- Fix: set `font_path='simhei.ttf'`
 
-### 常用中文字体路径
+### Common Chinese font paths
 - Windows: `C:\Windows\Fonts\simhei.ttf`
 - Mac: `/System/Library/Fonts/PingFang.ttc`
 - Linux: `/usr/share/fonts/truetype/`
 
-## 参考资源
+## References
 
 - GitHub: https://github.com/amueller/word_cloud
-- 文档: https://amueller.github.io/word_cloud/
+- Docs: https://amueller.github.io/word_cloud/

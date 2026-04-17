@@ -3,18 +3,14 @@ title: "Starship"
 description: "Starship is a cross-shell terminal prompt tool supporting PowerShell, Bash, and Zsh, with Scoop installation and profile configuration guide."
 icon: "terminal"
 ---
-<Note icon="language" title="Original Chinese Content">
-Parts of this page are still in their original Chinese. Key technical terms and concepts may be more intuitive in Chinese. [View the Chinese version →](/zh/apps/starship.md)
-</Note>
 
-
-# Comand Line
+# Command line prompt tools
 
 ## oh my zsh
 
 ## oh my posh
 
-只有 powershell 自动补全难用
+PowerShell completion is the only part that still feels awkward to use.
 
 ## [starship](https://starship.rs/guide/)
 
@@ -25,22 +21,22 @@ scoop install starship
 starship config command_timeout 3600 //解决超时Issue https://github.com/starship/starship/issues/5985
 ```
 
-### Configuration power shell
+### Configure PowerShell
 
-需要in power shell 执行`$PROFILE`ViewConfiguration路径`C:\Users\用户名\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`然后写入
+Run `$PROFILE` in PowerShell to find the config file path, usually `C:\Users\<username>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`, and add the following line:
 
 ```bash
 Invoke-Expression (&starship init powershell)
 ```
 
-使用[Bracketed-segments](https://starship.rs/zh-CN/presets/bracketed-segments)主题，也可以前往[Staship 预设](https://starship.rs/presets/)View其他喜欢's 主题，需要注意's is有's 需要Configuration[Nerd Font](https://www.nerdfonts.com/)
+I use the [Bracketed Segments](https://starship.rs/zh-CN/presets/bracketed-segments) preset. You can browse other themes on the [Starship presets](https://starship.rs/presets/) page. Some presets require a [Nerd Font](https://www.nerdfonts.com/).
 
-### Configuration cmd
+### Configure `cmd`
 
-starship 使用[clink](https://chrisant996.github.io/clink/)来Configuration cmd
+Starship uses [clink](https://chrisant996.github.io/clink/) to configure `cmd`.
 
 > [!note]
-> 使用 scoop InstallationCommand行不会Command高亮显示，原因is scoop Installation's 可能不带有`Enhanced default settings`这个功能，syntax高亮is靠这个功能Implementation's ，所以需要这个功能's 还is从[Github Realease](https://github.com/chrisant996/clink/releases)Download吧【梦想is scoop 管理所有应用，破碎第一步 😭】
+> If you install clink with Scoop, command highlighting may not work. The likely reason is that the Scoop package does not include the `Enhanced default settings` feature, which is what enables syntax highlighting. If you need it, downloading clink directly from the [GitHub Releases](https://github.com/chrisant996/clink/releases) page is the safer choice.
 
 ```bash
 code %LocalAppData%\clink\starship.lua
