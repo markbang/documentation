@@ -76,55 +76,72 @@
         }
       ]
     },
-    "tabs": [
+    "languages": [
       {
-        "tab": "开始",
-        "icon": "house",
+        "language": "en",
+        "default": true,
+        "banner": {
+          "content": "You're viewing the English version. [Switch to Chinese →](/zh)",
+          "dismissible": true
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Blog",
+              "href": "https://bangwu.me"
+            },
+            {
+              "label": "GitHub",
+              "href": "https://github.com/markbang"
+            }
+          ]
+        },
+        "footer": {
+          "socials": {
+            "github": "https://github.com/markbang",
+            "x-twitter": "https://x.com/bangwu_",
+            "website": "https://bangwu.me"
+          }
+        },
         "groups": [
           {
-            "group": "首页",
+            "group": "Home",
             "icon": "rocket",
             "pages": [
-              "index",
-              "code"
+              "en/index",
+              "en/code"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "技术",
-        "icon": "code",
-        "groups": [
+          },
           {
-            "group": "后端",
+            "group": "Backend",
             "icon": "server",
             "pages": [
               {
                 "group": "Python",
                 "icon": "python",
                 "pages": [
-                  "backend/Python/index",
-                  "backend/Python/fastapi",
+                  "en/backend/Python/index",
+                  "en/backend/Python/fastapi",
                   {
-                    "group": "爬虫",
+                    "group": "Web Scraping",
                     "icon": "spider",
                     "pages": [
-                      "backend/Python/spider/index",
-                      "backend/Python/spider/anti-spider"
+                      "en/backend/Python/spider/index",
+                      "en/backend/Python/spider/anti-spider"
                     ]
                   },
                   {
-                    "group": "常用库",
+                    "group": "Libraries",
                     "icon": "cubes",
                     "pages": [
-                      "backend/Python/libs/index",
-                      "backend/Python/libs/httpx",
-                      "backend/Python/libs/wordcloud",
-                      "backend/Python/libs/matplotlib",
-                      "backend/Python/libs/PyTorch",
-                      "backend/Python/libs/python-notes",
-                      "backend/Python/libs/pyautogui",
-                      "backend/Python/libs/data-types"
+                      "en/backend/Python/libs/index",
+                      "en/backend/Python/libs/httpx",
+                      "en/backend/Python/libs/wordcloud",
+                      "en/backend/Python/libs/matplotlib",
+                      "en/backend/Python/libs/PyTorch",
+                      "en/backend/Python/libs/python-notes",
+                      "en/backend/Python/libs/pyautogui",
+                      "en/backend/Python/libs/data-types"
                     ]
                   }
                 ]
@@ -133,18 +150,238 @@
                 "group": "Go",
                 "icon": "golang",
                 "pages": [
-                  "backend/Go/index",
-                  "backend/Go/gin/index"
+                  "en/backend/Go/index",
+                  "en/backend/Go/gin/index"
+                ]
+              },
+              {
+                "group": "Databases",
+                "icon": "database",
+                "pages": [
+                  "en/backend/SQL/index",
+                  "en/backend/SQL/mysql",
+                  "en/backend/SQL/db-knowledge",
+                  "en/backend/SQL/sqlite"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Frontend",
+            "icon": "browser",
+            "pages": [
+              {
+                "group": "Vue",
+                "icon": "vuejs",
+                "pages": [
+                  "en/frontend/Vue/index",
+                  "en/frontend/Vue/NaiveUI"
+                ]
+              },
+              {
+                "group": "Next.js",
+                "icon": "nextjs",
+                "pages": [
+                  "en/frontend/Nextjs/index"
+                ]
+              },
+              {
+                "group": "CSS Tools",
+                "icon": "palette",
+                "pages": [
+                  "en/frontend/TailwindCSS/index",
+                  "en/frontend/daisyui"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Desktop",
+            "icon": "laptop",
+            "pages": [
+              "en/software/index",
+              "en/software/tauri"
+            ]
+          },
+          {
+            "group": "Algorithms",
+            "icon": "brain",
+            "pages": [
+              "en/algo/index",
+              "en/algo/sliding_window",
+              "en/algo/bit"
+            ]
+          },
+          {
+            "group": "Software",
+            "icon": "app-store-ios",
+            "pages": [
+              "en/apps/index",
+              "en/apps/Apifox",
+              "en/apps/Barrier",
+              "en/apps/CherryStudio",
+              "en/apps/Cursor",
+              "en/apps/Pyenv",
+              "en/apps/Rclone",
+              "en/apps/Rye",
+              "en/apps/Scoop",
+              "en/apps/ShareX",
+              "en/apps/Typora",
+              "en/apps/Xizhi",
+              "en/apps/iTab",
+              "en/apps/starship"
+            ]
+          },
+          {
+            "group": "Environment & Deployment",
+            "icon": "cloud",
+            "pages": [
+              "en/env/index",
+              "en/env/docker",
+              "en/env/docker-compose",
+              "en/env/Caddy",
+              "en/env/supervisor",
+              "en/env/CDN",
+              "en/env/Jupyter",
+              "en/env/github-workflow",
+              "en/env/markdown",
+              {
+                "group": "Blog Setup",
+                "icon": "pen-nib",
+                "pages": [
+                  "en/env/Fuwari",
+                  "en/env/imgbed"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Job Hunting",
+            "icon": "briefcase",
+            "pages": [
+              "en/env/exam",
+              "en/env/interview"
+            ]
+          },
+          {
+            "group": "About",
+            "icon": "user",
+            "pages": [
+              "en/about/index",
+              "en/about/site"
+            ]
+          },
+          {
+            "group": "Course Notes",
+            "icon": "book-open",
+            "pages": [
+              "en/about/courses/web-design",
+              "en/about/courses/info-analysis",
+              "en/about/courses/info-processing",
+              "en/about/courses/info-retrieval",
+              "en/about/courses/info-management",
+              "en/about/courses/game-theory",
+              "en/about/courses/macro-economics",
+              "en/about/courses/macro-economics-2",
+              "en/about/courses/data-warehouse",
+              "en/about/courses/data-visualization",
+              "en/about/courses/data-mining",
+              "en/about/courses/data-structure",
+              "en/about/courses/e-commerce",
+              "en/about/courses/knowledge-management",
+              "en/about/courses/competitive-intelligence",
+              "en/about/courses/mis",
+              "en/about/courses/system-analysis",
+              "en/about/courses/english-fiction",
+              "en/about/courses/econometrics"
+            ]
+          }
+        ]
+      },
+      {
+        "language": "zh",
+        "banner": {
+          "content": "你正在查看中文版本。[切换到英文 →](/en)",
+          "dismissible": true
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "博客",
+              "href": "https://bangwu.me"
+            },
+            {
+              "label": "GitHub",
+              "href": "https://github.com/markbang"
+            }
+          ]
+        },
+        "footer": {
+          "socials": {
+            "github": "https://github.com/markbang",
+            "x-twitter": "https://x.com/bangwu_",
+            "website": "https://bangwu.me"
+          }
+        },
+        "groups": [
+          {
+            "group": "首页",
+            "icon": "rocket",
+            "pages": [
+              "zh/index",
+              "zh/code"
+            ]
+          },
+          {
+            "group": "后端",
+            "icon": "server",
+            "pages": [
+              {
+                "group": "Python",
+                "icon": "python",
+                "pages": [
+                  "zh/backend/Python/index",
+                  "zh/backend/Python/fastapi",
+                  {
+                    "group": "爬虫",
+                    "icon": "spider",
+                    "pages": [
+                      "zh/backend/Python/spider/index",
+                      "zh/backend/Python/spider/anti-spider"
+                    ]
+                  },
+                  {
+                    "group": "常用库",
+                    "icon": "cubes",
+                    "pages": [
+                      "zh/backend/Python/libs/index",
+                      "zh/backend/Python/libs/httpx",
+                      "zh/backend/Python/libs/wordcloud",
+                      "zh/backend/Python/libs/matplotlib",
+                      "zh/backend/Python/libs/PyTorch",
+                      "zh/backend/Python/libs/python-notes",
+                      "zh/backend/Python/libs/pyautogui",
+                      "zh/backend/Python/libs/data-types"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Go",
+                "icon": "golang",
+                "pages": [
+                  "zh/backend/Go/index",
+                  "zh/backend/Go/gin/index"
                 ]
               },
               {
                 "group": "数据库",
                 "icon": "database",
                 "pages": [
-                  "backend/SQL/index",
-                  "backend/SQL/mysql",
-                  "backend/SQL/db-knowledge",
-                  "backend/SQL/sqlite"
+                  "zh/backend/SQL/index",
+                  "zh/backend/SQL/mysql",
+                  "zh/backend/SQL/db-knowledge",
+                  "zh/backend/SQL/sqlite"
                 ]
               }
             ]
@@ -157,23 +394,23 @@
                 "group": "Vue",
                 "icon": "vuejs",
                 "pages": [
-                  "frontend/Vue/index",
-                  "frontend/Vue/NaiveUI"
+                  "zh/frontend/Vue/index",
+                  "zh/frontend/Vue/NaiveUI"
                 ]
               },
               {
                 "group": "Next.js",
                 "icon": "nextjs",
                 "pages": [
-                  "frontend/Nextjs/index"
+                  "zh/frontend/Nextjs/index"
                 ]
               },
               {
                 "group": "CSS 工具",
                 "icon": "palette",
                 "pages": [
-                  "frontend/TailwindCSS/index",
-                  "frontend/daisyui"
+                  "zh/frontend/TailwindCSS/index",
+                  "zh/frontend/daisyui"
                 ]
               }
             ]
@@ -182,64 +419,58 @@
             "group": "客户端",
             "icon": "laptop",
             "pages": [
-              "software/index",
-              "software/tauri"
+              "zh/software/index",
+              "zh/software/tauri"
             ]
           },
           {
             "group": "算法",
             "icon": "brain",
             "pages": [
-              "algo/index",
-              "algo/sliding_window",
-              "algo/bit"
+              "zh/algo/index",
+              "zh/algo/sliding_window",
+              "zh/algo/bit"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "工具与环境",
-        "icon": "wrench",
-        "groups": [
+          },
           {
             "group": "软件",
             "icon": "app-store-ios",
             "pages": [
-              "apps/index",
-              "apps/Apifox",
-              "apps/Barrier",
-              "apps/CherryStudio",
-              "apps/Cursor",
-              "apps/Pyenv",
-              "apps/Rclone",
-              "apps/Rye",
-              "apps/Scoop",
-              "apps/ShareX",
-              "apps/Typora",
-              "apps/Xizhi",
-              "apps/iTab",
-              "apps/starship"
+              "zh/apps/index",
+              "zh/apps/Apifox",
+              "zh/apps/Barrier",
+              "zh/apps/CherryStudio",
+              "zh/apps/Cursor",
+              "zh/apps/Pyenv",
+              "zh/apps/Rclone",
+              "zh/apps/Rye",
+              "zh/apps/Scoop",
+              "zh/apps/ShareX",
+              "zh/apps/Typora",
+              "zh/apps/Xizhi",
+              "zh/apps/iTab",
+              "zh/apps/starship"
             ]
           },
           {
             "group": "环境与部署",
             "icon": "cloud",
             "pages": [
-              "env/index",
-              "env/docker",
-              "env/docker-compose",
-              "env/Caddy",
-              "env/supervisor",
-              "env/CDN",
-              "env/Jupyter",
-              "env/github-workflow",
-              "env/markdown",
+              "zh/env/index",
+              "zh/env/docker",
+              "zh/env/docker-compose",
+              "zh/env/Caddy",
+              "zh/env/supervisor",
+              "zh/env/CDN",
+              "zh/env/Jupyter",
+              "zh/env/github-workflow",
+              "zh/env/markdown",
               {
                 "group": "博客搭建",
                 "icon": "pen-nib",
                 "pages": [
-                  "env/Fuwari",
-                  "env/imgbed"
+                  "zh/env/Fuwari",
+                  "zh/env/imgbed"
                 ]
               }
             ]
@@ -248,47 +479,41 @@
             "group": "求职",
             "icon": "briefcase",
             "pages": [
-              "env/exam",
-              "env/interview"
+              "zh/env/exam",
+              "zh/env/interview"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "课程与关于",
-        "icon": "graduation-cap",
-        "groups": [
+          },
           {
             "group": "关于",
             "icon": "user",
             "pages": [
-              "about/index",
-              "about/site"
+              "zh/about/index",
+              "zh/about/site"
             ]
           },
           {
             "group": "课程复习",
             "icon": "book-open",
             "pages": [
-              "about/courses/web-design",
-              "about/courses/info-analysis",
-              "about/courses/info-processing",
-              "about/courses/info-retrieval",
-              "about/courses/info-management",
-              "about/courses/game-theory",
-              "about/courses/macro-economics",
-              "about/courses/macro-economics-2",
-              "about/courses/data-warehouse",
-              "about/courses/data-visualization",
-              "about/courses/data-mining",
-              "about/courses/data-structure",
-              "about/courses/e-commerce",
-              "about/courses/knowledge-management",
-              "about/courses/competitive-intelligence",
-              "about/courses/mis",
-              "about/courses/system-analysis",
-              "about/courses/english-fiction",
-              "about/courses/econometrics"
+              "zh/about/courses/web-design",
+              "zh/about/courses/info-analysis",
+              "zh/about/courses/info-processing",
+              "zh/about/courses/info-retrieval",
+              "zh/about/courses/info-management",
+              "zh/about/courses/game-theory",
+              "zh/about/courses/macro-economics",
+              "zh/about/courses/macro-economics-2",
+              "zh/about/courses/data-warehouse",
+              "zh/about/courses/data-visualization",
+              "zh/about/courses/data-mining",
+              "zh/about/courses/data-structure",
+              "zh/about/courses/e-commerce",
+              "zh/about/courses/knowledge-management",
+              "zh/about/courses/competitive-intelligence",
+              "zh/about/courses/mis",
+              "zh/about/courses/system-analysis",
+              "zh/about/courses/english-fiction",
+              "zh/about/courses/econometrics"
             ]
           }
         ]
