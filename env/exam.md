@@ -1,3 +1,9 @@
+---
+title: "笔试记录"
+description: "各公司笔试复盘与经验总结。"
+icon: "file-pen"
+---
+
 ## 2025-03-08 美团 综合能力测试 【项目管理实习】
 
 ![bangwu20250308194953](https://cdn.bangwu.top/img/202503082350366.webp)

@@ -1,3 +1,9 @@
+---
+title: "Tauri"
+description: "Rust 跨端客户端开发实践。"
+icon: "laptop-code"
+---
+
 # Tauri
 
 Rust 跨端 app，虽然比较新的框架，但是已经有较为成熟的产品，例如：[ChatWise](https://chatwise.app)、[HuLa](https://hulaspark.com/)，学习这种跨端框架当然是要跨端才好，

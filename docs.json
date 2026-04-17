@@ -41,8 +41,19 @@
       {
         "label": "博客",
         "href": "https://bangwu.me"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/markbang"
       }
     ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/markbang",
+      "x-twitter": "https://x.com/bangwu_",
+      "website": "https://bangwu.me"
+    }
   },
   "contextual": {
     "options": [
@@ -51,14 +62,30 @@
     "display": "header"
   },
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "博客",
+          "icon": "pen-nib",
+          "href": "https://bangwu.me"
+        },
+        {
+          "anchor": "GitHub",
+          "icon": "github",
+          "href": "https://github.com/markbang"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "开始",
+        "icon": "house",
         "groups": [
           {
             "group": "首页",
-            "root": "index",
+            "icon": "rocket",
             "pages": [
+              "index",
               "code"
             ]
           }
@@ -66,83 +93,104 @@
       },
       {
         "tab": "技术",
+        "icon": "code",
         "groups": [
           {
             "group": "后端",
-            "root": "backend/index",
+            "icon": "server",
             "pages": [
               {
                 "group": "Python",
-                "root": "backend/Python/index",
+                "icon": "python",
                 "pages": [
+                  "backend/Python/index",
                   "backend/Python/fastapi",
                   {
                     "group": "爬虫",
-                    "root": "backend/Python/spider/index",
+                    "icon": "spider",
                     "pages": [
+                      "backend/Python/spider/index",
                       "backend/Python/spider/anti-spider"
                     ]
                   },
                   {
                     "group": "常用库",
-                    "root": "backend/Python/libs/index",
+                    "icon": "cubes",
                     "pages": [
+                      "backend/Python/libs/index",
                       "backend/Python/libs/httpx",
                       "backend/Python/libs/wordcloud",
                       "backend/Python/libs/matplotlib",
                       "backend/Python/libs/PyTorch",
-                      "backend/Python/libs/Python笔记",
-                      "backend/Python/libs/pyautogui脚本",
-                      "backend/Python/libs/数据类型"
+                      "backend/Python/libs/python-notes",
+                      "backend/Python/libs/pyautogui",
+                      "backend/Python/libs/data-types"
                     ]
                   }
                 ]
               },
               {
                 "group": "Go",
-                "root": "backend/Go/index",
+                "icon": "golang",
                 "pages": [
+                  "backend/Go/index",
                   "backend/Go/gin/index"
                 ]
               },
               {
                 "group": "数据库",
-                "root": "backend/SQL/index",
+                "icon": "database",
                 "pages": [
-                  "backend/SQL/Mysql基础语法",
-                  "backend/SQL/数据库知识点",
-                  "backend/SQL/Sqlite"
+                  "backend/SQL/index",
+                  "backend/SQL/mysql",
+                  "backend/SQL/db-knowledge",
+                  "backend/SQL/sqlite"
                 ]
               }
             ]
           },
           {
             "group": "前端",
-            "root": "frontend/index",
+            "icon": "browser",
             "pages": [
               {
                 "group": "Vue",
-                "root": "frontend/Vue/index",
+                "icon": "vuejs",
                 "pages": [
+                  "frontend/Vue/index",
                   "frontend/Vue/NaiveUI"
                 ]
               },
-              "frontend/Nextjs/index",
-              "frontend/TailwindCSS/index",
-              "frontend/daisyui"
+              {
+                "group": "Next.js",
+                "icon": "nextjs",
+                "pages": [
+                  "frontend/Nextjs/index"
+                ]
+              },
+              {
+                "group": "CSS 工具",
+                "icon": "palette",
+                "pages": [
+                  "frontend/TailwindCSS/index",
+                  "frontend/daisyui"
+                ]
+              }
             ]
           },
           {
             "group": "客户端",
-            "root": "software/index",
+            "icon": "laptop",
             "pages": [
+              "software/index",
               "software/tauri"
             ]
           },
           {
             "group": "算法",
-            "root": "algo/index",
+            "icon": "brain",
             "pages": [
+              "algo/index",
               "algo/sliding_window",
               "algo/bit"
             ]
@@ -151,11 +199,13 @@
       },
       {
         "tab": "工具与环境",
+        "icon": "wrench",
         "groups": [
           {
             "group": "软件",
-            "root": "apps/index",
+            "icon": "app-store-ios",
             "pages": [
+              "apps/index",
               "apps/Apifox",
               "apps/Barrier",
               "apps/CherryStudio",
@@ -172,88 +222,73 @@
             ]
           },
           {
-            "group": "环境",
-            "root": "env/index",
+            "group": "环境与部署",
+            "icon": "cloud",
             "pages": [
-              "env/笔试",
-              "env/面经",
-              "env/markdown",
-              "env/github-workflow",
+              "env/index",
+              "env/docker",
+              "env/docker-compose",
               "env/Caddy",
               "env/supervisor",
+              "env/CDN",
+              "env/Jupyter",
+              "env/github-workflow",
+              "env/markdown",
               {
-                "group": "博客",
+                "group": "博客搭建",
+                "icon": "pen-nib",
                 "pages": [
                   "env/Fuwari",
                   "env/imgbed"
                 ]
-              },
-              {
-                "group": "Docker",
-                "pages": [
-                  "env/docker",
-                  "env/docker-compose"
-                ]
-              },
-              "env/Jupyter",
-              "env/CDN"
+              }
+            ]
+          },
+          {
+            "group": "求职",
+            "icon": "briefcase",
+            "pages": [
+              "env/exam",
+              "env/interview"
             ]
           }
         ]
       },
       {
         "tab": "课程与关于",
+        "icon": "graduation-cap",
         "groups": [
           {
             "group": "关于",
-            "root": "about/index",
+            "icon": "user",
             "pages": [
-              "about/site",
-              {
-                "group": "课程复习",
-                "pages": [
-                  "about/courses/Web设计与应用",
-                  "about/courses/信息分析",
-                  "about/courses/信息处理与组织",
-                  "about/courses/信息检索",
-                  "about/courses/信息管理概论",
-                  "about/courses/博弈论",
-                  "about/courses/宏观经济学",
-                  "about/courses/宏观经济学2",
-                  "about/courses/数据仓库",
-                  "about/courses/数据可视化",
-                  "about/courses/数据挖掘",
-                  "about/courses/数据结构与算法",
-                  "about/courses/电子商务",
-                  "about/courses/知识管理",
-                  "about/courses/竞争情报",
-                  "about/courses/管理信息系统",
-                  "about/courses/系统分析与设计",
-                  "about/courses/英语短篇小说佳作欣赏",
-                  "about/courses/计量经济学"
-                ]
-              }
+              "about/index",
+              "about/site"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "兴趣",
-        "groups": [
+          },
           {
-            "group": "一人之下",
-            "root": "yrzx/index",
+            "group": "课程复习",
+            "icon": "book-open",
             "pages": [
-              {
-                "group": "人物",
-                "pages": [
-                  "yrzx/zcl",
-                  "yrzx/fbb"
-                ]
-              },
-              "yrzx/yiren",
-              "yrzx/xiutie",
-              "yrzx/立场"
+              "about/courses/web-design",
+              "about/courses/info-analysis",
+              "about/courses/info-processing",
+              "about/courses/info-retrieval",
+              "about/courses/info-management",
+              "about/courses/game-theory",
+              "about/courses/macro-economics",
+              "about/courses/macro-economics-2",
+              "about/courses/data-warehouse",
+              "about/courses/data-visualization",
+              "about/courses/data-mining",
+              "about/courses/data-structure",
+              "about/courses/e-commerce",
+              "about/courses/knowledge-management",
+              "about/courses/competitive-intelligence",
+              "about/courses/mis",
+              "about/courses/system-analysis",
+              "about/courses/english-fiction",
+              "about/courses/econometrics"
             ]
           }
         ]

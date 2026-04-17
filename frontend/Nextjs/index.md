@@ -1,3 +1,9 @@
+---
+title: "Next.js"
+description: "React 全栈框架，SSR/SSG/API Routes。"
+icon: "nextjs"
+---
+
 ## Next.js
 
 Next.js 是近些年最火的 React 框架，由 Vercel 开发和维护。

@@ -1,29 +1,38 @@
-# 关于
+---
+title: "关于"
+description: "棒无的简介、知识库范围与联系方式。"
+icon: "user"
+---
 
-## 棒无 / markbang / bangwu
+## 我是谁
 
-- 漫画《一人之下》的重度思考者
+- 棒无 / markbang / bangwu
 - ECNUer
-- 相信存在即合理的全栈
-- 游戏瘾晚期患者、羽毛球小白、瞎折腾冠军、著名音乐的听者
-- INFP-A
+- 主要关注前后端、工具链、文档整理与知识沉淀
+- 这个站点是我长期维护的个人知识库，不是一次性的文章合集
 
-## 内容输出简介
+## 这里主要写什么
 
-日常：https://blog.bangwu.top 我的日常思考以及生活分享
+| 板块 | 说明 |
+|------|------|
+| 技术 | 后端、前端、客户端、算法等学习与实践记录 |
+| 工具与环境 | 软件配置、部署流程、自动化与写作相关内容 |
+| 课程复习 | 信息管理、数据挖掘、计量经济学等课程笔记 |
+| 速查内容 | 命令、片段和高频回查入口 |
 
-知识库：https://base.bangwu.top 几乎是所有学到过的 CS 知识
+## 站点入口
 
-RSS：[我的碎碎念](https://now.bangwu.top/rss.xml)
+| 位置 | 说明 | 链接 |
+|------|------|------|
+| 日常 | 日常思考与生活分享 | [blog.bangwu.top](https://blog.bangwu.top) |
+| 知识库 | 文档站点入口 | [base.bangwu.top](https://base.bangwu.top) |
+| RSS | 碎碎念订阅 | [now.bangwu.top/rss.xml](https://now.bangwu.top/rss.xml) |
 
-## 联系我
+## 联系方式
 
-E-mail:[i@bangwu.top](mailto:i@bangwu.top)
+- **Email**：[i@bangwu.top](mailto:i@bangwu.top)
+- **GitHub**：[markbang](https://github.com/markbang)
 
-GitHub:[markbang](https://github.com/markbang)
-
-由于习惯原因，一般回 email 会很慢，请谅解。加我 vx 之前请确保一般回复消息不会超过 15 分钟（因为我一般是秒回，并且回复慢会影响到我）
-
-## 一些宣告
-
-相信你明白在茫茫的互联网浪潮中，遇到彼此就是缘分，所以请友善发言。如果能和棒无友好交流并成为好朋友的话，我会非常开心 😋URL 是对互联网的第一次承诺，所以我会一直持有这个域名的。嗯，就这样——2024 年 9 月 27 日
+<Note icon="pen-to-square" title="维护方式">
+优先整理自己会反复回看的内容，先保证可检索和可复用，再逐步补全深度内容。
+</Note>

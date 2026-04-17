@@ -1,28 +1,31 @@
-# 后端
+---
+title: "后端"
+description: "后端开发技术整理，涵盖 Python、Go 与数据库。"
+icon: "server"
+---
 
-后端开发主要负责服务器端逻辑、数据库交互、API设计等核心功能。
+后端开发主要负责服务器端逻辑、数据库交互和 API 设计。这里整理了我学习过的后端技术栈。
 
-## 主要技术栈
+<CardGroup cols={3}>
 
-### Python
-- **FastAPI**: 现代、高性能的 Web 框架
-- **爬虫开发**: 数据采集与反爬虫技术
-- **常用库**: pandas, numpy, requests 等
+<Card title="Python" icon="python" href="/backend/Python/index">
+FastAPI、爬虫与常用库。
+</Card>
 
-### Go
-- **Gin**: 高性能的 Web 框架
-- **并发编程**: goroutine 和 channel
-- **微服务**: 适合构建分布式系统
+<Card title="Go" icon="golang" href="/backend/Go/index">
+Gin 框架与并发编程。
+</Card>
 
-### 数据库
-- **MySQL**: 关系型数据库，企业级应用
-- **SQLite**: 轻量级嵌入式数据库
-- **Redis**: 高性能缓存数据库
+<Card title="数据库" icon="database" href="/backend/SQL/index">
+MySQL、SQLite 与数据库核心概念。
+</Card>
+
+</CardGroup>
 
 ## 学习路线
 
-1. 掌握一门后端语言（Python/Go）
-2. 学习数据库设计与操作
-3. 理解 RESTful API 设计
-4. 学习身份认证与授权
+1. 掌握一门后端语言（Python / Go）
+2. 学习数据库设计与 SQL 操作
+3. 理解 RESTful API 设计原则
+4. 学习身份认证与授权机制
 5. 部署与运维基础

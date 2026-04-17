@@ -1,3 +1,9 @@
+---
+title: "Fuwari"
+description: "基于 Astro 的博客主题。"
+icon: "pen-nib"
+---
+
 ## Fuwari
 
 [Fuwari](https://github.com/saicaca/fuwari) 是一个基于 Astro 的静态博客主题，风格优雅简洁。

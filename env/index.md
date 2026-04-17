@@ -1,3 +1,57 @@
-# 环境
+---
+title: "环境与部署"
+description: "计算机环境配置、容器化部署与博客搭建。"
+icon: "cloud"
+---
 
-刚开始接触编程的时候，都会有很多关于计算机环境和编程环境上的疑问，例如我刚开始学 python 时，就有很多疑问：什么是环境变量啊，包管理工具 pip 又是什么？？？等等，刚开始接触 Linux 时，由于 Linux 有很多发行版，从而有很多包管理工具，所以又产生除了许多问题，本专栏就是为了解决计算机环境上的问题，也会做一些博客搭建，生态使用，行业情况等的介绍。
+刚开始接触编程时，都会有很多关于环境配置的疑问——什么是环境变量？包管理工具 `pip` 又是什么？Linux 发行版那么多，包管理工具怎么选？本专栏就是为了解决这些问题，也会做一些博客搭建、生态使用、行业情况的介绍。
+
+<CardGroup cols={3}>
+
+<Card title="Docker" icon="container-storage" href="/env/docker">
+容器化部署与应用管理。
+</Card>
+
+<Card title="Docker Compose" icon="layer-group" href="/env/docker-compose">
+多容器编排与一键部署。
+</Card>
+
+<Card title="Caddy" icon="globe" href="/env/Caddy">
+现代 Web 服务器与自动 HTTPS。
+</Card>
+
+<Card title="Supervisor" icon="eye" href="/env/supervisor">
+进程守护与后台服务管理。
+</Card>
+
+<Card title="CDN 配置" icon="network-wired" href="/env/CDN">
+国内境外分流 CDN 搭建方案。
+</Card>
+
+<Card title="Jupyter" icon="chart-line" href="/env/Jupyter">
+交互式数据分析笔记本。
+</Card>
+
+<Card title="GitHub Workflow" icon="code-branch" href="/env/github-workflow">
+GitHub Actions CI/CD 自动化。
+</Card>
+
+<Card title="Markdown" icon="file-lines" href="/env/markdown">
+Markdown 写作技巧与工具。
+</Card>
+
+</CardGroup>
+
+## 博客搭建
+
+<CardGroup cols={2}>
+
+<Card title="Fuwari" icon="pen-nib" href="/env/Fuwari">
+基于 Astro 的博客主题。
+</Card>
+
+<Card title="图床方案" icon="image" href="/env/imgbed">
+七牛云 OSS + 多吉云 CDN 图床。
+</Card>
+
+</CardGroup>

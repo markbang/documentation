@@ -1,3 +1,9 @@
+---
+title: "Starship"
+description: "跨 Shell 终端提示符美化。"
+icon: "terminal"
+---
+
 # Comand Line
 
 ## oh my zsh

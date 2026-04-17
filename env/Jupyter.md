@@ -1,3 +1,9 @@
+---
+title: "Jupyter"
+description: "交互式数据分析笔记本。"
+icon: "chart-line"
+---
+
 # Jupyter
 
 ## Jupyter Notebook

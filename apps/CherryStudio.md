@@ -1,3 +1,9 @@
+---
+title: "CherryStudio"
+description: "AI 客户端与主题定制。"
+icon: "message"
+---
+
 # CherryStudio
 
 [https://github.com/CherryHQ/cherry-studio]

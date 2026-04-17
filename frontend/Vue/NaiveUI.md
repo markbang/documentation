@@ -1,3 +1,9 @@
+---
+title: "Naive UI"
+description: "Vue 3 组件库，完善的 TypeScript 支持与主题定制。"
+icon: "cube"
+---
+
 ![TypeScript](https://cdn.bangwu.top/img/TypeScript.png)
 
 # Naive UI

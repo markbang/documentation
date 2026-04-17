@@ -1,3 +1,9 @@
+---
+title: "DaisyUI"
+description: "基于 Tailwind CSS 的组件库，提供预设计组件。"
+icon: "palette"
+---
+
 # DaisyUI
 
 DaisyUI 是一个基于 Tailwind CSS 的组件库，提供了丰富的预设计组件。

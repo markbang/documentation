@@ -1,3 +1,9 @@
+---
+title: "Rye"
+description: "新一代 Python 包管理器。"
+icon: "gear"
+---
+
 [Python 上的包管理器和虚拟环境——V2EX](https://www.v2ex.com/t/1032069)
 
 Python的环境管理工具可谓是多之又多

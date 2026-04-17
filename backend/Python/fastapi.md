@@ -1,3 +1,9 @@
+---
+title: "FastAPI"
+description: "现代高性能 Python Web 框架，自动文档与类型检查。"
+icon: "bolt"
+---
+
 # FastAPI
 
 FastAPI 是一个现代、高性能的 Python Web 框架，基于 Python 3.6+ 的类型提示构建。在 Github 上拥有超过 70k+ stars，是目前最流行的 Python 后端框架之一。

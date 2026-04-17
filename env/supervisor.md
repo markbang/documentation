@@ -1,3 +1,9 @@
+---
+title: "Supervisor"
+description: "进程守护与后台服务管理。"
+icon: "eye"
+---
+
 # Supervisor 进程管理
 
 Supervisor 是一个 Python 编写的进程管理工具，用于监控和控制 Unix/Linux 系统上的进程。

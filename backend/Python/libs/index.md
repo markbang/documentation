@@ -1,17 +1,55 @@
-# 第三方库介绍
+---
+title: "常用库"
+description: "Python 第三方库学习笔记与使用指南。"
+icon: "cubes"
+---
 
-在 Python 语言的库中，分为 Python 标准库和 Python 的第三方库。python 的标准库是随着 python 安装的时候默认自带的库，python 的第三方库，需要下载后安装到 python 的安装目录下，不同的第三方库安装及使用方法不同。它们调用方式是一样的，都需要用 import 语句调用。
+第三方库是 Python 生态的核心优势。Python 标准库随安装自带，第三方库需要通过 `pip` 安装，调用方式统一使用 `import` 语句。
 
-第三方库都是带有能实现某些工能的函数的，库里面的函数调用方法为`库名.函数`,当然，库中也可以包含库，所有调用方式就为`库名1.库名2.函数`，这和文件路径很相似。
+## 学习方法
 
-## 第三方库学习
+不需要刻意记忆所有库的使用方法，熟练使用常用的即可（如 `numpy`、`pandas` 处理数据，`re`、`BeautifulSoup` 提取数据）。其他库跟着官方文档学一遍，知道能干什么就行，用到的时候翻笔记。
 
-对于第三方库的学习呢，我个人认为是不需要刻意去记忆一些库的使用方法的，会熟练使用一些常用的库就行了，比如`numpy、pandas`这些与数据读取、写入相关的，`re、BeautifulSoup`这些与数据提取相关的。其他的不常用的库可以跟着官方文档学习一遍（其他博主的教学也行，但首推官方文档，比较全面），知道这个库能干些什么事情，实现什么功能就行了，可以在学习过程中把库的函数都记录下来，到时候用到的时候直接翻笔记看就行。
+<Tip icon="lightbulb" title="盖房子的比喻">
+库就像盖房子的砖块——使用时需要了解材料构造吗？只要会用就行了。
+</Tip>
 
-这就像是盖房子需要用砖块一样，你使用砖块时需要去了解它的材料构造、如何形成的吗，只要会用就行了。
+<Warning icon="triangle-exclamation" title="不要只看博客">
+第三方库学习首推官方文档，比较全面。其他博主的教学可以作为补充，但官方文档才是最权威的来源。
+</Warning>
 
 ## 功能对应的库
 
-知道了有第三方库，可第三方库那么多，怎么找到我需要去学习的呢，GitHub 大佬早就整理好了，里面的功能很全，star 数 26k+，[点击这里](https://github.com/jobbole/awesome-python-cn)就可以到达。
+GitHub 大佬早就整理好了，[awesome-python-cn](https://github.com/jobbole/awesome-python-cn) star 数 26k+，按功能分类非常全。
 
-以上就是我对 python 第三方库的看法，祝学习 python 顺利！
+<CardGroup cols={3}>
+
+<Card title="httpx" icon="bolt" href="/backend/Python/libs/httpx">
+新一代 HTTP 客户端，支持异步请求。
+</Card>
+
+<Card title="matplotlib" icon="chart-bar" href="/backend/Python/libs/matplotlib">
+数据可视化与图表绘制。
+</Card>
+
+<Card title="wordcloud" icon="cloud" href="/backend/Python/libs/wordcloud">
+词云生成与文本可视化。
+</Card>
+
+<Card title="PyTorch" icon="microchip" href="/backend/Python/libs/PyTorch">
+深度学习框架入门笔记。
+</Card>
+
+<Card title="Python 笔记" icon="notebook" href="/backend/Python/libs/python-notes">
+杂项笔记与常见用法记录。
+</Card>
+
+<Card title="数据类型" icon="list" href="/backend/Python/libs/data-types">
+Python 数据类型详解与操作。
+</Card>
+
+<Card title="pyautogui" icon="robot" href="/backend/Python/libs/pyautogui">
+自动化脚本与 GUI 操作。
+</Card>
+
+</CardGroup>

@@ -1,3 +1,9 @@
+---
+title: "CDN 配置"
+description: "国内境外分流 CDN 搭建方案。"
+icon: "network-wired"
+---
+
 目前使用的 CDN 方案来自：https://www.eallion.com/cdn-cname-cloudflare/
 
 一下是 CDN 结构图，目的就是解决全球 CDN 并且成本低

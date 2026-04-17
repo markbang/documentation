@@ -1,3 +1,9 @@
+---
+title: "Scoop"
+description: "Windows 命令行包管理器。"
+icon: "bucket"
+---
+
 # Scoop-Windows 中的 brew
 
 ## 安装

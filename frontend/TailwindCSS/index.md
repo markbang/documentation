@@ -1,3 +1,9 @@
+---
+title: "Tailwind CSS"
+description: "原子化 CSS 框架，通过组合工具类构建界面。"
+icon: "palette"
+---
+
 ![Tailwindcss6](https://cdn.bangwu.top/img/Tailwindcss6.png)
 
 # Tailwind CSS

@@ -1,3 +1,9 @@
+---
+title: "GitHub Actions"
+description: "GitHub CI/CD 自动化工具。"
+icon: "code-branch"
+---
+
 # GitHub Actions
 
 GitHub Actions 是 GitHub 提供的 CI/CD 自动化工具，可以自动执行构建、测试、部署等工作流程。

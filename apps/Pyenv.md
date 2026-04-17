@@ -1,3 +1,9 @@
+---
+title: "Pyenv"
+description: "Python 版本管理工具。"
+icon: "python"
+---
+
 # [Pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#windows)
 
 Pyenv 是一个 Python 版本管理工具，允许你在同一系统上轻松安装和切换多个 Python 版本。

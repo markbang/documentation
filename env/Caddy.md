@@ -1,3 +1,9 @@
+---
+title: "Caddy"
+description: "现代 Web 服务器与自动 HTTPS。"
+icon: "globe"
+---
+
 # Web 服务器
 
 ```bash

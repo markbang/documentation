@@ -1,3 +1,9 @@
+---
+title: "Docker Compose"
+description: "多容器编排与一键部署。"
+icon: "layer-group"
+---
+
 # Docker Compose
 
 Docker Compose 是用于定义和运行多容器 Docker 应用的工具，通过 YAML 文件配置应用服务。

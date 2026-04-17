@@ -1,11 +1,24 @@
-![FlutterTransparent](https://cdn.bangwu.top/img/FlutterTransparent.png)
+---
+title: "客户端开发"
+description: "当前以 Tauri 为主的跨端客户端开发记录。"
+icon: "laptop"
+---
 
-# 客户端开发
+这里主要记录桌面应用和跨端客户端开发的实践内容。当前收录还不算多，但会优先保留真正做过、以后还会回看的方案。
 
-客户端即用户使用的软件，包括.exe、.apk、.ipa等文件。客户端开发是指开发这些软件的过程。
+## 当前主题
 
-## 1.语言选择说明
+<Card title="Tauri 实践" icon="laptop-code" href="/software/tauri">
+使用 GitHub Actions 自动发布 Release、处理跨平台构建和工程化问题。
+</Card>
 
-[`Flutter`](https://flutter.dev/)作为开源框架，可以快速构建高质量的移动应用程序。Flutter是Google开发的移动应用开发框架，可以快速在iOS和Android上构建高质量的原生用户界面。Flutter可以与现有的代码一起工作。在全球范围内，Flutter正在被越来越多的开发者和组织使用，Flutter的生态系统也在不断壮大。
+## 这一栏后续会补什么
 
-![GitHub Repo stars](https://img.shields.io/github/stars/flutter/flutter)
+- 工程初始化与目录结构
+- 打包、签名与发布
+- 自动更新与 CI/CD
+- 跨平台构建中的常见坑
+
+## 阅读建议
+
+如果你只是想快速搭一个桌面应用，可以先从 `Tauri` 页面开始；如果你更关心发布流程，重点看其中的 GitHub Actions 示例。

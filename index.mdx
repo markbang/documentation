@@ -7,63 +7,58 @@ description: "棒无的知识库：涵盖前后端、环境、软件工具、课
 
 这里收集了我在学习、开发和折腾过程中整理下来的教程、笔记、命令片段和软件经验。你可以从下面的入口快速开始，也可以直接使用右上角搜索。
 
-<Card
-  title="开始浏览"
-  icon="rocket"
-  href="/backend/index"
-  horizontal
->
-  从后端、前端、软件、环境和课程笔记中选择一个方向开始读。
+<CardGroup cols={2}>
+
+<Card title="后端" icon="server" href="/backend/Python/index">
+Python、Go、数据库与爬虫整理。
 </Card>
 
-## 主要内容
+<Card title="前端" icon="browser" href="/frontend/index">
+Vue、Next.js、Tailwind CSS 与组件库方案。
+</Card>
 
-<Columns cols={2}>
-  <Card title="后端" icon="server" href="/backend/index">
-    Python、Go、SQL、爬虫与常用库整理。
-  </Card>
-  <Card title="前端" icon="code" href="/frontend/index">
-    Vue、Next.js、Tailwind CSS 与常见 UI 方案。
-  </Card>
-  <Card title="客户端" icon="laptop" href="/software/index">
-    Tauri 等客户端方向的实践记录。
-  </Card>
-  <Card title="算法" icon="database" href="/algo/index">
-    滑动窗口、位运算等高频算法题型。
-  </Card>
-</Columns>
+<Card title="客户端" icon="laptop" href="/software/index">
+Tauri 跨端客户端开发实践。
+</Card>
 
-## 常用入口
+<Card title="算法" icon="brain" href="/algo/index">
+滑动窗口、位运算等高频算法题型。
+</Card>
 
-<Columns cols={2}>
-  <Card title="环境配置" icon="wrench" href="/env/index">
-    Docker、Caddy、图床、Jupyter、GitHub Workflow 等环境搭建内容。
-  </Card>
-  <Card title="软件工具" icon="terminal" href="/apps/index">
-    Apifox、Cursor、ShareX、Typora、Pyenv 等常用工具。
-  </Card>
-  <Card title="课程复习" icon="graduation-cap" href="/about/index">
-    信息管理、数据挖掘、计量经济学等课程笔记与复习材料。
-  </Card>
-  <Card title="一人之下" icon="star" href="/yrzx/index">
-    角色、剧情与锈铁篇相关整理。
-  </Card>
-</Columns>
+</CardGroup>
 
-## 阅读建议
+## 工具与环境
 
-1. 如果你是第一次来，先看你最关心的主题入口页。
-2. 如果你是来找某个命令、工具或概念，直接用搜索更快。
-3. 站点已经启用公式渲染，包含数学表达式的页面可以直接阅读。
-4. 如果你发现问题或想补充内容，可以在 GitHub 仓库里提 issue 或 PR。
+<CardGroup cols={3}>
 
-## 额外入口
+<Card title="软件工具" icon="app-store-ios" href="/apps/index">
+Apifox、Cursor、ShareX、Typora 等常用工具推荐与配置。
+</Card>
 
-<Columns cols={2}>
-  <Card title="代码片段" icon="code" href="/code">
-    一些常用代码、命令和随手记录。
-  </Card>
-  <Card title="站点说明" icon="book" href="/about/site">
-    关于这个知识库的内容范围与维护方式。
-  </Card>
-</Columns>
+<Card title="环境与部署" icon="cloud" href="/env/index">
+Docker、Caddy、GitHub Workflow、博客搭建等基础设施。
+</Card>
+
+<Card title="求职记录" icon="briefcase" href="/env/exam">
+笔试与面经复盘，踩坑经验总结。
+</Card>
+
+</CardGroup>
+
+## 课程与关于
+
+<CardGroup cols={2}>
+
+<Card title="课程复习" icon="graduation-cap" href="/about/index">
+信息管理、数据挖掘、计量经济学等课程笔记。
+</Card>
+
+<Card title="站点说明" icon="book-open" href="/about/site">
+知识库范围、排版规约与维护方式。
+</Card>
+
+</CardGroup>
+
+<Tip icon="magnifying-glass" title="使用搜索更高效">
+按 `Ctrl+K` 可快速唤起搜索。如果你是来找某个命令、工具或概念，直接搜索比翻侧边栏更快。
+</Tip>

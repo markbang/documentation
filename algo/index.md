@@ -1,19 +1,35 @@
-# 算法学习
+---
+title: "算法学习"
+description: "算法刷题与题型整理，滑动窗口与位运算。"
+icon: "brain"
+---
 
-算法学习主要是跟随 GitHub 上一些开源的书籍和 Leetcode 刷题来学习
+算法学习主要是跟随 GitHub 上开源的书籍和 Leetcode 刷题。
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/bangwu?theme=nord&font=Readex%20Pro&ext=activity&site=cn)
 
-> 这里推荐一些高质量的算法教程
+## 推荐教程
 
-## 1. 《Hello 算法》
+<Accordions>
+<Accordion title="Hello 算法" icon="book-open">
+[Hello 算法](https://github.com/krahets/hello-algo)：动画图解、一键运行的数据结构与算法教程，支持 Java, C++, Python, Go, JS, TS, C#, Swift, Rust, Dart, Zig 等语言。对小白非常友好，社区更新活跃，满分推荐。
+</Accordion>
+<Accordion title="代码随想录" icon="list-check">
+[代码随想录](https://github.com/youngyangyang04/leetcode-master)：200 道经典题目刷题顺序，60w 字详细图解，视频难点剖析，50 余张思维导图，支持多语言版本。
+</Accordion>
+<Accordion title="labuladong 算法笔记" icon="pen-nib">
+[labuladong 算法笔记](https://github.com/labuladong/fucking-algorithm)：60 多篇原创文章，基于 LeetCode 题目，涵盖所有题型和技巧，通俗易懂。
+</Accordion>
+</Accordions>
 
-[Hello 算法](https://github.com/krahets/hello-algo)：动画图解、一键运行的数据结构与算法教程，支持 Java, C++, Python, Go, JS, TS, C#, Swift, Rust, Dart, Zig 等语言。PS:作者写的这本书可以说是非常细节用心，对小白非常友好，社区更新也活跃，满分推荐。
+<CardGroup cols={2}>
 
-## 2. 《代码随想录》
+<Card title="滑动窗口" icon="window-maximize" href="/algo/sliding_window">
+双指针与滑动窗口题型整理。
+</Card>
 
-[代码随想录](https://github.com/youngyangyang04/leetcode-master)：LeetCode 刷题攻略：200 道经典题目刷题顺序，共 60w 字的详细图解，视频难点剖析，50 余张思维导图，支持 C++，Java，Python，Go，JavaScript 等多语言版本，从此算法学习不再迷茫！🔥🔥 来看看，你会发现相见恨晚！🚀
+<Card title="位运算" icon="microchip" href="/algo/bit">
+常见位运算技巧与题型。
+</Card>
 
-## 3. 《labuladong 算法笔记》
-
-[labuladong 算法笔记](https://github.com/labuladong/fucking-algorithm)：总共 60 多篇原创文章，都是基于 LeetCode 的题目，涵盖了所有题型和技巧，而且一定要做到举一反三，通俗易懂，绝不是简单的代码堆砌。
+</CardGroup>
