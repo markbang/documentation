@@ -39,57 +39,15 @@
     "links": [
       {
         "label": "博客",
-        "href": "https://bangwu.top"
-      },
-      {
-        "type": "discord",
-        "href": "https://discord.gg/Eb3jEZNtRv"
-      }
-    ],
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/markbang/documentation"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/markbang/documentation",
-      "twitter": "https://twitter.com/markbangwu",
-      "website": "https://bangwu.top",
-      "discord": "https://discord.gg/Eb3jEZNtRv"
-    },
-    "links": [
-      {
-        "header": "站点",
-        "items": [
-          {
-            "label": "首页",
-            "href": "https://base.bangwu.top"
-          },
-          {
-            "label": "博客",
-            "href": "https://bangwu.top"
-          },
-          {
-            "label": "Mintlify 仓库",
-            "href": "https://github.com/markbang/documentation"
-          }
-        ]
-      },
-      {
-        "header": "联系",
-        "items": [
-          {
-            "label": "Discord",
-            "href": "https://discord.gg/Eb3jEZNtRv"
-          },
-          {
-            "label": "Email",
-            "href": "mailto:markbang35@gmail.com"
-          }
-        ]
+        "href": "https://bangwu.me"
       }
     ]
+  },
+  "contextual": {
+    "options": [
+      "copy"
+    ],
+    "display": "header"
   },
   "navigation": {
     "tabs": [
@@ -299,20 +257,6 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "博客",
-          "href": "https://bangwu.top",
-          "icon": "book-open"
-        },
-        {
-          "anchor": "源码",
-          "href": "https://github.com/markbang/documentation",
-          "icon": "github"
-        }
-      ]
-    }
+    ]
   }
 }
