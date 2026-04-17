@@ -1,3 +1,9 @@
+---
+title: "Database principles"
+description: "Database principles course notes covering relational algebra, SQL queries with JOIN/GROUP BY, normalization to BCNF, ACID properties, and ER."
+icon: "graduation-cap"
+---
+
 # 数据库原理与应用考试相关-2023
 
 \----------------------------------------

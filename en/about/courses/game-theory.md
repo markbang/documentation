@@ -1,3 +1,9 @@
+---
+title: "Game theory"
+description: "Course notes on game theory covering Nash equilibrium, mixed strategies, the prisoner's dilemma, social cooperation, and decision goals."
+icon: "chess"
+---
+
 # 博弈论
 
 > [!note]

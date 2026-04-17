@@ -1,6 +1,6 @@
 ---
 title: "Rye"
-description: "Next-gen Python package manager."
+description: "Rye is a next-gen Python package manager and virtual environment tool, compared with pyenv, pipenv, uv, and pdm for dependency management."
 icon: "gear"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Barrier"
-description: "Cross-device keyboard/mouse sharing software."
+description: "Barrier is an open-source Synergy alternative for sharing one keyboard and mouse across multiple computers on Windows, macOS, or Linux."
 icon: "arrows-left-right"
 ---
 

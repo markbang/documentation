@@ -1,6 +1,6 @@
 ---
 title: "Tauri"
-description: "Rust cross-platform desktop development practice."
+description: "Tauri is a Rust-based cross-platform desktop framework smaller than Electron, covering project setup, Rust-JS communication, and app packaging."
 icon: "laptop-code"
 ---
 

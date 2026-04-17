@@ -1,6 +1,6 @@
 ---
 title: "Databases"
-description: "MySQL, SQLite, and core database concepts."
+description: "Database technology hub covering MySQL relational database operations, SQLite embedded usage, and core concepts like normalization and ACID."
 icon: "database"
 ---
 

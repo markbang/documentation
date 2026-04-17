@@ -1,6 +1,6 @@
 ---
 title: "Python"
-description: "Python backend development and web scraping."
+description: "Python backend development hub covering FastAPI framework, web scraping with requests and BeautifulSoup, and popular third-party libraries."
 icon: "python"
 ---
 

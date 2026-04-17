@@ -1,3 +1,9 @@
+---
+title: "English short fiction appreciation"
+description: "Course notes on English short fiction analysis covering narrative techniques, foreshadowing, and readings of The Rocking-Horse Winner and The Garden Party."
+icon: "book"
+---
+
 以下文章来自[青灰色的风](https://www.cnblogs.com/68786C)然后我再结合今年（2024年上半年）上课新增的小说进行的补充
 
 英语短篇小说佳作欣赏

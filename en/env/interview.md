@@ -1,6 +1,6 @@
 ---
 title: "Interview Experience"
-description: "Interview reviews and lessons learned."
+description: "Technical interview reviews with round-by-round analysis covering algorithm questions, system design, project deep-dives, and improvement areas."
 icon: "comments"
 ---
 

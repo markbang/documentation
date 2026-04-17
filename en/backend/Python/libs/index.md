@@ -1,6 +1,6 @@
 ---
 title: "Python Libraries"
-description: "Python third-party library notes and guides."
+description: "Python third-party library notes covering httpx, matplotlib, PyTorch, WordCloud, PyAutoGUI and more, with a learn-by-doing philosophy."
 icon: "cubes"
 ---
 

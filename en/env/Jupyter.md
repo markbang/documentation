@@ -1,6 +1,6 @@
 ---
 title: "Jupyter"
-description: "Interactive data analysis notebook."
+description: "Jupyter Notebook is an interactive data analysis tool for running code in the browser, covering installation, remote SSH access, and shortcuts."
 icon: "chart-line"
 ---
 

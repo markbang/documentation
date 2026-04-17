@@ -1,3 +1,9 @@
+---
+title: "Information management"
+description: "Course notes on information management covering information definitions, information society features, system classification, and resource planning frameworks."
+icon: "folder-open"
+---
+
 <details>
     <summary>写在前面</summary>
 <p>信息管理概论由课程资料+书本总结，按照顺序来划分，毕竟老师没有给出重点😅(抽象)</p>

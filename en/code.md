@@ -1,6 +1,6 @@
 ---
 title: "Code Snippets"
-description: "Common commands, cheatsheets, and quick references."
+description: "Developer cheatsheets and quick references covering Git commands, Docker operations, shell script snippets, and package manager shortcuts."
 icon: "code"
 ---
 

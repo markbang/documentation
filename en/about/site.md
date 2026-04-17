@@ -1,6 +1,6 @@
 ---
 title: "Site Info"
-description: "Knowledge base scope, formatting conventions, and maintenance."
+description: "Knowledge base site guide covering four content sections, page conventions, recommended reading workflow, and current maintenance principles."
 icon: "book-open"
 ---
 
