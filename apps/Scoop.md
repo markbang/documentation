@@ -1,6 +1,6 @@
 ---
 title: "Scoop"
-description: "Windows 命令行包管理器。"
+description: "Scoop 是 Windows 平台上的命令行包管理器，类似 macOS 上的 Homebrew，通过 scoop install 一条命令即可安装软件，本文介绍安装流程与初始配置、aria2 多线程下载加速设置、第三方 bucket 源添加管理、HTTP 代理配置以及全局安装路径自定义等常用操作说明。"
 icon: "bucket"
 ---
 

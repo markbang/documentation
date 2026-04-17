@@ -1,6 +1,6 @@
 ---
 title: "Pyenv"
-description: "Python 版本管理工具。"
+description: "Pyenv 是一个 Python 版本管理工具，允许你在同一系统上轻松安装、管理和切换多个 Python 版本，支持为不同项目设置特定版本与虚拟环境，本文涵盖 Windows（pyenv-win）通过 pip 或 Git 安装方法与 Linux/macOS 平台的安装配置流程。"
 icon: "python"
 ---
 

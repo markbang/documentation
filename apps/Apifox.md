@@ -1,6 +1,6 @@
 ---
 title: "Apifox"
-description: "API 设计、调试、Mock 与文档协作的一体化工具。"
+description: "Apifox 是集 API 接口设计、调试测试、Mock 数据模拟与文档自动生成于一体的协作平台，适合个人项目和小团队使用，本文介绍 REST API 调试、按模块整理接口、前后端并行开发 Mock 功能以及公共环境变量管理、敏感信息检查等团队协作中的日常使用流程与配置建议。"
 icon: "plug"
 ---
 

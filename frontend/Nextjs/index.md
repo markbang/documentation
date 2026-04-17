@@ -1,6 +1,6 @@
 ---
 title: "Next.js"
-description: "React 全栈框架，SSR/SSG/API Routes。"
+description: "Next.js 是 Vercel 团队开发的基于 React 的全栈 Web 框架，支持服务端渲染（SSR）、静态站点生成（SSG）与 API Routes 后端接口，本文整理了 create-next-app 项目初始化、文件系统路由、数据获取方法与页面渲染模式等核心概念与用法。"
 icon: "nextjs"
 ---
 
