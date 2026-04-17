@@ -139,6 +139,22 @@
                     ]
                   },
                   {
+                    "group": "Rust",
+                    "icon": "rust",
+                    "pages": [
+                      "backend/Rust/index",
+                      "backend/Rust/agentim"
+                    ]
+                  },
+                  {
+                    "group": "Auth & ORM",
+                    "icon": "shield-halved",
+                    "pages": [
+                      "backend/auth/rbac",
+                      "backend/orm/drizzle"
+                    ]
+                  },
+                  {
                     "group": "Databases",
                     "icon": "database",
                     "pages": [
@@ -163,10 +179,18 @@
                     ]
                   },
                   {
-                    "group": "Next.js",
-                    "icon": "nextjs",
+                    "group": "React Full-Stack",
+                    "icon": "code",
                     "pages": [
+                      "frontend/tanstack",
                       "frontend/Nextjs/index"
+                    ]
+                  },
+                  {
+                    "group": "SolidJS Desktop",
+                    "icon": "laptop-code",
+                    "pages": [
+                      "frontend/solidjs"
                     ]
                   },
                   {
@@ -184,7 +208,8 @@
                 "icon": "laptop",
                 "pages": [
                   "software/index",
-                  "software/tauri"
+                  "software/tauri",
+                  "software/monorepo"
                 ]
               },
               {
@@ -383,6 +408,22 @@
                     ]
                   },
                   {
+                    "group": "Rust",
+                    "icon": "rust",
+                    "pages": [
+                      "zh/backend/Rust/index",
+                      "zh/backend/Rust/agentim"
+                    ]
+                  },
+                  {
+                    "group": "认证与ORM",
+                    "icon": "shield-halved",
+                    "pages": [
+                      "zh/backend/auth/rbac",
+                      "zh/backend/orm/drizzle"
+                    ]
+                  },
+                  {
                     "group": "数据库",
                     "icon": "database",
                     "pages": [
@@ -407,10 +448,18 @@
                     ]
                   },
                   {
-                    "group": "Next.js",
-                    "icon": "nextjs",
+                    "group": "React 全栈",
+                    "icon": "code",
                     "pages": [
+                      "zh/frontend/tanstack",
                       "zh/frontend/Nextjs/index"
+                    ]
+                  },
+                  {
+                    "group": "SolidJS 桌面",
+                    "icon": "laptop-code",
+                    "pages": [
+                      "zh/frontend/solidjs"
                     ]
                   },
                   {
@@ -428,7 +477,8 @@
                 "icon": "laptop",
                 "pages": [
                   "zh/software/index",
-                  "zh/software/tauri"
+                  "zh/software/tauri",
+                  "zh/software/monorepo"
                 ]
               },
               {

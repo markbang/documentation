@@ -8,7 +8,7 @@ icon: "browser"
 
 Frontend development builds user interfaces and experiences, covering the visual part of web applications.
 
-<CardGroup cols={3}>
+<CardGroup cols={4}>
 
 <Card title="Vue" icon="vuejs" href="/frontend/Vue/index">
 Progressive JavaScript framework with Composition API.
@@ -18,8 +18,24 @@ Progressive JavaScript framework with Composition API.
 React full-stack framework with SSR/SSG/API Routes.
 </Card>
 
+<Card title="TanStack + Hono" icon="code" href="/frontend/tanstack">
+Full-stack monorepo — SSR + type-safe API server.
+</Card>
+
+<Card title="SolidJS + Tauri" icon="laptop-code" href="/frontend/solidjs">
+Local-first desktop apps — reactive UI + Rust shell.
+</Card>
+
+</CardGroup>
+
+<CardGroup cols={2}>
+
 <Card title="CSS Tools" icon="palette" href="/frontend/TailwindCSS/index">
 Tailwind CSS and DaisyUI component library.
+</Card>
+
+<Card title="UnoCSS" icon="wind" href="/frontend/tanstack#styling-unocss">
+Utility-first CSS with icon presets — lighter than Tailwind.
 </Card>
 
 </CardGroup>
