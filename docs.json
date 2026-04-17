@@ -62,6 +62,20 @@
     "display": "header"
   },
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "博客",
+          "icon": "pen-nib",
+          "href": "https://bangwu.me"
+        },
+        {
+          "anchor": "GitHub",
+          "icon": "github",
+          "href": "https://github.com/markbang"
+        }
+      ]
+    },
     "languages": [
       {
         "language": "en",
