@@ -1,6 +1,6 @@
 ---
 title: "Agent-ready docs"
-description: "Practical checklist for making a documentation site easier for AI agents to discover, read, and use, covering llms.txt, markdown delivery, content signals, and protocol discovery."
+description: "Checklist for making your docs site AI-agent-friendly, covering llms.txt, markdown delivery, content signals, and protocol discovery."
 icon: "robot"
 ---
 

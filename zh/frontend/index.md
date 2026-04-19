@@ -1,6 +1,6 @@
 ---
 title: "前端"
-description: "前端开发技术学习笔记入口页，涵盖 Vue 3 渐进式框架（Composition API 与 Naive UI 组件库）、Next.js React 全栈框架（SSR/SSG/API Routes）、Tailwind CSS 原子化样式工具以及 DaisyUI 预设计组件库等方向的学习记录与实践整理导航。"
+description: "前端开发技术学习笔记入口页，涵盖 Vue 3 渐进式框架与 Naive UI 组件库、Next.js React 全栈框架（SSR/SSG/API Routes）、Tailwind CSS 原子化样式工具以及 DaisyUI 预设计组件库、SolidJS 与 TanStack 等方向的学习记录与实践导航。"
 icon: "browser"
 ---
 
