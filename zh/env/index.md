@@ -40,6 +40,10 @@ GitHub Actions CI/CD 自动化。
 Markdown 写作技巧与工具。
 </Card>
 
+<Card title="Agent 友好文档" icon="robot" href="/zh/env/agent-ready-docs">
+让文档站更容易被 AI Agent 发现和读取。
+</Card>
+
 </CardGroup>
 
 ## 博客搭建

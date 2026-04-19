@@ -257,12 +257,13 @@
                   "env/Caddy",
                   "env/supervisor",
                   "env/CDN",
-                  "env/Jupyter",
-                  "env/github-workflow",
-                  "env/markdown",
-                  {
-                    "group": "Blog Setup",
-                    "icon": "pen-nib",
+                "env/Jupyter",
+                "env/github-workflow",
+                "env/markdown",
+                "env/agent-ready-docs",
+                {
+                  "group": "Blog Setup",
+                  "icon": "pen-nib",
                     "pages": [
                       "env/Fuwari",
                       "env/imgbed"
@@ -526,12 +527,13 @@
                   "zh/env/Caddy",
                   "zh/env/supervisor",
                   "zh/env/CDN",
-                  "zh/env/Jupyter",
-                  "zh/env/github-workflow",
-                  "zh/env/markdown",
-                  {
-                    "group": "博客搭建",
-                    "icon": "pen-nib",
+                "zh/env/Jupyter",
+                "zh/env/github-workflow",
+                "zh/env/markdown",
+                "zh/env/agent-ready-docs",
+                {
+                  "group": "博客搭建",
+                  "icon": "pen-nib",
                     "pages": [
                       "zh/env/Fuwari",
                       "zh/env/imgbed"

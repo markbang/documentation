@@ -40,6 +40,10 @@ GitHub Actions CI/CD automation.
 Markdown writing tips and tools.
 </Card>
 
+<Card title="Agent-ready docs" icon="robot" href="/env/agent-ready-docs">
+Make docs easier for AI agents to discover and read.
+</Card>
+
 </CardGroup>
 
 ## Blog Setup
