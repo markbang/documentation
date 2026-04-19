@@ -1,6 +1,6 @@
 ---
 title: "Vue.js"
-description: "Vue.js 3 渐进式前端框架学习笔记，涵盖 Composition API（setup/ref/reactive/computed）响应式编程模式、组件通信（props/emit/provide/inject）与 Vue Router 路由及 Pinia 状态管理等生态工具，附 Naive UI 组件库使用经验。"
+description: "Vue.js 3 渐进式前端框架学习笔记，涵盖 Composition API（setup/ref/reactive/computed）响应式编程模式、组件通信（props/emit/provide/inject）与 Vue Router 路由及 Pinia 状态管理等生态工具使用经验。"
 icon: "vuejs"
 ---
 

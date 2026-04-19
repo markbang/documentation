@@ -1,6 +1,6 @@
 ---
 title: "SolidJS + Tauri 桌面"
-description: "使用 SolidJS 真响应式前端框架（无虚拟 DOM、基于 Signal 的细粒度响应式更新、约 7KB 体积）构建桌面应用 UI，配合 Tauri v2 Rust 原生壳打包为轻量级跨平台桌面程序（约 3MB），基于 OnlyWrite 本地优先写作工具的完整项目开发实践。"
+description: "使用 SolidJS 真响应式前端框架（无虚拟 DOM、基于 Signal 的细粒度响应式更新、约 7KB 体积）构建桌面应用 UI，配合 Tauri v2 Rust 原生壳打包为轻量级跨平台桌面程序（约 3MB），基于 OnlyWrite 本地优先写作工具的完整开发实践。"
 icon: "laptop-code"
 ---
 

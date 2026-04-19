@@ -1,6 +1,6 @@
 ---
 title: "TanStack Start + Hono"
-description: "TanStack Start SSR 前端与 Hono API 服务器组合的全栈 Monorepo 架构详解，涵盖文件路由、tRPC 类型安全契约、Drizzle ORM 数据层与 Better Auth 认证集成，来自 badmin 和 cyop 项目实践。"
+description: "TanStack Start SSR 前端与 Hono API 服务器的全栈 Monorepo 架构详解，涵盖文件路由、tRPC 类型安全契约、Drizzle ORM 数据层与 Better Auth 认证集成，来自 badmin 与 cyop 项目实践经验。"
 icon: "code"
 ---
 

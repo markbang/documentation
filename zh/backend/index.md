@@ -1,6 +1,6 @@
 ---
 title: "后端"
-description: "后端开发技术学习笔记与实践记录汇总，涵盖 Python 方向（FastAPI 框架、爬虫技术、httpx/matplotlib/PyTorch 等常用库）、Go 方向（Gin Web 框架入门与实战）以及数据库方向（MySQL 操作管理、SQLite 嵌入式使用与数据库原理课程笔记）。"
+description: "后端开发技术学习笔记与实践记录汇总，涵盖 Python 方向（FastAPI 框架、爬虫技术与常用库）、Go 方向（Gin Web 框架）、Rust 方向（Axum 服务与 Tauri 桌面）以及数据库方向（MySQL、SQLite 与数据库原理课程笔记）各技术栈导航。"
 icon: "server"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "常用库"
-description: "Python 第三方库学习笔记与使用指南入口页，整理了 httpx 异步 HTTP 客户端、matplotlib 数据绑图、PyTorch 深度学习、WordCloud 词云生成、PyAutoGUI 自动化等常用库的安装配置与核心 API 用法，附 awesome-python-cn 资源索引链接。"
+description: "Python 第三方库学习笔记与使用指南入口页，整理了 httpx 异步 HTTP 客户端、matplotlib 数据绑图、PyTorch 深度学习、WordCloud 词云生成与 PyAutoGUI 桌面自动化等常用库的安装配置与核心 API 用法，附资源索引链接。"
 icon: "cubes"
 ---
 
