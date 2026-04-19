@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Docker 容器化部署与管理完整指南，涵盖 Docker 基本概念（镜像、容器、仓库）、docker pull 拉取镜像与 docker build 构建自定义镜像、docker run 启动容器与端口映射、数据卷挂载持久化存储、容器网络配置及 logs/exec/stop 等日常运维核心命令详解。"
+description: "Docker 容器化部署与管理完整指南，涵盖 Docker 基本概念（镜像、容器、仓库）、docker pull 拉取镜像与 docker build 构建自定义镜像、docker run 启动容器与端口映射、数据卷挂载持久化存储及 logs/exec/stop 等日常运维命令详解。"
 icon: "container-storage"
 ---
 

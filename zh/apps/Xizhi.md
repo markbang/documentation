@@ -1,6 +1,6 @@
 ---
 title: "息知"
-description: "息知等多渠道消息推送服务整理，涵盖 Server 酱微信推送免费服务的登录绑定与 SendKey 获取流程，以及使用 Python requests 库调用推送 API 发送 Markdown 格式通知的代码示例，适用于服务器监控告警、定时提醒与系统状态通知等自动化场景。"
+description: "多渠道消息推送服务的功能整理与横向对比，涵盖 Server 酱微信推送、Bark iOS 通知、Telegram Bot 消息及息知聚合平台的注册绑定与 Python/curl 调用示例代码。附统一推送管理器类的实现，适用于服务器监控告警、定时任务通知与 CI/CD 构建回调等自动化场景。"
 icon: "bell"
 ---
 

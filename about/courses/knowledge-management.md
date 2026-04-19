@@ -1,6 +1,6 @@
 ---
 title: "Knowledge management"
-description: "Course notes on knowledge management covering tacit vs explicit knowledge, the SECI conversion model, knowledge sharing mechanisms, and organizational learning."
+description: "Course notes on knowledge management covering tacit vs explicit knowledge, the SECI conversion model, knowledge sharing, and organizational learning."
 icon: "lightbulb"
 ---
 

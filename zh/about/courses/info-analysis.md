@@ -1,6 +1,6 @@
 ---
 title: "信息分析"
-description: "信息分析课程复习笔记，涵盖专利法核心内容解读、研究设计中调节变量与中介变量区分、概率与非概率抽样方法、量表信度 Cronbach α 与效度检验、Pearson 相关分析与一元多元线性回归、Logistic 回归模型、探索性因子分析及 K-Means 聚类等 SPSS 统计实操要点。"
+description: "信息分析课程复习笔记，涵盖专利法核心内容解读、研究设计中调节变量与中介变量区分、概率与非概率抽样方法、量表信度 Cronbach α 与效度检验、Pearson 相关分析与一元多元线性回归、Logistic 回归模型及探索性因子分析与 K-Means 聚类等 SPSS 统计实操要点。"
 icon: "chart-pie"
 ---
 

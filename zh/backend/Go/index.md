@@ -1,6 +1,6 @@
 ---
 title: "Go"
-description: "Go 语言学习路线与实践记录，从选择 Go 作为高性能语言的原因讲起，涵盖 Go 语言之旅入门语法、Bilibili 视频教程学习、GoFrame 框架初探到最终选择 Gin + Gorm 搭建后端服务的完整学习经历，附推荐教程与从 Python 转 Go 的经验分享。"
+description: "Go 语言学习路线规划与实战开发记录，完整涵盖从 Go 语言之旅入门基本语法、GoFrame 框架初次尝试到 Gin + Gorm 搭建 RESTful API 后端服务的逐步进阶路径，并分享从 Python 转向 Go 语言过程中的个人经验心得与优质学习教程推荐资源汇总。"
 icon: "golang"
 ---
 

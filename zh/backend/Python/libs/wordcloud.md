@@ -1,6 +1,6 @@
 ---
 title: "WordCloud 词云"
-description: "WordCloud 是用于生成词云图的 Python 可视化库，可将文本数据转化为美观直观的词云图像，本文涵盖 pip 安装与基本生成流程、自定义形状蒙版与配色方案设置、结合 jieba 实现中文分词支持以及使用 Matplotlib 展示词云的完整代码示例。"
+description: "WordCloud Python 词云数据可视化库的完整使用指南与实战示例，涵盖 pip 安装配置与基本词云生成流程、遮罩图片形状与 colormap 配色方案自定义设置、jieba 中文分词集成与停用词过滤、TF-IDF 关键词提取权重词频生成及 Matplotlib 图表展示与高分辨率图片导出技巧。"
 icon: "cloud"
 ---
 

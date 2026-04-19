@@ -1,6 +1,6 @@
 ---
 title: "Fuwari"
-description: "Fuwari 是一款基于 Astro 静态站点框架的博客主题，设计简洁且性能优秀，本文介绍项目初始化与目录结构说明、文章 frontmatter 格式（title/published/tags/category/draft）配置、分类与标签设置方法以及自定义样式与博客搭建部署的完整流程实践。"
+description: "Fuwari 是一款基于 Astro 静态站点框架的博客主题，设计简洁且性能优秀，本文介绍项目初始化与目录结构说明、文章 frontmatter 格式（title/published/tags/category/draft）配置、分类与标签设置方法以及博客搭建部署流程。"
 icon: "pen-nib"
 ---
 

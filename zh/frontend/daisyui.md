@@ -1,6 +1,6 @@
 ---
 title: "DaisyUI"
-description: "DaisyUI 是基于 Tailwind CSS 的高层组件库，提供按钮（btn）、卡片（card）、模态框（modal）、导航栏（navbar）等数十种预设计 UI 组件，无需手写大量工具类即可快速搭建界面，本文介绍 npm 安装与配置、主题切换及常用组件示例。"
+description: "DaisyUI 是基于 Tailwind CSS 的高层组件库，提供按钮（btn）、卡片（card）、模态框（modal）、导航栏（navbar）等数十种预设计 UI 组件，无需手写大量工具类即可快速搭建界面，本文介绍 npm 安装配置、主题切换及常用组件示例。"
 icon: "palette"
 ---
 

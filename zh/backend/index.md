@@ -1,6 +1,6 @@
 ---
 title: "后端"
-description: "后端开发技术学习笔记与实践记录汇总，涵盖 Python 方向（FastAPI 框架、爬虫技术与常用库）、Go 方向（Gin Web 框架）、Rust 方向（Axum 服务与 Tauri 桌面）以及数据库方向（MySQL、SQLite 与数据库原理课程笔记）各技术栈导航。"
+description: "后端开发技术的学习笔记与项目实践记录的汇总导航页面，系统涵盖 Python、Go、Rust 三大主流后端编程语言以及 MySQL、SQLite 关系型数据库各技术栈的入口链接导航、推荐学习路径规划与 RESTful API 设计及身份认证授权等后端核心知识点概览。"
 icon: "server"
 ---
 
