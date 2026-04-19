@@ -1,6 +1,6 @@
 ---
 title: "Rclone"
-description: "Rclone is a command-line tool for managing files on 40+ cloud storage services with a unified interface, supporting rsync-like sync, copy, and mount operations."
+description: "Rclone is a command-line tool for managing files on 40+ cloud storage services with a unified interface, supporting rsync-like sync, copy, and mount."
 icon: "cloud-arrow-up"
 ---
 

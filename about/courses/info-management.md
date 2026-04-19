@@ -1,6 +1,6 @@
 ---
 title: "Information management"
-description: "Course notes on information management covering information definitions, information society features, system classification, and resource planning frameworks."
+description: "Course notes on information management covering information definitions, information society features, system classification, and resource planning."
 icon: "folder-open"
 ---
 

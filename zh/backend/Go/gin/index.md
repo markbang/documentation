@@ -1,6 +1,6 @@
 ---
 title: "Go Gin"
-description: "Go Gin 高性能 Web 框架入门指南，涵盖 gin.Default 路由引擎创建、GET/POST 路由定义与分组、c.JSON 返回 JSON 响应、中间件配置与 router.Run 启动 HTTP 服务等基础用法，帮助开发者快速上手 Go 语言 Web API 后端开发。"
+description: "Go 语言 Gin 高性能 Web 框架的入门使用指南与核心概念速查，详细讲解 gin.Default 路由引擎的创建方式、路由分组与嵌套结构设计、JSON/XML 格式响应返回、全局与局部中间件的注册配置以及 HTTP 服务启动与端口监听等 Gin 框架日常开发中最常用的基础操作。"
 icon: "bolt"
 ---
 

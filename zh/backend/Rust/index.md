@@ -1,6 +1,6 @@
 ---
 title: "Rust"
-description: "Rust 后端开发技术学习入口页，涵盖基于 Axum HTTP 框架与 Tokio 异步运行时构建的高性能 AgentIM 多平台 IM 桥接服务项目实践与 Tauri 跨平台原生桌面壳开发经验，以及从所有权借用生命周期到异步 Web 服务的完整进阶学习路径。"
+description: "Rust 后端开发技术学习导航入口页，涵盖基于 Axum Web 框架与 Tokio 异步运行时构建的 AgentIM 多平台即时通讯桥接服务项目实践、Tauri 框架跨平台轻量桌面应用开发，以及所有权借用、异步并发编程与 Web 路由中间件设计的系统进阶学习路径规划。"
 icon: "rust"
 ---
 

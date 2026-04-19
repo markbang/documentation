@@ -1,6 +1,6 @@
 ---
 title: "RBAC 与会话认证"
-description: "RBAC 基于角色的访问控制权限系统与会话 Cookie 认证模式详解，涵盖用户-角色-权限四表数据模型设计与签名 Cookie 会话管理机制，基于 badmin（Hono + SQLite）和邮轮系统（Next.js + PostgreSQL）两个真实项目实践。"
+description: "RBAC 角色访问控制与 Cookie 会话认证机制的原理详解与项目实践笔记，涵盖用户-角色-权限-资源四表数据模型设计思路、badmin 通用管理后台与邮轮票务管理系统中的角色分配、权限校验及 Cookie/Session 登录认证完整实现方案与代码示例参考。"
 icon: "shield-halved"
 ---
 

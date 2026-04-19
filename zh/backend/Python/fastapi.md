@@ -1,6 +1,6 @@
 ---
 title: "FastAPI"
-description: "FastAPI 现代高性能 Python Web 框架学习笔记，基于 Python 3.6+ 类型提示构建，涵盖 pip 安装与 uvicorn 启动、路由定义与路径参数、Pydantic 请求体数据验证、异步 async/await 处理等核心用法，性能媲美 NodeJS 和 Go。"
+description: "FastAPI 基于 Python 类型提示构建的高性能 Web 框架学习笔记，系统涵盖路由定义与路径参数绑定、Pydantic 请求体验证、依赖注入系统、CORS 跨域中间件配置、SQLAlchemy 数据库集成、OAuth2 认证授权以及文件上传与后台任务等核心功能用法详解。"
 icon: "bolt"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "让文档站对 AI Agent 更友好"
-description: "面向文档站的 AI Agent 适配实操清单，帮助编码代理与 AI 搜索工具更好地发现和解析你的文档，涵盖 llms.txt 声明文件配置、Markdown 纯文本输出、Content-Signal 内容信号标注、API 与 MCP 协议发现以及大规模文档站结构优化建议。"
+description: "面向文档站的 AI Agent 适配实操清单，帮助编码代理与 AI 搜索工具更好地发现和解析你的文档，涵盖 llms.txt 声明文件配置、Markdown 纯文本输出、Content-Signal 内容信号标注、API 与 MCP 协议发现及文档站结构优化建议。"
 icon: "robot"
 ---
 

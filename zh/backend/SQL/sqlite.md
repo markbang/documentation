@@ -1,6 +1,6 @@
 ---
 title: "SQLite"
-description: "SQLite 轻量级嵌入式关系型数据库引擎使用指南，无需独立服务器进程即可直接读写磁盘文件，涵盖零配置架构特点、Python sqlite3 模块集成方法、CREATE/INSERT/SELECT 等基本 SQL 操作以及适用于小型项目与移动端的使用场景分析。"
+description: "SQLite 轻量级嵌入式关系型数据库的完整使用指南，无需独立服务器进程即可直接读写单个磁盘文件存储数据，涵盖 Python sqlite3 标准库模块集成与上下文管理器用法、建表与参数化 CRUD 操作、WAL 日志模式性能优化配置、适用场景分析及与其他数据库的对比参考。"
 icon: "database"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Monorepo Architecture"
-description: "Bun/Turborepo monorepo patterns for full-stack apps — project structure, shared packages, workspace tooling, and CI/CD drawn from badmin, cyop, and fullstack."
+description: "Bun/Turborepo monorepo patterns for full-stack apps — project structure, shared packages, workspace tooling, and CI/CD from real project experience."
 icon: "cubes"
 ---
 

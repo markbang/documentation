@@ -1,6 +1,6 @@
 ---
 title: "GitHub Actions"
-description: "GitHub Actions 是 GitHub 内置的 CI/CD 自动化工具，通过 .github/workflows 目录下的 YAML 文件定义工作流，本文介绍 workflow 基本结构与语法、on 事件触发条件（push/pull_request/schedule）以及自动构建部署实践。"
+description: "GitHub Actions 是 GitHub 内置的 CI/CD 自动化工具，通过 .github/workflows 目录下的 YAML 文件定义工作流，本文介绍 workflow 基本结构与语法、on 事件触发条件（push/pull_request/schedule）以及自动构建与部署实践。"
 icon: "code-branch"
 ---
 

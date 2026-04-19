@@ -1,6 +1,6 @@
 ---
 title: "Drizzle ORM"
-description: "Drizzle ORM 基于 TypeScript-first 理念的数据库 Schema 设计、迁移管理与 CRUD 操作模式详解笔记，基于 badmin（SQLite）、邮轮系统（PostgreSQL）和 cyop（PostgreSQL AI 平台）三个实际项目总结的开发最佳实践。"
+description: "Drizzle ORM 作为 TypeScript-first 的现代数据库工具链，本文详解其关系型 Schema 声明式定义、数据库迁移生成与执行工作流、类型安全的 CRUD 增删改查操作语法，并基于博客系统、认证模块与智能体配置三个实际项目总结 Drizzle ORM 的最佳实践经验与设计模式。"
 icon: "database"
 ---
 

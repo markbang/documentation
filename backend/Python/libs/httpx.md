@@ -1,6 +1,6 @@
 ---
 title: "HTTPX"
-description: "HTTPX is a modern Python HTTP client replacing requests, with sync and async APIs, native HTTP/2 support, connection pooling, and fine-grained timeout control."
+description: "HTTPX is a modern Python HTTP client replacing requests, with sync and async APIs, native HTTP/2 support, connection pooling, and timeout configuration."
 icon: "globe"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Python 学习笔记"
-description: "Python 日常学习过程中积累的零散编程笔记与实用代码片段记录，涵盖 pd.DataFrame 创建格式与注意事项、Pandas 数据处理常用技巧以及常见错误排查与解决方案等编程实用要点整理，内容不定期补充更新，适合在开发中快速回查 Python 特定用法。"
+description: "Python 日常学习中积累的编程笔记与实用代码片段合集，内容涵盖 pd.DataFrame 创建格式与 Series 概念、Pandas 文本数据读取与 read_csv 参数配置、describe 描述性统计输出、value_counts 频数分析、交叉表 crosstab 及常见数据处理错误排查方案。"
 icon: "note-sticky"
 ---
 

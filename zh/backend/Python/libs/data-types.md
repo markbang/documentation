@@ -1,6 +1,6 @@
 ---
 title: "Python 数据类型"
-description: "Python 内置数据类型详解与使用指南，涵盖整数浮点数与复数等数字类型、字符串常用方法（upper/split/strip/replace）、列表增删改查与切片操作、元组不可变特性、字典键值对操作（get/items/keys）以及集合交并差运算等基础数据结构。"
+description: "Python 内置与扩展数据类型全面详解参考笔记，涵盖字符串格式化与常用方法、列表增删改查与切片索引操作、元组不可变特性与解包、字典键值遍历与安全访问、集合交并差运算，以及 datetime 日期处理、collections 容器扩展、dataclass 数据类与 typing 类型提示等进阶用法。"
 icon: "list"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "HTTPX"
-description: "HTTPX 是功能完整的 Python HTTP 客户端库，作为 requests 的现代替代品，本文涵盖同步与异步 API 统一接口、原生 HTTP/2 协议支持、GET/POST 请求基本用法、细粒度超时控制配置与 Client 实例连接复用等核心功能详解。"
+description: "HTTPX 作为 requests 库的现代替代方案，是功能完备的 Python HTTP 客户端，本文详解其统一的同步与异步请求 API 接口、HTTP/2 协议原生支持、Client 连接池自动复用、细粒度超时控制与自动重试机制、流式大文件下载以及代理设置等高级功能配置与生产环境最佳实践。"
 icon: "bolt"
 ---
 

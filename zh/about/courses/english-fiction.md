@@ -1,6 +1,6 @@
 ---
 title: "英语短篇小说赏析"
-description: "英语短篇小说佳作欣赏课程笔记，涵盖叙事视角与文学手法分析（style、theme、foreshadowing、conflict）及 The Rocking-Horse Winner、The Garden Party、The Lottery 等经典篇目主题解读与写作评析。"
+description: "英语短篇小说佳作欣赏课程笔记，涵盖叙事视角与文学手法分析包括 style、theme、foreshadowing、conflict，以及 The Rocking-Horse Winner、The Garden Party、The Lottery 等经典篇目主题解读与写作评析。"
 icon: "book"
 ---
 

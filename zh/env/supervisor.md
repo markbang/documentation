@@ -1,6 +1,6 @@
 ---
 title: "Supervisor"
-description: "Supervisor 是 Linux 系统上的进程守护与管理工具，用于在后台运行、监控和自动重启应用服务进程，本文整理了 apt/pip 安装方法、supervisord 主配置文件与 program 子配置编写规范、supervisorctl 常用管理命令以及开机自启设置流程。"
+description: "Supervisor 是 Linux 系统上的进程守护与管理工具，用于在后台运行、监控和自动重启应用服务进程，本文整理了 apt/pip 安装方法、supervisord 主配置文件与 program 子配置编写规范、supervisorctl 常用管理命令及开机自启设置。"
 icon: "eye"
 ---
 
