@@ -24,6 +24,10 @@ AI 客户端与主题定制。
 AI 驱动的代码编辑器。
 </Card>
 
+<Card title="Browser Harness" icon="globe" href="/zh/apps/BrowserHarness">
+面向编码 Agent 的轻量浏览器控制层。
+</Card>
+
 <Card title="Pyenv" icon="python" href="/zh/apps/Pyenv">
 Python 版本管理工具。
 </Card>

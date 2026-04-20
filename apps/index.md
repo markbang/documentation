@@ -24,6 +24,10 @@ AI client with theme customization.
 AI-powered code editor.
 </Card>
 
+<Card title="Browser Harness" icon="globe" href="/apps/BrowserHarness">
+Thin browser control layer for coding agents.
+</Card>
+
 <Card title="Pyenv" icon="python" href="/apps/Pyenv">
 Python version manager.
 </Card>
