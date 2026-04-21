@@ -1,6 +1,6 @@
 ---
 title: "Git worktree"
-description: "Git worktree 可以让同一个仓库同时拥有多个工作目录，适合并行开发、多 agent 协作、隔离 hotfix 与功能分支。"
+description: "Git worktree 让同一个仓库同时检出多个独立工作目录，无需重复 clone 即可并行开发不同分支，适用于功能并行开发、多 agent 同时编码、紧急 hotfix 隔离与跨分支代码评审等场景，附 worktree add、list、remove 常用命令速查。"
 icon: "code-branch"
 ---
 

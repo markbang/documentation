@@ -1,6 +1,6 @@
 ---
 title: "Git worktree"
-description: "Use git worktree to check out multiple branches from one repository at the same time, which is especially useful for parallel feature work and multi-agent coding."
+description: "Use git worktree to check out multiple branches from one repository simultaneously for parallel feature work and multi-agent coding."
 icon: "code-branch"
 ---
 
