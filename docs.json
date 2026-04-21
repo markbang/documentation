@@ -257,9 +257,10 @@
                   "env/docker-compose",
                   "env/Caddy",
                   "env/supervisor",
-                  "env/CDN",
+                "env/CDN",
                 "env/Jupyter",
                 "env/github-workflow",
+                "env/git-worktree",
                 "env/markdown",
                 "env/agent-ready-docs",
                 {
@@ -528,9 +529,10 @@
                   "zh/env/docker-compose",
                   "zh/env/Caddy",
                   "zh/env/supervisor",
-                  "zh/env/CDN",
+                "zh/env/CDN",
                 "zh/env/Jupyter",
                 "zh/env/github-workflow",
+                "zh/env/git-worktree",
                 "zh/env/markdown",
                 "zh/env/agent-ready-docs",
                 {

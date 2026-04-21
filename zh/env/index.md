@@ -36,6 +36,10 @@ icon: "cloud"
 GitHub Actions CI/CD 自动化。
 </Card>
 
+<Card title="Git worktree" icon="code-branch" href="/zh/env/git-worktree">
+适合并行开发与多 agent 协作的多工作目录方案。
+</Card>
+
 <Card title="Markdown" icon="file-lines" href="/zh/env/markdown">
 Markdown 写作技巧与工具。
 </Card>
