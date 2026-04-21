@@ -1,6 +1,6 @@
 ---
 title: "Browser Harness"
-description: "Browser Harness is a thin, self-healing browser control layer built on CDP, designed for Codex, Claude Code, and other coding agents that need real browser access."
+description: "Browser Harness is a thin, self-healing browser control layer built on CDP for coding agents like Codex and Claude Code that need real browser access."
 icon: "globe"
 ---
 

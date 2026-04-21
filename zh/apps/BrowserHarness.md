@@ -1,6 +1,6 @@
 ---
 title: "Browser Harness"
-description: "Browser Harness 是 Browser Use 团队推出的轻量级浏览器控制层，基于 CDP 直接连接真实浏览器，适合 Codex、Claude Code 等 Agent 在执行任务时动态补齐缺失能力。"
+description: "Browser Harness 是 Browser Use 团队开源的轻量级浏览器控制层，基于 Chrome DevTools Protocol 直接连接真实浏览器实例，为 Codex、Claude Code 等编码 Agent 提供网页交互能力，支持自愈重连、远程调试与无头模式。"
 icon: "globe"
 ---
 
