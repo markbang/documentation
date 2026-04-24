@@ -48,6 +48,10 @@ Markdown 写作技巧与工具。
 让文档站更容易被 AI Agent 发现和读取。
 </Card>
 
+<Card title="Agent harness" icon="robot" href="/zh/env/agent-harness">
+设计 AI Agent 外层运行时。
+</Card>
+
 </CardGroup>
 
 ## 博客搭建

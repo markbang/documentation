@@ -263,6 +263,7 @@
                 "env/git-worktree",
                 "env/markdown",
                 "env/agent-ready-docs",
+                "env/agent-harness",
                 {
                   "group": "Blog Setup",
                   "icon": "pen-nib",
@@ -535,6 +536,7 @@
                 "zh/env/git-worktree",
                 "zh/env/markdown",
                 "zh/env/agent-ready-docs",
+                "zh/env/agent-harness",
                 {
                   "group": "博客搭建",
                   "icon": "pen-nib",

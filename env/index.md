@@ -48,6 +48,10 @@ Markdown writing tips and tools.
 Make docs easier for AI agents to discover and read.
 </Card>
 
+<Card title="Agent harness" icon="robot" href="/env/agent-harness">
+Design the runtime layer around AI agents.
+</Card>
+
 </CardGroup>
 
 ## Blog Setup
