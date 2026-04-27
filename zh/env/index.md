@@ -52,6 +52,10 @@ Markdown 写作技巧与工具。
 设计 AI Agent 外层运行时。
 </Card>
 
+<Card title="Beads" icon="diagram-project" href="/zh/env/beads">
+编码 Agent 的结构化任务记忆。
+</Card>
+
 </CardGroup>
 
 ## 博客搭建

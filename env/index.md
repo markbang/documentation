@@ -52,6 +52,10 @@ Make docs easier for AI agents to discover and read.
 Design the runtime layer around AI agents.
 </Card>
 
+<Card title="Beads" icon="diagram-project" href="/env/beads">
+Structured task memory for coding agents.
+</Card>
+
 </CardGroup>
 
 ## Blog Setup

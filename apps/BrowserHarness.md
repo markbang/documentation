@@ -107,6 +107,22 @@ The README recommends a very direct setup pattern:
 
 That setup pattern matters because the harness is intentionally editable during execution.
 
+## Browser Use Box
+
+[Browser Use Box](https://github.com/browser-use/bux), also called `bux`, is a useful pattern built on top of Browser Harness. Instead of running the agent only on your laptop, it runs a persistent Claude Code environment on a box you own, such as a VPS, Mac mini, or Raspberry Pi.
+
+The pieces are simple:
+
+- `claude -p` drives the agent loop
+- Browser Harness connects to a real Chromium session through CDP over WSS
+- Browser Use Cloud hosts the browser session
+- Telegram and `ttyd` provide remote control surfaces
+- `/home/bux` stores persistent state across restarts
+
+This solves a different problem from local browser automation. Local agents disappear when the laptop sleeps or the terminal closes. A box-based agent can keep browser logins, cookies, skills, and task state alive, then accept short commands from anywhere.
+
+The tradeoff is operational complexity. You now own a small always-on runtime with credentials, systemd services, browser sessions, and remote access paths. Treat it like infrastructure, not just a demo.
+
 ## How it fits into the current agent tooling landscape
 
 There are now roughly three common layers for browser automation:
@@ -134,5 +150,6 @@ That is a useful mental model if you are building agent workflows around real we
 
 - [browser-use/browser-harness](https://github.com/browser-use/browser-harness)
 - [Browser Use documentation](https://docs.browser-use.com/)
+- [browser-use/bux](https://github.com/browser-use/bux)
 - [Remote Browser via CDP](https://docs.browser-use.com/customize/browser/remote)
 - [Browser Use MCP Server](https://docs.browser-use.com/customize/mcp-server)

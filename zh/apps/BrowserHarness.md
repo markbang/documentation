@@ -115,6 +115,22 @@ README 给出的推荐方式很“agent-native”：
 
 这套顺序不是装饰，而是因为这个 harness 本来就预期会在执行中被修改。
 
+## Browser Use Box
+
+[Browser Use Box](https://github.com/browser-use/bux)，也叫 `bux`，是一个基于 Browser Harness 的上层组合。它不是只在你的笔记本上临时跑 Agent，而是把一个持久化 Claude Code 环境放到你拥有的盒子里，例如 VPS、Mac mini 或树莓派。
+
+它的组成很直接：
+
+- `claude -p` 驱动 Agent 循环
+- Browser Harness 通过 CDP over WSS 连接真实 Chromium
+- Browser Use Cloud 承载浏览器会话
+- Telegram 和 `ttyd` 提供远程控制入口
+- `/home/bux` 保存重启后仍然存在的状态
+
+它解决的是本地浏览器自动化之外的另一个问题：本地 Agent 会随着电脑休眠、终端关闭而消失；盒子里的 Agent 可以长期保留登录态、cookie、skills 和任务状态，并且随时接受远程指令。
+
+代价是运维复杂度会上升。你现在拥有的是一个小型常驻运行时，里面有凭据、systemd 服务、浏览器会话和远程入口。要把它当基础设施看，而不是只当 demo。
+
 ## 它在浏览器自动化工具里的位置
 
 现在大致可以把相关工具分成三层：
@@ -142,5 +158,6 @@ Browser Harness 更明显属于第三类。
 
 - [browser-use/browser-harness](https://github.com/browser-use/browser-harness)
 - [Browser Use 官方文档](https://docs.browser-use.com/)
+- [browser-use/bux](https://github.com/browser-use/bux)
 - [Remote Browser via CDP](https://docs.browser-use.com/customize/browser/remote)
 - [Browser Use MCP Server](https://docs.browser-use.com/customize/mcp-server)

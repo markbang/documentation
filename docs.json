@@ -264,6 +264,7 @@
                 "env/markdown",
                 "env/agent-ready-docs",
                 "env/agent-harness",
+                "env/beads",
                 {
                   "group": "Blog Setup",
                   "icon": "pen-nib",
@@ -537,6 +538,7 @@
                 "zh/env/markdown",
                 "zh/env/agent-ready-docs",
                 "zh/env/agent-harness",
+                "zh/env/beads",
                 {
                   "group": "博客搭建",
                   "icon": "pen-nib",
