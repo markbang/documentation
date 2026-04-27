@@ -1,0 +1,4 @@
+interface:
+  display_name: "Folo Knowledge Curator"
+  short_description: "Turn Folo items into durable docs"
+  default_prompt: "Use $folo-knowledge-curator to review recent Folo items, update the documentation knowledge base, validate changes, and push them."
