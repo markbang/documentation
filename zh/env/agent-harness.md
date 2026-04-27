@@ -1,6 +1,6 @@
 ---
 title: "Agent harness"
-description: "AI Agent harness 设计笔记，整理记忆、技能、协议、上下文管理、评测与常见故障模式。"
+description: "AI Agent harness 实战设计笔记，系统梳理记忆架构、技能装载、工具协议、上下文窗口管理、权限边界控制、评测体系与常见故障模式排查思路，帮助开发者从零搭建可靠的智能体运行时层，提升编码 Agent 与工作流 Agent 的稳定性，少踩坑、多快速落地。"
 icon: "robot"
 ---
 
