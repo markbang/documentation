@@ -61,7 +61,17 @@ Common destinations:
 - `backend/`, `frontend/`, `software/`, or `algo/` for domain-specific technical material
 - `about/courses/` and `zh/about/courses/` for course-style notes
 
-For bilingual sections, usually add both English and Chinese pages when the surrounding section has both. For a Chinese-first source, make the Chinese page the more natural version and keep the English page concise but complete.
+## Bilingual sync rule
+
+**Every documentation change must update both languages.** This site has English (root-level paths) and Chinese (`zh/` paths) pages. When you edit or add any English page, you must also edit or add the corresponding `zh/` page with equivalent Chinese content. Conversely, any Chinese-only change must be mirrored to the English root page.
+
+Exceptions:
+- Course note pages (`about/courses/`) are Chinese-only by nature — no English mirror needed.
+- If the English page already exists but the Chinese mirror is just a stub with a language note pointing to the English version, updating the English page alone is acceptable **only if** the Chinese stub remains functional and its language-note link still works.
+
+When both pages have full prose content, both must be updated in the same commit. Do not push an update to one language and leave the other stale.
+
+For a Chinese-first source, make the Chinese page the more natural version and keep the English page concise but complete. For an English-first source, make the English page the primary version and keep the Chinese page equivalent in meaning.
 
 When adding a page:
 
