@@ -36,6 +36,10 @@ Interactive data analysis notebook.
 GitHub Actions CI/CD automation.
 </Card>
 
+<Card title="Browser Observability" icon="magnifying-glass-chart" href="/env/browser-observability">
+Debug browser automation with read-only CDP tracing.
+</Card>
+
 <Card title="Git worktree" icon="code-branch" href="/env/git-worktree">
 Parallel checkouts for multi-branch and multi-agent work.
 </Card>

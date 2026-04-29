@@ -64,4 +64,8 @@ Markdown 编辑器推荐。
 跨 Shell 终端提示符美化。
 </Card>
 
+<Card title="Warp" icon="terminal" href="/zh/apps/Warp">
+Rust 终端 + AI 命令搜索，已开源（AGPL）。
+</Card>
+
 </CardGroup>

@@ -64,4 +64,8 @@ Browser start page service.
 Cross-shell terminal prompt customization.
 </Card>
 
+<Card title="Warp" icon="terminal" href="/apps/Warp">
+Rust-based terminal with AI command search, now open-source (AGPL).
+</Card>
+
 </CardGroup>

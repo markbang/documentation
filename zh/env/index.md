@@ -36,6 +36,10 @@ icon: "cloud"
 GitHub Actions CI/CD 自动化。
 </Card>
 
+<Card title="Browser Observability" icon="magnifying-glass-chart" href="/zh/env/browser-observability">
+浏览器自动化调试 — 只读 CDP 旁路采集。
+</Card>
+
 <Card title="Git worktree" icon="code-branch" href="/zh/env/git-worktree">
 适合并行开发与多 agent 协作的多工作目录方案。
 </Card>

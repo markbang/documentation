@@ -245,7 +245,8 @@
                   "apps/Typora",
                   "apps/Xizhi",
                   "apps/iTab",
-                  "apps/starship"
+                  "apps/starship",
+                  "apps/Warp"
                 ]
               },
               {
@@ -260,7 +261,7 @@
                 "env/CDN",
                 "env/Jupyter",
                 "env/github-workflow",
-                "env/git-worktree",
+                "env/browser-observability",
                 "env/markdown",
                 "env/agent-ready-docs",
                 "env/agent-harness",
@@ -519,7 +520,8 @@
                   "zh/apps/Typora",
                   "zh/apps/Xizhi",
                   "zh/apps/iTab",
-                  "zh/apps/starship"
+                  "zh/apps/starship",
+                  "zh/apps/Warp"
                 ]
               },
               {
@@ -534,7 +536,7 @@
                 "zh/env/CDN",
                 "zh/env/Jupyter",
                 "zh/env/github-workflow",
-                "zh/env/git-worktree",
+                "zh/env/browser-observability",
                 "zh/env/markdown",
                 "zh/env/agent-ready-docs",
                 "zh/env/agent-harness",

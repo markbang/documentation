@@ -423,6 +423,30 @@ jobs:
 5. **Protect secrets** and never print them in logs.
 6. **Prefer official actions** because they are more reliable and better maintained.
 7. **Limit permissions** and grant only what each workflow needs.
+8. **Have a CI fallback plan** — GitHub Actions outages happen regularly; consider self-hosted runners or a secondary CI platform.
+
+## Platform Reliability Risk
+
+GitHub Actions has experienced frequent outages in 2025–2026. Mitchell Hashimoto (creator of Vagrant and Terraform, GitHub user #1299 since 2008) announced in April 2026 that his open-source project **Ghostty** is leaving GitHub, primarily because of persistent CI/CD reliability issues:
+
+> "I started marking each day with an X if GitHub outages affected my work. Nearly every day had an X."
+
+<Note title="Durable lesson">
+When your CI/CD platform has regular outages that block you for hours, it becomes a productivity risk — not just an inconvenience. For serious projects, consider:
+
+- **Self-hosted runners** as a fallback (see the Self-hosted Runner section above)
+- **Alternative CI platforms** (CircleCI, Buildkite, Gitea Actions)
+- **Mirror your repo** to another platform so you can switch CI quickly
+- **Don't couple your entire workflow** to one platform's availability
+</Note>
+
+### Mitigation Strategies
+
+1. **Self-hosted runners** — Run workflows on your own infrastructure; unaffected by GitHub outages
+2. **Multi-platform CI** — Mirror critical workflows to an alternative (CircleCI, Buildkite)
+3. **Local testing first** — Run lint/typecheck/test locally before pushing; CI should be a gate, not a bottleneck
+4. **Cache aggressively** — Reduce job duration so outages cause less blocked time
+5. **Read-only GitHub mirror** — Keep your source on GitHub for discoverability, but host CI elsewhere
 
 ## References
 

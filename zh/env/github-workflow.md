@@ -424,6 +424,30 @@ jobs:
 5. **保护 secrets**：不要在日志中输出
 6. **使用官方 actions**：更可靠和维护良好
 7. **限制权限**：按需设置 permissions
+8. **准备 CI 降级方案** — GitHub Actions 经常宕机；考虑自托管 Runner 或备用 CI 平台
+
+## 平台可靠性风险
+
+GitHub Actions 在 2025–2026 年经历了多次频繁宕机。Mitchell Hashimoto（Vagrant 和 Terraform 创造者，2008年注册的 GitHub 第 1299 号用户）于 2026年4月宣布他的开源项目 **Ghostty** 离开 GitHub，主要原因就是 CI/CD 可持续性问题：
+
+> "我开始给每天打 X，标记 GitHub 宕机影响工作的日子。几乎每天都有 X。"
+
+<Note title="持久教训">
+当你的 CI/CD 平台经常宕机数小时，它就成了生产力风险，不只是不便。对严肃项目，考虑：
+
+- **自托管 Runner** 作为降级方案（见上方自托管 Runner 章节）
+- **备选 CI 平台**（CircleCI、Buildkite、Gitea Actions）
+- **镜像仓库到其他平台**，以便快速切换 CI
+- **不要把整个工作流绑在一个平台的可用性上**
+</Note>
+
+### 降级策略
+
+1. **自托管 Runner** — 在自己的基础设施上跑工作流，不受 GitHub 宕机影响
+2. **多平台 CI** — 把关键工作流镜像到备选平台（CircleCI、Buildkite）
+3. **先本地测试** — 推送前本地跑 lint/typecheck/test；CI 应是门槛，不是瓶颈
+4. **缓存用足** — 减少任务时长，宕机造成的阻塞时间更短
+5. **只读 GitHub 镜像** — 保留 GitHub 作为发现渠道，但 CI 放别处
 
 ## 参考资源
 
