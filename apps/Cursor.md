@@ -98,6 +98,80 @@ If you run long Copilot Agent sessions, check the preview billing tool in early 
 - [Twitter @dotey summary](https://x.com/dotey/status/2048849524739977672)
 </Note>
 
+## Coding Agent Safety: How OpenAI Controls Codex
+
+When coding agents can read/write repos, run commands, and call development tools, you need both efficiency and control. OpenAI's answer is a **four-layer framework** for Codex: sandbox + approval + network policy + identity governance. The guiding principle: **zero friction for low-risk daily operations, mandatory human review for high-risk ones**.
+
+### 1. Sandbox + Approval
+
+- **Sandbox** defines technical execution boundaries: where to write, whether to allow networking, which paths are read-only
+- **Approval policy** defines when to stop and ask a human — typically triggered when crossing sandbox boundaries
+- **Auto-review mode**: A separate sub-agent reviews Codex's pending actions and context, auto-approving low-risk requests and only interrupting the user when risk escalates. This is "AI reviewing AI" — turning approval itself into an intelligent layer
+
+### 2. Network Access
+
+Default-deny, explicit-allow model:
+
+- **Allow** known compliant destinations
+- **Block** explicitly unwanted domains (e.g., pastebin.com — typical data exfiltration channel)
+- **Require approval** for unknown domains
+
+Implemented via proxy — no open outbound permissions for the agent.
+
+### 3. Identity & Credentials
+
+- OAuth credentials for CLI and MCP are **forced into OS keyring** (macOS Keychain)
+- Authentication via **ChatGPT login** — no bypass
+- Locked to **specific enterprise workspace UUID**
+
+Effect: All Codex activity is bound to workspace-level governance and automatically falls into ChatGPT compliance logging.
+
+### 4. Command Rules
+
+Commands are classified by semantic risk level:
+
+- **Read-only commands** (`gh pr view`, `kubectl get`) → auto-approve
+- **Dangerous commands** → explicit block or require approval
+
+This "semantic classification" approach means the agent feels almost no friction during normal engineering workflows, while retaining a hard brake for dangerous operations.
+
+### 5. Configuration Distribution
+
+Three-layer distribution ensures org-wide consistency:
+
+- **Cloud managed requirements** + **macOS managed preferences** + **local requirements file**
+- `requirements` are admin-mandatory — users cannot override
+
+### Agent-Native Telemetry
+
+Traditional EDR and audit logs tell you "what happened" — but for AI agents, security teams need **"why"**:
+
+- User's original prompt
+- Agent's reasoning path
+- Approval decisions
+- Tool call chains
+- MCP server usage
+- Network proxy allow/deny events
+
+Codex exports these via **OpenTelemetry**, enabling reconstruction of the full causal chain: "user said → agent planned → system approved → actually happened → network layer blocked or not".
+
+OpenAI's own practice: When EDR flags anomalous Codex behavior, their **AI safety triage agent** pulls Codex telemetry and auto-classifies into three categories:
+
+1. Expected agent behavior
+2. Benign mistake
+3. genuinely needs escalation
+
+Only category 3 gets pushed to humans. This is a **"agent behavior interpreted by another agent"** security ops paradigm.
+
+<Tip>
+If you deploy coding agents in your org, consider implementing a similar framework: sandbox boundaries, command-level risk classification, and telemetry that captures the "why" not just the "what". The auto-review pattern (AI reviewing AI) is especially useful for reducing approval noise.
+</Tip>
+
+<Note title="Source">
+- [OpenAI: Running Codex Safely](https://openai.com/index/running-codex-safely/) — official blog post
+- [Twitter @dotey Chinese summary](https://x.com/dotey/status/2048849524739977672) — detailed translation of the four-layer framework
+</Note>
+
 ## Trae
 
 Free AI IDE, continuously updated.

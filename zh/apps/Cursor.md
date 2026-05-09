@@ -99,6 +99,80 @@ irm https://aizaozao.com/accelerate.php/https://raw.githubusercontent.com/yuaoti
 - [宝玉翻译摘要](https://x.com/dotey/status/2048849524739977672)
 </Note>
 
+## Coding Agent 安全治理：OpenAI 如何管住 Codex
+
+当 coding agent 能读写仓库、运行命令、调用开发工具时，你需要同时保证效率和可控性。OpenAI 给 Codex 设计了**四层框架**：沙箱 + 审批 + 网络策略 + 身份治理。指导原则：**低风险日常操作零摩擦，高风险操作必须停下来等审查**。
+
+### 1. 沙箱 + 审批
+
+- **沙箱**定义技术执行边界：能写哪里、能不能联网、哪些路径只读
+- **审批策略**定义什么时候必须停下来问人——通常在越界沙箱时触发
+- **Auto-review 模式**：一个独立子代理审阅 Codex 的待执行动作和上下文，对低风险请求自动放行，仅在风险升高时才打断用户。这是"AI 审 AI"——把审批本身做成智能层
+
+### 2. 网络访问
+
+默认拒绝、显式允许模型：
+
+- **允许**已知合规目的地
+- **拉黑**明确不希望的域名（如 pastebin.com——典型数据外泄渠道）
+- **未知域名**要求审批
+
+通过 proxy 实施——Agent 没有开放出站权限。
+
+### 3. 身份与凭证
+
+- CLI 和 MCP 的 OAuth 凭证**强制存入 OS keyring**（macOS Keychain）
+- 强制通过 **ChatGPT 登录**——不可绕过
+- 锁定到**指定企业工作区 UUID**
+
+效果：所有 Codex 活动被绑回工作区级管控，自动落入 ChatGPT 合规日志。
+
+### 4. 命令规则
+
+按语义风险分级：
+
+- **只读命令**（`gh pr view`、`kubectl get`）→ 自动放行
+- **危险命令** → 显式拦截或要求审批
+
+这种"按命令语义分级"的做法让 agent 在常规工程流程中几乎无摩擦，同时保留对危险操作的强制刹车。
+
+### 5. 配置分发
+
+三层分发保证全公司基线一致：
+
+- **云端 managed requirements** + **macOS 托管偏好** + **本地 requirements 文件**
+- `requirements` 是管理员强制项——用户无法覆盖
+
+### Agent-Native Telemetry
+
+传统 EDR 和审计日志只能告诉你"发生了什么"——但面对 AI Agent，安全团队真正缺的是**"为什么"**：
+
+- 用户原始 prompt
+- Agent 推理路径
+- 审批决策
+- 工具调用链
+- MCP 服务器使用
+- 网络代理放行/拒绝事件
+
+Codex 通过 **OpenTelemetry** 导出这些事件，可以重建完整因果链："用户说了什么 → Agent 打算做什么 → 系统批准了什么 → 实际发生了什么 → 网络层是否拦下"。
+
+OpenAI 自己的做法：当 EDR 报警 Codex 行为异常，他们的**AI 安全三角分诊 agent** 会主动拉取 Codex 遥测，自动分类为：
+
+1. 预期内的 agent 行为
+2. 良性失误
+3. 真正需要升级的事件
+
+只有第3类推给人类。这是**"agent 行为由另一个 agent 解释"**的安全运营范式。
+
+<Tip>
+如果你在企业中部署 coding agent，考虑实施类似的框架：沙箱边界、命令级风险分类、和能捕获"为什么"而非只"什么"的遥测。Auto-review 模式（AI审AI）尤其有助于减少审批噪音。
+</Tip>
+
+<Note title="来源">
+- [OpenAI: Running Codex Safely](https://openai.com/index/running-codex-safely/) — 官方博客
+- [宝玉中文摘要](https://x.com/dotey/status/2048849524739977672) — 四层框架详细翻译
+</Note>
+
 ## Trae
 
 免费 AI IDE，持续更新中。

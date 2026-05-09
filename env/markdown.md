@@ -321,6 +321,52 @@ Use backslashes to escape special characters:
 5. **Preview often**: check the rendered result after writing.
 6. **Version control**: Markdown works very well with Git.
 7. **Check links**: make sure all links work.
+8. **Consider HTML for rich Agent output**: When AI agents generate long documents with tables, diagrams, and interactive elements, HTML may be more expressive than Markdown (see below).
+
+## HTML vs Markdown for Agent Output
+
+In the AI Agent era, the question of output format matters more than before. When agents write and modify documents, Markdown's core advantage — "easy to manually edit" — disappears. Should you switch to HTML?
+
+### When Markdown is still the right choice
+
+- **Short documents** (under ~100 lines) — Markdown remains the simplest format
+- **Config files, READMEs, changelogs** — Git-friendly, easy to diff
+- **Knowledge base pages** (like this site) — Mintlify/Jekyll render Markdown beautifully
+- **Team wikis** — Where version control and collaborative editing are important
+
+### When HTML has advantages
+
+| Advantage | Example |
+|-----------|--------|
+| **Information density** | Tables, SVG, CSS, charts, and images in one file — no ASCII art approximations |
+| **Readability** | Tabs, illustrations, and responsive layouts for long documents |
+| **Shareability** | Upload HTML, share link — colleagues open it without special tools |
+| **Interactivity** | Sliders, buttons, form controls that feed back into the agent |
+| **Multi-source data** | Agent reads code, Slack, Git history → produces unified HTML report |
+| **Pleasure** | More engaging authoring experience for the human reviewer |
+
+### Five practical use cases for HTML
+
+1. **Planning & exploration** — Generate an "HTML file network": 6 directions side-by-side, then mockups, then an implementation plan
+2. **Code review** — Render diff, inline annotations, and flow charts in one page
+3. **Design prototyping** — HTML as design intermediate language, then translate to React/Swift
+4. **Reports & learning** — Cross-source synthesis with interactive explanations or slides
+5. **Disposable editors** — A throwaway UI for one task (reorder 30 tickets, toggle feature flags, adjust system prompt) with an "Export as JSON/prompt" button
+
+### Tradeoffs
+
+- **Generation time** — HTML takes 2–4× longer to generate than Markdown
+- **Token cost** — Higher, but less relevant with 1M+ context windows
+- **Version control** — **HTML diff is noisy and hard to review** — this is Markdown's biggest remaining advantage
+- **Style consistency** — Requires a "design system HTML file" as reference to constrain aesthetics
+
+<Tip>
+For knowledge bases and version-controlled docs, **Markdown is still the default**. Use HTML only when the output is a one-off report, a review artifact, or an interactive prototype — things that won't need Git diff review.
+</Tip>
+
+<Note title="Source">
+Based on [Thariq's analysis: HTML replacing Markdown in the Agent era](https://x.com/trq212) — 6 advantages, 5 use cases, and tradeoffs. Original article at [x.com/i/article/2052796100608974848](https://x.com/i/article/2052796100608974848).
+</Note>
 
 ## References
 
