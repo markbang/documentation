@@ -55,6 +55,41 @@ Harness 至少应该把这些决策显式化：
 
 如果 Agent 前面基于某段推理调用了工具或修改了文件，harness 就必须保留足够的原因链。否则后续轮次可能重复执行、忘记为什么选这条路，或者调用奇怪的工具。
 
+### 用文件承载持久状态
+
+长时间运行的 Agent 工作流不能只依赖聊天历史。普通文件通常是最简单的持久记忆层，因为人可以查看、编辑、diff，也可以用 Git 版本化。
+
+一个好用模式是把工作区拆成目标、资源、交付物和学习记录：
+
+```text
+workspace/
+├── MISSION.md              # 为什么要做这件事或学习这个方向
+├── RESOURCES.md            # 可信来源与参考资料
+├── NOTES.md                # 偏好与临时笔记
+├── lessons/                # 每个文件一个自包含学习单元
+├── reference/              # 压缩后的长期速查资料
+└── learning-records/       # 用户能力发生了什么变化
+```
+
+具体文件名可以调整。关键原则是：状态必须**可检查、可恢复、有边界**。在 Agent 辅助学习里，这能让 Agent 基于学习者当前能力继续教学，而不是每次都从通用大纲开始。在工程工作里，同样可以用于 onboarding 笔记、迁移日志、事故复盘和任务 journal。
+
+### 正确性重要时要做确定性检索
+
+当任务需要精确结果时，不要只让 Agent 在脆弱网页、分散数据库和没有文档的一次性脚本之间“自己想办法”。应该给它一个确定性检索层。
+
+Anthropic 的生物学 Agent 案例很有代表性：研究团队让科学 Agent 从 NCBI Virus 检索病毒序列数据。真正值得沉淀的结论不是“某个模型赢了 benchmark”，而是加入 `gget virus` 这种接口更窄的确定性检索层后，工作流可靠性显著提高。
+
+高风险检索建议优先提供：
+
+- 类型化查询函数，而不是自由浏览网页
+- 稳定 ID、版本号和日期过滤条件
+- 可机器校验的数量统计或 checksum
+- 每条返回记录的来源证据
+- 下游分析前的验证步骤
+- 明确错误情况，而不是静默 best-effort 输出
+
+这和工具设计是同一个 harness 原则：先把执行表面变得可预测，再让模型围绕它做计划。
+
 ### 让推理强度可见
 
 推理强度不只是模型参数，也是产品决策。降低强度可以减少延迟和 token，但也可能让复杂编码任务明显变差。
@@ -127,3 +162,5 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 - [Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering](https://arxiv.org/abs/2604.08224)
 - [Micropaper：LLM Agent 的外化设计范式](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)
 - [Anthropic Engineering：An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
+- [Anthropic Research：Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
+- [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)

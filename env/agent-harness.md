@@ -55,6 +55,41 @@ Context pruning is not just a cost optimization. It changes behavior.
 
 If an agent made tool calls or file edits based on earlier reasoning, the harness must preserve enough rationale for later turns to continue coherently. Otherwise the agent may repeat itself, forget why it chose a path, or pick odd tools.
 
+### Represent durable state as files
+
+Long-running agent workflows need state outside chat history. Plain files are often the simplest durable memory layer because humans can inspect, edit, diff, and version them.
+
+A useful pattern is a workspace that separates intent, resources, work products, and learning records:
+
+```text
+workspace/
+├── MISSION.md              # why this work or learning track exists
+├── RESOURCES.md            # trusted sources and references
+├── NOTES.md                # preferences and scratch notes
+├── lessons/                # one self-contained learning unit per file
+├── reference/              # compressed long-term reference material
+└── learning-records/       # what changed in the user's capability
+```
+
+The exact names can change. The important rule is that state should be **inspectable, restartable, and scoped**. For agent-assisted learning, this lets the agent teach the next step from the learner's current capability instead of from a generic syllabus. For engineering work, the same pattern applies to onboarding notes, migration logs, incident follow-ups, and task journals.
+
+### Make retrieval deterministic when correctness matters
+
+Do not ask an agent to "figure it out" through brittle websites, scattered databases, or undocumented one-off scripts when the task needs exact results. Give it a deterministic retrieval layer instead.
+
+Anthropic's biology-agent case study is a good example. Scientific agents were asked to retrieve viral sequence data from NCBI Virus. The durable lesson was not that one model won a benchmark; it was that reliability improved dramatically when the workflow added `gget virus`, a deterministic retrieval layer with a narrower interface.
+
+For high-stakes retrieval, prefer:
+
+- typed query functions over free-form browsing
+- stable IDs, versions, and date filters
+- machine-checkable counts or checksums
+- explicit provenance for every returned record
+- validation steps before downstream analysis
+- documented error cases instead of silent best-effort output
+
+This is the same harness principle as tool design: make the execution surface predictable, then let the model plan around it.
+
 ### Make effort settings visible
 
 Reasoning effort is a product decision, not only a model parameter. Lower effort can reduce latency and token use, but it can also make hard coding tasks feel worse.
@@ -127,3 +162,5 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering](https://arxiv.org/abs/2604.08224)
 - [Micropaper: Externalization in LLM Agents](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)
 - [Anthropic Engineering: An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
+- [Anthropic Research: Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
+- [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
