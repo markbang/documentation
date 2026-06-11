@@ -28,6 +28,10 @@ AI-powered code editor.
 Thin browser control layer for coding agents.
 </Card>
 
+<Card title="baoyu-design" icon="pen-ruler" href="/apps/baoyu-design">
+Local Agent Skill for UI mockups and design systems.
+</Card>
+
 <Card title="Pyenv" icon="python" href="/apps/Pyenv">
 Python version manager.
 </Card>

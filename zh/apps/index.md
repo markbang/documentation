@@ -28,6 +28,10 @@ AI 驱动的代码编辑器。
 面向编码 Agent 的轻量浏览器控制层。
 </Card>
 
+<Card title="baoyu-design" icon="pen-ruler" href="/zh/apps/baoyu-design">
+本地 Agent UI 设计与设计系统 Skill。
+</Card>
+
 <Card title="Pyenv" icon="python" href="/zh/apps/Pyenv">
 Python 版本管理工具。
 </Card>
