@@ -36,6 +36,10 @@ icon: "cloud"
 GitHub Actions CI/CD 自动化。
 </Card>
 
+<Card title="npm 供应链安全" icon="shield-halved" href="/zh/env/npm-supply-chain">
+审查并锁定 npm 安装脚本。
+</Card>
+
 <Card title="Browser Observability" icon="magnifying-glass-chart" href="/zh/env/browser-observability">
 浏览器自动化调试 — 只读 CDP 旁路采集。
 </Card>

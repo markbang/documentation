@@ -36,6 +36,10 @@ Interactive data analysis notebook.
 GitHub Actions CI/CD automation.
 </Card>
 
+<Card title="npm supply chain" icon="shield-halved" href="/env/npm-supply-chain">
+Review and lock down npm install scripts.
+</Card>
+
 <Card title="Browser Observability" icon="magnifying-glass-chart" href="/env/browser-observability">
 Debug browser automation with read-only CDP tracing.
 </Card>
