@@ -90,6 +90,14 @@ Anthropic 的生物学 Agent 案例很有代表性：研究团队让科学 Agent
 
 这和工具设计是同一个 harness 原则：先把执行表面变得可预测，再让模型围绕它做计划。
 
+### 为人际协作而设计，而不只是追求自主执行
+
+大多数 Agent 产品把目标放在自进化和闭环上：Agent 自己规划、执行、收尾。这不一定是健康的模式。即使加了透明度和追溯工具，优先追求自主完成的 Agent 也可能制造出难以交接和维护的噪音。
+
+Agent 不只是执行流程的容器，也是人理解、判断和协作的环境。设计 harness 时问自己：另一个人能接手这个会话继续工作吗？推理过程是否足够透明，让同事能审计某个决策？工作流产出的是可维护的交付物，还是一堆自动执行的步骤？
+
+优先考虑交接质量，而不是自动化完成度。一个以清晰、可检查状态结束的工作流，比一个"全都做完了"但没留痕迹的工作流更有价值。
+
 ### 让推理强度可见
 
 推理强度不只是模型参数，也是产品决策。降低强度可以减少延迟和 token，但也可能让复杂编码任务明显变差。
@@ -164,3 +172,4 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 - [Anthropic Engineering：An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research：Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
+- [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。

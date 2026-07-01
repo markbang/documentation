@@ -90,6 +90,14 @@ For high-stakes retrieval, prefer:
 
 This is the same harness principle as tool design: make the execution surface predictable, then let the model plan around it.
 
+### Design for human collaboration, not just autonomous execution
+
+Most agent products optimize for self-evolution: the agent plans, executes, and closes the loop on its own. This is not always a healthy pattern. Even with transparency and traceability tools, an agent that prioritizes autonomous completion can create noise that is hard to hand off or maintain.
+
+An agent is not only an execution container. It is also an environment for human understanding, judgment, and collaboration. When designing a harness, ask: can another person pick up this session and continue? Is the reasoning visible enough for a teammate to audit a decision? Does the workflow produce a maintainable artifact, or just a pile of automated steps?
+
+Prioritize handoff quality over automation completeness. A workflow that ends with a clear, inspectable state is more valuable than one that "finished everything" but left no trail.
+
 ### Make effort settings visible
 
 Reasoning effort is a product decision, not only a model parameter. Lower effort can reduce latency and token use, but it can also make hard coding tasks feel worse.
@@ -164,3 +172,4 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Anthropic Engineering: An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
+- [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
