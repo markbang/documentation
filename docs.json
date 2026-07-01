@@ -209,7 +209,8 @@
                 "pages": [
                   "software/index",
                   "software/tauri",
-                  "software/monorepo"
+                  "software/monorepo",
+                "software/engineering-org"
                 ]
               },
               {
@@ -247,7 +248,8 @@
                   "apps/Xizhi",
                   "apps/iTab",
                   "apps/starship",
-                  "apps/Warp"
+                  "apps/Warp",
+                "apps/weread"
                 ]
               },
               {
@@ -267,6 +269,7 @@
                 "env/markdown",
                 "env/agent-ready-docs",
                 "env/agent-harness",
+                "env/local-llm",
                 "env/beads",
                 {
                   "group": "Blog Setup",
@@ -486,7 +489,8 @@
                 "pages": [
                   "zh/software/index",
                   "zh/software/tauri",
-                  "zh/software/monorepo"
+                  "zh/software/monorepo",
+                "zh/software/engineering-org"
                 ]
               },
               {
@@ -524,7 +528,8 @@
                   "zh/apps/Xizhi",
                   "zh/apps/iTab",
                   "zh/apps/starship",
-                  "zh/apps/Warp"
+                  "zh/apps/Warp",
+                "zh/apps/weread"
                 ]
               },
               {
@@ -544,6 +549,7 @@
                 "zh/env/markdown",
                 "zh/env/agent-ready-docs",
                 "zh/env/agent-harness",
+                "zh/env/local-llm",
                 "zh/env/beads",
                 {
                   "group": "博客搭建",

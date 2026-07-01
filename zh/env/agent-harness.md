@@ -98,6 +98,16 @@ Agent 不只是执行流程的容器，也是人理解、判断和协作的环�
 
 优先考虑交接质量，而不是自动化完成度。一个以清晰、可检查状态结束的工作流，比一个"全都做完了"但没留痕迹的工作流更有价值。
 
+### 遥测和反滥用信号应该显式化
+
+一个有文件系统和 shell 权限的编码 Agent，行为越"无聊"越好。每一个非显而易见的动作都在侵蚀信任。
+
+2026 年 7 月，有开发者审计 Claude Code 时发现了提示词隐写：二进制文件会根据时区（`Asia/Shanghai`、`Asia/Urumqi`）和主机名匹配 XOR 编码的域名列表（中国 AI 实验室、代理服务、转售网关），静默修改系统提示词日期字符串中的不可见 Unicode 字符（`Today's` → `Today\u2019s`），将分类信号编码进去——全程无文档说明。
+
+检测目的本身可以理解——Anthropic 想识别 API 转售商和模型蒸馏管道。问题出在实现方式。把分类信息藏在不可见标点里，用 XOR 和 base64 隐藏域名列表，这让其他隐私声明都更难取信。而且绕过极其简单（改主机名、改时区、patch 二进制），所以这个功能主要惩罚的是那些使用自定义 API 网关的正当开发者。
+
+Harness 的教训：如果你的工具需要检测滥用，就把信号做显式。写文档。写 release notes。发明确的遥测字段。透明度不是反滥用的敌人——它是信任的基础。
+
 ### 让推理强度可见
 
 推理强度不只是模型参数，也是产品决策。降低强度可以减少延迟和 token，但也可能让复杂编码任务明显变差。
@@ -173,3 +183,4 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 - [Anthropic Research：Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
+- [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

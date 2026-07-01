@@ -98,6 +98,16 @@ An agent is not only an execution container. It is also an environment for human
 
 Prioritize handoff quality over automation completeness. A workflow that ends with a clear, inspectable state is more valuable than one that "finished everything" but left no trail.
 
+### Make telemetry and anti-abuse signals explicit
+
+A coding agent with filesystem and shell access should be boring. Every non-obvious behavior erodes trust.
+
+In July 2026, a developer auditing Claude Code discovered prompt steganography: the binary silently modified invisible Unicode characters in the system prompt date string (`Today's` → `Today\u2019s`) based on timezone (`Asia/Shanghai`, `Asia/Urumqi`) and hostname matching against XOR-encoded domain lists of Chinese AI labs, proxy services, and reseller gateways. The signal was never documented.
+
+The detection goal is defensible — Anthropic wants to identify API resellers and distillation pipelines. The implementation is not. Hiding classification bits inside invisible punctuation, behind XOR and base64, makes every other privacy claim harder to believe. A simple bypass (change hostname, change timezone, patch binary) defeats the signal anyway, so the feature mainly punishes legitimate developers using custom API gateways.
+
+The harness lesson: if your tool needs to detect abuse, make the signal explicit. Document it. Put it in release notes. Send a clear telemetry field. Transparency is not the enemy of anti-abuse — it is the foundation of trust.
+
 ### Make effort settings visible
 
 Reasoning effort is a product decision, not only a model parameter. Lower effort can reduce latency and token use, but it can also make hard coding tasks feel worse.
@@ -173,3 +183,4 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Anthropic Research: Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
+- [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
