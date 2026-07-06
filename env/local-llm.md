@@ -125,6 +125,18 @@ For laptops, a Mac Mini M4 on the local network is a quieter, cheaper alternativ
 | Quick one-off queries | Cloud (convenience) |
 | Long-context projects (>128K) | Cloud (or aggressive quantization) |
 
+## Model evaluation: benchmarks vs. real experience
+
+A recurring pattern in open-weight model releases is the gap between benchmark scores and practical experience. Tencent's Hy3 model (released July 2026, 295B total / 21B active MoE) explicitly noted in its model card:
+
+> 模型的实用体验不完全与榜单成绩挂钩。基于广泛的用户反馈和分析，我们定位并优化了一系列体验向能力，获得了产品侧一致且积极的评价。
+
+("The model's practical experience does not fully correlate with benchmark rankings. Based on extensive user feedback and analysis, we identified and optimized a range of experience-oriented capabilities, receiving consistently positive evaluations from the product side.")
+
+This is a healthy trend: model builders are acknowledging that real-world usefulness involves dimensions that benchmarks don't capture well — instruction following consistency, refusal calibration, output formatting reliability, and long-context coherence.
+
+When evaluating a local model for daily use, test it on your actual workflows rather than relying solely on leaderboard scores.
+
 ## What's next
 
 The gap is closing fast. GLM 5.2 already delivers frontier-level open-weight intelligence, and the trend toward separating reasoning from factual knowledge will make future models even more efficient on consumer hardware.

@@ -269,6 +269,7 @@
                 "env/markdown",
                 "env/agent-ready-docs",
                 "env/agent-harness",
+                "env/claude-code-patterns",
                 "env/local-llm",
                 "env/beads",
                 {
@@ -549,6 +550,7 @@
                 "zh/env/markdown",
                 "zh/env/agent-ready-docs",
                 "zh/env/agent-harness",
+                "zh/env/claude-code-patterns",
                 "zh/env/local-llm",
                 "zh/env/beads",
                 {
