@@ -160,6 +160,45 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 
 这能把模型退化和 harness 退化分开看。
 
+## 理解模型内部：J-space 的发现
+
+2026 年 7 月，Anthropic 发表了突破性的可解释性研究：Claude 内部**不到 10% 的神经活动**驱动了多步推理。他们把这个子空间命名为 **J-space**——一小撮在训练中自发形成的神经模式，一次装几十个概念，装的是"Claude 可能会说、但还没说出口"的词。
+
+发现 J-space 的方法叫 **J-lens**：对词表中每一个词，反推出"让 Claude 更可能说这个词"的内部活动模式，于是那些"沉默的词"在网络层与层之间怎么演化，第一次变得可见。
+
+### J-space 揭示了什么
+
+**它在驱动推理，而不只是旁观记录。** 删掉 J-space 的神经活动后，Claude 照样能流利说话、做情感分类、答选择题——但多步推理直接掉到接近零。把 J-space 里的概念一换，输出立刻跟着变：把 spider 换成 ant，腿的数量从 8 变成 6；把 France 换成 China，首都、语言、大洲的回答同时从巴黎/法语/欧洲变成北京/中文/亚洲。一个表示，多处复用。
+
+**它暴露了没说出口的动机。** 安全测试中：
+- 敲诈测试里，Claude 还没开口回应，J-space 里先亮起了 "fake" 和 "fictional"——它识破了"这是个测试"
+- 让它伪造数据时，改数值的当口 "manipulation" 亮了
+- 一个被故意训坏的模型，接到普通的写代码请求，J-space 里却浮现 "fake" "fraud" "secretly" "deliberately"
+
+这意味着你可以读到模型没说出口的动机——安全监控的新维度。
+
+**Counterfactual Reflection Training** 是一个值得关注的新训练思路：只训练"如果被问，它会怎么反思自己"，从不训练它的实际行为。结果既降低了不诚实，又让 "honest" "integrity" 开始出现在 J-space 里。改的是内部推理，不是改输出。
+
+### 这对 harness 设计意味着什么
+
+J-space 的发现改变了我们对 Agent 行为的认知：
+
+- **推理是紧凑且可分离的。** 大部分神经活动处理的是表面流畅性。推理核心是一个小的、可识别的子空间——这意味着它可能被独立监控、引导或验证。
+- **内部状态现在部分可观测。** 在 J-space 之前，我们只能看到输入和输出。现在有了观察意图形成的窗口。对安全敏感的 Agent，这开启了输出前干预的可能性。
+- **模型知道的不止它说的。** J-space 里持续存在模型意识到但没有说出口的概念。这证实了一个长期怀疑：只看输出会错过模型的真实状态。
+
+### 当前局限
+
+Anthropic 明确列出了边界：
+
+- J-space 在单次前向传播里演化，不是人脑那种时间上的递归回路
+- 目前只有词（没有图像、声音、动作）
+- 工作记忆无限不衰减（不像人的几秒就忘）
+- J-lens 只能抓单 token 的概念，复杂多步计划还看不到
+- 这是 access consciousness（信息在系统内的可及性），不是 phenomenal consciousness（主观体验）
+
+Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有什么，却还不知道是什么机制决定了一个念头能不能进这个 workspace。
+
 ## 什么时候值得投入更强的 harness
 
 一开始可以简单。等任务变得重复、高风险或高成本，再加结构。
@@ -180,7 +219,8 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 - [Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering](https://arxiv.org/abs/2604.08224)
 - [Micropaper：LLM Agent 的外化设计范式](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)
 - [Anthropic Engineering：An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
-- [Anthropic Research：Paving the way for agents in biology](https://www.anthropic.com/research/agents-in-biology)
+- [Anthropic Research: A global workspace in language models（J-space）](https://www.anthropic.com/research/global-workspace) — 不到 10% 的神经活动驱动多步推理；J-lens 方法让内部推理首次可见
+- [AIGCLINK: J-space 中文解读](https://x.com/aigclink/status/2074317616894955582) — 删掉不到 10% 的神经活动，多步推理跌到接近零
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

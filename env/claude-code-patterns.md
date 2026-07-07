@@ -12,6 +12,14 @@ Claude Code's Fable 5 model brings significantly stronger coding capability — 
 
 Thariq from the Claude Code team described three key changes in how he works with Fable 5:
 
+### Unhobble Claude: let the model surprise you
+
+Anthropic internally calls it **capability overhang** — the model can already do many things, we just haven't found the right way to unlock them. Early models needed detailed instructions and examples, but with Fable-level models, too many examples actually constrain the model because its own imagination is richer than what you can specify.
+
+Claude Code recently cut **80% of its system prompt**. The new approach: give context, not constraints. Tell the model about the situation, not what it's not allowed to do.
+
+A concrete example: ask a chat model which Pokémon names end with "aw" — it can't answer because it can't iterate through names in its head. But give it a code execution tool and it pulls the full list, writes a script, and finds the answer in two seconds. The capability was there all along; the tool unlocked it.
+
 ### Treat Claude as a thinking partner
 
 The old pattern: break tasks into small pieces, check every output, catch problems when the model stops too early. With Fable, you increasingly check whether Claude is doing the **right work**, not just whether it's working correctly.
@@ -113,6 +121,19 @@ in pure code, then build a webpage with a particle fluid
 that moves to the beat.
 ```
 
+## Find your unknowns: blind spot techniques
+
+Thariq's second key theme: your prompt is a "map," but the real codebase is the "territory." When the model encounters something not on your map, it must decide on its own. Fable 5's range is so large that if you don't identify these unknowns in advance, it will make decisions you didn't want in places you didn't expect.
+
+Six concrete techniques:
+
+- **Blind spot scan**: before building, have Fable read through relevant code and surface potential issues you didn't know about
+- **Four-prototype burst**: ask for four stylistically different prototypes at once, then discover your preferences through reaction rather than description
+- **Interview you**: let Fable ask you questions to extract details you "know but haven't written down"
+- **Reference code as map**: give it code from another system as a reference pattern — often more efficient than writing a spec from scratch
+- **Decision log**: have it record every point where it deviated from your expectations, so you can see where it encountered problems you didn't anticipate
+- **Reverse quiz**: ask Fable to quiz you on what it built, ensuring you understand it well enough to explain the PR
+
 ## Key takeaway
 
 Mastering Fable 5 isn't about learning more commands or parameters — it's about changing your relationship with the model:
@@ -124,7 +145,80 @@ Mastering Fable 5 isn't about learning more commands or parameters — it's abou
 
 A good prompt isn't one with the most detailed instructions — it's one where **constraints are just enough, and trust is set to maximum**.
 
+## Loops design paradigm
+
+Claude Code's official Loops framework elevates agent engineering from intuition to a reusable design language. The core insight: four variables — trigger, stop condition, artifact, and use case — define every agent loop. The question isn't "is this task hard?" but "which segment of work can be handed off?"
+
+### Four loop types
+
+**Turn-based (default agentic loop)**
+- What you hand off: checking this step
+- Trigger: user prompt
+- Stop: agent decides it's done or needs more context
+- Artifact: SKILL.md (encode your verification criteria)
+- When: short, one-off, non-recurring tasks
+
+This is the default. Improve it by encoding your mental acceptance criteria into SKILL.md so the agent can self-check more steps, reducing the rounds per task.
+
+**Goal-based (/goal)**
+- What you hand off: the stop condition
+- Trigger: manual prompt
+- Stop: goal achieved, or max turns reached
+- Artifact: /goal + evaluation model
+- When: tasks with verifiable exit criteria
+
+Use when one turn isn't enough. The key: define exactly what "done" looks like. The evaluation model checks your conditions each turn — deterministic metrics (test pass count, score thresholds) work best because the evaluator only needs to compare, not judge "good enough."
+
+**Time-based (/loop, /schedule)**
+- What you hand off: the trigger timing
+- Stop: you cancel, or work completes naturally (PR merged, queue emptied)
+- Artifact: /loop (local, stops on shutdown) or /schedule (cloud)
+- When: recurring work, or work that reacts to external state changes
+
+Prefer event-driven over time-driven: longer intervals or state-change triggers save tokens and avoid jitter. Use /loop for local machines, /schedule for cloud persistence.
+
+**Proactive (fully autonomous)**
+- What you hand off: the prompt itself
+- Trigger: events or schedule, no human in the loop
+- Stop: each subtask exits on goal; the routine runs until stopped
+- Artifact: all of the above + dynamic workflows (research preview) + auto mode
+- When: standardized incoming work — bug reports, issue triage, dependency upgrades, batch migrations
+
+Example assembly: /schedule periodic scan → /goal defines "done" + SKILL encodes verification → dynamic workflows explore multiple solutions with adversarial review → auto mode executes without approval.
+
+### Quality guardrails (four levels)
+
+1. **Keep the codebase clean** — agents follow existing patterns and conventions
+2. **Give agents self-verification** — encode "good" as SKILL checks
+3. **Make docs accessible** — keep framework/library docs current with best practices
+4. **Use a second agent for code review** — a fresh-context reviewer avoids the main agent's confirmation bias
+
+When a single result falls short, don't just fix that one issue — encode it into the system so all future iterations benefit.
+
+### Cost guardrails
+
+- Match the artifact and model to the task — simple tasks don't need multi-agent loops
+- Define clear success/stop criteria — be specific about "what done looks like"
+- Pilot before scaling — dynamic workflows can spawn hundreds of agents
+- Use scripts for deterministic work — a form-filling script is far cheaper than an agent deriving code each time
+- Don't run routines more often than necessary
+
+Monitor with `/usage`, `/goal` (no args), and `/workflows` to inspect token distribution. The loops themselves don't save money — model tiering and clear boundaries do.
+
+### How to start
+
+Look at work you're already doing. Find the step where **you** are the bottleneck. Ask:
+
+- Can you write a quantifiable verification check? → If yes, try goal-based
+- Is "done" clearly definable? → If not, don't automate it yet
+- Does work arrive on a schedule? → If yes, try time-based
+- None of the above? → Stick with turn-based and improve your SKILL.md
+
+The four loop types are composable building blocks, not mutually exclusive categories. The most sophisticated form (Proactive) is just /schedule + /goal + dynamic workflows + auto mode assembled together.
+
 ## References
 
 - [Thariq (Claude Code team): Tips for using Fable 5](https://x.com/dotey/status/2074019009226322078) — compiled by 宝玉 from Thariq's video
+- [Thariq at AI Engineer World's Fair: Fable 5 talk (unhobbling + blind spots)](https://x.com/dotey/status/2074255513353642090) — four themes from the full presentation
+- [Claude Code official: Loops design paradigm](https://x.com/shao__meng/status/2074290011282055656) — from prompts to loops
 - [Gorden Sun: Pushing Fable to its limits](https://x.com/Gorden_Sun/status/2073976595589841197) — five principles with example prompts
