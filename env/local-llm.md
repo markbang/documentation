@@ -127,15 +127,37 @@ For laptops, a Mac Mini M4 on the local network is a quieter, cheaper alternativ
 
 ## Model evaluation: benchmarks vs. real experience
 
-A recurring pattern in open-weight model releases is the gap between benchmark scores and practical experience. Tencent's Hy3 model (released July 2026, 295B total / 21B active MoE) explicitly noted in its model card:
+A recurring pattern in open-weight model releases is the gap between benchmark scores and practical experience. Two data points from July 2026 make this impossible to ignore:
+
+**Tencent Hy3** (295B total / 21B active MoE) explicitly noted in its model card:
 
 > 模型的实用体验不完全与榜单成绩挂钩。基于广泛的用户反馈和分析，我们定位并优化了一系列体验向能力，获得了产品侧一致且积极的评价。
 
-("The model's practical experience does not fully correlate with benchmark rankings. Based on extensive user feedback and analysis, we identified and optimized a range of experience-oriented capabilities, receiving consistently positive evaluations from the product side.")
+("The model's practical experience does not fully correlate with benchmark rankings.")
 
-This is a healthy trend: model builders are acknowledging that real-world usefulness involves dimensions that benchmarks don't capture well — instruction following consistency, refusal calibration, output formatting reliability, and long-context coherence.
+**Anthropic Opus 5 vs Fable 5**: Opus 5 beats Fable 5 on nearly every benchmark, yet anyone who has used both meaningfully can tell within minutes that Opus 5 is nowhere near Fable in practical coding and agent tasks. As one observer put it: "this can only mean our benchmarks are now almost completely useless."
 
-When evaluating a local model for daily use, test it on your actual workflows rather than relying solely on leaderboard scores.
+The benchmarks are failing because they measure narrow task completion under clean conditions, while real-world usefulness involves dimensions they don't capture: instruction following consistency across long contexts, refusal calibration, output formatting reliability, tool use judgment, and the ability to recover from mid-task errors.
+
+When evaluating any model for daily use, test it on your actual workflows rather than relying solely on leaderboard scores.
+
+## Model architecture frontiers: diffusion language models
+
+The dominant LLM architecture is autoregressive — generate tokens left to right, commit to each one, never go back. This creates a fundamental problem for agent workflows: when a tool call produces an error 50 tokens ago, the model can't edit that part of the output. It must either start over or push forward with incorrect context.
+
+**Diffusion language models** take a different approach. Instead of generating sequentially, they refine the entire output in parallel passes. inclusionAI's **LLaDA2.2-flash** (July 2026) introduces the first diffusion model with explicit editing capability:
+
+- **DELETE** and **INSERT** control tokens let the model actively remove and add content during generation
+- The model can dynamically adjust sequence structure, enabling self-correction
+- This is particularly valuable for multi-turn tool calling and long-horizon agent interactions
+
+Current limitations: diffusion models still score significantly below similarly-sized autoregressive models on standard benchmarks. But the architectural advantage — the ability to edit mid-generation — addresses a limitation that no amount of scaling can fix in autoregressive models.
+
+This is early-stage research, not a replacement for autoregressive models. But the direction matters: as agent workflows grow longer and more complex, the ability to revise rather than restart will become essential.
+
+## Industry: Anthropic enters the chip race
+
+Anthropic has started early development of its own AI chips, seeking memory semiconductor supply from SK Hynix and reportedly in talks with Samsung for a custom project potentially using Samsung's 2nm process and advanced packaging. This follows OpenAI's earlier chip efforts and signals that frontier AI labs now see vertical integration into silicon as strategically necessary.
 
 ## What's next
 
@@ -146,4 +168,7 @@ The gap is closing fast. GLM 5.2 already delivers frontier-level open-weight int
 - [Qwen 3.6 27B is the sweet spot for local development](https://quesma.com/blog/qwen-36-is-awesome/) — setup guide, benchmarks, and real-world impressions
 - [Will it Mythos?](https://swelljoe.com/post/will-it-mythos/) — Qwen 3.6 benchmark comparison
 - [Simon Willison on Qwen 3.6 27B](https://simonwillison.net/2026/Apr/22/qwen36-27b/)
-- [Stop using Ollama](https://sleepingrobots.com/dreams/stop-using-ollama/) — ethical concerns with Ollama
+- [Tencent Hy3 on HuggingFace](https://huggingface.co/tencent/Hy3)
+- [Opus 5 vs Fable 5: benchmarks are broken](https://x.com/oran_ge/status/2081501133168947412)
+- [LLaDA2.2-flash: diffusion model with editing](https://huggingface.co/inclusionAI/LLaDA2.2-flash)
+- [Anthropic developing own AI chips](https://readhub.cn/topic/8v2eHNj7g1m)
