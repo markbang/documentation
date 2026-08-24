@@ -199,6 +199,30 @@ Anthropic 明确列出了边界：
 
 Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有什么，却还不知道是什么机制决定了一个念头能不能进这个 workspace。
 
+## 生产环境中的 LLM 评判器
+
+用一个语言模型去评判另一个模型的输出很常见，但在规模化生产环境中让评判器持续有效是另一个问题。Netflix 每周用评判器处理数十万条剧集推荐解释，服务数百万移动端会员。他们的核心洞察：把评判器当作一个**四阶段生命周期**，而不是一次验证完就完事的工件。
+
+### 四个阶段
+
+**诞生（Birth）**——定义多个评估标准，构建带人工标注和理由的精选基准。基准是评判器的真相来源，因此人工标注质量直接决定了评判器质量的上限。
+
+**训练（Training）**——通过 Reasoning-Aligned Rubric Tuning 精化评判器的评分标准。一个元评判器对评判器的推理输出打分，这个信号用来训练评分标准。评判器学的是"为什么好答案是好答案"，而不只是"好答案长什么样"。
+
+**部署（Deployment）**——同一个评判器扮演两个角色：质量把关（拦截坏输出）和反思生成（告诉生成器如何改进）。同一个模型可以两者兼顾，但两个角色需要不同的提示词和阈值。
+
+**监控（Monitoring）**——持续的人机对齐检测漂移，在审查门控后触发重新调优。评判器的质量不是静态的，它会随着数据、模型和用户期望的变化而漂移。
+
+在数千万会员上跑的五周 A/B 测试表明，观看行为向之前未看过的内容转移，成功的浏览转播放会话增加，且没有质量相关的下架。结论：评判器质量是一门运营纪律，不是一次性设置。
+
+## Harness 评测的困境
+
+越来越多人意识到，用重度工程化的 harness 去评测模型是失真的。模型厂商优化自己的专有 harness，所以"在我们的 harness 里最好"对"在你的环境里最好"几乎没有参考意义。
+
+更干净的做法是用**最小 harness** 测试模型质量——轻薄、标准化的设置，暴露模型的原始能力，不受厂商专用脚手架干扰。这不完美：每个 harness 都有偏向某些模型的偏见。但标准化的最小 harness 比各家调优的设置更可比。
+
+更深层的问题：harness 工程正是领先 AI 公司现在投入的方向，而且演进太快，标准化跟不上。前沿方向是模型按任务动态生成自己的 harness——Claude 已经在一定程度上做到了，只是不稳定。如果 harness 最终变成像 system prompt 一样可调的工件，基准测试只会越来越模糊。
+
 ## 什么时候值得投入更强的 harness
 
 一开始可以简单。等任务变得重复、高风险或高成本，再加结构。
@@ -220,7 +244,8 @@ Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有�
 - [Micropaper：LLM Agent 的外化设计范式](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)
 - [Anthropic Engineering：An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: A global workspace in language models（J-space）](https://www.anthropic.com/research/global-workspace) — 不到 10% 的神经活动驱动多步推理；J-lens 方法让内部推理首次可见
-- [AIGCLINK: J-space 中文解读](https://x.com/aigclink/status/2074317616894955582) — 删掉不到 10% 的神经活动，多步推理跌到接近零
+- [Netflix：生产环境中保持 LLM 评判器有效](https://arxiv.org/abs/2608.18300) — 四阶段评判器生命周期（诞生、训练、部署、监控）
+- [Measuring models against harnesses is broken](https://x.com/omarsar0/status/2091565973098676670) — 跨模型对比应使用最小 harness
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

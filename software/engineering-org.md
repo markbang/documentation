@@ -74,6 +74,15 @@ The podcast noted early signals of change:
 - Delivery and integration work cannot be fully automated away
 - Teams that combine domain expertise with AI tooling will have an edge over pure AI-native startups without industry knowledge
 
+A complementary view (August 2026): coding execution is being industrialized, but programmer value does not automatically disappear or move up the stack. The new dividing line is about:
+
+1. **Who can define problems worth solving**
+2. **Who can turn organizational knowledge into machine-usable context**
+3. **Who can constrain high-speed execution with independent verification**
+4. **Who takes responsibility for the results that enter the real world**
+
+Execution speed is becoming commoditized. What stays scarce is problem definition, context engineering, verification discipline, and accountability.
+
 ## References
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）

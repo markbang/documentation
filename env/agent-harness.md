@@ -199,6 +199,30 @@ Anthropic is explicit about boundaries:
 
 The key open question Anthropic raised: we can now see what's in the workspace, but we don't yet know what mechanism decides which thoughts enter it.
 
+## LLM-as-judge in production
+
+Using a language model to judge another model's output is common, but keeping that judge effective at scale is a different problem. Netflix runs judges over hundreds of thousands of show-level recommendation explanations per week, served to millions of members. Their key insight: treat the judge as a **lifecycle with four phases**, not an artifact you validate once.
+
+### The four phases
+
+**Birth** — define multiple evaluation criteria and build curated benchmarks with human labels and rationales. The benchmark is the judge's ground truth, so human annotation quality directly caps judge quality.
+
+**Training** — refine the judge's rubric through Reasoning-Aligned Rubric Tuning. A meta-judge scores the judge's reasoning output, and that signal trains the rubric. The judge learns *why* a good answer is good, not just what a good answer looks like.
+
+**Deployment** — one judge plays two roles: quality gating (blocking bad output) and reflective generation (telling the generator how to improve). A single judge model can do both, but the two roles need different prompts and thresholds.
+
+**Monitoring** — continuous human-in-the-loop alignment detects drift and triggers re-tuning behind a review gate. Judge quality is not static; it drifts as data, models, and user expectations shift.
+
+A five-week A/B test over tens of millions of members shifted viewing toward previously unwatched content and increased successful browse-to-play sessions, with no quality-related takedowns. The takeaway: judge quality is an operating discipline, not a one-time setup.
+
+## The harness measurement problem
+
+A growing consensus is that measuring models against heavily-engineered harnesses is broken. Model vendors optimize their own proprietary harnesses, so "best in our harness" says little about "best in yours."
+
+A cleaner approach is to test model quality against **minimal harnesses** — thin, standardized setups that expose the model's raw capability without vendor-specific scaffolding. This is imperfect: every harness has biases that favor some models over others. But a standardized minimal harness is more comparable than each vendor's tuned setup.
+
+The deeper issue: harness engineering is where leading AI companies are now focusing effort, and it moves too fast for standardization to keep up. The frontier direction is models that dynamically generate their own harness per task — Claude already does this inconsistently. If a harness becomes just another tunable artifact like a system prompt, benchmarking gets murkier, not clearer.
+
 ## When to invest in a stronger harness
 
 Start simple. Add structure when the work becomes repeated, risky, or expensive.
@@ -220,7 +244,8 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Micropaper: Externalization in LLM Agents](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)
 - [Anthropic Engineering: An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: A global workspace in language models (J-space)](https://www.anthropic.com/research/global-workspace) — less than 10% of neural activity drives multi-step reasoning; J-lens technique makes internal reasoning visible
-- [AIGCLINK: J-space 中文解读](https://x.com/aigclink/status/2074317616894955582) — 删掉不到 10% 的神经活动，多步推理跌到接近零
+- [Netflix: Keeping an LLM judge effective in production](https://arxiv.org/abs/2608.18300) — four-phase judge lifecycle (birth, training, deployment, monitoring)
+- [Measuring models against harnesses is broken](https://x.com/omarsar0/status/2091565973098676670) — prefer minimal harnesses for cross-model comparison
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

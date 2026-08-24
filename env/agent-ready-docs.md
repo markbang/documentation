@@ -127,6 +127,25 @@ Use the smallest useful sequence:
 4. Add `Content-Signal` if you need explicit AI usage preferences.
 5. Add API or MCP discovery only if your site actually exposes capabilities.
 
+## What agents actually read
+
+A 2026 study traced 94,000 development events across 557 agentic coding sessions and 690,000 file-level change records from 33,000 agentic pull requests. The findings quantify what coding agents actually consume — and they contradict some common assumptions.
+
+### The numbers
+
+- **Instruction files and working notes (AGENTS.md, CLAUDE.md, etc.) account for 60.5% of everything agents read.** If you maintain one, it is likely the single highest-leverage document you can write.
+- Classical technical docs get only **10.6%** of reads.
+- API references get just **1.3%**.
+
+### Implications
+
+- **Agents prefer guidance over reference.** They read instruction files far more than formal docs. Optimize AGENTS.md/CLAUDE.md first, then link out to deeper docs from there.
+- **Reading docs is associated with less immediate testing** (adjusted odds ratio 0.39). Agents that spend time reading are less likely to test right away — structure your guidance to compensate for this.
+- **Consultation is self-initiated 70.2% of the time**, against only 7.5% triggered by a failure. Agents proactively look things up far more often than they react to errors.
+- **In multi-commit agentic PRs, code gets touched first 4.7× more often** than other artifacts. Agents dive into code before reading surrounding material.
+
+The practical takeaway: your instruction file is the agent's primary surface. Make it accurate, current, and self-contained, because the agent will trust it over most other sources.
+
 ## Audit your site
 
 Use both automated and manual checks:
@@ -146,4 +165,4 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 - [Cloudflare: Introducing the Agent Readiness score](https://blog.cloudflare.com/agent-readiness/)
 - [Cloudflare Style Guide: AI tooling](https://developers.cloudflare.com/style-guide/ai-tooling/)
 - [Cloudflare: robots.txt setting and Content Signals](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/)
-- [llms.txt specification](https://llmstxt.org/)
+- [How do coding agents read repositories?](https://arxiv.org/abs/2608.20195) — instruction files are 60.5% of agent reads; docs 10.6%; API references 1.3%

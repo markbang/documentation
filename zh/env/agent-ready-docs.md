@@ -142,6 +142,25 @@ Sitemap: https://example.com/sitemap.xml
 4. 需要时再补 `Content-Signal`
 5. 站点真的有 API 或 MCP，再做协议发现
 
+## Agent 到底在读什么
+
+2026 年的一项研究追踪了 557 个 agentic 编码会话中的 94,000 个开发事件，以及 33,000 个 agentic PR 的 690,000 条文件级变更记录。研究结果量化了编码 Agent 实际消费的内容——并且与一些常见假设相矛盾。
+
+### 数据
+
+- **指令文件和笔记（AGENTS.md、CLAUDE.md 等）占了 Agent 所有阅读量的 60.5%。** 如果你维护着一份，它很可能是你能写的、杠杆最高的文档。
+- 经典技术文档只占 **10.6%**。
+- API 参考文档只占 **1.3%**。
+
+### 启示
+
+- **Agent 偏好指引而非参考。** 它们读指令文件的频率远高于正式文档。先优化 AGENTS.md/CLAUDE.md，再从那里链接到更深的文档。
+- **读文档与更少的即时测试相关**（调整后胜算比 0.39）。花时间阅读的 Agent 不太会立刻测试——结构化你的指引来弥补这一点。
+- **咨询是自发的，占 70.2%**，只有 7.5% 是失败触发的。Agent 主动查阅资料的频率远高于响应错误。
+- **在多提交的 agentic PR 中，代码被首先触碰的频率是其他文件的 4.7 倍。** Agent 会先钻进代码，再读周围材料。
+
+实用结论：你的指令文件是 Agent 的主要接触面。让它准确、最新、自包含，因为 Agent 会信任它超过大多数其他来源。
+
 ## 怎么检查是否真的变好了
 
 建议自动化和手工一起看：
@@ -161,4 +180,4 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 - [Cloudflare：Introducing the Agent Readiness score](https://blog.cloudflare.com/agent-readiness/)
 - [Cloudflare Style Guide：AI tooling](https://developers.cloudflare.com/style-guide/ai-tooling/)
 - [Cloudflare：robots.txt setting and Content Signals](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/)
-- [llms.txt 规范](https://llmstxt.org/)
+- [How do coding agents read repositories?](https://arxiv.org/abs/2608.20195) — 指令文件占 Agent 阅读量的 60.5%；文档 10.6%；API 参考 1.3%
