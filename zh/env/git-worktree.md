@@ -6,7 +6,7 @@ icon: "code-branch"
 
 # Git worktree
 
-`git worktree` 可以让一个仓库同时暴露出**多个工作目录**。  
+`git worktree` 可以让一个仓库同时暴露出**多个工作目录**。
 你不需要为了并行开发反复重新 clone 仓库，而是可以在同一个仓库对象库之上，同时检出多个分支。
 
 它特别适合这些场景：
@@ -136,7 +136,7 @@ Git 通常会帮你拦住大多数这种情况，但原则上要记住：
 git worktree remove ../project-agent-docs
 ```
 
-而不是直接 `rm -rf` 目录。  
+而不是直接 `rm -rf` 目录。
 如果你确实手工删了目录，记得补一条：
 
 ```bash
@@ -145,7 +145,7 @@ git worktree prune
 
 ### 3）有需要时启用 worktree 专属配置
 
-默认情况下，大部分配置还是共享主仓库的 `.git/config`。  
+默认情况下，大部分配置还是共享主仓库的 `.git/config`。
 如果你想让某些配置只存在于某一个 worktree，可以启用：
 
 ```bash
@@ -204,7 +204,7 @@ worktree 很适合同仓库内的**并行工作**，但不是所有隔离需求�
 
 ## 顺手一提：Git 2.54
 
-今天的 Git 生态里还有一个相关更新：**Git 2.54**。  
+今天的 Git 生态里还有一个相关更新：**Git 2.54**。
 它新增了实验性的 `git history` 命令，让一些简单历史改写更直接，也把 geometric repacking 变成了默认的手动维护策略。
 
 不过对于日常并行开发来说，真正最值得先掌握的仍然是 `git worktree`。

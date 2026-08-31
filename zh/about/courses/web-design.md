@@ -90,17 +90,17 @@ HTML 是构建网页结构的标记语言。
     <input type="password" name="password" placeholder="密码">
     <input type="email" name="email" placeholder="邮箱">
     <textarea name="message" rows="5"></textarea>
-    
+
     <select name="city">
         <option value="beijing">北京</option>
         <option value="shanghai">上海</option>
     </select>
-    
+
     <input type="radio" name="gender" value="male"> 男
     <input type="radio" name="gender" value="female"> 女
-    
+
     <input type="checkbox" name="agree"> 同意条款
-    
+
     <button type="submit">提交</button>
 </form>
 ```
@@ -442,7 +442,7 @@ const storedUser = JSON.parse(localStorage.getItem('user'));
         function renderTodos() {
             const list = document.getElementById('todoList');
             list.innerHTML = '';
-            
+
             todos.forEach((todo, index) => {
                 const div = document.createElement('div');
                 div.className = 'todo-item';
@@ -460,7 +460,7 @@ const storedUser = JSON.parse(localStorage.getItem('user'));
         function addTodo() {
             const input = document.getElementById('todoInput');
             const text = input.value.trim();
-            
+
             if (text) {
                 todos.push({ text, completed: false });
                 input.value = '';

@@ -9,7 +9,7 @@ icon: "graduation-cap"
 
 \----------------------------------------
 
- 
+
 **Exam question types**
 
 **1. Multiple-choice questions (10 points, 5 questions, 2 points each)**
@@ -24,13 +24,13 @@ icon: "graduation-cap"
 
 **\* Question design ideas: Choose corresponding questions from the following key points, then randomly select the above question types and numbers, and then make fine adjustments. **
 
- 
+
 \----------------------------------------
 
- 
+
 Exam focus:
 
- 
+
 # 1. Introduction
 
 1. `数据库的4个基本概念 P10`
@@ -822,15 +822,15 @@ DELIMITER //
 
 CREATE FUNCTION func_student ( f_Sno CHAR(9))
 
-RETURNS CHAR(20) DETERMINISTIC 
+RETURNS CHAR(20) DETERMINISTIC
 
 COMMENT ’ 查 询 某 个 学 生 的 姓 名 ’
 
-BEGIN 
+BEGIN
 
 RETURN (SELECT Sname FROM Student WHERE Sno = f_Sno ) ;
 
-END // 
+END //
 
 DELIMITER ;
 

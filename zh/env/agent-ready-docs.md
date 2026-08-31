@@ -30,7 +30,7 @@ icon: "robot"
 
 ## 提供 `llms.txt`
 
-`/llms.txt` 可以理解成“给 LLM 看的目录页”。  
+`/llms.txt` 可以理解成“给 LLM 看的目录页”。
 它和 `sitemap.xml` 不一样，不应该无脑列出全站所有页面，而应该做成一个**高价值阅读清单**。
 
 它要帮助 Agent 迅速回答三个问题：
@@ -71,7 +71,7 @@ icon: "robot"
 
 ## 直接输出 Markdown
 
-对 Agent 来说，Markdown 通常比完整 HTML 更友好。  
+对 Agent 来说，Markdown 通常比完整 HTML 更友好。
 Cloudflare 在官方实践里明确强调：Markdown 版本会更省 token，也更容易被模型完整消费。
 
 推荐两个方式：
@@ -85,7 +85,7 @@ Cloudflare 在官方实践里明确强调：Markdown 版本会更省 token，也
 
 ## 明确声明 AI 访问策略
 
-`robots.txt` 依然是第一层访问规则。  
+`robots.txt` 依然是第一层访问规则。
 如果你想把 AI 的用途拆得更细，可以增加 `Content-Signal`。
 
 例如：
@@ -107,7 +107,7 @@ Sitemap: https://example.com/sitemap.xml
 
 ## 只有在必要时再做协议发现
 
-不是每个文档站都需要 API/MCP 发现能力。  
+不是每个文档站都需要 API/MCP 发现能力。
 如果你的网站只是公开文档，做到“内容可发现 + 内容好读取”通常就够了。
 
 当你的站点还暴露了 API、工具或可执行能力时，再考虑补这些：
@@ -129,7 +129,7 @@ Sitemap: https://example.com/sitemap.xml
 - 标题、描述、路径命名都尽量语义化
 - `llms.txt` 里尽量链接 Markdown 版页面，而不是 HTML 页
 
-对人来说，好的 metadata 能帮助扫读；  
+对人来说，好的 metadata 能帮助扫读；
 对 Agent 来说，好的 metadata 能直接决定它第一跳抓哪一页。
 
 ## 按阶段落地最省事

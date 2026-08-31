@@ -6,7 +6,7 @@ icon: "code-branch"
 
 # Git worktree
 
-`git worktree` lets one repository expose **multiple working directories at the same time**.  
+`git worktree` lets one repository expose **multiple working directories at the same time**.
 Instead of cloning the same repo again and again, you can keep one shared repository object store and open several branches in parallel.
 
 This is especially useful when:
@@ -128,7 +128,7 @@ Prefer:
 git worktree remove ../project-agent-docs
 ```
 
-instead of deleting the folder directly.  
+instead of deleting the folder directly.
 If you do delete it manually, follow up with:
 
 ```bash
@@ -137,7 +137,7 @@ git worktree prune
 
 ### 3. Use worktree-specific config when needed
 
-By default, the main `.git/config` is shared across worktrees.  
+By default, the main `.git/config` is shared across worktrees.
 If you need config that should exist only in one worktree, enable:
 
 ```bash

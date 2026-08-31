@@ -21,9 +21,9 @@ icon: "book"
 
 第二部分`10`个`选词填空`，分别是 style , theme , foreshadowing , conflict , setting 等等这种，比较简单；
 
-第三部分`3`个写作题（大致意思）  
-1、Is the house a haunted house?`(The Rocking-Horse Winner)`  
-2、Please comment on her writing?`(The Garden Party)`  
+第三部分`3`个写作题（大致意思）
+1、Is the house a haunted house?`(The Rocking-Horse Winner)`
+2、Please comment on her writing?`(The Garden Party)`
 3、Do you think the story is still meaning nowadays?`(Lottery)`
 
 本门课程课上学什么？
@@ -170,20 +170,20 @@ Modernisim 现代
 
 ### The Screat Life of Walter Mitty
 
-常常心不在焉的主人公沃尔特·米蒂在开车送妻子去城途中又一次习惯性陷入了充满英雄情结的白日梦。  
-他把自己幻想为一位英勇的海军飞机指挥官，果断地带领部下穿越重重风暴和迷雾。  
+常常心不在焉的主人公沃尔特·米蒂在开车送妻子去城途中又一次习惯性陷入了充满英雄情结的白日梦。
+他把自己幻想为一位英勇的海军飞机指挥官，果断地带领部下穿越重重风暴和迷雾。
 作为海军飞机指挥官全速飞行穿越风暴的幻觉产生于他驾车飞速行驶的过程中；
 
-妻子在美发店下车之后，他又陷入了第二场白日梦。这一次他摇身一变成为了一位医术高超、闻名遐迩的外科医生，仅仅用一支钢笔就不费吹灰之力地修好了出了故障的麻醉机，并在众名医束手无策的情况下挥洒自如地为垂死的著名银行家施行手术。  
+妻子在美发店下车之后，他又陷入了第二场白日梦。这一次他摇身一变成为了一位医术高超、闻名遐迩的外科医生，仅仅用一支钢笔就不费吹灰之力地修好了出了故障的麻醉机，并在众名医束手无策的情况下挥洒自如地为垂死的著名银行家施行手术。
 把自己想象成外科医生的幻觉则来源于他所戴的白手套、妻子所提及的医生以及刚刚路过的一家医院；
 
-从停车场出来之后，行走在大街上，他又开始了第三场白日梦，这次他是一位百发百中的神枪手，在法庭上为自己辩护，并狠狠地教训了凶暴的地方检察官。  
+从停车场出来之后，行走在大街上，他又开始了第三场白日梦，这次他是一位百发百中的神枪手，在法庭上为自己辩护，并狠狠地教训了凶暴的地方检察官。
 产生作为神枪手出现在法庭上的幻觉则是因为报童的叫卖中提及的有关庭判的头条新闻；
 
-在第四场白日梦中他又成了英国皇家空军的轰炸机机长，准备穿越德的炮弹封锁执行一项自杀式的军火运输任务。  
+在第四场白日梦中他又成了英国皇家空军的轰炸机机长，准备穿越德的炮弹封锁执行一项自杀式的军火运输任务。
 而成为英国皇家空军的轰炸机机长的幻觉来自于一张旧报纸上的文字和图片。
 
-故事末尾的最后一场白日梦中，他则变成了一个永不低头的死刑犯，面对着行刑队，始终保持神秘莫测、桀骜不驯。  
+故事末尾的最后一场白日梦中，他则变成了一个永不低头的死刑犯，面对着行刑队，始终保持神秘莫测、桀骜不驯。
 妻子准备给他买精神药物
 
 Daydream
@@ -218,26 +218,26 @@ Character and characterization
 妻子背叛 ， 凯兰达没有说出真相
 
 1.  Mr. Max Kelada: Mr. Kelada is the central character in "Mr. Know-All." He is portrayed as a gregarious, talkative, and confident man who is proud of his accomplishments. He is also shown to be a bit of a show-off, often bragging about his knowledge and experiences. He is a skilled storyteller and enjoys being the center of attention. However, his arrogance and tendency to exaggerate his stories often rub other people the wrong way.
-    
+
 2.  Mrs. Ramsay: Mrs. Ramsay is the wife of the narrator and is depicted as a kind and gentle woman who is always trying to make everyone feel comfortable. She is a good listener and is empathetic to other people's needs. She is also shown to be quite perceptive, noticing things that other people miss.
-    
+
 3.  The narrator: The narrator is an unnamed character who is traveling on a ship with Mr. Kelada and his wife. He is initially put off by Mr. Kelada's arrogance and is skeptical of his stories. However, as the story progresses, the narrator's opinion of Mr. Kelada changes, and he comes to appreciate his wit and intelligence.
-    
+
 4.  Mr. and Mrs. Ramsay's cabin-mate: This character is not named in the story, but he is portrayed as a quiet and reserved man who is uncomfortable with Mr. Kelada's constant talking. He is also shown to be quite judgmental, often making assumptions about people based on their appearance.
-    
+
 
 Overall, the characters in "Mr. Know-All" are well-drawn and multi-dimensional, with their personalities and actions driving the story forward. The story explores themes of cultural differences, prejudice, and the importance of keeping an open mind.
 
 * * *
 
 1.  Paul's mother - Greediness and Materialism: Paul's mother is a greedy and materialistic woman who is obsessed with wealth and status. She constantly complains about their financial situation and always wants more money. She is also emotionally distant from her children and does not show them any affection.
-    
+
 2.  Paul - Obsessive and Determined: Paul is a determined and obsessive young boy who is fixated on winning money for his mother. He is willing to do whatever it takes to win, even if it means sacrificing his own health and well-being. He is also sensitive and perceptive, as he is able to sense the winning horses.
-    
+
 3.  Uncle Oscar - Cynical and Practical: Uncle Oscar is a practical man who is skeptical of Paul's ability to predict the winning horses. He is also cynical about the value of wealth and material possessions, which is in contrast to Paul's mother.
-    
+
 4.  Paul's sisters - Naive and Innocent: Paul's sisters are young and innocent, and they are not aware of the family's financial troubles. They are also naive about their mother's behavior and do not understand why she is always unhappy.
-    
+
 
 Attentive and kind
 

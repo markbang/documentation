@@ -30,7 +30,7 @@ pd.read_csv(
 			utf-8/GBK，中文数据文件最好设定为utf-8
 	na_values：指定将被读入为缺失值's 数值列表，默认下列数据被读入为缺失值：
 			' '，'#N/A', '#N/A N/A', '#NA', '-1.#IND',
-			'-1.#QNAN', '-NaN', '-nan', '1.#IND', '1.#QNAN', 
+			'-1.#QNAN', '-NaN', '-nan', '1.#IND', '1.#QNAN',
 			‘N/A',  'NA', 'NULL', 'NaN', 'n/a', 'nan', 'null'
 )：读取csv格式文件，但也可通用于文本文件读取
 ```
@@ -85,7 +85,7 @@ pd.crosstab(
 	汇总设定
 		margins = False : 是否加入行列汇总
 		margins_name = "All": 汇总行/列's Name
-		dropna = True: 
-		
+		dropna = True:
+
 	)
 ```

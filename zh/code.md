@@ -24,8 +24,8 @@ Python、Go 与数据库。
 Tauri 跨端开发。
 </Card>
 
-</CardGroup>
-
 <Card title="算法" icon="brain" href="/zh/algo/index">
 算法分享与题型整理。
 </Card>
+
+</CardGroup>

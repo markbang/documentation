@@ -30,12 +30,12 @@ import requests
 def send_wechat(title, content):
     sendkey = "YOUR_SENDKEY"
     url = f"https://sctapi.ftqq.com/{sendkey}.send"
-    
+
     data = {
         "title": title,
         "desp": content
     }
-    
+
     response = requests.post(url, data=data)
     return response.json()
 
@@ -79,7 +79,7 @@ import requests
 
 def send_bark(title, content):
     url = "https://api.day.app/YOUR_KEY/"
-    
+
     data = {
         "title": title,
         "body": content,
@@ -87,7 +87,7 @@ def send_bark(title, content):
         "icon": "https://example.com/icon.png",  # Icons
         "group": "test"  # Grouping
     }
-    
+
     response = requests.post(url, json=data)
     return response.json()
 
@@ -139,7 +139,7 @@ class TelegramBot:
         self.token = token
         self.chat_id = chat_id
         self.api_url = f"https://api.telegram.org/bot{token}"
-    
+
     def send_message(self, text, parse_mode="Markdown"):
         url = f"{self.api_url}/sendMessage"
         data = {
@@ -148,7 +148,7 @@ class TelegramBot:
             "parse_mode": parse_mode
         }
         return requests.post(url, json=data).json()
-    
+
     def send_photo(self, photo_url, caption=""):
         url = f"{self.api_url}/sendPhoto"
         data = {
@@ -157,7 +157,7 @@ class TelegramBot:
             "caption": caption
         }
         return requests.post(url, json=data).json()
-    
+
     def send_document(self, file_path):
         url = f"{self.api_url}/sendDocument"
         with open(file_path, 'rb') as f:
@@ -232,13 +232,13 @@ import requests
 
 def send_xizhi(title, content, url=""):
     api_url = "YOUR_XIZHI_URL"
-    
+
     data = {
         "title": title,
         "content": content,
         "url": url
     }
-    
+
     response = requests.post(api_url, json=data)
     return response.json()
 
@@ -264,37 +264,37 @@ send_xizhi(
 ```python
 class NotificationManager:
     """统一's MessagePush管理器"""
-    
+
     def __init__(self):
         self.server_chan_key = "YOUR_SENDKEY"
         self.bark_url = "https://api.day.app/YOUR_KEY"
         self.telegram_bot = TelegramBot("TOKEN", "CHAT_ID")
-    
+
     def send(self, title, content, channels=None):
         """Send to Multiple Channels"""
         if channels is None:
             channels = ['all']
-        
+
         results = {}
-        
+
         if 'all' in channels or 'wechat' in channels:
             results['wechat'] = self._send_wechat(title, content)
-        
+
         if 'all' in channels or 'bark' in channels:
             results['bark'] = self._send_bark(title, content)
-        
+
         if 'all' in channels or 'telegram' in channels:
             results['telegram'] = self._send_telegram(title, content)
-        
+
         return results
-    
+
     def _send_wechat(self, title, content):
         url = f"https://sctapi.ftqq.com/{self.server_chan_key}.send"
         return requests.post(url, data={"title": title, "desp": content})
-    
+
     def _send_bark(self, title, content):
         return requests.post(self.bark_url, json={"title": title, "body": content})
-    
+
     def _send_telegram(self, title, content):
         return self.telegram_bot.send_message(f"*{title}*\n\n{content}")
 

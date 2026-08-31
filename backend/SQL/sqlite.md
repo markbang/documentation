@@ -37,7 +37,7 @@ cursor.execute('''
 ''')
 
 # 插入数据
-cursor.execute("INSERT INTO users (name, email) VALUES (?, ?)", 
+cursor.execute("INSERT INTO users (name, email) VALUES (?, ?)",
                ("张三", "zhangsan@example.com"))
 
 # 查询数据

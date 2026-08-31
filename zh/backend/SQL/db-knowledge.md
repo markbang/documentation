@@ -8,7 +8,7 @@ icon: "book-open"
 
 \----------------------------------------
 
- 
+
 
 **考试题型**
 
@@ -24,15 +24,15 @@ icon: "book-open"
 
 **\* 出题思路：从以下重点中出相应的题目，然后再随机选择上述题型和数目，再做微调。**
 
- 
+
 
 \----------------------------------------
 
- 
+
 
 考试重点：
 
- 
+
 
 # 一. 绪论
 
@@ -825,15 +825,15 @@ DELIMITER //
 
 CREATE FUNCTION func_student ( f_Sno CHAR(9))
 
-RETURNS CHAR(20) DETERMINISTIC 
+RETURNS CHAR(20) DETERMINISTIC
 
 COMMENT ’ 查 询 某 个 学 生 的 姓 名 ’
 
-BEGIN 
+BEGIN
 
 RETURN (SELECT Sname FROM Student WHERE Sno = f_Sno ) ;
 
-END // 
+END //
 
 DELIMITER ;
 

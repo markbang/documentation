@@ -48,7 +48,7 @@ export const siteConfig = {
   description: 'blogsDescription',
   author: 'Author Name',
   avatar: '/avatar.jpg',
-  
+
   // Social Links
   socialLinks: [
     { name: 'github', url: 'https://github.com/username' },

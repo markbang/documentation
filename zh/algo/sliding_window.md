@@ -20,22 +20,22 @@ def sliding_window(s: str):
     left = 0
     window = {}  # 窗口内的数据
     result = 0
-    
+
     for right in range(len(s)):
         # 1. 将right位置的元素加入窗口
         c = s[right]
         window[c] = window.get(c, 0) + 1
-        
+
         # 2. 判断窗口是否需要收缩
         while 窗口需要收缩的条件:
             # 3. 移出left位置的元素
             d = s[left]
             left += 1
             window[d] -= 1
-            
+
         # 4. 更新结果
         result = max(result, right - left + 1)
-    
+
     return result
 ```
 
@@ -44,7 +44,7 @@ def sliding_window(s: str):
 ### 1. [LeetCode 3. 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
 ```python
-# leetcode.3 滑动窗口+哈希表 
+# leetcode.3 滑动窗口+哈希表
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         dic, res, i = {}, 0, -1
@@ -67,26 +67,26 @@ class Solution:
         left = 0
         valid = 0
         start, length = 0, float('inf')
-        
+
         for right in range(len(s)):
             c = s[right]
             if c in need:
                 window[c] = window.get(c, 0) + 1
                 if window[c] == need[c]:
                     valid += 1
-            
+
             while valid == len(need):
                 if right - left + 1 < length:
                     start = left
                     length = right - left + 1
-                
+
                 d = s[left]
                 left += 1
                 if d in need:
                     if window[d] == need[d]:
                         valid -= 1
                     window[d] -= 1
-        
+
         return "" if length == float('inf') else s[start:start+length]
 ```
 
@@ -101,25 +101,25 @@ class Solution:
         left = 0
         valid = 0
         result = []
-        
+
         for right in range(len(s)):
             c = s[right]
             if c in need:
                 window[c] = window.get(c, 0) + 1
                 if window[c] == need[c]:
                     valid += 1
-            
+
             while right - left + 1 >= len(p):
                 if valid == len(need):
                     result.append(left)
-                
+
                 d = s[left]
                 left += 1
                 if d in need:
                     if window[d] == need[d]:
                         valid -= 1
                     window[d] -= 1
-        
+
         return result
 ```
 
@@ -131,15 +131,15 @@ class Solution:
         left = 0
         total = 0
         result = float('inf')
-        
+
         for right in range(len(nums)):
             total += nums[right]
-            
+
             while total >= target:
                 result = min(result, right - left + 1)
                 total -= nums[left]
                 left += 1
-        
+
         return 0 if result == float('inf') else result
 ```
 
@@ -153,25 +153,25 @@ class Solution:
         window = {}
         left = 0
         valid = 0
-        
+
         for right in range(len(s2)):
             c = s2[right]
             if c in need:
                 window[c] = window.get(c, 0) + 1
                 if window[c] == need[c]:
                     valid += 1
-            
+
             while right - left + 1 >= len(s1):
                 if valid == len(need):
                     return True
-                
+
                 d = s2[left]
                 left += 1
                 if d in need:
                     if window[d] == need[d]:
                         valid -= 1
                     window[d] -= 1
-        
+
         return False
 ```
 

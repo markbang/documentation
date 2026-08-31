@@ -147,17 +147,6 @@ When all code is AI-generated, the risk is not writing code — it is keeping th
 
 The throughline: AI lowers the cost of writing code to near zero, so the discipline that matters shifts to architecture, verification, and cleanup.
 
-## Key takeaway
-
-Mastering Fable 5 isn't about learning more commands or parameters — it's about changing your relationship with the model:
-
-- From "supervising execution" to "guiding direction"
-- From "decomposing steps" to "setting goals and acceptance criteria"
-- From "cautious testing" to "bold ambition"
-- From "checking output" to "demanding self-verification"
-
-A good prompt isn't one with the most detailed instructions — it's one where **constraints are just enough, and trust is set to maximum**.
-
 ## Loops design paradigm
 
 Claude Code's official Loops framework elevates agent engineering from intuition to a reusable design language. The core insight: four variables — trigger, stop condition, artifact, and use case — define every agent loop. The question isn't "is this task hard?" but "which segment of work can be handed off?"
@@ -228,6 +217,17 @@ Look at work you're already doing. Find the step where **you** are the bottlenec
 - None of the above? → Stick with turn-based and improve your SKILL.md
 
 The four loop types are composable building blocks, not mutually exclusive categories. The most sophisticated form (Proactive) is just /schedule + /goal + dynamic workflows + auto mode assembled together.
+
+## Key takeaway
+
+Mastering Fable 5 isn't about learning more commands or parameters — it's about changing your relationship with the model:
+
+- From "supervising execution" to "guiding direction"
+- From "decomposing steps" to "setting goals and acceptance criteria"
+- From "cautious testing" to "bold ambition"
+- From "checking output" to "demanding self-verification"
+
+A good prompt isn't one with the most detailed instructions — it's one where **constraints are just enough, and trust is set to maximum**.
 
 ## References
 

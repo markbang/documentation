@@ -48,7 +48,7 @@ export const siteConfig = {
   description: '博客描述',
   author: '作者名',
   avatar: '/avatar.jpg',
-  
+
   // 社交链接
   socialLinks: [
     { name: 'github', url: 'https://github.com/username' },

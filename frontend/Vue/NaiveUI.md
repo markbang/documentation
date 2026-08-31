@@ -169,16 +169,16 @@ function toggleTheme() {
     <n-button type="success">Success</n-button>
     <n-button type="warning">Warning</n-button>
     <n-button type="error">Error</n-button>
-    
+
     <!-- 大小 -->
     <n-button size="small">Small</n-button>
     <n-button size="medium">Medium</n-button>
     <n-button size="large">Large</n-button>
-    
+
     <!-- State -->
     <n-button :loading="true">Loading</n-button>
     <n-button disabled>Disabled</n-button>
-    
+
     <!-- Icons -->
     <n-button>
       <template #icon>
@@ -257,9 +257,9 @@ const data = [
     <template #header-extra>
       <n-button size="small">Extra</n-button>
     </template>
-    
+
     Card content here
-    
+
     <template #footer>
       Footer content
     </template>
@@ -278,7 +278,7 @@ const showModal = ref(false)
 
 <template>
   <n-button @click="showModal = true">打开弹窗</n-button>
-  
+
   <n-modal v-model:show="showModal">
     <n-card style="width: 600px" title="Modal" closable @close="showModal = false">
       Modal content
@@ -324,11 +324,11 @@ function handleSubmit(e) {
     <n-form-item label="姓名" path="name">
       <n-input v-model:value="formValue.name" />
     </n-form-item>
-    
+
     <n-form-item label="年龄" path="age">
       <n-input-number v-model:value="formValue.age" />
     </n-form-item>
-    
+
     <n-form-item>
       <n-button attr-type="submit" type="primary">Commit</n-button>
     </n-form-item>
@@ -425,7 +425,7 @@ async function fetchData() {
     <n-layout-sider bordered>
       Sider
     </n-layout-sider>
-    
+
     <n-layout>
       <n-layout-header bordered>Header</n-layout-header>
       <n-layout-content>Content</n-layout-content>
@@ -443,7 +443,7 @@ async function fetchData() {
     <n-button>Button 1</n-button>
     <n-button>Button 2</n-button>
   </n-space>
-  
+
   <n-space :size="20">
     <n-button>Button 1</n-button>
     <n-button>Button 2</n-button>

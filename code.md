@@ -24,8 +24,8 @@ Python, Go, and databases.
 Tauri cross-platform development.
 </Card>
 
-</CardGroup>
-
 <Card title="Algorithms" icon="brain" href="/algo/index">
 Algorithm practice and pattern-based notes.
 </Card>
+
+</CardGroup>

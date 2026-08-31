@@ -98,7 +98,7 @@ class SimpleNet(nn.Module):
         self.fc1 = nn.Linear(784, 128)
         self.fc2 = nn.Linear(128, 10)
         self.relu = nn.ReLU()
-    
+
     def forward(self, x):
         x = self.fc1(x)
         x = self.relu(x)
@@ -120,7 +120,7 @@ class CNN(nn.Module):
         self.fc2 = nn.Linear(128, 10)
         self.relu = nn.ReLU()
         self.maxpool = nn.MaxPool2d(2)
-    
+
     def forward(self, x):
         x = self.conv1(x)
         x = self.relu(x)
@@ -154,12 +154,12 @@ for epoch in range(10):
         # 前向传播
         output = model(data)
         loss = criterion(output, target)
-        
+
         # 反向传播
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        
+
         if batch_idx % 100 == 0:
             print(f'Epoch: {epoch}, Loss: {loss.item()}')
 ```
@@ -175,10 +175,10 @@ class CustomDataset(Dataset):
     def __init__(self, data, labels):
         self.data = data
         self.labels = labels
-    
+
     def __len__(self):
         return len(self.data)
-    
+
     def __getitem__(self, idx):
         return self.data[idx], self.labels[idx]
 

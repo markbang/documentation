@@ -101,22 +101,22 @@ icon: "sitemap"
 
    ```python
    class Iterator:
-       
+
        def __init__(self, squence):
            self._seq = squence
            self._index = -1
-           
+
        def __next__(self):
            self._index += 1
            if self._index < len(self._seq):
                return self._seq[self._index]
            else:
                raise StopIteration()
-           
+
        def __iter__(self):
            return self
-       
-       
+
+
    if __name__ == '__main__':
        a = Iterator([1, 2, 3, 4, 5])
        print(next(a), next(a))
@@ -131,10 +131,10 @@ icon: "sitemap"
    ```python
    # 任意对象，只要定义了__next__方法，它就是一个迭代器。
    class Iterator:
-   
+
        def __next__(self):
            return self
-       
+
    if __name__ == '__main__':
        print(Iterator()) # <__main__.Iterator object at 0x2753730>
    ```
@@ -146,10 +146,10 @@ icon: "sitemap"
     def generator_function():
         for i in range(10):
             yield i
-    
+
     for item in generator_function():
         print(item, end='->')
-    
+
     # Output: 0->1->2->3->4->5->6->7->8->9->
     ```
 
@@ -242,7 +242,7 @@ icon: "sitemap"
 
     ```python
     class Point:
-        
+
         def __init__(self, x=0, y=0):
             self.x = x
             self.y = y
@@ -330,7 +330,7 @@ icon: "sitemap"
             return li1 == li2
         else:
             return False
-    
+
     def solution2(st1, st2): # O(n^2)
         if len(st1) == len(st2):
             for i in range(len(st1)):
@@ -343,7 +343,7 @@ icon: "sitemap"
             return ''.join(li2) == ''
         else:
             return False
-        
+
     def solution3(st1, st2): # O(n)
         dic1 = {}
         dic2 = {}
@@ -354,7 +354,7 @@ icon: "sitemap"
             return dic1 == dic2
         else:
             return False
-    
+
     ```
 
 ## 第5章 递归
@@ -453,38 +453,38 @@ icon: "sitemap"
 
    ```python
    import ctypes
-   
+
    class DynamicArray:
-       
+
        def __init__(self):
            self._n = 0
            self._capacity = 1
            self._A = self._make_array(self._capacity)
-           
+
        def __len__(self):
            return self._n
-       
+
        def __getitem__(self, k):
            if not 0 <= k < self._n:
                raise IndexError('invalid index')
            return self._A[k]
-       
+
        def append(self, obj):
            if self._n == self._capacity:
                self._resize(2 * self._capacity)
            self._A[self._n] = obj
            self._n += 1
-           
+
        def _make_array(self, c):
            return (c * ctypes.py_object)()
-       
+
        def _resize(self, c):
            B = self._make_array(c)
            for k in range(self._n):
                B[k] = self._A[k]
            self._A = B
            self._capacity = c
-           
+
        def remove(self, value):
            for k in range(self._n):
                if self._A[k] == value:
@@ -493,7 +493,7 @@ icon: "sitemap"
                    self._A[self._n - 1] = None
                    self._n -= 1
            raise ValueError('value not found')
-       
+
        def insert(self, k, value):
            if self._n == self._capacity:
                self._resize(2 * self._capacity)
@@ -501,7 +501,7 @@ icon: "sitemap"
                self._A[j] = self._A[j - 1]
            self._A[k] = value
            self._n += 1
-           
+
    if __name__ == '__main__':
        A = DynamicArray()
        A.append(1)
@@ -535,27 +535,27 @@ icon: "sitemap"
 
    ```python
    class ArrayStack:
-       
+
        def __init__(self):
            self._stack = []
-           
+
        def __len__(self):
            return len(self._stack)
-       
+
        def __str__(self) -> str:
            return str(self._stack)
-       
+
        def is_empty(self):
            return len(self) == 0
-       
+
        def push(self, e):
            self._stack.append(e)
-           
+
        def top(self):
            if self.is_empty():
                raise ValueError('Stack is empty')
            return self._stack[-1]
-       
+
        def pop(self):
            if self.is_empty():
                raise ValueError('Stack is empty')
@@ -608,16 +608,16 @@ icon: "sitemap"
     def base_converter(dec_number, base):
         digits = "0123456789ABCDEF"
         rem_stack = ArrayStack()
-        
+
         while dec_number > 0:
             rem = dec_number % base
             rem_stack.push(rem)
             dec_number = dec_number // base
-            
+
         new_string = ""
         while not rem_stack.is_empty():
             new_string = new_string + digits[rem_stack.pop()]
-            
+
         return new_string
     ```
 
@@ -627,7 +627,7 @@ icon: "sitemap"
     # 这段大概率是不会出的
     from array_stack import ArrayStack
     import string
-    
+
     def infix_to_post_fix(infix_expr):
         prec = {}
         prec["*"] = 3
@@ -635,12 +635,12 @@ icon: "sitemap"
         prec["+"] = 2
         prec["-"] = 2
         prec["("] = 1
-    
+
         op_stack = ArrayStack()
         post_fix_list = []
-    
+
         token_list = infix_expr.split()
-    
+
         for token in token_list:
             if token in string.ascii_uppercase:
                 post_fix_list.append(token)
@@ -656,13 +656,13 @@ icon: "sitemap"
                     (prec[op_stack.top()] >= prec[token]):
                     post_fix_list.append(op_stack.pop())
                 op_stack.push(token)
-    
+
         while not op_stack.is_empty():
             post_fix_list.append(op_stack.pop())
-    
+
         return " ".join(post_fix_list)
-    
-    
+
+
     if __name__ == "__main__":
         # infix_expr = "( A + B ) * ( C + D )"
         # infix_expr = "( A + B ) * C"
@@ -688,35 +688,35 @@ icon: "sitemap"
     ```python
     class ArrayQueue:
         """FIFO Queue implementation using a Python list as underlying storage."""
-    
+
         def __init__(self):
             """Create an empty queue."""
             self._data = []
-    
+
         def __len__(self):
             """Return the number of elements in the queue."""
             return len(self._data)
-    
+
         def is_empty(self):
             """Return True if the queue is empty."""
             return len(self._data) == 0
-    
+
         def enqueue(self, e):
             """Add element e to the back of the queue."""
             self._data.append(e)  # new item stored at end of list
-    
+
         def first(self):
             """Return (but do not remove) the element at the front of the queue.
-    
+
             Raise Empty exception if the queue is empty.
             """
             if self.is_empty():
                 raise Empty('Queue is empty')
             return self._data[0]  # the last item in the list
-    
+
         def dequeue(self):
             """Remove and return the first element of the queue (i.e., FIFO).
-    
+
             Raise Empty exception if the queue is empty.
             """
             if self.is_empty():
@@ -731,16 +731,16 @@ icon: "sitemap"
         sim_queue = ArrayQueue()
         for name in name_list:
             sim_queue.enqueue(name)
-    
+
         while len(sim_queue) > 1:
             for i in range(num):
                 sim_queue.enqueue(sim_queue.dequeue())
             sim_queue.dequeue()
             print(sim_queue._data)
-    
+
         return sim_queue.dequeue()
-    
-    
+
+
     if __name__ == "__main__":
         name_list = ['Bill', 'David', 'Susan', 'Jane', 'Kent', 'Bard']
         num = 6
@@ -770,34 +770,34 @@ icon: "sitemap"
     class Deque:
         def __init__(self):
             self._data = []
-    
+
         def __len__(self):
             return len(self._data)
-    
+
         def is_empty(self):
             return len(self._data) == 0
-    
+
         def add_first(self, e):
             self._data.insert(0, e)
-    
+
         def add_last(self, e):
             self._data.append(e)
-    
+
         def delete_first(self):
             if self.is_empty():
                 raise Empty('Deque is empty')
             return self._data.pop(0)
-    
+
         def delete_last(self):
             if self.is_empty():
                 raise Empty('Deque is empty')
             return self._data.pop()
-    
+
         def first(self):
             if self.is_empty():
                 raise Empty('Deque is empty')
             return self._data[0]
-    
+
         def last(self):
             if self.is_empty():
                 raise Empty('Deque is empty')
@@ -811,22 +811,22 @@ icon: "sitemap"
     def palchecker(a_string):
         print(a_string)
         char_deque = Deque()
-    
+
         for ch in a_string:
             char_deque.add_last(ch)
-    
+
         still_equal = True
-    
+
         while len(char_deque) > 1 and still_equal:
             print(char_deque.first(), char_deque.last())
             first = char_deque.delete_first()
             last = char_deque.delete_last()
             if first != last:
                 still_equal = False
-    
+
         return still_equal
-    
-    
+
+
     if __name__ == "__main__":
         # a_string1 = 'lsdkjfskf'
         a_string1 = '上海自来水来自海上'
@@ -888,31 +888,31 @@ icon: "sitemap"
         def __init__(self, initdata):
             self.data = initdata
             self.next = None
-    
+
         def get_data(self):
             return self.data
-    
+
         def get_next(self):
             return self.next
-    
+
         def set_data(self, new_data):
             self.data = new_data
-    
+
         def set_next(self, new_next):
-            self.next = new_next       
+            self.next = new_next
     # 构建链表
     class UnordredList:
         def __init__(self):
             self.head = None
-    
+
         def is_empty(self):
             return self.head == None
-    
+
         def add(self, item):
             temp = Node(item)
             temp.set_next(self.head)
             self.head = temp
-            
+
         def length(self):
             count = 0
             current = self.head
@@ -920,7 +920,7 @@ icon: "sitemap"
                 count += 1
                 current = current.get_next()
             return count
-        
+
         def search(self, item):
             current = self.head
             while current != None:
@@ -929,7 +929,7 @@ icon: "sitemap"
                 else:
                     current = current.get_next()
             return False
-    
+
         def remove(self, item):
             current = self.head
             previous = None
@@ -944,13 +944,13 @@ icon: "sitemap"
                 self.head = current.get_next()
             else:
                 previous.set_next(current.get_next())
-    
+
         def append(self, item):
             current = self.head
             while current.get_next() != None:
                 current = current.get_next()
             current.set_next(Node(item))
-    
+
         def insert(self, pos, item):
             current = self.head
             previous = None
@@ -962,7 +962,7 @@ icon: "sitemap"
             insert_item = Node(item)
             insert_item.set_next(current)
             previous.set_next(insert_item)
-    
+
         def index(self, item):
             current = self.head
             count = 0
@@ -973,7 +973,7 @@ icon: "sitemap"
                     count +=1
                     current = current.get_next()
             return count
-    
+
         def pop (self, pos=None):
             if pos == None:
                 current = self.head
@@ -1106,14 +1106,14 @@ icon: "sitemap"
        sum = 0
        for pos in range(len(a_string)):
            sum += ord(a_string[pos])
-   
+
        return sum % table_size
-   
+
    def hash_pro(a_string, table_size):
        sum = 0
        for pos in range(len(a_string)):
            sum += ord(a_string[pos]) * (pos + 1)
-   
+
        return sum % table_size
    # 以上两个函数是用来key和index的，比如hash('cat', 100)返回12
    ```
@@ -1136,10 +1136,10 @@ icon: "sitemap"
            self.size = 11
            self.slots = [None] * self.size
            self.data = [None] * self.size
-   
+
        def put(self, key, data):
            hash_value = self.hash_function(key, len(self.slots))
-   
+
            if self.slots[hash_value] == None:
                self.slots[hash_value] = key
                self.data[hash_value] = data
@@ -1155,13 +1155,13 @@ icon: "sitemap"
                        self.data[next_slot] = data
                    else:
                        self.data[next_slot] = data # replace the old data
-   
+
        def hash_function(self, key, size):
            return key % size
-   
+
        def rehash(self, old_hash, size):
            return (old_hash + 1) % size
-   
+
        def get(self, key):
            start_slot = self.hash_function(key, len(self.slots))
            data = None
@@ -1177,10 +1177,10 @@ icon: "sitemap"
                    if position == start_slot:
                        stop = True
            return data
-   
+
        def __getitem__(self, key): # 允许对象通过索引访问其元素
            return self.get(key)
-   
+
        def __setitem__(self, key, data): # 允许对象通过索引设置其元素的值
            self.put(key, data)
    ```
@@ -1246,11 +1246,11 @@ icon: "sitemap"
             for location in range(1, fill_slot + 1):
                 if a_list[location] > a_list[position_of_max]:
                     position_of_max = location
-    
+
             a_list[fill_slot], a_list[position_of_max] = a_list[position_of_max], a_list[fill_slot]
     ```
 
-    
+
 
 12. 插入排序的实现和分析    P73-P74
 

@@ -60,19 +60,19 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      
+
       - name: Install dependencies
         run: npm install
-      
+
       - name: Run tests
         run: npm test
 ```
@@ -201,12 +201,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Build
         run: |
           npm install
           npm run build
-      
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -327,11 +327,11 @@ steps:
   - name: Only on main
     if: github.ref == 'refs/heads/main'
     run: echo "Main branch"
-  
+
   - name: Only on success
     if: success()
     run: echo "Previous steps succeeded"
-  
+
   - name: Always run
     if: always()
     run: echo "Cleanup"
@@ -353,7 +353,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
@@ -381,13 +381,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:

@@ -16,7 +16,7 @@ icon: "globe"
 
 ## 为什么值得关注
 
-现在很多浏览器自动化工具都能“让 AI 点网页”。  
+现在很多浏览器自动化工具都能“让 AI 点网页”。
 Browser Harness 更特别的地方在于，它是按 **agentic workflow** 的思路设计的：
 
 - 可以直接配合 **Codex**、**Claude Code**
@@ -24,7 +24,7 @@ Browser Harness 更特别的地方在于，它是按 **agentic workflow** 的思
 - 如果执行到一半发现 helper 不够，Agent 可以**现场补代码**
 - 也支持免费远程浏览器，适合云端或 sub-agent 场景
 
-官方 README 对它的定义是 **self-healing browser harness**。  
+官方 README 对它的定义是 **self-healing browser harness**。
 也就是说，它默认接受这样一个现实：浏览器任务不会总是刚好被预设函数完整覆盖，所以“执行中自我补齐能力”本身就是设计目标的一部分。
 
 ## 它怎么工作
@@ -36,7 +36,7 @@ Browser Harness 更特别的地方在于，它是按 **agentic workflow** 的思
 - `helpers.py`：浏览器 helper 函数集合
 - `daemon.py` / `admin.py`：CDP websocket 和本地桥接逻辑
 
-重点在于：`helpers.py` 并不被视为一份永远固定不变的工具集。  
+重点在于：`helpers.py` 并不被视为一份永远固定不变的工具集。
 Agent 在执行任务时，会去读它、理解它、必要时扩展它。
 
 实际流程通常是：
@@ -46,7 +46,7 @@ Agent 在执行任务时，会去读它、理解它、必要时扩展它。
 3. 如果当前 helper 不够，就让 Agent 修改 harness
 4. 然后继续完成任务
 
-这和传统浏览器脚本最大的区别在于：  
+这和传统浏览器脚本最大的区别在于：
 传统脚本一旦遇到“缺能力”就失败；Browser Harness 把“补能力”变成了执行过程的一部分。
 
 ## 适合什么场景
@@ -77,8 +77,8 @@ Agent 在执行任务时，会去读它、理解它、必要时扩展它。
 
 Browser Harness 的优先级更偏向：
 
-**Agent 的灵活性**  
-而不是  
+**Agent 的灵活性**
+而不是
 **测试流程的绝对确定性**
 
 ## 真实浏览器 vs 远程浏览器
@@ -135,11 +135,11 @@ README 给出的推荐方式很“agent-native”：
 
 现在大致可以把相关工具分成三层：
 
-1. **传统自动化框架**  
+1. **传统自动化框架**
    例如 Playwright、Puppeteer、Selenium
-2. **面向助手的浏览器工具层**  
+2. **面向助手的浏览器工具层**
    例如 MCP/browser tool 这种 tool-call 接口
-3. **面向 Agent 的浏览器 harness**  
+3. **面向 Agent 的浏览器 harness**
    浏览器控制本身就被设计成可推理、可补齐、可演化
 
 Browser Harness 更明显属于第三类。

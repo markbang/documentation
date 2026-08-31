@@ -127,11 +127,11 @@ The tradeoff is operational complexity. You now own a small always-on runtime wi
 
 There are now roughly three common layers for browser automation:
 
-1. **classic automation frameworks**  
+1. **classic automation frameworks**
    Playwright, Puppeteer, Selenium
-2. **MCP/browser tools for assistants**  
+2. **MCP/browser tools for assistants**
    tool-call-oriented browser control
-3. **agent-native browser harnesses**  
+3. **agent-native browser harnesses**
    browser control designed for LLMs that reason, adapt, and patch their own workflow
 
 Browser Harness clearly sits in the third category.

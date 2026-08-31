@@ -388,7 +388,7 @@ INSERT INTO `student`(`name`) VALUES ('zsr');
 INSERT INTO `student`(`name`,`pwd`,`sex`) VALUES ('zsr','200024','男'),('gcc','000421','女');
 
 -- 省略字段
-INSERT INTO `student` VALUES (5,'Bareth','123456','男','2000-02-04','武汉','1412@qq.com',1); 
+INSERT INTO `student` VALUES (5,'Bareth','123456','男','2000-02-04','武汉','1412@qq.com',1);
 12345678
 ```
 
@@ -533,7 +533,7 @@ CREATE TABLE `grade`(
 )ENGINE=INNODB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- 给grade表插入数据
-INSERT INTO `grade`(`GradeID`,`GradeName`) 
+INSERT INTO `grade`(`GradeID`,`GradeName`)
 VALUES (1,'大一'),(2,'大二'),(3,'大三'),(4,'大四');
 
 -- 创建成绩result表
@@ -546,12 +546,12 @@ CREATE TABLE `result`(
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 -- 给result表插入数据
-INSERT INTO `result`(`StudentNo`,`SubjectNo`,`ExamDate`,`StudentResult`) 
+INSERT INTO `result`(`StudentNo`,`SubjectNo`,`ExamDate`,`StudentResult`)
 VALUES (1000,1,'2019-10-21 16:00:00',97),(1001,1,'2019-10-21 16:00:00',96),
 (1000,2,'2019-10-21 16:00:00',87),(1001,3,'2019-10-21 16:00:00',98);
 
 -- 创建学生表student
-CREATE TABLE `student`(	
+CREATE TABLE `student`(
 	`StudentNo` INT(4) NOT NULL COMMENT '学号',
 	`LoginPwd` VARCHAR(20) DEFAULT NULL,
 	`StudentName` VARCHAR(20) DEFAULT NULL COMMENT '学生姓名',
@@ -568,7 +568,7 @@ CREATE TABLE `student`(
 )ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 -- 给学生表插入数据
-INSERT INTO `student`(`StudentNo`,`LoginPwd`,`StudentName`,`Sex`,`GradeID`,`Phone`,`Adress`,`BornDate`,`Email`,`IdentityCard`) 
+INSERT INTO `student`(`StudentNo`,`LoginPwd`,`StudentName`,`Sex`,`GradeID`,`Phone`,`Adress`,`BornDate`,`Email`,`IdentityCard`)
 VALUES (1000,'1241','dsaf',1,2,'24357','unknow','2000-09-16 00:00:00','1231@qq.com','809809'),
 (1001,'1321','dfdj',0,2,'89900','unknow','2000-10-16 00:00:00','5971@qq.com','908697');
 
@@ -582,7 +582,7 @@ CREATE TABLE `subject`(
 )ENGINE=INNODB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- 给科目表subject插入数据
-INSERT INTO `subject`(`SubjectNo`,`SubjectName`,`ClassHour`,`GradeID`) 
+INSERT INTO `subject`(`SubjectNo`,`SubjectName`,`ClassHour`,`GradeID`)
 VALUES(1,'高数','96',2),(2,'大物','112',2),(3,'程序设计',64,3);
 
 SELECT 字段 FROM 表;
@@ -909,7 +909,7 @@ SELECT VERSION();
 | count | 计算个数 |
 
 ```sql
-SELECT COUNT(StudentName) FROM student; 
+SELECT COUNT(StudentName) FROM student;
 SELECT COUNT(*) FROM student;
 SELECT COUNT(1) FROM student;
 
@@ -1015,7 +1015,7 @@ SQL执行：B收到A的钱
 1️⃣ **关闭自动提交**
 
 ```sql
-SET autocommit=0; 
+SET autocommit=0;
 ```
 
 2️⃣ **事务开启**
@@ -1066,7 +1066,7 @@ RELEASE SAVEPOINT 保存点名; -- 撤销保存点
 
 ```sql
 -- 创建学生表student
-CREATE TABLE `student`(	
+CREATE TABLE `student`(
 	`StudentNo` INT(4) NOT NULL COMMENT '学号',
 	`LoginPwd` VARCHAR(20) DEFAULT NULL,
 	`StudentName` VARCHAR(20) DEFAULT NULL COMMENT '学生姓名',
@@ -1139,10 +1139,10 @@ ALTER TABLE tableName ADD INDEX indexName(columnName)
 CREATE UNIQUE INDEX indexName ON tableName(columnName)
 
 -- 创建表的时候指定唯一索引
-CREATE TABLE tableName(  
+CREATE TABLE tableName(
 	......
-	UNIQUE INDEX [indexName] (columeName)  
-);  
+	UNIQUE INDEX [indexName] (columeName)
+);
 
 -- 修改表结构添加唯一索引
 ALTER TABLE tableName ADD UNIQUE INDEX [indexName] (columnName)
@@ -1189,7 +1189,7 @@ CREATE TABLE 表名 (
        ON 表名 (字段名[(长度)] [ASC |DESC]) ;
 
 -- 方法二：ALTER TABLE在已存在的表上创建索引
-       ALTER TABLE 表名 ADD [UNIQUE|FULLTEXT|SPATIAL] 
+       ALTER TABLE 表名 ADD [UNIQUE|FULLTEXT|SPATIAL]
        INDEX 索引名 (字段名[(长度)] [ASC |DESC]) ;
 ```
 
@@ -1429,7 +1429,7 @@ mysqldump -hlocalhost -uroot -p200024 school course grade student >D:/school.sql
 
 > 我们编写的程序会通过**数据库驱动**来和数据库进行交互
 >
-> 
+>
 >
 > 然后不同的数据库有不同的驱动，这不便于我们程序对各种数据库进行操作；因此为了简化对不同数据库的操作，SUN公司提供了一个Java操作数据库的规范`JDBC`；不同数据库的规范由对应的数据库厂商完成，对于开发人员，只需要掌握JDBC接口的操作即可
 
