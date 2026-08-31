@@ -26,8 +26,8 @@ OnlyWrite — local-first writing app with reactive UI.
 Bun + Turborepo monorepo — project structure, shared packages, CI/CD.
 </Card>
 
-<Card title="OnlyWrite" icon="pen-nib" href="https://github.com/markbang/OnlyWrite">
-Local-first desktop writing app built with SolidJS + Tauri 2.
+<Card title="Engineering team organization" icon="users" href="/software/engineering-org">
+Hiring, team building, and AI-era org shifts from ByteDance and Meituan.
 </Card>
 
 </CardGroup>

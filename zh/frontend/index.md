@@ -18,6 +18,14 @@ icon: "browser"
 React 全栈框架，SSR/SSG/API Routes。
 </Card>
 
+<Card title="TanStack + Hono" icon="code" href="/zh/frontend/tanstack">
+全栈 monorepo——SSR + 类型安全 API 服务。
+</Card>
+
+<Card title="SolidJS + Tauri" icon="laptop-code" href="/zh/frontend/solidjs">
+本地优先桌面应用——响应式 UI + Rust 外壳。
+</Card>
+
 <Card title="CSS 工具" icon="palette" href="/zh/frontend/TailwindCSS/index">
 Tailwind CSS 与 DaisyUI 组件库。
 </Card>

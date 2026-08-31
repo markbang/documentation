@@ -16,8 +16,24 @@ FastAPI、爬虫与常用库。
 Gin 框架与并发编程。
 </Card>
 
+<Card title="Rust" icon="rust" href="/zh/backend/Rust/index">
+Axum IM 桥接与 Tauri 桌面外壳。
+</Card>
+
 <Card title="数据库" icon="database" href="/zh/backend/SQL/index">
 MySQL、SQLite 与数据库核心概念。
+</Card>
+
+</CardGroup>
+
+<CardGroup cols={2}>
+
+<Card title="Drizzle ORM" icon="layer-group" href="/zh/backend/orm/drizzle">
+类型安全的 ORM——SQLite 与 PostgreSQL 模式设计。
+</Card>
+
+<Card title="RBAC 与认证" icon="shield-halved" href="/zh/backend/auth/rbac">
+基于角色的访问控制与会话 cookie 认证。
 </Card>
 
 </CardGroup>

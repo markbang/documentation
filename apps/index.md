@@ -72,4 +72,8 @@ Cross-shell terminal prompt customization.
 Rust-based terminal with AI command search, now open-source (AGPL).
 </Card>
 
+<Card title="WeChat Reading" icon="book-open" href="/apps/weread">
+WeChat Reading notes and workflows.
+</Card>
+
 </CardGroup>

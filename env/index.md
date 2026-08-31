@@ -60,6 +60,14 @@ Make docs easier for AI agents to discover and read.
 Design the runtime layer around AI agents.
 </Card>
 
+<Card title="Claude Code patterns" icon="wand-magic-sparkles" href="/env/claude-code-patterns">
+Effective patterns for Claude Code Fable 5 and agent loops.
+</Card>
+
+<Card title="Local LLM" icon="microchip" href="/env/local-llm">
+Run capable models locally with llama.cpp.
+</Card>
+
 <Card title="Beads" icon="diagram-project" href="/env/beads">
 Structured task memory for coding agents.
 </Card>

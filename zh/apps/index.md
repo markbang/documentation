@@ -72,4 +72,8 @@ Markdown 编辑器推荐。
 Rust 终端 + AI 命令搜索，已开源（AGPL）。
 </Card>
 
+<Card title="微信读书" icon="book-open" href="/zh/apps/weread">
+微信读书笔记与用法。
+</Card>
+
 </CardGroup>

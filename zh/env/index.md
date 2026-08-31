@@ -60,6 +60,14 @@ Markdown 写作技巧与工具。
 设计 AI Agent 外层运行时。
 </Card>
 
+<Card title="Claude Code 高效使用" icon="wand-magic-sparkles" href="/zh/env/claude-code-patterns">
+Claude Code Fable 5 使用模式与 Agent 循环设计。
+</Card>
+
+<Card title="本地 LLM" icon="microchip" href="/zh/env/local-llm">
+用 llama.cpp 在本地跑高性能大模型。
+</Card>
+
 <Card title="Beads" icon="diagram-project" href="/zh/env/beads">
 编码 Agent 的结构化任务记忆。
 </Card>

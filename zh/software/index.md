@@ -12,6 +12,14 @@ icon: "laptop"
 使用 GitHub Actions 自动发布 Release、处理跨平台构建和工程化问题。
 </Card>
 
+<Card title="Monorepo 架构" icon="cubes" href="/zh/software/monorepo">
+Bun + Turborepo monorepo——项目结构、共享包与 CI/CD。
+</Card>
+
+<Card title="工程团队组织" icon="users" href="/zh/software/engineering-org">
+字节与美团的招聘、团队建设与 AI 时代组织变化。
+</Card>
+
 ## 这一栏后续会补什么
 
 - 工程初始化与目录结构
