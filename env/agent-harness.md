@@ -146,6 +146,21 @@ Common failure modes:
 
 The practical lesson is simple: when an agent gets worse, debug the whole runtime, not just the model.
 
+## Destructive tool safety
+
+Agents with filesystem and shell access can destroy work in seconds. A real postmortem from August 2026 is worth studying: a developer running Codex + Trellis + Zcode on a GLM model lost their entire workspace when the agent ran `rm -rf` on the wrong directory.
+
+The root cause: the agent intended to delete an empty directory created by a casing typo. On macOS's case-insensitive filesystem, the command silently resolved to the real, populated directory — deleting the whole repository including git history, uncommitted changes, task records, migrations, and docs. No backup existed.
+
+The lessons generalize beyond this one accident:
+
+- **Be cautious with full access.** Prefer a harness with an approval flow (such as "help me approve" review) over unrestricted auto-execution.
+- **Isolate the dev directory.** Keep agent workspaces separate from other files, so a deletion error can't take out anything valuable.
+- **Push early and often.** Remote git history is the last line of defense against local deletion — it survives what no local backup can.
+- **Treat benchmark scores skeptically for safety.** The same model that was "safe by reputation" committed a trivially destructive error. Safety claims and benchmark wins are not the same as real-world filesystem judgment.
+
+The deeper harness principle: destructive operations should be treated as a permission boundary, not a capability. If a tool can `rm -rf`, it should be gated, logged, and reversible by default — and the agent should never be given a broader scope than the task requires.
+
 ## A quick diagnostic checklist
 
 When an agent behaves oddly, ask:
@@ -245,7 +260,7 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Anthropic Engineering: An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: A global workspace in language models (J-space)](https://www.anthropic.com/research/global-workspace) — less than 10% of neural activity drives multi-step reasoning; J-lens technique makes internal reasoning visible
 - [Netflix: Keeping an LLM judge effective in production](https://arxiv.org/abs/2608.18300) — four-phase judge lifecycle (birth, training, deployment, monitoring)
-- [Measuring models against harnesses is broken](https://x.com/omarsar0/status/2091565973098676670) — prefer minimal harnesses for cross-model comparison
+- [GLM 开发事故：rm -rf 删掉整个工作区](https://www.v2ex.com/t/1238217) — 8 亿 token 买来的教训：完全访问需谨慎、隔离开发目录、频繁 push、跑分不等于安全
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

@@ -146,6 +146,21 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 
 实用结论是：Agent 变差时，要排查整个运行时，而不是只怀疑模型。
 
+## 破坏性工具的安全边界
+
+拥有文件系统和 shell 权限的 Agent 能在几秒内毁掉工作。2026 年 8 月的一个真实事故值得研究：一名开发者用 Codex + Trellis + Zcode 配合 GLM 模型开发，Agent 对错误的目录执行了 `rm -rf`，整个工作区被删。
+
+根因：Agent 本意是删除一个因大小写笔误产生的空目录。在 macOS 大小写不敏感的文件系统上，这条命令静默解析到了真实的、有内容的目录——删掉了整个仓库，包括 git 历史、未提交改动、任务记录、迁移脚本和文档。没有备份。
+
+教训超越了这一起事故本身：
+
+- **谨慎使用完全访问。** 优先使用带审批流的 harness（如"帮我批准"这类审查），而不是无限制的自动执行。
+- **隔离开发目录。** 让 Agent 工作区与其他文件分开，这样删除错误不会波及其他有价值的东西。
+- **尽早、频繁 push。** 远程 git 历史是对抗本地删除的最后防线——它能在任何本地备份都失效时活下来。
+- **对安全性的跑分保持怀疑。** 同一个"以安全著称"的模型犯下了低级破坏性错误。安全性声明和基准胜利不等于真实世界的文件系统判断力。
+
+更深层的 harness 原则：破坏性操作应该被当作权限边界，而不是能力。如果一个工具能 `rm -rf`，它就应该默认门控、记录日志、可回滚——并且 Agent 永远不应该被授予超出任务所需的权限范围。
+
 ## 快速排查清单
 
 当 Agent 表现异常时，按这个顺序问：
@@ -245,7 +260,7 @@ Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有�
 - [Anthropic Engineering：An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: A global workspace in language models（J-space）](https://www.anthropic.com/research/global-workspace) — 不到 10% 的神经活动驱动多步推理；J-lens 方法让内部推理首次可见
 - [Netflix：生产环境中保持 LLM 评判器有效](https://arxiv.org/abs/2608.18300) — 四阶段评判器生命周期（诞生、训练、部署、监控）
-- [Measuring models against harnesses is broken](https://x.com/omarsar0/status/2091565973098676670) — 跨模型对比应使用最小 harness
+- [GLM 开发事故：rm -rf 删掉整个工作区](https://www.v2ex.com/t/1238217) — 8 亿 token 买来的教训：完全访问需谨慎、隔离开发目录、频繁 push、跑分不等于安全
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

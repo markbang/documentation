@@ -134,6 +134,19 @@ Six concrete techniques:
 - **Decision log**: have it record every point where it deviated from your expectations, so you can see where it encountered problems you didn't anticipate
 - **Reverse quiz**: ask Fable to quiz you on what it built, ensuring you understand it well enough to explain the PR
 
+## Maintaining AI-generated code
+
+When all code is AI-generated, the risk is not writing code — it is keeping that code iterable, maintainable, and free of rot. Product engineer Tw93 distilled six practices after shipping 13 versions of an app with ~110K lines of Swift and ~73K lines of tests, all AI-generated:
+
+1. **Architecture and layering still matter.** Clear boundaries make AI-generated code easier to maintain and extend. Don't let the model invent the structure each time.
+2. **Automated tests are the quality backbone.** Every bug fix must add a regression test, so the same bug can't come back.
+3. **Delete dead code aggressively.** When you remove a feature, remove its code too. Accumulated leftovers confuse both humans and future AI passes.
+4. **CI/CD with a clean machine.** Run the full test suite on a clean cloud runner before release, not just on your local machine.
+5. **Let the AI auto-verify and auto-correct.** Wire automated verification into the loop; reserve human verification for critical stages.
+6. **Turn repeated work into skills.** Encode recurring procedures so you don't re-explain them from scratch every session.
+
+The throughline: AI lowers the cost of writing code to near zero, so the discipline that matters shifts to architecture, verification, and cleanup.
+
 ## Key takeaway
 
 Mastering Fable 5 isn't about learning more commands or parameters — it's about changing your relationship with the model:
@@ -221,4 +234,5 @@ The four loop types are composable building blocks, not mutually exclusive categ
 - [Thariq (Claude Code team): Tips for using Fable 5](https://x.com/dotey/status/2074019009226322078) — compiled by 宝玉 from Thariq's video
 - [Thariq at AI Engineer World's Fair: Fable 5 talk (unhobbling + blind spots)](https://x.com/dotey/status/2074255513353642090) — four themes from the full presentation
 - [Claude Code official: Loops design paradigm](https://x.com/shao__meng/status/2074290011282055656) — from prompts to loops
-- [Gorden Sun: Pushing Fable to its limits](https://x.com/Gorden_Sun/status/2073976595589841197) — five principles with example prompts
+- [Tw93: 代码全由 AI 生成时代的可维护性](https://x.com/HiTw93/status/2094015568101921254) — 六个实践：架构分层、自动化测试、清理死代码、CI/CD、自动验证、重复工作 skill 化
+- [Simon Willison: Agentic Engineering Patterns](https://x.com/shao__meng/status/2094027833505144919) — 从代码边际成本趋零出发的完整工程方法论
