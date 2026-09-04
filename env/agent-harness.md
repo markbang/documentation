@@ -238,6 +238,36 @@ A cleaner approach is to test model quality against **minimal harnesses** — th
 
 The deeper issue: harness engineering is where leading AI companies are now focusing effort, and it moves too fast for standardization to keep up. The frontier direction is models that dynamically generate their own harness per task — Claude already does this inconsistently. If a harness becomes just another tunable artifact like a system prompt, benchmarking gets murkier, not clearer.
 
+## Multi-model orchestration
+
+A major trend in harness design is running several models together instead of betting on one. Two recent examples show where this is going.
+
+**GitHub's Project HydraFusion** treats workflow selection as an optimization problem. For each request it picks one of three execution patterns:
+
+- **Single** — one selected model solves the task directly. Fastest when one model is enough.
+- **Cascade** — an efficient model drafts a solution, and a quality gate accepts it or escalates to a stronger model. First attempt is cheap; escalation is the safety net.
+- **Critique** — one model drafts, an independent read-only critic from a different model family reviews it, and the drafting model revises once. Adds an outside perspective when review beats another unaided attempt.
+
+HydraFusion improved verified task quality by 4.9 percentage points at 67% lower estimated cost versus Claude Opus 5 on TerminalBench 2.1. The insight: routing between models is a quality-to-cost dial, and cheap models should get the first attempt whenever a verifiable gate can catch their failures.
+
+**Grok Bot's design philosophy** distills persistent-agent design to four ideas: persistent roles, clear state, scoped context, and coordinated teams. The goal is to move from *operating* AI to *delegating* work — the agent team persists across tasks with stable responsibilities and boundaries, rather than being re-prompted from scratch each session.
+
+## Computer use cost: reverse-engineer to scripts
+
+Computer-use agents are effective but expensive: every step is screenshot → visual understanding → click decision → screenshot again. A simple task can burn dozens of vision-reasoning rounds.
+
+A practical way to keep the capability while cutting cost: run the computer-use flow **once**, capture the network requests the browser makes, and have the agent convert them into a script. Future runs call the API directly instead of driving the GUI.
+
+Why this works:
+
+- **Tokens drop to near zero.** Script execution needs no model involvement; only the one-time capture and script generation cost tokens.
+- **It is much faster.** GUI operation is limited by page load, rendering, and model latency. Direct HTTP calls reduce minutes to seconds.
+- **It reuses existing auth.** The captured requests include the session cookie or token, so the script works without a separate API key — even for web apps with no public API.
+
+Example workflow: "Go to acme.com/invoices, filter unpaid, export CSV" → the agent clicks through while recording `GET /api/invoices?status=unpaid` and `POST /api/export/csv` → it outputs a Python `requests` script that reuses the session and runs as a scheduled routine.
+
+The division of labor: **vision is for exploration, code is for execution.** Explore the unknown once with the GUI, then freeze the discovered path into a cheap, repeatable script.
+
 ## When to invest in a stronger harness
 
 Start simple. Add structure when the work becomes repeated, risky, or expensive.
@@ -260,7 +290,10 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Anthropic Engineering: An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: A global workspace in language models (J-space)](https://www.anthropic.com/research/global-workspace) — less than 10% of neural activity drives multi-step reasoning; J-lens technique makes internal reasoning visible
 - [Netflix: Keeping an LLM judge effective in production](https://arxiv.org/abs/2608.18300) — four-phase judge lifecycle (birth, training, deployment, monitoring)
-- [GLM 开发事故：rm -rf 删掉整个工作区](https://www.v2ex.com/t/1238217) — 8 亿 token 买来的教训：完全访问需谨慎、隔离开发目录、频繁 push、跑分不等于安全
+- [GitHub: Project HydraFusion](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/) — multi-model orchestration with Single/Cascade/Critique patterns
+- [xAI: Designing Grok Bot](https://x.ai/news/designing-grok-bot) — persistent roles, clear state, scoped context, coordinated teams
+- [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
+- [Computer use cost reduction](https://x.com/shao__meng/status/2095891512597094671) — 反向工程为脚本：视觉探索一次，代码执行多次
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

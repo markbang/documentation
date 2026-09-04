@@ -238,6 +238,36 @@ Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有�
 
 更深层的问题：harness 工程正是领先 AI 公司现在投入的方向，而且演进太快，标准化跟不上。前沿方向是模型按任务动态生成自己的 harness——Claude 已经在一定程度上做到了，只是不稳定。如果 harness 最终变成像 system prompt 一样可调的工件，基准测试只会越来越模糊。
 
+## 多模型编排
+
+Harness 设计的一个大趋势是同时运行多个模型，而不是赌一个。两个最近的例子展示了方向。
+
+**GitHub 的 Project HydraFusion** 把工作流选择当作优化问题。每个请求会从三种执行模式中选一个：
+
+- **Single（单一）**——一个选定的模型直接解决任务。一个模型足够时最快。
+- **Cascade（级联）**——一个高效模型先起草，质量门决定接受还是升级到更强模型。第一次尝试便宜，升级是安全网。
+- **Critique（批判）**——一个模型起草，来自不同模型家族的独立只读评审者审阅，起草模型修订一次。当评审比再来一次无监督尝试更有价值时使用。
+
+在 TerminalBench 2.1 上，HydraFusion 相比 Claude Opus 5 提升了 4.9 个百分点的验证任务质量，同时估算成本降低 67%。洞察：模型间路由是质量与成本的旋钮，只要有可验证的门控能抓住失败，便宜模型就应该得到第一次尝试的机会。
+
+**Grok Bot 的设计哲学**把持久化 Agent 设计提炼为四点：持久角色、清晰状态、限定上下文、协调团队。目标是从“操作”AI 转向“委派”工作——Agent 团队跨任务持续存在，职责和边界稳定，而不是每次会话从头重新提示。
+
+## Computer Use 成本控制：反向工程为脚本
+
+Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决定点哪里 → 再截屏验证。一个简单任务可能消耗几十轮视觉推理。
+
+一个既能保留能力又能降本的做法：让 computer-use 流程只跑**一次**，抓取浏览器发出的网络请求，再让 Agent 把这些请求整理成脚本。之后的重复执行直接调 API，不再走图形界面。
+
+为什么这样有效：
+
+- **token 降到接近零。** 脚本执行不需要模型参与，只有一次性抓取和脚本生成消耗 token。
+- **快得多。** GUI 操作受页面加载、渲染、模型延迟多重限制，直接 HTTP 调用把分钟级降到秒级。
+- **复用现有登录态。** 抓到的请求里包含 session cookie / token，脚本沿用这些凭证，不需要额外申请 API key——对没有公开 API 的 web 应用同样适用。
+
+示例工作流：“去 acme.com/invoices，筛选未付款，导出 CSV”→ Agent 一边点击一边记录 `GET /api/invoices?status=unpaid` 和 `POST /api/export/csv` → 输出一段 Python `requests` 脚本，复用 session，之后作为定时 routine 自动跑。
+
+分工原则：**视觉用于探索，代码用于执行。** 用 GUI 探索未知路径一次，然后把发现的路径固化成便宜、可重复的脚本。
+
 ## 什么时候值得投入更强的 harness
 
 一开始可以简单。等任务变得重复、高风险或高成本，再加结构。
@@ -260,7 +290,10 @@ Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有�
 - [Anthropic Engineering：An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
 - [Anthropic Research: A global workspace in language models（J-space）](https://www.anthropic.com/research/global-workspace) — 不到 10% 的神经活动驱动多步推理；J-lens 方法让内部推理首次可见
 - [Netflix：生产环境中保持 LLM 评判器有效](https://arxiv.org/abs/2608.18300) — 四阶段评判器生命周期（诞生、训练、部署、监控）
-- [GLM 开发事故：rm -rf 删掉整个工作区](https://www.v2ex.com/t/1238217) — 8 亿 token 买来的教训：完全访问需谨慎、隔离开发目录、频繁 push、跑分不等于安全
+- [GitHub：Project HydraFusion](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/) — 多模型编排：Single/Cascade/Critique 三种模式
+- [xAI：Designing Grok Bot](https://x.ai/news/designing-grok-bot) — 持久角色、清晰状态、限定上下文、协调团队
+- [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
+- [Computer use 成本优化](https://x.com/shao__meng/status/2095891512597094671) — 反向工程为脚本：视觉探索一次，代码执行多次
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
