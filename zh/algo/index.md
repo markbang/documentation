@@ -20,6 +20,9 @@ icon: "brain"
 <Accordion title="labuladong 算法笔记" icon="pen-nib">
 [labuladong 算法笔记](https://github.com/labuladong/fucking-algorithm)：60 多篇原创文章，基于 LeetCode 题目，涵盖所有题型和技巧，通俗易懂。
 </Accordion>
+<Accordion title="从零构建 AI 工程" icon="robot">
+[从零构建 AI 工程](https://github.com/rohitg00/ai-engineering-from-scratch)：20 个阶段、523 节课、约 342 小时，从线性代数到自主智能体。每课产出可复用工件（SKILL.md、prompt、MCP server），可用 `npx skills add rohitg00/ai-engineering-from-scratch` 安装。
+</Accordion>
 </Accordions>
 
 <CardGroup cols={2}>

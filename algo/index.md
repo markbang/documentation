@@ -20,6 +20,9 @@ Algorithm study here mainly follows open-source books on GitHub together with Le
 <Accordion title="labuladong's Algorithm Notes" icon="pen-nib">
 [labuladong](https://github.com/labuladong/fucking-algorithm): Original articles built around LeetCode problems, focused on patterns, intuition, and transferable problem-solving techniques.
 </Accordion>
+<Accordion title="AI Engineering from Scratch" icon="robot">
+[AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch): 20 stages, 523 lessons, ~342 hours — from linear algebra to autonomous agents. Every lesson ships a reusable artifact (SKILL.md, prompt, MCP server); install with `npx skills add rohitg00/ai-engineering-from-scratch`.
+</Accordion>
 </Accordions>
 
 <CardGroup cols={2}>

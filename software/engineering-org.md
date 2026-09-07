@@ -83,6 +83,10 @@ A complementary view (August 2026): coding execution is being industrialized, bu
 
 Execution speed is becoming commoditized. What stays scarce is problem definition, context engineering, verification discipline, and accountability.
 
+OpenAI's September 2026 internal view on research acceleration adds a concrete data point. They model AI research as six stages — **Decide → Design → Build → Run → Analyze → Communicate** — and found that coding-agent usage grew across all six, but grew *least* in **Decide** (research direction) and **Design** (decisions). Daily median usage hit $600 and P90 hit $7,000.
+
+The interpretation: agents are excellent at execution, debugging, and experiments, but research direction and key decisions still need human input. This matches the "research intern" analogy — AI is increasingly the executor, while humans own direction and accountability. The org implication is the same as above: invest in the people who define problems, not just those who execute them.
+
 ## References
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）
