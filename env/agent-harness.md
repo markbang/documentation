@@ -49,6 +49,19 @@ Prefer narrow tools with clear inputs and outputs. A tool that does one thing is
 
 For local workflows, CLI tools are often enough. For reusable cross-client integration, use a protocol boundary such as MCP. For stable product backends, a direct API is still the simplest option.
 
+### Separate skill design from execution
+
+A skill is a manual for the agent — it should only contain what the model does not already know. The execution is done by tools (scripts, CLI, apps) that the model calls directly.
+
+Keep the two apart:
+
+- **Design logic** lives in the SKILL.md and describes *what* to do and *why*.
+- **Execution logic** lives in scripts and tools and describes *how* to do it.
+
+Scripts can be pre-written or generated on the fly by the agent when a task needs one. Pre-written scripts are stable and auditable; generated scripts are flexible but should be treated as throwaway code until verified.
+
+This separation explains why strong skills still need a UI: the skill tells the agent what to accomplish, while a UI carries the concrete execution steps a human can trigger with a few clicks instead of re-prompting from scratch each time.
+
 ### Preserve reasoning-critical context
 
 Context pruning is not just a cost optimization. It changes behavior.
@@ -268,6 +281,22 @@ Example workflow: "Go to acme.com/invoices, filter unpaid, export CSV" → the a
 
 The division of labor: **vision is for exploration, code is for execution.** Explore the unknown once with the GUI, then freeze the discovered path into a cheap, repeatable script.
 
+## Team-level harness: shared knowledge
+
+Individual best practices evaporate with each session unless they are captured as team assets. Tencent's TeamAI CLI (open-sourced September 2026, used internally for six months) turns team AI knowledge into a git repository that every agent works from, and solves three problems:
+
+- **Config fragmentation** — different members use different tools (Claude Code, Codex, Cursor...), each with incompatible skill/rule/hook formats.
+- **Experience evaporation** — a two-hour debugging session's lessons stay in one person's chat log and get re-learned from scratch by everyone else.
+- **Governance blind spots** — no visibility into token spend, intervention rates, or which skills are actually used.
+
+Its three-layer architecture is a useful reference pattern:
+
+1. **Execution — unified distribution.** Git is the single source of truth. Admins maintain skills, rules, hooks, and MCP configs; merge requests review them; a session-start hook pulls them into each member's tool, translating one declaration into each tool's native format.
+2. **Context — team memory.** Capture is gated by *friction signals*: only sessions where a human interrupted the AI, rejected a tool call, or watched it retry and fail get summarized into team knowledge. Smooth sessions produce no noise. Recall uses a local BM25 index plus a code knowledge graph.
+3. **Improvement — flywheel.** Weekly digests, a dashboard, `recall promote` (elevate high-value experience to a formal skill), and `recall maintenance` (prune stale entries) close the loop.
+
+The deeper trend: competition is shifting from single-agent capability to **team-level harnesses and memory systems**. The winning question is no longer "which model is best?" but "how does the team's knowledge compound across sessions and members?"
+
 ## When to invest in a stronger harness
 
 Start simple. Add structure when the work becomes repeated, risky, or expensive.
@@ -293,7 +322,7 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [GitHub: Project HydraFusion](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/) — multi-model orchestration with Single/Cascade/Critique patterns
 - [xAI: Designing Grok Bot](https://x.ai/news/designing-grok-bot) — persistent roles, clear state, scoped context, coordinated teams
 - [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
-- [Computer use cost reduction](https://x.com/shao__meng/status/2095891512597094671) — 反向工程为脚本：视觉探索一次，代码执行多次
+- [Tencent: TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

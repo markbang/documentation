@@ -49,6 +49,19 @@ Harness 至少应该把这些决策显式化：
 
 本地工作流里，CLI 往往够用。需要跨客户端复用时，再考虑 MCP 这样的协议边界。稳定产品后端则继续用直接 API，通常最简单。
 
+### 把 Skill 的设计与执行分开
+
+Skill 是给 Agent 用的说明书，只需要说那些模型不知道的部分。执行则交给工具（脚本、CLI、App）去做，由模型直接调用。
+
+把两者分开：
+
+- **设计逻辑**放在 SKILL.md 里，描述*做什么*和*为什么*。
+- **执行逻辑**放在脚本和工具里，描述*怎么做*。
+
+脚本可以预先写好，也可以在需要时由 Agent 现场生成。预写的脚本稳定、可审查；现场生成的脚本灵活，但在验证之前应视为一次性代码。
+
+这个分离也解释了为什么 Skill 再强仍离不开 UI：Skill 告诉 Agent 要达成什么，而 UI 承载具体的执行步骤——人点几下就能配置好，不必每次从头重新提示。
+
 ### 保留影响推理的上下文
 
 上下文裁剪不只是省 token 的优化，它会改变行为。
@@ -268,6 +281,22 @@ Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决
 
 分工原则：**视觉用于探索，代码用于执行。** 用 GUI 探索未知路径一次，然后把发现的路径固化成便宜、可重复的脚本。
 
+## 团队级 harness：共享知识
+
+个人最佳实践如果不沉淀为团队资产，就会随每个会话蒸发。腾讯 2026 年 9 月开源的 TeamAI CLI（内部用了半年）把团队 AI 知识放进一个 git 仓库，让每个 Agent 都从同一本手册工作，解决三个问题：
+
+- **配置碎片化**——成员用不同工具（Claude Code、Codex、Cursor...），各自的 skill/rule/hook 格式互不兼容。
+- **经验蒸发**——某人花两小时踩透的坑，只留在他自己的会话记录里，其他人（和其他 AI 会话）下次再踩一遍。
+- **治理盲区**——不知道 token 花在哪、干预率多高、哪些 skill 真正被用、哪些是僵尸。
+
+它的三层架构是一个值得参考的模式：
+
+1. **Execution——统一分发。** Git 是唯一事实来源。管理员维护 skills、rules、hooks、MCP 配置，经 MR 评审合并后，由 SessionStart hook 自动拉取到每位成员的本地工具，把统一声明翻译成各工具的原生格式。
+2. **Context——团队记忆。** 写入侧靠"摩擦信号"过滤：只有你打断过 AI、拒绝过工具调用、或 AI 反复重试失败的会话，才会总结成经验推送到团队仓库——顺滑的会话不产生噪音。读出侧用本地 BM25 索引 + 代码知识图谱。
+3. **Improvement——飞轮闭环。** 周报 + 看板 + `recall promote`（高价值经验晋升为正式 skill）+ `recall maintenance`（清理过时条目）。
+
+更深层的趋势：竞争正在从单个 Agent 的能力，转向**团队级 harness 和记忆系统的标准化**。关键问题不再是"哪个模型最好"，而是"团队知识如何在会话和成员之间复利增长"。
+
 ## 什么时候值得投入更强的 harness
 
 一开始可以简单。等任务变得重复、高风险或高成本，再加结构。
@@ -293,7 +322,7 @@ Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决
 - [GitHub：Project HydraFusion](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/) — 多模型编排：Single/Cascade/Critique 三种模式
 - [xAI：Designing Grok Bot](https://x.ai/news/designing-grok-bot) — 持久角色、清晰状态、限定上下文、协调团队
 - [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
-- [Computer use 成本优化](https://x.com/shao__meng/status/2095891512597094671) — 反向工程为脚本：视觉探索一次，代码执行多次
+- [腾讯：TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
