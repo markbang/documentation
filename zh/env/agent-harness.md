@@ -145,6 +145,26 @@ System prompt 的改动可能和代码改动一样影响质量。处理它时也
 
 对代码审查或编码 Agent 评测来说，还要给足真实任务需要的仓库和文件上下文。缺少跨仓库上下文时，模型明明有能力找出问题，评测里也可能看不到。
 
+## 验证优先的设计
+
+一位通过 Cursor pstack skills 每月交付约 2000 个 PR 的实践者，把核心原则提炼为**“验证就是一切”**：Agent 只有能自己确认改动真的生效，才能闭环执行、持续迭代，人不再是瓶颈。验证是关键基础设施，不是事后补充——值得像生产系统一样投入。
+
+三个组件让它落地：
+
+**1. 验证 CLI，而不是纯 markdown 指令。** 给 Agent 一个封装应用交互与调试的小 CLI——snapshot/screenshot、navigate、click/type、trace/wait-settle、健康检查等子命令。工具永远胜过一次性脚本：更省 token、可复现、可测试。Agent 友好 CLI 的设计要点：
+
+- 可组合 API（deep modules：一个命令只做一件有意义的事）
+- 破坏性命令带 `--dry-run`
+- 子命令渐进披露功能
+- 错误信息告诉 Agent *下一步该做什么*
+- 丰富的 `--help` 和 JSON 输出
+
+**2. Feature Map 作为物化记忆。** 一组 markdown 文件，记录每个功能是什么、用户视角如何到达、有哪些坑。本质是代码库的压缩投影——代码才是终极记忆，Feature Map 只是为了省 token 的紧凑形式。用每日例行维护防止它过时。
+
+**3. 云端并行。** 本地 worktree 上限大约十个并行 agent，还占资源。云端 agent 有真实机器、能装依赖、能跑应用、能录屏，首次构建后有快照——这是数百子 agent 并行的前提，也是 swarm 验证和 fuzz 回归的基础。
+
+技术选型的推论：**优先可调试的运行时。** 如果技术栈无法截屏、没有 accessibility 树、没有性能 trace，Agent 就无法验证自己的工作。仅为了 Agent 可验证性而换技术栈是合理的——Web/Electron 有 Chrome DevTools Protocol，iOS 有模拟器。
+
 ## 常见故障模式
 
 Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有参考价值：用户感知到的退化来自产品和 harness 改动，而不是底层 API 模型退化。
@@ -323,6 +343,7 @@ Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决
 - [xAI：Designing Grok Bot](https://x.ai/news/designing-grok-bot) — 持久角色、清晰状态、限定上下文、协调团队
 - [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
 - [腾讯：TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
+- [poteto：pstack 验证优先设计](https://x.com/shao__meng/status/2099300148874707297) — 验证 CLI、Feature Map、云端并行与可调试性选型
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

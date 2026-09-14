@@ -147,6 +147,26 @@ When all code is AI-generated, the risk is not writing code — it is keeping th
 
 The throughline: AI lowers the cost of writing code to near zero, so the discipline that matters shifts to architecture, verification, and cleanup.
 
+## Supervising agents smarter than you
+
+Frontier agents remove the barrier of "you must build a mental model before changing code," but they still fail in two ways: misunderstanding your intent and lacking the context to get things right. Both share one root cause — the quality of what you put into the context window. Since modern codebases are too large to hold fully in your head, the method shifts from "understand it yourself" to "make the agent prove it understands."
+
+Five techniques from a practitioner shipping thousands of PRs per month:
+
+**1. Indirect prompting (in your own words).** Don't order directly. First ask the agent to restate the problem in plain language — "read this Slack thread and describe the root problem in your own words." This compresses noise into a structured statement, surfaces misunderstandings before the agent runs the wrong way, and stops your own wrong assumptions from steering it.
+
+**2. Mental-model skills.** Four complementary commands:
+- `/how` — trace runtime mechanics across directories and services
+- `/why` — investigate intent: code says what happened, rarely why. Search git history, PR comments, Linear, Notion, Slack, Datadog, Sentry in parallel
+- `/teach` — have the agent explain it back to you intuitively (this also forces the agent to build a real model instead of confidently bluffing)
+- `/recall` — pull context back from past session transcripts instead of rebuilding from zero
+
+**3. README-driven development.** For shared code, write the README before implementing. It forces you to design from the hypothetical user's API perspective. Use the Diátaxis framework to separate Tutorial / How-to / Reference / Explanation, and a pass to strip AI-sounding filler. The finished doc doubles as a concrete target the agent can verify against.
+
+**4. Prototype first.** The two planning mistakes are accepting the agent's first design and over-polishing a plan without evidence. Instead, have the agent produce several prototypes in parallel — UI variants behind a switcher, timing/layout measured with a verification CLI — and choose from screenshots. Prototypes are planning in code: the agent answers its own open questions with evidence.
+
+**5. Architect in five stages.** Ground (build the current-state model with /how + /why) → Sketch (several independent runners across model families, each producing a full design package: call sites, type definitions, signatures, rationale) → Cross-judge (different models score against a strict rubric) → Implement (fill in the chosen sketch) → the cycle repeats with verification.
+
 ## Loops design paradigm
 
 Claude Code's official Loops framework elevates agent engineering from intuition to a reusable design language. The core insight: four variables — trigger, stop condition, artifact, and use case — define every agent loop. The question isn't "is this task hard?" but "which segment of work can be handed off?"
@@ -236,3 +256,4 @@ A good prompt isn't one with the most detailed instructions — it's one where *
 - [Claude Code official: Loops design paradigm](https://x.com/shao__meng/status/2074290011282055656) — from prompts to loops
 - [Tw93: 代码全由 AI 生成时代的可维护性](https://x.com/HiTw93/status/2094015568101921254) — 六个实践：架构分层、自动化测试、清理死代码、CI/CD、自动验证、重复工作 skill 化
 - [Simon Willison: Agentic Engineering Patterns](https://x.com/shao__meng/status/2094027833505144919) — 从代码边际成本趋零出发的完整工程方法论
+- [poteto: pstack Agent 工程完全指南](https://x.com/shao__meng/status/2099300148874707297) — 验证优先 + 监督比你聪明的人五技法

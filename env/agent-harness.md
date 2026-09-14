@@ -145,6 +145,26 @@ Internal builds can hide production-only issues. Dogfood the exact public build,
 
 For code review or coding-agent evals, include the repositories and files the agent would actually need. A review that lacks cross-repo context can miss the bug even when the model is capable of finding it.
 
+## Verification-first design
+
+A practitioner shipping ~2,000 PRs a month through Cursor's pstack skills distilled the core principle as **"verification is all you need"**: the agent can close the loop on its own only if it can confirm its changes actually work. Verification is critical infrastructure, not an afterthought — worth the same investment as a production system.
+
+Three components make it practical:
+
+**1. A verification CLI, not markdown instructions.** Give the agent a small CLI that wraps app interaction and debugging — snapshot/screenshot, navigate, click/type, trace/wait-settle, health checks. A tool beats a one-off script every time: less token spend, reproducible, testable. Agent-friendly CLI design rules:
+
+- composable API (deep modules: one command does one meaningful thing)
+- destructive commands take `--dry-run`
+- subcommands disclose features progressively
+- error messages tell the agent *what to do next*
+- rich `--help` and JSON output
+
+**2. A feature map as materialized memory.** A set of markdown files describing what each feature is, how a user reaches it, and where the traps are. It is a compressed projection of the codebase — the code is the ultimate memory, and the map exists only to save tokens. Maintain it with a daily routine so it never goes stale.
+
+**3. Cloud parallelism.** Local worktrees cap out around ten parallel agents and burn resources. Cloud agents with real machines, dependency installs, app runs, screen recording, and post-build snapshots enable hundreds of parallel sub-agents — the prerequisite for swarm verification and fuzz regression at scale.
+
+The stack-selection corollary: **prefer debuggable runtimes.** If a tech stack can't be screenshotted, has no accessibility tree, and no performance traces, the agent cannot verify its own work. It is reasonable to change stack for agent-verifiability alone — Web/Electron exposes Chrome DevTools Protocol; iOS exposes the simulator.
+
 ## Failure modes to watch
 
 Anthropic's April 2026 Claude Code postmortem is a useful case study because the reported degradation came from product and harness changes, not the base API model.
@@ -323,6 +343,7 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [xAI: Designing Grok Bot](https://x.ai/news/designing-grok-bot) — persistent roles, clear state, scoped context, coordinated teams
 - [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
 - [Tencent: TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
+- [poteto: pstack 验证优先设计](https://x.com/shao__meng/status/2099300148874707297) — 验证 CLI、Feature Map、云端并行与可调试性选型
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
