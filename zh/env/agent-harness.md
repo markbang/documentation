@@ -49,6 +49,24 @@ Harness 至少应该把这些决策显式化：
 
 本地工作流里，CLI 往往够用。需要跨客户端复用时，再考虑 MCP 这样的协议边界。稳定产品后端则继续用直接 API，通常最简单。
 
+MCP 在 2026 年确实强了很多——现在是无状态协议、支持延迟加载工具，模型的结构化 tool calling 也更可靠。这**并不等于** 大多数集成都应该用 MCP 而不是 CLI。
+
+更适合 **CLI** 的场景：
+
+- 模型训练时就会的命令（`gh`、`aws`、`kubectl`），几乎不用注入 schema
+- 本机或 CI 里跑固定命令
+- 需要管道组合、管道过滤，或者只是临时排查
+- 省 token，`--help` 再加一个 skill 就能教会新 CLI
+
+更适合 **MCP** 的场景：
+
+- 没有终端（浏览器、移动端、托管 Agent）
+- 需要 OAuth、按用户授权或标准化审计头
+- 模型没见过这个工具，可机器校验的 JSON Schema 值得花 token
+- 工具集不固定，Agent 需要运行时发现（`tools/list` + 延迟加载）
+
+简单口诀：本地、熟悉、可组合的工具用 CLI；鉴权、审计、发现、没有 shell 的环境用 MCP。
+
 ### 把 Skill 的设计与执行分开
 
 Skill 是给 Agent 用的说明书，只需要说那些模型不知道的部分。执行则交给工具（脚本、CLI、App）去做，由模型直接调用。
@@ -58,7 +76,7 @@ Skill 是给 Agent 用的说明书，只需要说那些模型不知道的部分�
 - **设计逻辑**放在 SKILL.md 里，描述*做什么*和*为什么*。
 - **执行逻辑**放在脚本和工具里，描述*怎么做*。
 
-脚本可以预先写好，也可以在需要时由 Agent 现场生成。预写的脚本稳定、可审查；现场生成的脚本灵活，但在验证之前应视为一次性代码。
+脚本可以预先写好，也可以在需要时由 Agent 现场生成。现场生成更灵活——即使没有 Skill，Agent 也经常会现写一段 Python 去完成任务。代价是更慢、更费 token、边界情况也更容易漏。重复出现、质量重要的任务应预写脚本：Markdown 转 HTML 这类事，现写只能勉强能用，预写才能兼顾样式和边角。现场生成的脚本在验证之前应视为一次性代码。
 
 这个分离也解释了为什么 Skill 再强仍离不开 UI：Skill 告诉 Agent 要达成什么，而 UI 承载具体的执行步骤——人点几下就能配置好，不必每次从头重新提示。
 
@@ -344,6 +362,7 @@ Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决
 - [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
 - [腾讯：TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
 - [poteto：pstack 验证优先设计](https://x.com/shao__meng/status/2099300148874707297) — 验证 CLI、Feature Map、云端并行与可调试性选型
+- [MCP vs CLI：Agent 工具选型](https://x.com/dotey/status/2100046089214709979) — 无状态 MCP 和 deferred tools 缩小了差距，但本地熟悉命令、管道和 CI 仍更适合 CLI
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

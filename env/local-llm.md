@@ -155,6 +155,18 @@ Current limitations: diffusion models still score significantly below similarly-
 
 This is early-stage research, not a replacement for autoregressive models. But the direction matters: as agent workflows grow longer and more complex, the ability to revise rather than restart will become essential.
 
+## System One models: AI as a typed if-statement
+
+Not every in-process AI call needs a chat model. TypeSafe AI's **Jev** (September 2026) is a "System One" model: it gives up text generation and returns typed, calibrated decisions instead. Think of it as an intelligent `if` inside your code — classification, scoring, routing, extraction — with millisecond latency and a constrained output schema.
+
+Why this exists: RLHF made chat models good at pleasing humans, but less reliable as silent automation. Jev is trained with RLCD (Reinforcement Learning for Calibrated Decisions) for that narrower job. Claimed characteristics:
+
+- **70–500 ms** responses versus seconds-to-minutes for frontier chat models, because it samples outputs in parallel instead of token-by-token
+- **Cheap at volume**: about $0.042 per million input tokens, free output tokens
+- **Zero type errors by construction** — the schema is part of the architecture, so it cannot emit unexpected prose
+
+Use a System One model when you need judgment without expression: ticket routing, bulk labeling, real-time scoring, or a guardrail after a chat model. Keep the chat model for writing, planning, and tool-using agents. The two are complementary, not competitors.
+
 ## Industry: Anthropic enters the chip race
 
 Anthropic has started early development of its own AI chips, seeking memory semiconductor supply from SK Hynix and reportedly in talks with Samsung for a custom project potentially using Samsung's 2nm process and advanced packaging. This follows OpenAI's earlier chip efforts and signals that frontier AI labs now see vertical integration into silicon as strategically necessary.
@@ -172,3 +184,4 @@ The gap is closing fast. GLM 5.2 already delivers frontier-level open-weight int
 - [Opus 5 vs Fable 5: benchmarks are broken](https://x.com/oran_ge/status/2081501133168947412)
 - [LLaDA2.2-flash: diffusion model with editing](https://huggingface.co/inclusionAI/LLaDA2.2-flash)
 - [Anthropic developing own AI chips](https://readhub.cn/topic/8v2eHNj7g1m)
+- [TypeSafe AI: Jev System One model](https://typesafe.ai) — typed, calibrated decisions instead of chat generation

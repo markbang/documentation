@@ -49,6 +49,24 @@ Prefer narrow tools with clear inputs and outputs. A tool that does one thing is
 
 For local workflows, CLI tools are often enough. For reusable cross-client integration, use a protocol boundary such as MCP. For stable product backends, a direct API is still the simplest option.
 
+MCP got much better in 2026 — it is now stateless, supports deferred tool loading, and models are stronger at structured tool calling. That does **not** mean MCP is better than CLI for most integrations.
+
+Prefer **CLI** when:
+
+- the model already knows the command (`gh`, `aws`, `kubectl`) so you spend almost no schema tokens
+- you are on a local machine or in CI with a fixed command
+- you need pipes, composition, or a one-off debug loop
+- token cost matters and `--help` plus a skill is enough to teach a new CLI
+
+Prefer **MCP** when:
+
+- there is no terminal (browser, mobile, hosted agent)
+- you need OAuth, per-user auth, or standardized audit headers
+- the tool is new to the model and a machine-checkable JSON schema is worth the extra tokens
+- the tool set is dynamic and agents should discover tools at runtime (`tools/list` + deferred loading)
+
+A useful rule: CLI wins on known local tools and composition. MCP wins on auth, audit, discovery, and environments without a shell.
+
 ### Separate skill design from execution
 
 A skill is a manual for the agent — it should only contain what the model does not already know. The execution is done by tools (scripts, CLI, apps) that the model calls directly.
@@ -58,7 +76,7 @@ Keep the two apart:
 - **Design logic** lives in the SKILL.md and describes *what* to do and *why*.
 - **Execution logic** lives in scripts and tools and describes *how* to do it.
 
-Scripts can be pre-written or generated on the fly by the agent when a task needs one. Pre-written scripts are stable and auditable; generated scripts are flexible but should be treated as throwaway code until verified.
+Scripts can be pre-written or generated on the fly by the agent when a task needs one. Generated scripts are flexible — agents already do this even without a skill, often writing a one-off Python snippet. They are also slower, more token-hungry, and less complete on edge cases. Pre-written scripts win when the task is recurring and quality matters: a Markdown-to-HTML skill that generates the converter at runtime will be barely usable, while a pre-written converter can cover styles and edge cases. Treat generated scripts as throwaway until verified.
 
 This separation explains why strong skills still need a UI: the skill tells the agent what to accomplish, while a UI carries the concrete execution steps a human can trigger with a few clicks instead of re-prompting from scratch each time.
 
@@ -344,6 +362,7 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Harness Playbook](https://x.com/i/article/2095796679568146432) — omp 作者关于 harness 状态、运行时、控制面、推理层、工具面的系统总结
 - [Tencent: TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
 - [poteto: pstack 验证优先设计](https://x.com/shao__meng/status/2099300148874707297) — 验证 CLI、Feature Map、云端并行与可调试性选型
+- [MCP vs CLI for agent tools](https://x.com/dotey/status/2100046089214709979) — 无状态 MCP 和 deferred tools 缩小了差距，但本地熟悉命令、管道和 CI 仍更适合 CLI
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
