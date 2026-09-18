@@ -80,6 +80,14 @@ Skill 是给 Agent 用的说明书，只需要说那些模型不知道的部分�
 
 这个分离也解释了为什么 Skill 再强仍离不开 UI：Skill 告诉 Agent 要达成什么，而 UI 承载具体的执行步骤——人点几下就能配置好，不必每次从头重新提示。
 
+Skill 没有杀死 MCP，RAG 也没有死。它们解决不同问题，经常出现在同一条工作流里：
+
+- **MCP** 是共享接口：结构化工具调用、鉴权和数据访问。
+- **Skill** 是打包好的经验：这个团队怎么工作、这个项目该怎么改、哪些约定重要。用 Markdown 是优点——人也能读。
+- **RAG / 检索** 把文档、工单和代码从权重之外补进上下文。
+
+MCP 提供访问。Skill 解释怎么用好这次访问。检索让模型从更接近答案的地方起步。按缺口选层，不要选赢家。
+
 ### 保留影响推理的上下文
 
 上下文裁剪不只是省 token 的优化，它会改变行为。
@@ -319,6 +327,8 @@ Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决
 
 分工原则：**视觉用于探索，代码用于执行。** 用 GUI 探索未知路径一次，然后把发现的路径固化成便宜、可重复的脚本。
 
+GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cua 的 jev-use 就是这样做 Computer Use 的：Driver 负责观察（截屏、无障碍树、DOM）和执行；System One 模型（如 Jev）只按 ID 从候选动作里选一个。候选列表由客户端确定性生成，模型选择而不是生成。开放式生成变成有界选择——更快、更便宜、也更好验证。只有 AX/DOM 不够用时，才调用视觉解析器。
+
 ## 团队级 harness：共享知识
 
 个人最佳实践如果不沉淀为团队资产，就会随每个会话蒸发。腾讯 2026 年 9 月开源的 TeamAI CLI（内部用了半年）把团队 AI 知识放进一个 git 仓库，让每个 Agent 都从同一本手册工作，解决三个问题：
@@ -363,6 +373,8 @@ Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决
 - [腾讯：TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
 - [poteto：pstack 验证优先设计](https://x.com/shao__meng/status/2099300148874707297) — 验证 CLI、Feature Map、云端并行与可调试性选型
 - [MCP vs CLI：Agent 工具选型](https://x.com/dotey/status/2100046089214709979) — 无状态 MCP 和 deferred tools 缩小了差距，但本地熟悉命令、管道和 CI 仍更适合 CLI
+- [GitHub：Should you read the code, is RAG dead, and did Skills kill MCP?](https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/) — Skills、MCP、RAG 解决不同缺口，不要选赢家
+- [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

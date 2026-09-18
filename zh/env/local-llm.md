@@ -165,6 +165,11 @@ llama-server -hf unsloth/Qwen3.6-27B-MTP-GGUF:Q8_0 \
 
 需要判断力、不需要表达力时用 System One：工单分流、批量打标、实时打分，或在聊天模型后面加一层护栏。写作、规划、带工具的 Agent 仍然用聊天模型。两者互补，不是替代。
 
+已经有两种 harness 用法：
+
+- **先路由，再思考。** LangChain 式循环里有大量小问题（"难不难"、"危不危险"）。用 System One 回答这些，只有难活才交给旗舰模型。
+- **选择，不要生成。** Computer Use 里让 Driver 枚举合法动作，Jev 只选一个 ID。Cua 的 jev-use 在 2048 演示里比 Astra 大约快 5 倍、便宜约 1000 倍——这是状态完全可观察的理想任务，不能直接外推到杂乱网页。
+
 ## 行业动态：Anthropic 入局自研芯片
 
 Anthropic 已启动自研 AI 芯片的早期开发，向 SK 海力士寻求存储半导体供应，并与三星洽谈定制项目，有望采用三星 2nm 制程和先进封装技术。继 OpenAI 的芯片布局之后，这标志着前沿 AI 实验室已将垂直整合到硅层面视为战略必需。
@@ -183,3 +188,5 @@ Anthropic 已启动自研 AI 芯片的早期开发，向 SK 海力士寻求存�
 - [LLaDA2.2-flash：能边写边改的扩散语言模型](https://huggingface.co/inclusionAI/LLaDA2.2-flash)
 - [Anthropic 自研芯片](https://readhub.cn/topic/8v2eHNj7g1m)
 - [TypeSafe AI：Jev System One 模型](https://typesafe.ai) — 类型安全的校准决策，而不是聊天生成
+- [LangChain + Jev harness](https://x.com/shao__meng/status/2100873142969536631) — 用 System One 做路由和护栏，旗舰模型只处理难活
+- [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 里让模型选择动作 ID，而不是生成动作

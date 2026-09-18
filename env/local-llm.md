@@ -167,6 +167,11 @@ Why this exists: RLHF made chat models good at pleasing humans, but less reliabl
 
 Use a System One model when you need judgment without expression: ticket routing, bulk labeling, real-time scoring, or a guardrail after a chat model. Keep the chat model for writing, planning, and tool-using agents. The two are complementary, not competitors.
 
+Two harness patterns already use this split:
+
+- **Route, then think.** LangChain-style loops ask many tiny questions ("is this hard?", "is this dangerous?"). Answer those with a System One model; send only hard work to a frontier model.
+- **Choose, don't generate.** In computer use, let the driver enumerate legal actions and have Jev pick an ID. Cua's jev-use reported a 2048 demo about 5× faster and ~1000× cheaper than Astra — an ideal case with a fully observable keyboard task, not a guarantee for messy web UIs.
+
 ## Industry: Anthropic enters the chip race
 
 Anthropic has started early development of its own AI chips, seeking memory semiconductor supply from SK Hynix and reportedly in talks with Samsung for a custom project potentially using Samsung's 2nm process and advanced packaging. This follows OpenAI's earlier chip efforts and signals that frontier AI labs now see vertical integration into silicon as strategically necessary.
@@ -185,3 +190,5 @@ The gap is closing fast. GLM 5.2 already delivers frontier-level open-weight int
 - [LLaDA2.2-flash: diffusion model with editing](https://huggingface.co/inclusionAI/LLaDA2.2-flash)
 - [Anthropic developing own AI chips](https://readhub.cn/topic/8v2eHNj7g1m)
 - [TypeSafe AI: Jev System One model](https://typesafe.ai) — typed, calibrated decisions instead of chat generation
+- [LangChain + Jev harness](https://x.com/shao__meng/status/2100873142969536631) — 用 System One 做路由和护栏，旗舰模型只处理难活
+- [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 里让模型选择动作 ID，而不是生成动作

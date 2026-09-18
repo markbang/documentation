@@ -80,6 +80,14 @@ Scripts can be pre-written or generated on the fly by the agent when a task need
 
 This separation explains why strong skills still need a UI: the skill tells the agent what to accomplish, while a UI carries the concrete execution steps a human can trigger with a few clicks instead of re-prompting from scratch each time.
 
+Skills did not kill MCP, and RAG is not dead. They solve different problems and often sit in the same workflow:
+
+- **MCP** is a shared interface: structured tool calls, auth, and data access.
+- **Skills** are packaged expertise: how this team works, how this project should change, which conventions matter. Markdown is a feature — humans can read it too.
+- **RAG / retrieval** grounds the model in documents, tickets, and code that are not in weights.
+
+MCP provides access. Skills explain how to use that access well. Retrieval starts the model closer to the answer. Pick the layer that matches the gap, not a winner.
+
 ### Preserve reasoning-critical context
 
 Context pruning is not just a cost optimization. It changes behavior.
@@ -319,6 +327,8 @@ Example workflow: "Go to acme.com/invoices, filter unpaid, export CSV" → the a
 
 The division of labor: **vision is for exploration, code is for execution.** Explore the unknown once with the GUI, then freeze the discovered path into a cheap, repeatable script.
 
+When the GUI path cannot be frozen into an API, split **decision** from **perception and action**. Cua's jev-use does this for computer use: the driver observes (screenshot, accessibility tree, DOM) and executes; a System One model such as Jev only picks one candidate action by ID. The client generates the candidate list deterministically, so the model chooses instead of generating. Open-ended generation becomes a bounded choice — faster, cheaper, and easier to verify. Use a vision parser only when the accessibility tree or DOM is not enough.
+
 ## Team-level harness: shared knowledge
 
 Individual best practices evaporate with each session unless they are captured as team assets. Tencent's TeamAI CLI (open-sourced September 2026, used internally for six months) turns team AI knowledge into a git repository that every agent works from, and solves three problems:
@@ -363,6 +373,8 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Tencent: TeamAI CLI](https://github.com/Tencent/teamai-cli) — 团队级 harness：Git 作事实来源，三层架构（Execution/Context/Improvement）
 - [poteto: pstack 验证优先设计](https://x.com/shao__meng/status/2099300148874707297) — 验证 CLI、Feature Map、云端并行与可调试性选型
 - [MCP vs CLI for agent tools](https://x.com/dotey/status/2100046089214709979) — 无状态 MCP 和 deferred tools 缩小了差距，但本地熟悉命令、管道和 CI 仍更适合 CLI
+- [GitHub: Should you read the code, is RAG dead, and did Skills kill MCP?](https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/) — Skills、MCP、RAG 解决不同缺口，不要选赢家
+- [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
