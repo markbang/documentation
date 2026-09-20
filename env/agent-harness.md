@@ -191,6 +191,10 @@ Three components make it practical:
 
 The stack-selection corollary: **prefer debuggable runtimes.** If a tech stack can't be screenshotted, has no accessibility tree, and no performance traces, the agent cannot verify its own work. It is reasonable to change stack for agent-verifiability alone — Web/Electron exposes Chrome DevTools Protocol; iOS exposes the simulator.
 
+The strongest quantitative case that harness beats model: the **GAVEL** paper (2026) took Qwen3-8B on long-horizon robot tasks from 41.2% to 91.8% with zero changes to the model. It adds an explicit graph world model — object relations, action preconditions and effects, probabilistic beliefs about unobserved objects. Before executing an LLM-generated action, the graph predicts what that action would do; violations get caught, and those with a mechanical fix are repaired without calling the model again. Only errors needing semantic reasoning go back to the LLM. On BEHAVIOR-1K, success rose from 19.9% to 92.6% across 500 multi-task instructions.
+
+The reusable lesson: many long-horizon agent failures are **state-tracking failures, not reasoning failures**, and a symbolic checker outside the LLM catches them cheaply. Wrap the model's decision point in deterministic structure — a world model, a candidate list, a verifier — and the small model stops paying for what the harness already knows.
+
 ## Failure modes to watch
 
 Anthropic's April 2026 Claude Code postmortem is a useful case study because the reported degradation came from product and harness changes, not the base API model.
@@ -375,6 +379,7 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [MCP vs CLI for agent tools](https://x.com/dotey/status/2100046089214709979) — 无状态 MCP 和 deferred tools 缩小了差距，但本地熟悉命令、管道和 CI 仍更适合 CLI
 - [GitHub: Should you read the code, is RAG dead, and did Skills kill MCP?](https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/) — Skills、MCP、RAG 解决不同缺口，不要选赢家
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
+- [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

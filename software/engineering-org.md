@@ -87,6 +87,12 @@ OpenAI's September 2026 internal view on research acceleration adds a concrete d
 
 The interpretation: agents are excellent at execution, debugging, and experiments, but research direction and key decisions still need human input. This matches the "research intern" analogy — AI is increasingly the executor, while humans own direction and accountability. The org implication is the same as above: invest in the people who define problems, not just those who execute them.
 
+Databricks CEO Ali Ghodsi gave the enterprise version of the same judgment in a September 2026 podcast: most companies use AI as a glorified search plus code writing, and the bottleneck is not model intelligence but missing **organizational context** — the model has never sat in a meeting, does not know how decisions got made, and lacks what veteran employees carry in their heads. His answer is an Ontology: digitize the organization's concepts, goals, departments, people, and projects into one graph.
+
+The analogy is sharp: agents calling MCP servers one at a time is like Google indexing nothing and crawling ten pages live per query — expensive, slow, low quality. An Ontology is the enterprise equivalent of offline-computed PageRank, only much harder, because of permissions, access control, and heterogeneous objects. Thorsten Ball's parallel take is more radical: once model output exceeds human review capacity, code review, unit tests, and terminals lose their foundation, and most bugs will no longer be coding bugs but "asked for the wrong thing" bugs. The two converge: **the bottleneck is moving from writing code to defining problems and structuring organizational knowledge.**
+
 ## References
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）
+- [Databricks CEO on AI risk and enterprise ontology](https://x.com/shao__meng/status/2101493948917456960) — 组织上下文是企业 AI 落地的真正瓶颈，Ontology 是离线计算的 PageRank
+- [Thorsten Ball: predictions](https://x.com/shao__meng/status/2101476906629841156) — 瓶颈从写代码转移到定义问题

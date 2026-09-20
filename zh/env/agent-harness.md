@@ -191,6 +191,10 @@ System prompt 的改动可能和代码改动一样影响质量。处理它时也
 
 技术选型的推论：**优先可调试的运行时。** 如果技术栈无法截屏、没有 accessibility 树、没有性能 trace，Agent 就无法验证自己的工作。仅为了 Agent 可验证性而换技术栈是合理的——Web/Electron 有 Chrome DevTools Protocol，iOS 有模拟器。
 
+harness 胜过模型的最强定量证据：**GAVEL** 论文（2026）在长程机器人任务上把 Qwen3-8B 从 41.2% 提到 91.8%，模型一行未改。它加了一个显式的图世界模型——物体关系、动作前提与效果、对未见物体位置的概率估计。执行 LLM 生成的动作前，图先预测这个动作会产生什么；违规会被抓住，机械可修的直接修掉，不再调用模型。只有需要语义推理的错误才回到 LLM。在 BEHAVIOR-1K 的 500 条多任务指令上，成功率从 19.9% 升到 92.6%。
+
+可复用的教训：许多长程 Agent 失败是**状态追踪失败，不是推理失败**，而 LLM 外部的一个符号检查器能便宜地抓出它们。把模型的决策点包进确定性结构——世界模型、候选列表、验证器——小模型就不用再为 harness 已经知道的东西付账。
+
 ## 常见故障模式
 
 Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有参考价值：用户感知到的退化来自产品和 harness 改动，而不是底层 API 模型退化。
@@ -375,6 +379,7 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 - [MCP vs CLI：Agent 工具选型](https://x.com/dotey/status/2100046089214709979) — 无状态 MCP 和 deferred tools 缩小了差距，但本地熟悉命令、管道和 CI 仍更适合 CLI
 - [GitHub：Should you read the code, is RAG dead, and did Skills kill MCP?](https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/) — Skills、MCP、RAG 解决不同缺口，不要选赢家
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
+- [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
