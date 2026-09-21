@@ -112,6 +112,21 @@ workspace/
 
 The exact names can change. The important rule is that state should be **inspectable, restartable, and scoped**. For agent-assisted learning, this lets the agent teach the next step from the learner's current capability instead of from a generic syllabus. For engineering work, the same pattern applies to onboarding notes, migration logs, incident follow-ups, and task journals.
 
+### Audit memory for the associativity blind spot
+
+Every current memory architecture — Flat RAG, graph memory, agentic hierarchies, OS-style memory kernels — retrieves with the same recipe: embed query and stored content into one similarity space (BM25 or dense vectors), take top-K. That caps recall at **surface similarity**.
+
+It covers only *descriptive* recall — the query shares wording, entities, or timestamps with the memory. The other half is *associative* recall: a month-old note that "someone on the team has a severe seafood allergy" is the decisive evidence for today's question "where should the team dinner be?" Zero lexical overlap; only a semantic arc (causality, same situation) connects them. Tencent's **T-Mem** paper (2026) measures the blind spot: on LoCoMo-Plus Cognitive questions — built to strip lexical overlap — similarity-based systems score 32–49%, and GPT-4o reading the entire transcript scores only 21%.
+
+T-Mem's fix borrows from cognitive science (episodic future thinking): at **write time**, compute and store a prediction of *when this memory will matter again* — a trigger. Four trigger families cover the 2×2 space of granularity (fact / scene) × orientation (descriptive / associative). The two associative families are the point:
+
+- **Bridge trigger** — project a fact into the concrete situation where knowing it will help: "seafood allergy → picking a restaurant for the team dinner", with one step of reasoning why.
+- **Horizon trigger** — project a scene onto forward-looking dimensions so a future query approaching from a different context still hits it.
+
+Their ablation is the headline: removing Horizon triggers moves the standard benchmark by 0.08 points but collapses the associative one by 12.47. Systems tuned only on similarity benchmarks are implicitly optimizing to stay inside the similarity neighborhood — and that benchmark family cannot see the cost of the neighborhood's edge.
+
+The transferable rule: **do recall-plan at write time, when you know the content best.** Materialize the questions each item should answer, not just the item. It costs tokens once, offline; it saves the query every time after.
+
 ### Make retrieval deterministic when correctness matters
 
 Do not ask an agent to "figure it out" through brittle websites, scattered databases, or undocumented one-off scripts when the task needs exact results. Give it a deterministic retrieval layer instead.
@@ -315,6 +330,8 @@ HydraFusion improved verified task quality by 4.9 percentage points at 67% lower
 
 **Grok Bot's design philosophy** distills persistent-agent design to four ideas: persistent roles, clear state, scoped context, and coordinated teams. The goal is to move from *operating* AI to *delegating* work — the agent team persists across tasks with stable responsibilities and boundaries, rather than being re-prompted from scratch each session.
 
+Before adding routing, audit what your agent design actually optimizes for. TypeSafe's counterfactual is blunt: many "standard" agent features exist to dodge the KV cache and per-token billing, not because users want them. Their worked example: with Opus-class pricing (input 5, output 25) and Sonnet-class (3, 15), routing through a cheap model first — cache-isolated, so the big model re-reads the detour at full input price — can cost **more** than just staying on the strong model once context grows. The fix that makes routing economical is not a better router but **query-aware context rebuild**: rebuild context from labeled chunks per query instead of assuming every future turn needs the same shared cache. The same audit favors progressive disclosure (skills) over upfront tool schemas, and conditional over always-on memory files.
+
 ## Computer use cost: reverse-engineer to scripts
 
 Computer-use agents are effective but expensive: every step is screenshot → visual understanding → click decision → screenshot again. A simple task can burn dozens of vision-reasoning rounds.
@@ -380,6 +397,8 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [GitHub: Should you read the code, is RAG dead, and did Skills kill MCP?](https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/) — Skills、MCP、RAG 解决不同缺口，不要选赢家
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
 - [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
+- [Tencent T-Mem](https://arxiv.org/abs/2606.15405) — 写入时预演 trigger，填补相似度检索的联想盲区
+- [TypeSafe: notes on coding agents](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

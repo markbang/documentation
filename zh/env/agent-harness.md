@@ -112,6 +112,21 @@ workspace/
 
 具体文件名可以调整。关键原则是：状态必须**可检查、可恢复、有边界**。在 Agent 辅助学习里，这能让 Agent 基于学习者当前能力继续教学，而不是每次都从通用大纲开始。在工程工作里，同样可以用于 onboarding 笔记、迁移日志、事故复盘和任务 journal。
 
+### 审计记忆系统的联想盲区
+
+当前所有记忆架构——Flat RAG、图结构记忆、agentic 层级、操作系统式内核——检索配方都一样：把查询和内容投进同一个相似度空间（BM25 或稠密向量），取 top-K。这把召回上限锁死在**表面相似度**上。
+
+它只覆盖描述性召回——查询和记忆共享措辞、实体或时间地点。另一半是联想性召回：一个月前存下"团队有人严重海鲜过敏"，今天问"团队晚餐去哪吃"——零词汇重合，只有一条语义弧（因果、同一情境）把两者连着。腾讯 **T-Mem** 论文（2026）量出了这个盲区：在专门剥离词汇重合的 LoCoMo-Plus Cognitive 子集上，相似度系系统只有 32–49%，GPT-4o 直接读完全部对话原文也只有 21%。
+
+T-Mem 的修复借自认知科学（情景未来思维）：**写入时**算好并存下一条预测——这条记忆会在什么情境下重新重要——即 trigger。四族 trigger 覆盖粒度（事实/场景）×取向（描述/联想）的 2×2 空间，其中联想两族才是关键：
+
+- **Bridge trigger**——把事实投射到"知道它就会有用"的具体情境，并附一步推理理由："海鲜过敏 → 为团队晚餐选餐厅"。
+- **Horizon trigger**——把场景投射到一组前瞻维度，未来从不同情境接近的查询仍能命中。
+
+消融实验是 headline：去掉 Horizon trigger，标准基准只动 0.08 个点，联想基准塌 12.47 个点。只按相似度基准调优的系统，隐含地就在优化"待在相似度邻域之内"——而邻域边缘的成本，这族基准在构造上就测不到。
+
+可迁移的规则：**在写入时做召回规划，那时你最了解内容。** 把每条内容应该回答的问题物化出来，而不只是存内容本身。一次性离线花 token，之后每次查询都省。
+
 ### 正确性重要时要做确定性检索
 
 当任务需要精确结果时，不要只让 Agent 在脆弱网页、分散数据库和没有文档的一次性脚本之间“自己想办法”。应该给它一个确定性检索层。
@@ -315,6 +330,8 @@ Harness 设计的一个大趋势是同时运行多个模型，而不是赌一个
 
 **Grok Bot 的设计哲学**把持久化 Agent 设计提炼为四点：持久角色、清晰状态、限定上下文、协调团队。目标是从“操作”AI 转向“委派”工作——Agent 团队跨任务持续存在，职责和边界稳定，而不是每次会话从头重新提示。
 
+在加路由之前，先审计你的 Agent 设计到底在优化什么。TypeSafe 的反事实思想实验很直白：很多"标准"Agent 特性是为了绕开 KV cache 和按 token 计费，而不是用户真的需要。他们的算例：按 Opus 级（输入 5、输出 25）和 Sonnet 级（3、15）计价，先用便宜模型再回大模型——cache 按模型隔离，大模型要把绕路的每个 token 按输入价重付一遍——上下文一大反而**比全程用强模型更贵**。让路由真正省钱的不是更好的路由器，而是**按查询重建上下文**：给每个 chunk 打相关性标签，按需重建，而不是假设未来每个 turn 都要同一份共享缓存。同一个审计也解释了为什么渐进披露（skills）优于前置工具 schema、条件加载优于常驻记忆文件。
+
 ## Computer Use 成本控制：反向工程为脚本
 
 Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决定点哪里 → 再截屏验证。一个简单任务可能消耗几十轮视觉推理。
@@ -380,6 +397,8 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 - [GitHub：Should you read the code, is RAG dead, and did Skills kill MCP?](https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/) — Skills、MCP、RAG 解决不同缺口，不要选赢家
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
 - [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
+- [腾讯 T-Mem](https://arxiv.org/abs/2606.15405) — 写入时预演 trigger，填补相似度检索的联想盲区
+- [TypeSafe：coding agent 笔记](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
