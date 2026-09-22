@@ -144,6 +144,10 @@ Anthropic 的生物学 Agent 案例很有代表性：研究团队让科学 Agent
 
 这和工具设计是同一个 harness 原则：先把执行表面变得可预测，再让模型围绕它做计划。
 
+第一步检索值得超配投入。**Question's Gambit** 论文（2026）在 BrowseComp-Plus 上把 GPT-5.5 从 83.1% 提到 90.5%——同一个检索器、同一个 Agent 循环，唯一的变化是循环开始前先跑一次预检索：把问题拆成线索，每条线索转成互补搜索，汇总结果再重排。Agent 带着已排序的证据集开始循环。同样的改法把 mini 模型从 68.1% 提到 79.0%，校准误差大约减半。
+
+错误分析才是真正的教训：最强模型剩下的 79 个错误里，只有 3 个是证据文档从未被检索到，其余 76 个都发生在后面——预览、打开、使用证据的时候。**把开场的上下文做厚；验证消费环节，而不只是抓取环节。** 代价是每题多 2.3–5.3 次工具调用，相比一整轮失败很便宜。
+
 ### 为人际协作而设计，而不只是追求自主执行
 
 大多数 Agent 产品把目标放在自进化和闭环上：Agent 自己规划、执行、收尾。这不一定是健康的模式。即使加了透明度和追溯工具，优先追求自主完成的 Agent 也可能制造出难以交接和维护的噪音。
@@ -399,6 +403,8 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 - [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
 - [腾讯 T-Mem](https://arxiv.org/abs/2606.15405) — 写入时预演 trigger，填补相似度检索的联想盲区
 - [TypeSafe：coding agent 笔记](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
+- [Fireworks：The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
+- [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

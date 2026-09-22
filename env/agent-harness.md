@@ -144,6 +144,10 @@ For high-stakes retrieval, prefer:
 
 This is the same harness principle as tool design: make the execution surface predictable, then let the model plan around it.
 
+The first retrieval move deserves disproportionate investment. The **Question's Gambit** paper (2026) lifted GPT-5.5 from 83.1% to 90.5% on BrowseComp-Plus with the same retriever and the same agent loop — the only change was a single pre-search step that runs once, before the loop starts: split the question into clues, turn each clue into complementary searches, pool the results, and rerank. The agent then starts with a ranked evidence set already in context. The same change lifted a mini model from 68.1% to 79.0% and roughly halved calibration error.
+
+The error analysis is the real lesson: of 79 remaining errors for the strongest model, only 3 came from the gold document never being retrieved. The other 76 happened later — previewing, opening, or using the evidence. **Front-load the opening context; verify the consumption, not just the fetch.** Cost: 2.3–5.3 extra tool calls per question, cheap against a full failed run.
+
 ### Design for human collaboration, not just autonomous execution
 
 Most agent products optimize for self-evolution: the agent plans, executes, and closes the loop on its own. This is not always a healthy pattern. Even with transparency and traceability tools, an agent that prioritizes autonomous completion can create noise that is hard to hand off or maintain.
@@ -332,6 +336,14 @@ HydraFusion improved verified task quality by 4.9 percentage points at 67% lower
 
 Before adding routing, audit what your agent design actually optimizes for. TypeSafe's counterfactual is blunt: many "standard" agent features exist to dodge the KV cache and per-token billing, not because users want them. Their worked example: with Opus-class pricing (input 5, output 25) and Sonnet-class (3, 15), routing through a cheap model first — cache-isolated, so the big model re-reads the detour at full input price — can cost **more** than just staying on the strong model once context grows. The fix that makes routing economical is not a better router but **query-aware context rebuild**: rebuild context from labeled chunks per query instead of assuming every future turn needs the same shared cache. The same audit favors progressive disclosure (skills) over upfront tool schemas, and conditional over always-on memory files.
 
+How big is the routing prize, really? Fireworks ran 18 models across 113 real coding tasks, then asked what an oracle router would have achieved. Best single model: 74.1% at $6.52/task. Oracle routing: 97.6% at $1.88. Open-weights-only routing still hit 90.3% at $1.45 — beating every closed model. Three findings worth internalizing:
+
+- **Almost no task needs the most expensive model.** 94 of 113 tasks had a sub-$3 model as optimal; the three $11.50+ flagships were uniquely best on only 3 tasks. Sticking with one flagship is an insurance premium on general capability that most tasks never claim.
+- **The pool does not need to be big.** The best two-model pair gains 13.1 points over the best single; three models reach 91.2%; growing to 18 adds only 6.4 more. Value comes from complementary coverage, not pool size.
+- **The hard part is predicting which model fits.** Under strict pass@1, recent routing research — including commercial systems — struggles to beat simple baselines; the bottleneck is model recall, not the router algorithm. Sticking with one familiar model is a rational strategy when specialization differences are not predictable.
+
+Routing is not a cost tool first: if models truly complement each other, routing moves you up the capability curve, and cost savings are the byproduct. The second hidden cost is context — switching models usually means discarding paid-for context, so a router that preserves it (cache-aware handoff) changes the economics again: Fireworks reported 53% cost reduction across 2,334 internal coding sessions.
+
 ## Computer use cost: reverse-engineer to scripts
 
 Computer-use agents are effective but expensive: every step is screenshot → visual understanding → click decision → screenshot again. A simple task can burn dozens of vision-reasoning rounds.
@@ -399,6 +411,8 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
 - [Tencent T-Mem](https://arxiv.org/abs/2606.15405) — 写入时预演 trigger，填补相似度检索的联想盲区
 - [TypeSafe: notes on coding agents](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
+- [Fireworks: The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
+- [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。
