@@ -320,6 +320,8 @@ A cleaner approach is to test model quality against **minimal harnesses** — th
 
 The deeper issue: harness engineering is where leading AI companies are now focusing effort, and it moves too fast for standardization to keep up. The frontier direction is models that dynamically generate their own harness per task — Claude already does this inconsistently. If a harness becomes just another tunable artifact like a system prompt, benchmarking gets murkier, not clearer.
 
+The cleanest controlled experiment yet: **ReFigBench** (2026) ran GPT-5.5 inside both Claude Code and Codex on the same 1,000 tasks. With a specialized PowerPoint workflow, the model improved inside one harness and got **worse** inside the other — with an identical prompt. The harness alone flipped the direction of the delta. Perception remained the bottleneck either way. Treat any vendor chart comparing two models as a comparison of two model-plus-harness systems; the model is only half the system under test.
+
 ## Multi-model orchestration
 
 A major trend in harness design is running several models together instead of betting on one. Two recent examples show where this is going.
@@ -343,6 +345,14 @@ How big is the routing prize, really? Fireworks ran 18 models across 113 real co
 - **The hard part is predicting which model fits.** Under strict pass@1, recent routing research — including commercial systems — struggles to beat simple baselines; the bottleneck is model recall, not the router algorithm. Sticking with one familiar model is a rational strategy when specialization differences are not predictable.
 
 Routing is not a cost tool first: if models truly complement each other, routing moves you up the capability curve, and cost savings are the byproduct. The second hidden cost is context — switching models usually means discarding paid-for context, so a router that preserves it (cache-aware handoff) changes the economics again: Fireworks reported 53% cost reduction across 2,334 internal coding sessions.
+
+Within a single model, the lever is prompt-cache engineering. GPT-6's caching works on **exact prefix matches**, so structure your prompt like a cache layout: stable content (system policy, tool schemas, shared context) first, per-request content last. One stray token in the prefix silently voids the discount. GPT-6 adds what older models lacked:
+
+- **Explicit breakpoints** — mark where the reusable prefix ends instead of relying on implicit placement
+- **`prompt_cache_key`** — steer requests toward servers holding your cache
+- **Diagnostics** — compare a cache-missing request against an earlier one to see which change (model, tools, settings, input) broke reuse
+
+Cached reads discount up to 90% and cut time-to-first-token by up to 80%; cache writes may carry a fee on newer families, so a bloated but rarely-reused prefix is now a cost, not a free safety net. The design habit this rewards: put everything volatile at the tail, and treat "did the cache hit?" as a monitored metric, not an accident.
 
 ## Computer use cost: reverse-engineer to scripts
 
@@ -413,6 +423,8 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [TypeSafe: notes on coding agents](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Fireworks: The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
+- [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
+- [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

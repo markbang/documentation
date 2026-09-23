@@ -320,6 +320,8 @@ Anthropic 提出的关键开放问题：我们现在能看清 workspace 里有�
 
 更深层的问题：harness 工程正是领先 AI 公司现在投入的方向，而且演进太快，标准化跟不上。前沿方向是模型按任务动态生成自己的 harness——Claude 已经在一定程度上做到了，只是不稳定。如果 harness 最终变成像 system prompt 一样可调的工件，基准测试只会越来越模糊。
 
+目前最干净的受控实验：**ReFigBench**（2026）把 GPT-5.5 分别放进 Claude Code 和 Codex 跑同样的 1000 个任务。带专门 PowerPoint 工作流时，模型在一个 harness 里变好、在另一个里变**差**——而提示词完全相同。仅 harness 本身就能翻转变化的方向。感知始终是瓶颈。把厂商图表里两个模型的对比，当作两套"模型+harness"系统的对比来看；模型只是受测系统的一半。
+
 ## 多模型编排
 
 Harness 设计的一个大趋势是同时运行多个模型，而不是赌一个。两个最近的例子展示了方向。
@@ -343,6 +345,14 @@ Harness 设计的一个大趋势是同时运行多个模型，而不是赌一个
 - **难的是预测哪个模型合适。** 严格 pass@1 口径下，近期路由研究（含商业方案）难以稳定击败简单基线；瓶颈在模型召回——池子里有合适的模型，路由器认不出来。当专业化差异不可预测时，坚持用一个熟悉的模型反而是理性策略。
 
 路由首先不是省钱工具：如果模型真正互补，路由是沿能力曲线上移，省成本只是副产品。第二个隐性成本是上下文——切模型通常意味着丢弃已付费的上下文，所以保留上下文的路由器（cache 感知交接）会再次改写经济学：Fireworks 在 2334 个内部编码会话上报告了 53% 的成本下降。
+
+单模型内部，杠杆是 prompt cache 工程。GPT-6 的缓存按**精确前缀匹配**工作，所以要把 prompt 当缓存布局来设计：稳定内容（系统策略、工具 schema、共享上下文）放前面，每次请求变化的内容放最后。前缀里一个多余 token 会静默作废整个折扣。GPT-6 补上了老模型缺的东西：
+
+- **显式断点**——标记可复用前缀在哪里结束，不依赖隐式摆放
+- **`prompt_cache_key`**——把请求导到持有你缓存的服务器
+- **诊断工具**——把未命中的请求和早前请求对比，看是哪个变化（模型、工具、设置、输入）破坏了复用
+
+缓存读取最多打 1 折、首 token 延迟最多降 80%；新一代模型上缓存**写入**可能收费，所以臃肿但很少复用的前缀现在是成本，不是免费保险。这个机制奖励的设计习惯：易变的东西全放尾部，把"缓存命中了吗"当监控指标，而不是碰运气。
 
 ## Computer Use 成本控制：反向工程为脚本
 
@@ -413,6 +423,8 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 - [TypeSafe：coding agent 笔记](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Fireworks：The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
+- [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
+- [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

@@ -91,8 +91,11 @@ Databricks CEO Ali Ghodsi 在 2026 年 9 月的播客里给出了同一判断的
 
 他的类比很准：今天 Agent 逐个调 MCP 服务器检索，就像谷歌当年不建索引、每次搜索实时爬十个网页再总结——又贵又慢质量又差。Ontology 是企业版的"离线计算的 PageRank"，只是难得多，因为涉及权限、访问控制和异构对象。Thorsten Ball 同期给出了更激进的表述：当模型产出超过人工审查能力时，code review、单测、终端这些围绕"人写代码"建立的工艺都会失去存在基础，大多数 bug 将不再是编码 bug，而是"你要错了东西"的 bug。两家判断收敛到同一点：**瓶颈正在从写代码转移到定义问题与组织知识结构化。**
 
+经济侧的证据也在同一个方向：Harvey（法律 AI 公司）的毛利率从约 50% 跌到 -50%，原因是 agent 的 token 用量暴涨二十倍，而底层智能全部租自 OpenAI 和 Anthropic。这给了"own your intelligence stack"一个具体注脚——**租来的智能没有规模效应，成本随用量线性上涨；自有的模型、harness、evals 才是资产。**对重度用 AI 的产品，单位经济模型里必须有一行"智能成本随用量的曲线"，而它通常是线性甚至超线性的。
+
 ## 参考资料
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）
 - [Databricks CEO：AI 生存风险与组织本体](https://x.com/shao__meng/status/2101493948917456960) — 组织上下文是企业 AI 落地的真正瓶颈，Ontology 是离线计算的 PageRank
 - [Thorsten Ball：预测](https://x.com/shao__meng/status/2101476906629841156) — 瓶颈从写代码转移到定义问题
+- [Own your intelligence stack](https://x.com/omarsar0/status/2102483718958973392) — Harvey 毛利率 50% → -50%：token 用量涨 20 倍，智能全靠租

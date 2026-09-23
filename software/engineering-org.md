@@ -91,8 +91,11 @@ Databricks CEO Ali Ghodsi gave the enterprise version of the same judgment in a 
 
 The analogy is sharp: agents calling MCP servers one at a time is like Google indexing nothing and crawling ten pages live per query — expensive, slow, low quality. An Ontology is the enterprise equivalent of offline-computed PageRank, only much harder, because of permissions, access control, and heterogeneous objects. Thorsten Ball's parallel take is more radical: once model output exceeds human review capacity, code review, unit tests, and terminals lose their foundation, and most bugs will no longer be coding bugs but "asked for the wrong thing" bugs. The two converge: **the bottleneck is moving from writing code to defining problems and structuring organizational knowledge.**
 
+The economics point the same way: Harvey, a legal AI company, watched gross margin fall from about 50% to −50% as agent token use spiked twentyfold on intelligence rented entirely from OpenAI and Anthropic. That gives "own your intelligence stack" a concrete footnote — **rented intelligence has no economies of scale; costs scale linearly with usage. Custom models, harnesses, and evals are the assets.** Any product that uses AI heavily needs a line in its unit economics for the intelligence-cost curve, and it is usually linear or worse.
+
 ## References
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）
 - [Databricks CEO on AI risk and enterprise ontology](https://x.com/shao__meng/status/2101493948917456960) — 组织上下文是企业 AI 落地的真正瓶颈，Ontology 是离线计算的 PageRank
 - [Thorsten Ball: predictions](https://x.com/shao__meng/status/2101476906629841156) — 瓶颈从写代码转移到定义问题
+- [Own your intelligence stack](https://x.com/omarsar0/status/2102483718958973392) — Harvey 毛利率 50% → -50%：token 用量涨 20 倍，智能全靠租
