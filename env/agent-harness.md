@@ -354,6 +354,8 @@ Within a single model, the lever is prompt-cache engineering. GPT-6's caching wo
 
 Cached reads discount up to 90% and cut time-to-first-token by up to 80%; cache writes may carry a fee on newer families, so a bloated but rarely-reused prefix is now a cost, not a free safety net. The design habit this rewards: put everything volatile at the tail, and treat "did the cache hit?" as a monitored metric, not an accident.
 
+Both levers — cross-model routing and within-model caching — increasingly live in an **organizational control plane** rather than in each developer's head. Cloudflare's Auto Router (public beta, September 2026) sits in AI Gateway: set the model to `cloudflare/auto` and each request routes to a model capable enough for the task, invisible to the end user. Internal use through OpenCode saved up to 30% versus frontier-only. The rationale matches the Fireworks finding: individuals manually pick overkill models ("no one needs Opus to summarize an email"), but blanket blocking breaks power users — so the savings have to be ones users never notice. The gateway position matters: every request from every user, agent, and tool already flows through it, so it can enforce what budgets and policy documents only request.
+
 ## Computer use cost: reverse-engineer to scripts
 
 Computer-use agents are effective but expensive: every step is screenshot → visual understanding → click decision → screenshot again. A simple task can burn dozens of vision-reasoning rounds.
@@ -425,6 +427,7 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
 - [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
+- [Cloudflare: Auto Router](https://blog.cloudflare.com/auto-router/) — 组织级控制面路由，终端用户无感省最多 30%
 - [Matt Pocock Skills: Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE: Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code is steganographically marking requests](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

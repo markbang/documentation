@@ -105,6 +105,14 @@ Sitemap: https://example.com/sitemap.xml
 
 不要机械照抄别人的策略，按你站点的目标来定。
 
+## 考虑在 Agent 消费你的内容时收费
+
+如果 Agent 已经是你内容的真实读者，访问控制只是一半问题，另一半是补偿。Cloudflare 的 Monetization Gateway（2026 年 9 月 beta）实现了这个新兴模式：站长对访问页面、API、MCP 工具或数据集的 Agent 收费，用 **HTTP 402 Payment Required** 做协商机制，按 Agent 的消费单位计价——按请求、按查询、按 token。
+
+为什么订阅制不适合 Agent 流量：Agent 追求结果，一个任务可能触及几十个新来源；预付订阅把买家锁死在少数几个预算内来源，和 Agent 的实际工作方式错位。这也是为什么这些设计里出现的是稳定币轨道而不是卡组织——小额、计量、高频的机器间支付。
+
+对文档站的决策树很简单：人类和友好 Agent 免费，批量抓取计量收费，不想要的训练用途直接拒——每一层现在都可以独立表达。
+
 ## 只有在必要时再做协议发现
 
 不是每个文档站都需要 API/MCP 发现能力。
@@ -181,3 +189,4 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 - [Cloudflare Style Guide：AI tooling](https://developers.cloudflare.com/style-guide/ai-tooling/)
 - [Cloudflare：robots.txt setting and Content Signals](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/)
 - [How do coding agents read repositories?](https://arxiv.org/abs/2608.20195) — 指令文件占 Agent 阅读量的 60.5%；文档 10.6%；API 参考 1.3%
+- [Cloudflare: Monetization Gateway](https://blog.cloudflare.com/monetization-gateway-beta/) — HTTP 402 按 Agent 访问页面、API 和 MCP 工具计量收费

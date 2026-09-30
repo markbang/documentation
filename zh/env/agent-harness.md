@@ -354,6 +354,8 @@ Harness 设计的一个大趋势是同时运行多个模型，而不是赌一个
 
 缓存读取最多打 1 折、首 token 延迟最多降 80%；新一代模型上缓存**写入**可能收费，所以臃肿但很少复用的前缀现在是成本，不是免费保险。这个机制奖励的设计习惯：易变的东西全放尾部，把"缓存命中了吗"当监控指标，而不是碰运气。
 
+这两个杠杆——跨模型路由和模型内缓存——正越来越多地住进**组织级控制面**，而不是每个开发者的脑子里。Cloudflare 的 Auto Router（2026 年 9 月公开 beta）放在 AI Gateway 里：模型设成 `cloudflare/auto`，每个请求自动路由到对任务足够用的模型，终端用户无感。内部经 OpenCode 实测比纯旗舰省最多 30%。理由和 Fireworks 的发现一致：个人手动选模型经常杀鸡用牛刀（"总结邮件不需要 Opus"），但一刀切封禁又会伤到重度用户——所以省钱必须让用户察觉不到。Gateway 的位置才是关键：每个用户、Agent、工具的请求本来都要经过它，预算和政策文档只能"请求"的事，它可以直接执行。
+
 ## Computer Use 成本控制：反向工程为脚本
 
 Computer-use Agent 好用但贵：每一步都是截屏 → 视觉理解 → 决定点哪里 → 再截屏验证。一个简单任务可能消耗几十轮视觉推理。
@@ -425,6 +427,7 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
 - [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
+- [Cloudflare: Auto Router](https://blog.cloudflare.com/auto-router/) — 组织级控制面路由，终端用户无感省最多 30%
 - [Matt Pocock Skills：Teach skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)
 - [PsiACE：Agent 不只是执行流程的容器](https://x.com/repsiace/status/2072039687364161965) — 关于 Agent 应作为人理解、判断和协作的环境，而不仅是自主执行容器的设计洞察。
 - [Claude Code 通过隐写方式标记请求](https://thereallo.dev/blog/claude-code-prompt-steganography) — Claude Code 通过不可见 Unicode 隐写标记 API 请求的案例分析，提醒开发者审查有文件系统和 shell 权限的工具。

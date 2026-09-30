@@ -93,9 +93,21 @@ Databricks CEO Ali Ghodsi 在 2026 年 9 月的播客里给出了同一判断的
 
 经济侧的证据也在同一个方向：Harvey（法律 AI 公司）的毛利率从约 50% 跌到 -50%，原因是 agent 的 token 用量暴涨二十倍，而底层智能全部租自 OpenAI 和 Anthropic。这给了"own your intelligence stack"一个具体注脚——**租来的智能没有规模效应，成本随用量线性上涨；自有的模型、harness、evals 才是资产。**对重度用 AI 的产品，单位经济模型里必须有一行"智能成本随用量的曲线"，而它通常是线性甚至超线性的。
 
+个人到团队的 gap 具体是什么？阿里官方《AI Native 研发范式实践手册》（68 页，2026 年 9 月，基于三个内部案例）列出了五个能活过真实团队检验的挑战：
+
+1. **环境与验证**——可复现的共享验证是瓶颈，代码生成不是
+2. **平台能力**——个人从工具里免费拿到的，团队要当基础设施来建
+3. **度量**——AI 到底有没有提效？没有基线，"感觉变快了"就是全部论证
+4. **数字员工的自主性**——团队 Agent 无人值守能走多远才变成负债
+5. **组织配套**——角色、评审门、值班都要围绕 Agent 重新定义
+
+个人 Vibe Coding 五条全跳过；服务上亿用户的团队一条都跳不过。
+
 ## 参考资料
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）
 - [Databricks CEO：AI 生存风险与组织本体](https://x.com/shao__meng/status/2101493948917456960) — 组织上下文是企业 AI 落地的真正瓶颈，Ontology 是离线计算的 PageRank
 - [Thorsten Ball：预测](https://x.com/shao__meng/status/2101476906629841156) — 瓶颈从写代码转移到定义问题
 - [Own your intelligence stack](https://x.com/omarsar0/status/2102483718958973392) — Harvey 毛利率 50% → -50%：token 用量涨 20 倍，智能全靠租
+- [Cloudflare: Monetization Gateway](https://blog.cloudflare.com/monetization-gateway-beta/) — HTTP 402 按 Agent 消费单位收费
+- [阿里 AI Native 研发范式实践手册](https://x.com/shao__meng/status/2105279963922338258) — 个人到团队 gap 的五个挑战

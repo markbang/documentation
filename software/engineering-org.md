@@ -93,9 +93,21 @@ The analogy is sharp: agents calling MCP servers one at a time is like Google in
 
 The economics point the same way: Harvey, a legal AI company, watched gross margin fall from about 50% to −50% as agent token use spiked twentyfold on intelligence rented entirely from OpenAI and Anthropic. That gives "own your intelligence stack" a concrete footnote — **rented intelligence has no economies of scale; costs scale linearly with usage. Custom models, harnesses, and evals are the assets.** Any product that uses AI heavily needs a line in its unit economics for the intelligence-cost curve, and it is usually linear or worse.
 
+What does the individual-to-team gap actually consist of? Alibaba's official AI-Native development handbook (68 pages, September 2026, from three internal case studies) names five challenges that survive contact with real teams:
+
+1. **Environment and verification** — shared, reproducible verification is the bottleneck, not code generation
+2. **Platform capability** — what individuals get free from a tool, teams must build as infrastructure
+3. **Measurement** — did AI actually improve throughput? Without a baseline, "it feels faster" is the whole argument
+4. **Digital-employee autonomy** — how much can a team-owned agent do unattended before it becomes a liability
+5. **Organizational fit** — roles, review gates, and on-call need redefinition around agents
+
+Personal vibe coding skips all five; a team building for hundreds of millions of users cannot.
+
 ## References
 
 - [42章经 × 魏小康 播客笔记](https://x.com/dotey/status/2072149043757637916) — 宝玉的详细笔记（原始推文 by [yan5xu](https://x.com/yan5xu/status/2072146139999264940)）
 - [Databricks CEO on AI risk and enterprise ontology](https://x.com/shao__meng/status/2101493948917456960) — 组织上下文是企业 AI 落地的真正瓶颈，Ontology 是离线计算的 PageRank
 - [Thorsten Ball: predictions](https://x.com/shao__meng/status/2101476906629841156) — 瓶颈从写代码转移到定义问题
 - [Own your intelligence stack](https://x.com/omarsar0/status/2102483718958973392) — Harvey 毛利率 50% → -50%：token 用量涨 20 倍，智能全靠租
+- [Cloudflare: Monetization Gateway](https://blog.cloudflare.com/monetization-gateway-beta/) — HTTP 402 按 Agent 消费单位收费
+- [阿里 AI Native 研发范式实践手册](https://x.com/shao__meng/status/2105279963922338258) — 个人到团队 gap 的五个挑战

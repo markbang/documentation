@@ -94,6 +94,14 @@ This lets you separate:
 
 Pick the policy that matches your site instead of copying someone else's defaults.
 
+## Consider getting paid when agents consume your work
+
+If agents are a meaningful audience for your content, access control is only half the question — the other half is compensation. Cloudflare's Monetization Gateway (beta, September 2026) implements the emerging pattern: domain owners charge agents for access to pages, APIs, MCP tools, or datasets, with **HTTP 402 Payment Required** as the negotiation mechanism and metered pricing that matches an agent's consumption unit — per request, per query, per token.
+
+Why subscriptions don't fit agent traffic: agents seek outcomes and may touch dozens of new sources per task. Prepaid subscriptions force buyers into a few budgeted sources, which misaligns with how agents actually work. The traffic pattern this enables — small, metered, high-frequency payments between machines — is why stablecoin rails show up in these designs rather than card networks.
+
+For a docs site, the decision tree is simple: free for humans and friendly agents, metered for bulk scraping, blocked for training use you don't want — and each layer is now independently expressible.
+
 ## Publish machine-discoverable capabilities when relevant
 
 Not every docs site needs protocol discovery. If your site only serves public content, you can stop at content readiness.
@@ -166,3 +174,4 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 - [Cloudflare Style Guide: AI tooling](https://developers.cloudflare.com/style-guide/ai-tooling/)
 - [Cloudflare: robots.txt setting and Content Signals](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/)
 - [How do coding agents read repositories?](https://arxiv.org/abs/2608.20195) — instruction files are 60.5% of agent reads; docs 10.6%; API references 1.3%
+- [Cloudflare: Monetization Gateway](https://blog.cloudflare.com/monetization-gateway-beta/) — HTTP 402 metered payments for agent access to pages, APIs, and MCP tools
