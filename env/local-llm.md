@@ -172,6 +172,8 @@ Two harness patterns already use this split:
 - **Route, then think.** LangChain-style loops ask many tiny questions ("is this hard?", "is this dangerous?"). Answer those with a System One model; send only hard work to a frontier model.
 - **Choose, don't generate.** In computer use, let the driver enumerate legal actions and have Jev pick an ID. Cua's jev-use reported a 2048 demo about 5× faster and ~1000× cheaper than Astra — an ideal case with a fully observable keyboard task, not a guarantee for messy web UIs.
 
+The category is already commoditizing downward. Liquid AI open-sourced **d1-3B** and **d1-omni-600M** (October 2026): Jev-style decision models, but multimodal — text, vision, and audio in, typed decisions out. ~8 ms per query on an RTX 4090, under 50 ms on a Jetson Orin Nano. When the judgment layer reaches millisecond latency on edge hardware, "ask a small model first" stops being an optimization and becomes the default shape of an agent loop — with the frontier model reserved for what actually needs depth.
+
 ## Industry: Anthropic enters the chip race
 
 Anthropic has started early development of its own AI chips, seeking memory semiconductor supply from SK Hynix and reportedly in talks with Samsung for a custom project potentially using Samsung's 2nm process and advanced packaging. This follows OpenAI's earlier chip efforts and signals that frontier AI labs now see vertical integration into silicon as strategically necessary.
@@ -192,3 +194,4 @@ The gap is closing fast. GLM 5.2 already delivers frontier-level open-weight int
 - [TypeSafe AI: Jev System One model](https://typesafe.ai) — typed, calibrated decisions instead of chat generation
 - [LangChain + Jev harness](https://x.com/shao__meng/status/2100873142969536631) — 用 System One 做路由和护栏，旗舰模型只处理难活
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 里让模型选择动作 ID，而不是生成动作
+- [Liquid AI d1](https://huggingface.co/LiquidAI/d1-3B) — 开源多模态决策模型，RTX 4090 上 8ms，边缘硬件 50ms 以内

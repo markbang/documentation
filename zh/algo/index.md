@@ -23,6 +23,9 @@ icon: "brain"
 <Accordion title="从零构建 AI 工程" icon="robot">
 [从零构建 AI 工程](https://github.com/rohitg00/ai-engineering-from-scratch)：20 个阶段、523 节课、约 342 小时，从线性代数到自主智能体。每课产出可复用工件（SKILL.md、prompt、MCP server），可用 `npx skills add rohitg00/ai-engineering-from-scratch` 安装。
 </Accordion>
+<Accordion title="斯坦福 CS 329Z" icon="graduation-cap">
+[CS 329Z: Engineering AI Agents](https://cs329z.stanford.edu)（2026 秋，Diyi Yang 等）：从 LLM 流水线到复合系统再到自主 Agent 的工程课，讲义公开。Tool Use 和 Frameworks & Orchestration 两讲与本站的 harness 笔记互补。
+</Accordion>
 </Accordions>
 
 <CardGroup cols={2}>

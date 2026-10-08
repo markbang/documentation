@@ -23,6 +23,9 @@ Algorithm study here mainly follows open-source books on GitHub together with Le
 <Accordion title="AI Engineering from Scratch" icon="robot">
 [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch): 20 stages, 523 lessons, ~342 hours — from linear algebra to autonomous agents. Every lesson ships a reusable artifact (SKILL.md, prompt, MCP server); install with `npx skills add rohitg00/ai-engineering-from-scratch`.
 </Accordion>
+<Accordion title="Stanford CS 329Z" icon="graduation-cap">
+[CS 329Z: Engineering AI Agents](https://cs329z.stanford.edu) (Fall 2026, Diyi Yang et al.): the engineering path from LLM pipelines to compound systems to autonomous agents. Lecture slides are public — the tool-use and frameworks/orchestration decks pair well with the harness notes on this site.
+</Accordion>
 </Accordions>
 
 <CardGroup cols={2}>
