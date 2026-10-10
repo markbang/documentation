@@ -243,6 +243,20 @@ The lessons generalize beyond this one accident:
 
 The deeper harness principle: destructive operations should be treated as a permission boundary, not a capability. If a tool can `rm -rf`, it should be gated, logged, and reversible by default — and the agent should never be given a broader scope than the task requires.
 
+### Separate discovery from purchase approval
+
+Paid operations need an explicit boundary too. Vercel's domain CLI provides a concrete example: the agent can discover candidates with `vercel domains search`, check availability with `vercel domains check`, and retrieve pricing with `vercel domains price`. According to Vercel's announcement, a non-interactive `vercel domains buy` returns a structured error with suggested next commands instead of completing the purchase. The user confirms the price, auto-renew choice, and registrant details in an interactive terminal or the dashboard.
+
+The reusable pattern is **prepare → request approval → execute → verify**, not “give the agent a payment credential and tell it to be careful.” For your own tools:
+
+- **Allow scoped discovery separately from spending.** Permission to compare options does not authorize buying one.
+- **Make approval actionable.** Present the exact resource, account or team, current quote and currency, term, and recurring-payment choice. Reconfirm if those details change.
+- **Stop on approval-required responses.** Route the structured result to the user; do not retry through another interface, auto-answer prompts, or treat an interactive terminal as proof of consent.
+- **Enforce the gate outside the model.** A skill can explain the procedure, but tool permissions and the transaction service must enforce it. A CLI-only prompt is insufficient if the agent can use another purchase path with the same credentials.
+- **Verify before retrying.** Record the user's decision and transaction result without logging secrets or unnecessary contact data. If a request times out, check the provider's order state before attempting another purchase.
+
+These are harness-design recommendations; the Vercel example demonstrates the discovery/confirmation split, not a guarantee that every payment interface enforces all of these controls. Check the installed CLI's behavior before granting it spending access.
+
 ## A quick diagnostic checklist
 
 When an agent behaves oddly, ask:
@@ -406,6 +420,9 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [Vercel: Agents can now buy domains with the Vercel CLI](https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli) — Folo intake, October 9, 2026; non-interactive purchase handoff to a human
+- [Vercel CLI: Domains](https://vercel.com/docs/cli/domains) — discovery, availability, pricing, and purchase command reference
 
 - [Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering](https://arxiv.org/abs/2604.08224)
 - [Micropaper: Externalization in LLM Agents](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)

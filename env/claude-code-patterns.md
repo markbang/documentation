@@ -77,6 +77,29 @@ Key self-check dimensions:
 
 Moderate resource limits (search count, word count, time) force the model to make smarter prioritization decisions. Unlimited resources can produce unfocused, excessive output.
 
+## Manage context deliberately
+
+A large context window is capacity, not a reason to fill it. Providing complete task context means giving the requirements and relevant evidence, not appending every log or unrelated conversation.
+
+Claude Code clears older tool outputs and, when needed, summarizes the conversation as context fills. **Compaction is a lossy handoff, not verbatim retention of the whole conversation.** Earlier details can disappear; a summary is not proof that a test passed or a decision was approved.
+
+Use this workflow for long tasks:
+
+1. **Inspect before adding more.** Run `/context` to see what occupies the window. Filter logs and read relevant file ranges instead of repeatedly loading entire outputs.
+2. **Separate rules from task state.** Put persistent project instructions in `CLAUDE.md`. Keep the current goal, acceptance criteria, decisions, changed files, test commands and results, unresolved risks, and next step in a short task note. Link to evidence rather than copying large outputs.
+3. **Compact at a coherent boundary.** Save that note before switching from investigation to implementation, or from implementation to review. Use a focused command when you want control:
+
+   ```text
+   /compact Preserve the goal, acceptance criteria, decisions, changed files, test results, unresolved risks, and next step.
+   ```
+
+4. **Verify the handoff.** After compaction, have Claude read the task note and inspect the current diff. Check that it can restate the remaining work; recheck files or rerun tests when evidence is missing or stale.
+5. **Reset between unrelated tasks.** Save anything needed first, then use `/clear` rather than carrying irrelevant history into the next task.
+
+You can add a `Compact Instructions` section to `CLAUDE.md` to specify what summaries should preserve. Treat it as guidance, not a guarantee of lossless memory. See [Agent harness](/env/agent-harness) for the broader durable-state pattern.
+
+The Folo discussion that prompted this note suggested compacting around 300k–400k tokens. That is a practitioner's preference, **not a universal optimum**. Check the commands supported by your installed version and tune from observed quality, latency, and usage rather than copying a threshold or removing a context-limit setting blindly.
+
 ## Example prompts to try
 
 ### End-to-end deep research
@@ -250,6 +273,10 @@ Mastering Fable 5 isn't about learning more commands or parameters — it's abou
 A good prompt isn't one with the most detailed instructions — it's one where **constraints are just enough, and trust is set to maximum**.
 
 ## References
+
+- [宝玉: Context compaction thresholds](https://x.com/dotey/status/2108669008283402744) — Folo intake, October 9, 2026; practitioner advice, not an official default
+- [Claude Code: How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works#the-context-window) — context lifecycle and what compaction can lose
+- [Claude Code: Best practices](https://code.claude.com/docs/en/best-practices#manage-context-aggressively) — `/context`, focused compaction, persistent instructions, and task separation
 
 - [Thariq (Claude Code team): Tips for using Fable 5](https://x.com/dotey/status/2074019009226322078) — compiled by 宝玉 from Thariq's video
 - [Thariq at AI Engineer World's Fair: Fable 5 talk (unhobbling + blind spots)](https://x.com/dotey/status/2074255513353642090) — four themes from the full presentation

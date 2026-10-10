@@ -243,6 +243,20 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 
 更深层的 harness 原则：破坏性操作应该被当作权限边界，而不是能力。如果一个工具能 `rm -rf`，它就应该默认门控、记录日志、可回滚——并且 Agent 永远不应该被授予超出任务所需的权限范围。
 
+### 把候选查询与购买审批分开
+
+付费操作同样需要明确的权限边界。Vercel 域名 CLI 是一个具体例子：Agent 用 `vercel domains search` 找候选，用 `vercel domains check` 查可注册状态，用 `vercel domains price` 查价格。根据 Vercel 的公告，非交互式调用 `vercel domains buy` 会返回结构化错误和建议的后续命令，而不是直接成交；用户在交互式终端或控制台确认价格、自动续费选项和注册人信息。
+
+可复用的模式是**准备 → 请求审批 → 执行 → 验证**，而不是“把支付凭证交给 Agent，再叮嘱它小心”。设计自己的工具时：
+
+- **把限定范围的查询与花钱权限分开。** 允许比较选项，不等于授权买下其中一个。
+- **让审批包含具体条件。** 展示准确的资源、账号或团队、当前报价及币种、期限和续费选项；这些条件发生变化时，重新确认。
+- **遇到待审批响应就停下。** 把结构化结果交给用户，不要换接口重试、自动回答确认提示，也不要把“有交互式终端”当作用户同意的证据。
+- **在模型之外执行门控。** Skill 负责解释步骤，工具权限和交易服务负责强制执行。如果 Agent 能用同一凭证绕到其他购买入口，单靠 CLI 提示并不够。
+- **重试前先核对结果。** 记录用户决定和交易结果，但不要记录密钥或不必要的联系人信息。请求超时后先查提供方的订单状态，避免重复购买。
+
+以上是 harness 设计建议。Vercel 案例证明了“查询与确认分离”的做法，不代表每个支付接口都实现了全部控制措施。授予花钱权限前，应核对所安装 CLI 的实际行为。
+
 ## 快速排查清单
 
 当 Agent 表现异常时，按这个顺序问：
@@ -406,6 +420,9 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 如果只是一次性、低风险任务，一个提示词加几个工具就够了。只要任务开始变成长时间、带状态、可复用的工作流，就应该尽早设计 harness。
 
 ## 参考资料
+
+- [Vercel：Agent 通过 CLI 购买域名](https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli) — 2026-10-09 的 Folo 线索，非交互式购买交还用户确认
+- [Vercel CLI：Domains](https://vercel.com/docs/cli/domains) — 候选查询、可注册状态、报价与购买命令参考
 
 - [Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering](https://arxiv.org/abs/2604.08224)
 - [Micropaper：LLM Agent 的外化设计范式](https://unbug.github.io/one-minute-read-paper-externalization-in-llm-agents/)
