@@ -312,6 +312,8 @@ The key open question Anthropic raised: we can now see what's in the workspace, 
 
 ## LLM-as-judge in production
 
+For a step-by-step workflow from trace review to regression cases, human-calibrated judges, and deployment, see [AI product evals](/env/ai-evals).
+
 Using a language model to judge another model's output is common, but keeping that judge effective at scale is a different problem. Netflix runs judges over hundreds of thousands of show-level recommendation explanations per week, served to millions of members. Their key insight: treat the judge as a **lifecycle with four phases**, not an artifact you validate once.
 
 ### The four phases

@@ -60,6 +60,10 @@ Make docs easier for AI agents to discover and read.
 Design the runtime layer around AI agents.
 </Card>
 
+<Card title="AI product evals" icon="clipboard-check" href="/env/ai-evals">
+Turn real failures into regression tests and calibrated judges.
+</Card>
+
 <Card title="Claude Code patterns" icon="wand-magic-sparkles" href="/env/claude-code-patterns">
 Effective patterns for Claude Code Fable 5 and agent loops.
 </Card>

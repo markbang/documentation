@@ -60,6 +60,10 @@ Markdown 写作技巧与工具。
 设计 AI Agent 外层运行时。
 </Card>
 
+<Card title="AI 产品评测" icon="clipboard-check" href="/zh/env/ai-evals">
+从真实失败构建回归用例，校准裁判并部署评测。
+</Card>
+
 <Card title="Claude Code 高效使用" icon="wand-magic-sparkles" href="/zh/env/claude-code-patterns">
 Claude Code Fable 5 使用模式与 Agent 循环设计。
 </Card>
