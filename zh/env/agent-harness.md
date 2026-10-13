@@ -67,6 +67,29 @@ MCP 在 2026 年确实强了很多——现在是无状态协议、支持延迟�
 
 简单口诀：本地、熟悉、可组合的工具用 CLI；鉴权、审计、发现、没有 shell 的环境用 MCP。
 
+### 把聊天传输与 Agent 执行分开
+
+消息适配器应负责把平台事件转换为统一格式并投递回复，而不是变成 Agent 框架。BerriAI 的 `agentchat` 明确了这种分工：渠道适配器输出共享消息对象；核心层认领消息 ID、锁定会话、记录历史，再分发给应用 handler。发送者授权和 Agent 运行由 handler 负责。
+
+提交 `fb892cb` 的架构说明与源码提供了一个参考，也暴露出需要看清的边界：
+
+| 职责 | 放在哪一层 |
+| --- | --- |
+| 平台凭证、事件解码、接收确认、回复渲染 | 平台适配器或经过认证的接入层 |
+| 重复事件检测、单会话串行处理 | 共享状态／协调层 |
+| 用户授权、Agent 会话映射、工具权限 | 应用 handler 与执行策略 |
+| 持久任务、崩溃恢复、不确定投递结果的核对 | 应用负责的持久化基础设施 |
+
+不要混淆以下边界：
+
+- **事件验真不等于业务授权。** 对 Slack HTTP 请求，按官方规则对原始请求体和时间戳验签，使用常量时间比较；之后仍需独立判断发送者能让 Agent 做什么。Socket Mode 的接入机制不同，不要把 HTTP 签名规则无差别套到所有传输方式上。
+- **接收确认不等于处理完成。** Slack HTTP Events API 要求三秒内返回 2xx，并可能重试投递失败的事件。如果承诺持久处理，应先持久化／入队再确认接收，不要在确认路径里等待模型运行。入队失败时明确处理，不能返回成功后丢掉任务。
+- **去重不等于崩溃恢复。** 该版本 `agentchat` 默认的 `MemoryState` 把认领记录、锁和历史保存在单进程内；先认领，再运行 handler，`_receive` 中没有认领回滚。因此 handler 失败后，同一事件在该进程内再次送达，并不会自动重跑；进程重启又会丢失内存里的认领记录。生产恢复需要持久任务状态流转和明确的重试策略，不只是一个“见过的 ID 集合”。
+- **会话锁不等于全局有序。** 它只能串行化本地处理，不能保证平台时间戳顺序，也不能约束其他进程的 worker。会话 key 应包含平台、安装实例／租户、会话或线程范围；多 worker 用共享存储或分区协调，并明确群组线程是否在不同用户间共享上下文。
+- **Agent 完成不等于回复已送达。** 分别保存生成的回复和投递状态。发送超时后核对平台回执，或使用平台明确支持的去重机制；重跑整个 Agent 可能重复工具副作用，却没有解决回复丢失的问题。
+
+以上是生产设计要求，不代表这个 SDK 已实现持久队列或“恰好一次”执行。接入聊天平台前，应测试重复投递、未授权发送者、并发消息、接收后重启、handler 失败，以及发送超时但结果未知的情况。即使正常路径的演示只有几行代码，这些也应进入[产品评测与回归测试](/zh/env/ai-evals)。
+
 ### 把 Skill 的设计与执行分开
 
 Skill 是给 Agent 用的说明书，只需要说那些模型不知道的部分。执行则交给工具（脚本、CLI、App）去做，由模型直接调用。
@@ -422,6 +445,12 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 如果只是一次性、低风险任务，一个提示词加几个工具就够了。只要任务开始变成长时间、带状态、可复用的工作流，就应该尽早设计 harness。
 
 ## 参考资料
+
+- [meng shao：agentchat 传输层 SDK](https://x.com/shao__meng/status/2109819186893766721) — 2026-10-13 的 Folo 线索
+- [BerriAI agentchat：`fb892cb` 版本架构](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/docs/architecture.md) — 适配器、核心层与应用层的职责
+- [agentchat：分发实现](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/src/agentchat/app.py) 与[内存状态](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/src/agentchat/state/memory.py) — 认领顺序与进程内状态
+- [Slack：Events API](https://docs.slack.dev/apis/events-api/) — HTTP 接收确认时限与重试
+- [Slack：请求验签](https://docs.slack.dev/authentication/verifying-requests-from-slack/) — 原始请求体验签与重放防护
 
 - [Vercel：Agent 通过 CLI 购买域名](https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli) — 2026-10-09 的 Folo 线索，非交互式购买交还用户确认
 - [Vercel CLI：Domains](https://vercel.com/docs/cli/domains) — 候选查询、可注册状态、报价与购买命令参考

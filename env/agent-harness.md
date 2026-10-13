@@ -67,6 +67,29 @@ Prefer **MCP** when:
 
 A useful rule: CLI wins on known local tools and composition. MCP wins on auth, audit, discovery, and environments without a shell.
 
+### Separate chat transport from agent execution
+
+A messaging adapter should normalize platform events and deliver replies, not become the agent framework. BerriAI's `agentchat` makes this split explicit: channel adapters emit shared message objects; the core claims message IDs, locks the conversation, records history, and dispatches to an application handler. The handler owns sender authorization and the agent run.
+
+Its architecture and source at commit `fb892cb` provide a useful reference, with important limits:
+
+| Responsibility | Keep it in |
+| --- | --- |
+| Provider credentials, event decoding, acknowledgments, reply rendering | Platform adapter or authenticated ingress |
+| Duplicate-event detection and per-conversation serialization | Shared state/coordination layer |
+| User authorization, agent/session mapping, tool permissions | Application handler and execution policy |
+| Durable jobs, crash recovery, uncertain delivery reconciliation | Application-owned durable infrastructure |
+
+Do not confuse the boundaries:
+
+- **Authenticated event is not authorized work.** For Slack HTTP requests, verify the signature over the raw body and timestamp using the documented scheme and a constant-time comparison. Then separately decide what that sender may ask the agent to do. Socket Mode uses a different ingress mechanism; do not apply HTTP signing rules indiscriminately to every transport.
+- **Acknowledgment is not completion.** Slack's HTTP Events API requires a 2xx response within three seconds and can retry failed deliveries. If you promise durable processing, persist/enqueue accepted work before acknowledging it; keep model execution out of the acknowledgment path. Handle enqueue failure explicitly rather than returning success and dropping work.
+- **Deduplication is not crash recovery.** In this `agentchat` snapshot, the default `MemoryState` keeps claims, locks, and history in one process. A claim is recorded before the handler runs, with no claim rollback in `_receive`. A handler failure is therefore not automatically retried by delivering the same event again in that process; a restart, meanwhile, loses the in-memory claims. Production recovery needs a durable job lifecycle and explicit retry policy, not just a set of seen IDs.
+- **A conversation lock is not a global ordering guarantee.** It serializes local processing, not provider timestamps or workers in other processes. Scope conversation keys to the provider, installation/tenant, and conversation or thread. Coordinate workers through shared storage or partitioning, and explicitly decide whether a group thread shares context across users.
+- **Agent completion is not confirmed delivery.** Persist the generated reply and delivery state separately. If sending times out, reconcile the provider's receipt or use its documented deduplication mechanism; rerunning the whole agent may repeat tool side effects without fixing the missing reply.
+
+These are production design requirements, not claims that the SDK implements a durable queue or exactly-once execution. Test duplicate delivery, unauthorized senders, concurrent messages, restart after acceptance, handler failure, and send-timeout ambiguity before exposing an agent to a chat platform. Those cases belong in [product evals and regression tests](/env/ai-evals), even when the happy-path demo needs only a few lines.
+
 ### Separate skill design from execution
 
 A skill is a manual for the agent — it should only contain what the model does not already know. The execution is done by tools (scripts, CLI, apps) that the model calls directly.
@@ -422,6 +445,12 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [meng shao: agentchat transport SDK](https://x.com/shao__meng/status/2109819186893766721) — Folo intake, October 13, 2026
+- [BerriAI agentchat: Architecture at `fb892cb`](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/docs/architecture.md) — adapter/core/application ownership
+- [agentchat: Dispatch implementation](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/src/agentchat/app.py) and [in-memory state](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/src/agentchat/state/memory.py) — claim order and process-local state
+- [Slack: Events API](https://docs.slack.dev/apis/events-api/) — HTTP acknowledgment deadlines and retries
+- [Slack: Verifying requests](https://docs.slack.dev/authentication/verifying-requests-from-slack/) — raw-body signatures and replay protection
 
 - [Vercel: Agents can now buy domains with the Vercel CLI](https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli) — Folo intake, October 9, 2026; non-interactive purchase handoff to a human
 - [Vercel CLI: Domains](https://vercel.com/docs/cli/domains) — discovery, availability, pricing, and purchase command reference

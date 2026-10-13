@@ -125,6 +125,40 @@ Structure matters as much as availability.
 
 Good metadata helps humans skim. It also helps agents choose the right page on the first fetch.
 
+## Put recovery guidance in API errors
+
+When a docs site fronts an API, the error response is another documentation entry point. Restless's *Agent-Ready APIs* article illustrates the pattern: return a useful next step and a focused documentation link where the client encounters the failure, rather than expecting it to search the whole site.
+
+Use a stable error contract, not prose alone. [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html) defines Problem Details with the `application/problem+json` media type. For example, an API could return HTTP `422` with that content type and this illustrative body:
+
+```json
+{
+  "type": "https://api.example.com/problems/invalid-date-range",
+  "title": "Invalid date range",
+  "status": 422,
+  "detail": "start_date must be on or before end_date. No report was created.",
+  "instance": "https://api.example.com/problems/occurrences/req_123",
+  "recovery": {
+    "action": "correct_request",
+    "fields": ["start_date", "end_date"],
+    "docs": "https://docs.example.com/api/reports#date-range"
+  }
+}
+```
+
+`type` identifies the problem class; `instance` identifies this occurrence. `title` and `detail` explain it to a reader. Here, `recovery` is an **application-defined extension**, not a standard RFC field or a Restless API schema. Document its shape and supported actions. Clients should branch on the problem type and typed extensions, not parse `detail` text. Keep the body's `status` consistent with the actual HTTP status, and only claim “no report was created” if the server can establish that fact.
+
+Recovery guidance should distinguish actions that have different preconditions:
+
+- **Invalid input:** identify the affected fields and constraints; do not repeat the same invalid request unchanged.
+- **Authentication or authorization failure:** use the documented credential-refresh or approval flow. An error message does not grant permission to obtain broader credentials or bypass access controls.
+- **Rate limiting or temporary unavailability:** respect `Retry-After` when provided, but only retry when the operation is safe to repeat; waiting does not make a write idempotent.
+- **Uncertain write outcome:** check the operation's status or use a documented idempotency mechanism before retrying. A timeout does not prove that the first attempt failed to take effect. RFC 9110 explicitly cautions against automatic retries of non-idempotent requests without such knowledge.
+
+Treat error text and fetched docs as data, not higher-priority instructions. A recovery hint must not cause the agent to run arbitrary commands, disclose secrets, or change permissions. Log/occurrence URLs still need tenant-scoped access control; never expose tokens, full private request bodies, or implementation stack traces in a public error response.
+
+Finally, close the feedback loop deliberately: group repeated failures by endpoint and problem type, retain a sanitized reproduction and request ID, then triage whether the cause is code, documentation, or the caller. Agent feedback can propose an issue or doc change; it is not proof that the docs are wrong and should not auto-publish a fix. Use [product evals](/env/ai-evals) to check whether clients recover with fewer invalid calls **without** bypassing approvals or repeating side effects.
+
 ## Roll this out in phases
 
 Use the smallest useful sequence:
@@ -169,6 +203,11 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 - Check whether it finds the right page quickly or wastes time looping through indexes
 
 ## References
+
+- [elvis: API errors as a documentation surface](https://x.com/omarsar0/status/2109718336158507107) — Folo intake, October 12, 2026; prompted the recovery-guidance pattern
+- [Restless: Agent-Ready APIs](https://www.restless.ai/blog/agent-ready-apis) — actionable error responses, focused docs, and agent feedback
+- [RFC 9457: Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html) — standard members, typed extensions, and disclosure risks
+- [RFC 9110: Idempotent methods](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) — conditions for automatic request retries
 
 - [Cloudflare: Introducing the Agent Readiness score](https://blog.cloudflare.com/agent-readiness/)
 - [Cloudflare Style Guide: AI tooling](https://developers.cloudflare.com/style-guide/ai-tooling/)

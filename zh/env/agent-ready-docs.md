@@ -140,6 +140,40 @@ Sitemap: https://example.com/sitemap.xml
 对人来说，好的 metadata 能帮助扫读；
 对 Agent 来说，好的 metadata 能直接决定它第一跳抓哪一页。
 
+## 把恢复指引放进 API 错误响应
+
+如果文档站对应一个 API，错误响应本身也是文档入口。Restless 的 *Agent-Ready APIs* 文章展示了这种做法：在客户端遇到错误的位置，直接返回有用的下一步和具体文档链接，而不是指望它搜索整个站点。
+
+使用稳定的错误契约，不要只返回一段自然语言。[RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html) 定义了 Problem Details，媒体类型为 `application/problem+json`。例如，一个 API 可以返回 HTTP `422`、该内容类型及以下示意响应体：
+
+```json
+{
+  "type": "https://api.example.com/problems/invalid-date-range",
+  "title": "Invalid date range",
+  "status": 422,
+  "detail": "start_date 必须早于或等于 end_date。本次未创建报告。",
+  "instance": "https://api.example.com/problems/occurrences/req_123",
+  "recovery": {
+    "action": "correct_request",
+    "fields": ["start_date", "end_date"],
+    "docs": "https://docs.example.com/api/reports#date-range"
+  }
+}
+```
+
+`type` 标识问题类别，`instance` 标识这一次具体错误；`title` 和 `detail` 供人阅读。这里的 `recovery` 是**应用自行定义的扩展**，不是 RFC 标准字段，也不是 Restless 的 API schema。需要说明它的结构和支持的动作。客户端应依据问题类型和结构化扩展字段分支，而不是解析 `detail` 文本。响应体中的 `status` 应与实际 HTTP 状态一致；只有服务端能确认时，才写“本次未创建报告”。
+
+恢复指引要区分前提不同的动作：
+
+- **输入不合法：** 指明字段与约束，不要原样重发同一个错误请求。
+- **认证或授权失败：** 走文档规定的凭证刷新或审批流程。错误信息不等于授权，不能据此获取更高权限的凭证或绕过访问控制。
+- **限流或暂时不可用：** 提供了 `Retry-After` 时遵守等待时间，但仍要确认操作可以安全重试；等待不会让写操作自动具备幂等性。
+- **写入结果不确定：** 重试前先查询操作状态，或使用接口明确支持的幂等机制。超时不代表第一次操作没有生效。RFC 9110 明确提醒，不应在缺少这类依据时自动重试非幂等请求。
+
+把错误文本和取回的文档当作数据，而不是更高优先级的指令。恢复提示不能让 Agent 执行任意命令、泄露密钥或修改权限。日志／错误实例链接仍需租户级访问控制；不要在公开错误响应中暴露 token、完整私有请求体或内部堆栈。
+
+最后再建立反馈闭环：按接口和问题类型合并重复失败，保留脱敏复现与请求 ID，再判断原因在代码、文档还是调用方。Agent 反馈可以形成 issue 或文档修改建议，但不能证明文档一定错了，更不能自动发布修正。用[产品评测](/zh/env/ai-evals)检查客户端是否减少了无效调用，且**没有**绕过审批或重复产生副作用。
+
 ## 按阶段落地最省事
 
 推荐这样推进：
@@ -184,6 +218,11 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 - 看它是快速命中目标页，还是在目录页和低价值页面里来回打转
 
 ## 参考资料
+
+- [elvis：把 API 错误当作文档入口](https://x.com/omarsar0/status/2109718336158507107) — 2026-10-12 的 Folo 线索，触发本次恢复指引整理
+- [Restless：Agent-Ready APIs](https://www.restless.ai/blog/agent-ready-apis) — 可操作的错误响应、具体文档与 Agent 反馈
+- [RFC 9457：Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html) — 标准字段、结构化扩展与信息泄漏风险
+- [RFC 9110：幂等方法](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) — 自动重试请求的条件
 
 - [Cloudflare：Introducing the Agent Readiness score](https://blog.cloudflare.com/agent-readiness/)
 - [Cloudflare Style Guide：AI tooling](https://developers.cloudflare.com/style-guide/ai-tooling/)
