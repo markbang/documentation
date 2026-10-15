@@ -164,6 +164,76 @@ for epoch in range(10):
             print(f'Epoch: {epoch}, Loss: {loss.item()}')
 ```
 
+## Profile training before optimizing it
+
+A high GPU utilization number does not prove efficient training. NVIDIA's GPU utilization metric measures the fraction of the sampling interval during which a kernel is executing, not the fraction of peak arithmetic throughput achieved. Databricks reported roughly 6× shorter training time in one Qwen fine-tuning workload despite an initial 98% average utilization. Treat that as a case study, not an expected speedup for your model.
+
+### Capture a short CPU/GPU trace
+
+Use `torch.profiler` to inspect operator counts, CPU dispatch, device execution, and gaps between kernels. This small, standalone example needs an installed PyTorch build, uses CUDA when available, and otherwise records CPU activity. It downloads no model or data and writes one trace to the current directory.
+
+```python
+import torch
+from torch import nn
+from torch.profiler import ProfilerActivity, profile, record_function, schedule
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = nn.Sequential(nn.Linear(128, 256), nn.ReLU(), nn.Linear(256, 16)).to(device)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+x = torch.randn(64, 128, device=device)
+y = torch.randn(64, 16, device=device)
+activities = [ProfilerActivity.CPU]
+if device.type == "cuda":
+    activities.append(ProfilerActivity.CUDA)
+
+
+def save_trace(prof):
+    print(prof.key_averages().table(sort_by="self_cpu_time_total", row_limit=10))
+    prof.export_chrome_trace(f"training-trace-{prof.step_num}.json")
+
+
+with profile(
+    activities=activities,
+    schedule=schedule(wait=1, warmup=1, active=3, repeat=1),
+    on_trace_ready=save_trace,
+    record_shapes=True,
+) as prof:
+    for _ in range(5):
+        with record_function("train_step"):
+            optimizer.zero_grad(set_to_none=True)
+            loss = nn.functional.mse_loss(model(x), y)
+            loss.backward()
+            optimizer.step()
+        prof.step()
+```
+
+The schedule skips one step, warms up the profiler for one, then records three. Adjust it to reach a representative phase of a real workload; profiler warmup does not guarantee that compilation and model startup have finished. The toy inputs already reside on the device, so this example does not measure input loading or host-to-device copies. In a real loop, include those stages in labeled ranges too. Give each distributed rank a distinct trace filename.
+
+Tracing, shape recording, and optional memory profiling add overhead. Use traces to locate the bottleneck, then measure throughput separately with profiling disabled. CUDA execution is asynchronous: for wall-clock measurements, synchronize the relevant device before starting and before stopping the timer, rather than forcing synchronization inside every iteration. Do not add nested CPU totals and overlapping GPU durations and call the result wall-clock time.
+
+### Match the change to the bottleneck
+
+Modal's GPU glossary separates compute, memory movement, and overhead. Use these as hypotheses, then verify them in a timeline or device profiler:
+
+| Observation | Investigate | Candidate change |
+| --- | --- | --- |
+| Many tiny kernels, heavy CPU dispatch, gaps between launches | Launch/dispatch overhead | Supported fused kernels; evaluate `torch.compile` or CUDA Graphs for this workload |
+| Large kernels dominated by data movement | Memory bandwidth and unnecessary intermediate tensors | Reduce copies or intermediates; use supported fused implementations |
+| Large matrix operations dominate | Compute throughput, dtype, shapes, and hardware support | Tune batch/shape and precision while checking numerical quality |
+| Input waits, collective waits, or uneven progress across ranks | Data pipeline and distributed communication | Fix the measured wait rather than assuming the model kernel is slow |
+
+In Databricks' case, existing `flash-linear-attention` and `causal-conv1d` kernels removed many small operations; reduced padding provided a further gain. That does **not** mean these packages help every model, or that compilation and CUDA Graphs are generally unsuitable for distributed training.
+
+Before adopting a fast path, check model/backend support, GPU architecture, PyTorch/CUDA compatibility, and **both forward and backward** support. Pin the working environment and confirm the intended kernel actually appears in the trace: a successful package install does not prove it is being used. Recheck loss and gradients against the reference path within appropriate numerical tolerances.
+
+### Pack sequences without changing the task
+
+Sequence packing reduces padding, but simply concatenating examples can change training semantics. **Resetting `position_ids` alone is not a universal isolation mechanism.** The model and attention backend must consume compatible boundary metadata or masks; hybrid recurrent layers also need their state isolated at example boundaries.
+
+The pinned Databricks implementation uses reset `position_ids`, cumulative sequence lengths for full attention, segment IDs for gated-delta layers, and loss masking so shifted targets do not cross example boundaries. It also masks prompt tokens for response-only SFT. These are backend-specific inputs, not a recipe to copy unchanged into an arbitrary model.
+
+Test packed versus unpacked examples, including boundaries and truncated sequences, before measuring speed. Report non-padding tokens/s, padding fraction, effective batch size, sequence-length distribution, and validation quality. If packing changes tokens per optimizer step, account for the altered batch/optimization schedule. Compare equivalent training work, separating cold-start/compilation time from steady-state throughput.
+
 ## Data loading
 
 ### `Dataset` and `DataLoader`
@@ -265,6 +335,16 @@ for param in model.parameters():
 for param in model.fc2.parameters():
     param.requires_grad = True
 ```
+
+## References
+
+- [meng shao: Qwen training optimization case](https://x.com/shao__meng/status/2110573261302202853) — Folo intake, October 15, 2026
+- [Databricks: Reducing Qwen training time by 6x on AI Runtime](https://www.databricks.com/blog/reducing-qwen-training-time-6x-ai-runtime) — profiling, fused kernels, and padding reduction in one workload
+- [Databricks: Pinned training implementation](https://github.com/databricks-solutions/ai-runtime-cookbook/blob/b27c10cfda94263588214f8824e0dd8bb393371e/training/sft-qwen3.8-27b-fsdp2-multinode/train.py) — packing metadata and loss boundaries
+- [PyTorch: Profiler recipe](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) — activities, scheduled traces, and overhead
+- [NVIDIA: nvidia-smi documentation](https://docs.nvidia.com/deploy/nvidia-smi/index.html) — meaning of utilization metrics
+- [meng shao: Modal GPU glossary recommendation](https://x.com/shao__meng/status/2110581130806382765) — Folo intake, October 15, 2026; the glossary, not the financing news, is the reusable resource
+- [Modal: GPU glossary — performance bottleneck](https://modal.com/gpu-glossary/perf/performance-bottleneck) — compute, memory, and overhead
 
 ## Learning resources
 

@@ -76,6 +76,23 @@ A semantic grader can return a small structured result such as:
 
 This is an illustrative format, not a vendor API. Make it possible for a human to check the cited event. Missing evidence or a grader timeout is an evaluation error requiring review, not an automatic pass.
 
+## Check the path, conversation, and final state
+
+LangChain's agent-evals guide distinguishes several evaluation scopes. Pick the scope that can actually reveal the failure:
+
+| Scope | Example check | Evidence needed |
+| --- | --- | --- |
+| Single step | Did the tool receive the requested date? | Tool arguments and current request |
+| Final response | Does the confirmation match the booking result? | Final message and tool result |
+| Full conversation | Did the final booking reflect a date change made several turns earlier? | Ordered turns grouped by conversation/thread ID |
+| Environment state | Does exactly the intended test booking exist? | Records in an isolated test system after the run |
+
+A sequence of individually reasonable turns can still fail the overall task. Conversely, different tool sequences can achieve the same valid result. Assert necessary constraints—such as approval before a write or no duplicate booking—rather than requiring one exact trajectory unless that sequence is itself a requirement.
+
+For state-changing tasks, start every evaluation from a clean, known fixture and inspect the state afterward. A coding task can be scored with the repository's tests and the resulting diff instead of the agent's “done” message. Keep the trusted grading checks outside the agent's editable work products, and do not let success depend only on tests the agent wrote or changed itself.
+
+Containers are one way to isolate such tasks, not the definition of every benchmark and not a complete security boundary by themselves. Limit credentials, network access, mounts, and run time to what the test needs. Record the fixture version, tool configuration, grading result, and trace. Repeat stochastic cases when needed and report passes over attempts; record infrastructure errors and timeouts separately rather than silently excluding them or counting them as success.
+
 ## Calibrate the judge against people
 
 A second model's opinion is not ground truth. Build a human-labeled set containing both passes and failures for the same criterion, and resolve unclear definitions before tuning the judge.
@@ -119,6 +136,9 @@ CI pass rates are not estimates of user satisfaction: regression suites delibera
 - Assign an owner for failures and feed new production cases back into the suite.
 
 ## References
+
+- [meng shao: Common agent-eval questions](https://x.com/shao__meng/status/2110585984564039900) — Folo intake, October 15, 2026
+- [LangChain: The Most Common Questions About Agent Evals, Answered](https://www.langchain.com/blog/common-questions-about-agent-evals) — step, conversation, trajectory, and environment-state evaluation
 
 - [meng shao: Pocket Guide to AI Evals](https://x.com/shao__meng/status/2109445747133579381) — Folo intake, October 12, 2026; points to Hamel's original cards
 - [Hamel Husain: Evals flashcards](https://hamel.dev/notes/llm/evals/flashcards/) — especially error analysis, judge validation, trace-based cases, and deployment
