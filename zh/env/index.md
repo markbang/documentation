@@ -64,6 +64,10 @@ Markdown 写作技巧与工具。
 从真实失败构建回归用例，校准裁判并部署评测。
 </Card>
 
+<Card title="Agent 代码评审" icon="code-pull-request" href="/zh/env/ai-code-review">
+用分层检查、风险档位与评审器评测守住 AI 写的代码。
+</Card>
+
 <Card title="Claude Code 高效使用" icon="wand-magic-sparkles" href="/zh/env/claude-code-patterns">
 Claude Code Fable 5 使用模式与 Agent 循环设计。
 </Card>

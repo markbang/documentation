@@ -239,6 +239,8 @@ The reusable lesson: many long-horizon agent failures are **state-tracking failu
 
 ## Failure modes to watch
 
+For the review side of high-volume agent output — layered checks, verified findings, risk-tiered approvals, and reviewer evals — see [Code review when agents write the code](/env/ai-code-review).
+
 Anthropic's April 2026 Claude Code postmortem is a useful case study because the reported degradation came from product and harness changes, not the base API model.
 
 Common failure modes:

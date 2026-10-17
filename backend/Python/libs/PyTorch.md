@@ -168,6 +168,12 @@ for epoch in range(10):
 
 A high GPU utilization number does not prove efficient training. NVIDIA's GPU utilization metric measures the fraction of the sampling interval during which a kernel is executing, not the fraction of peak arithmetic throughput achieved. Databricks reported roughly 6× shorter training time in one Qwen fine-tuning workload despite an initial 98% average utilization. Treat that as a case study, not an expected speedup for your model.
 
+### Choose data by downstream results, not proxy metrics
+
+NVIDIA's open midtraining work on Nemotron reports a useful evaluation lesson: **base-model proxy metrics did not correlate reliably with post-training results.** Their recipe trains between pretraining and SFT at 256K context on hundreds of billions of tokens of natural software-engineering data — packed repositories, pull requests, commit histories, build logs — plus a small share of agentic traces. After an identical full SFT, SWE-bench Verified rose from 60.7 to 64.5 on the smaller model with 500B midtraining tokens, and 72.9 to 74.3 on the larger one with 280B. Those are the authors' published numbers on those benchmarks, which do not replace evaluation on your own traffic.
+
+The transferable method is how they chose data: score each candidate choice with **short fixed SFT runs** against the target task instead of trusting an upstream proxy. When changing pretraining or midtraining mixtures for an agentic workload, plan for a downstream evaluation budget — a proxy that looks better in isolation can lose after post-training.
+
 ### Capture a short CPU/GPU trace
 
 Use `torch.profiler` to inspect operator counts, CPU dispatch, device execution, and gaps between kernels. This small, standalone example needs an installed PyTorch build, uses CUDA when available, and otherwise records CPU activity. It downloads no model or data and writes one trace to the current directory.
@@ -338,6 +344,8 @@ for param in model.fc2.parameters():
 
 ## References
 
+- [elvis: NVIDIA midtraining recipe](https://x.com/omarsar0/status/2111484480875626979) — Folo intake, October 17, 2026
+- [NVIDIA: Priming Base Models for Agentic Post-Training (arXiv 2610.22019)](https://arxiv.org/abs/2610.22019) — midtraining stage and short-fixed-SFT evaluation protocol
 - [meng shao: Qwen training optimization case](https://x.com/shao__meng/status/2110573261302202853) — Folo intake, October 15, 2026
 - [Databricks: Reducing Qwen training time by 6x on AI Runtime](https://www.databricks.com/blog/reducing-qwen-training-time-6x-ai-runtime) — profiling, fused kernels, and padding reduction in one workload
 - [Databricks: Pinned training implementation](https://github.com/databricks-solutions/ai-runtime-cookbook/blob/b27c10cfda94263588214f8824e0dd8bb393371e/training/sft-qwen3.8-27b-fsdp2-multinode/train.py) — packing metadata and loss boundaries

@@ -168,6 +168,12 @@ for epoch in range(10):
 
 GPU 利用率高，不代表训练高效。NVIDIA 的 GPU 利用率衡量的是采样时间里有 kernel 执行的比例，不是达到峰值算力的比例。Databricks 的一个 Qwen 微调案例在基线平均利用率已达 98% 时，仍把训练时间缩短到约六分之一。这是特定任务的案例，不是你的模型也能提速六倍的承诺。
 
+### 用下游结果选数据，而不是代理指标
+
+NVIDIA 在 Nemotron 上公开的中训练工作，给出一条很实用的评测教训：**base model 的代理指标与后训练结果并不可靠相关。** 他们的配方放在预训练与 SFT 之间，以 256K 上下文训练数千亿 token 的自然软件工程数据——打包仓库、PR、提交历史、构建日志——再加少量 Agent 轨迹。在完全相同的完整 SFT 之后，较小的模型用 500B 中训练 token，SWE-bench Verified 从 60.7 升到 64.5；较大的模型用 280B，从 72.9 升到 74.3。这些是作者在那几个榜单上公布的数字，不能替代你自己流量上的评测。
+
+更可迁移的是他们的选数据方法：用**短的固定 SFT 跑分**对照目标任务评估每个候选选择，而不是相信上游代理指标。为 Agent 场景调整预训练或中训练配比时，要预留下游评测预算——单独看更好的代理，后训练之后可能反而更差。
+
 ### 采集短窗口 CPU／GPU trace
 
 用 `torch.profiler` 查看算子数量、CPU 调度、设备执行和 kernel 之间的空隙。下面是一个独立的小例子，需要已安装 PyTorch；有 CUDA 时记录 GPU，否则只记录 CPU。它不下载模型或数据，会在当前目录写出一份 trace。
@@ -338,6 +344,8 @@ for param in model.fc2.parameters():
 
 ## 参考资料
 
+- [elvis：NVIDIA 中训练配方](https://x.com/omarsar0/status/2111484480875626979) — 2026-10-17 的 Folo 线索
+- [NVIDIA：Priming Base Models for Agentic Post-Training（arXiv 2610.22019）](https://arxiv.org/abs/2610.22019) — 中训练阶段与短固定 SFT 的评测协议
 - [meng shao：Qwen 训练优化案例](https://x.com/shao__meng/status/2110573261302202853) — 2026-10-15 的 Folo 线索
 - [Databricks：Reducing Qwen training time by 6x on AI Runtime](https://www.databricks.com/blog/reducing-qwen-training-time-6x-ai-runtime) — 特定任务中的性能分析、融合内核与 padding 优化
 - [Databricks：固定版本训练实现](https://github.com/databricks-solutions/ai-runtime-cookbook/blob/b27c10cfda94263588214f8824e0dd8bb393371e/training/sft-qwen3.8-27b-fsdp2-multinode/train.py) — 打包元数据与 loss 边界

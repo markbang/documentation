@@ -64,6 +64,10 @@ Design the runtime layer around AI agents.
 Turn real failures into regression tests and calibrated judges.
 </Card>
 
+<Card title="AI code review" icon="code-pull-request" href="/env/ai-code-review">
+Review AI-written code with layers, risk tiers, and reviewer evals.
+</Card>
+
 <Card title="Claude Code patterns" icon="wand-magic-sparkles" href="/env/claude-code-patterns">
 Effective patterns for Claude Code Fable 5 and agent loops.
 </Card>
