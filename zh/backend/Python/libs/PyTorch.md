@@ -240,6 +240,34 @@ Databricks 案例中，已有的 `flash-linear-attention` 和 `causal-conv1d` �
 
 测速度之前，先对照打包与未打包样本，覆盖边界和截断情况。记录非 padding tokens/s、padding 占比、有效 batch size、序列长度分布与验证集质量。打包改变每次优化器更新的 token 数时，还要考虑 batch 与优化调度的变化。比较等量训练工作，并把冷启动／编译耗时与稳态吞吐分开报告。
 
+### 微调不是默认答案
+
+基于适配器的微调（LoRA 一类）能缩小可训练参数量和优化器内存，所以消费级 GPU 上常值得首先尝试。但它**不会**自动降低激活内存、推理时的 KV cache 压力或总训练时间——这些取决于序列长度、batch size，以及你仍更新多少参数。先测量，再判断它是否让任务真的装得下。
+
+## 为什么推理是带宽瓶颈
+
+训练时间只是一半。对交互式 Agent 来说，**解码延迟**往往更重要，而它受内存搬运限制，不是受浮点算力限制。
+
+自回归模型一次只生成一个 token。此时 batch 相对权重很小，每一步基本上都要通过内存带宽把全部参数和累积的 KV cache 读一遍。斯坦福 CS336 第 10 讲把这件事算清楚：先算**算术强度**（每搬运一字节做多少 FLOPs），再与加速器的峰值 FLOP/s 与内存带宽之比比较——强度低的操作，无论 ALU 多快都受带宽限制。
+
+这一条框架就能解释大多数推理优化：
+
+| 技术 | 层级 | 换来什么 |
+| --- | --- | --- |
+| GQA／MLA／跨层注意力 | 架构 | 更小的 KV cache；准确率代价要在自己的评测上验证 |
+| 量化、剪枝、蒸馏 | 架构 | 每个参数更少字节；有损，必须实测 |
+| 投机采样 | 算法 | 用额外算力验证草稿；实现正确时被接受的 token 是精确的 |
+| 连续批处理 | 系统 | 更高吞吐，更差的单请求延迟 |
+| 分页注意力 | 系统 | 减少 KV cache 碎片，从而支撑更大 batch |
+| 前缀共享、写时复制 | 系统 | 共享系统提示或并行采样时复用同一份 KV |
+
+延迟与吞吐的取舍带来两个实际结论：
+
+- **batch size 是策略选择，不是默认值。** 更大 batch 摊薄参数读取——tokens/s 更高，单个用户体验的延迟更差。按产品需求决定，不要按跑分决定。
+- **容量规划是一道内存算术。** 参数字节加最大并发序列的 KV cache 必须装得下，否则吞吐数字就是空话。prefill 阶段用更小 batch 抢首 token，生成阶段再用更大 batch。
+
+Percy Liang 结尾的判断是战略层面的：KV cache 本身就是 Transformer 结构导致的后果。**从第一天就为推理设计的架构**——状态空间模型、线性注意力、非自回归生成——可能是剩余空间最大的地方，而不是继续微调现有配方。
+
 ## 数据加载
 
 ### Dataset 和 DataLoader
@@ -344,6 +372,10 @@ for param in model.fc2.parameters():
 
 ## 参考资料
 
+- [meng shao：CS336 第 10 讲「Inference」](https://x.com/shao__meng/status/2111804476671795223) — 2026-10-18 的 Folo 线索
+- [Stanford CS336：Language Modeling from Scratch](https://cs336.stanford.edu/) — 课程主页，第 10 讲讨论推理性能
+- [CS336 第 10 讲（可执行讲义）](https://github.com/stanford-cs336/lectures/blob/main/lecture_10.py) — 算术强度、KV cache、批处理与 PagedAttention
+- [PagedAttention（arXiv 2309.06180）](https://arxiv.org/pdf/2309.06180.pdf) — vLLM 的 KV cache 分页与前缀共享
 - [elvis：NVIDIA 中训练配方](https://x.com/omarsar0/status/2111484480875626979) — 2026-10-17 的 Folo 线索
 - [NVIDIA：Priming Base Models for Agentic Post-Training（arXiv 2610.22019）](https://arxiv.org/abs/2610.22019) — 中训练阶段与短固定 SFT 的评测协议
 - [meng shao：Qwen 训练优化案例](https://x.com/shao__meng/status/2110573261302202853) — 2026-10-15 的 Folo 线索

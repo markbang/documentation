@@ -240,6 +240,34 @@ The pinned Databricks implementation uses reset `position_ids`, cumulative seque
 
 Test packed versus unpacked examples, including boundaries and truncated sequences, before measuring speed. Report non-padding tokens/s, padding fraction, effective batch size, sequence-length distribution, and validation quality. If packing changes tokens per optimizer step, account for the altered batch/optimization schedule. Compare equivalent training work, separating cold-start/compilation time from steady-state throughput.
 
+### Fine-tuning is not the default
+
+Adapter-based fine-tuning (LoRA and similar) shrinks the trainable parameter count and optimizer memory, which is why it is often the right first attempt on a consumer GPU. It does **not** automatically reduce activation memory, KV-cache pressure at inference, or total training time — those depend on sequence length, batch size, and how much of the model you still update. Measure before assuming it makes a workload fit.
+
+## Why inference is bandwidth-bound
+
+Training time is only half of the performance story. For an interactive agent, **decode latency** often matters more, and it is governed by memory traffic rather than floating-point throughput.
+
+An autoregressive model generates one token at a time. At that point the batch is tiny relative to the weights, so each step must read essentially all parameters — and the accumulated KV cache — through memory bandwidth. Stanford CS336's lecture 10 makes the argument arithmetic: compute **arithmetic intensity** (FLOPs per byte moved), compare it with the accelerator's ratio of peak FLOP/s to memory bandwidth, and note that a low-intensity operation is memory-bound regardless of how fast the ALUs are.
+
+That single framing explains most inference optimizations:
+
+| Technique | Layer | What it trades |
+| --- | --- | --- |
+| GQA / MLA / cross-layer attention | Architecture | Smaller KV cache; verify the accuracy cost on your evals |
+| Quantization, pruning, distillation | Architecture | Fewer bytes per parameter; lossy, needs measurement |
+| Speculative sampling | Algorithm | Extra compute to verify drafts, accepted tokens are exact if implemented correctly |
+| Continuous batching | System | Higher throughput, worse per-request latency |
+| Paged attention | System | Less KV-cache fragmentation, enabling larger batches |
+| Prefix sharing, copy-on-write | System | One KV copy for shared system prompts or parallel samples |
+
+Two practical consequences follow from the latency/throughput trade-off:
+
+- **Batch size is a policy choice, not a default.** Larger batches amortize parameter reads — better tokens/s, worse latency for an individual user. Choose from your product's requirement, not the benchmark.
+- **Capacity planning is a memory calculation.** Parameter bytes plus KV cache for the maximum concurrent sequences must fit, or the throughput numbers are fiction. Use smaller batches during prefill for faster first token, and reserve larger batches for generation.
+
+Percy Liang's closing observation is the strategic point: the KV cache is a structural consequence of the Transformer's design. An architecture built for inference from the start — state-space models, linear attention, non-autoregressive generation — is where the largest remaining gains may be, not in further tuning of the current recipe.
+
 ## Data loading
 
 ### `Dataset` and `DataLoader`
@@ -344,6 +372,10 @@ for param in model.fc2.parameters():
 
 ## References
 
+- [meng shao: CS336 lecture 10, Inference](https://x.com/shao__meng/status/2111804476671795223) — Folo intake, October 18, 2026
+- [Stanford CS336: Language Modeling from Scratch](https://cs336.stanford.edu/) — course site; lecture 10 covers inference performance
+- [CS336 lecture 10 (executable lecture)](https://github.com/stanford-cs336/lectures/blob/main/lecture_10.py) — arithmetic intensity, KV cache, batching, PagedAttention
+- [PagedAttention (arXiv 2309.06180)](https://arxiv.org/pdf/2309.06180.pdf) — vLLM's KV-cache paging and prefix sharing
 - [elvis: NVIDIA midtraining recipe](https://x.com/omarsar0/status/2111484480875626979) — Folo intake, October 17, 2026
 - [NVIDIA: Priming Base Models for Agentic Post-Training (arXiv 2610.22019)](https://arxiv.org/abs/2610.22019) — midtraining stage and short-fixed-SFT evaluation protocol
 - [meng shao: Qwen training optimization case](https://x.com/shao__meng/status/2110573261302202853) — Folo intake, October 15, 2026

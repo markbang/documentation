@@ -363,6 +363,30 @@ The deeper issue: harness engineering is where leading AI companies are now focu
 
 The cleanest controlled experiment yet: **ReFigBench** (2026) ran GPT-5.5 inside both Claude Code and Codex on the same 1,000 tasks. With a specialized PowerPoint workflow, the model improved inside one harness and got **worse** inside the other — with an identical prompt. The harness alone flipped the direction of the delta. Perception remained the bottleneck either way. Treat any vendor chart comparing two models as a comparison of two model-plus-harness systems; the model is only half the system under test.
 
+## Optimize the harness without touching the weights
+
+Google Research's **Harness²** is a useful reference design for a harder question: can an agent improve its own harness on tasks it has never seen, where no ground-truth checker exists? The repository is Apache-2.0 and describes a two-level recursion with model weights fixed:
+
+- **Task-level recursion.** A contrastive **Propose–Probe–Compose** loop. The agent runs the current harness once as a reference, proposes two candidate harness edits (one targeting general agentic weaknesses such as planning or context management, one targeting domain knowledge), probes both on the same task under equal conditions, then composes the successor from the observed behavioral differences.
+- **Harnessing-level recursion.** After each task, a reflector writes adopted harnesses and evidence-supported lessons into a persistent improvement library that guides the next task. Execution still starts from a common base harness; only the improvement process inherits experience.
+
+The design detail worth stealing is the **evidence rule**: each composed change must cite a specific observed contrast, not a hoped-for score gain. Without a verifier, a plausible-looking edit and a harmful one are indistinguishable from the agent's own reasoning — so behavior on the same task becomes the test.
+
+The project reports single-step gains on three benchmarks across four model–harness configurations, including up to 11.5 points on WorkBuddy-Bench. Those are the authors' results on their benchmarks, from a research codebase. They do not establish that self-editing harnesses work in your environment.
+
+### Treat harness edits as untrusted code
+
+A system that edits its own prompts, tools, skills, and middleware can quietly change what the agent is allowed to do. The recursion that makes the approach interesting is also the part that needs containment:
+
+- **Gate the write path.** Harness files are code. Require a diff, a reviewer, and a merged commit — not an in-place mutation at runtime.
+- **Keep the base harness pinned and reproducible.** Know exactly which version produced a result, and be able to return to it in one step.
+- **Forbid edits to approval, permission, and logging logic.** A self-improving loop must not be able to widen its own authority or reduce its own audit trail.
+- **Score every adoption.** Re-run a fixed regression set plus the incident cases before and after; accept a lesson only when the comparison supports it. See [AI product evals](/env/ai-evals) and [review convergence](/env/ai-code-review).
+- **Watch for silent degradation.** An edit that improves one benchmark while quietly breaking another failure class is worse than no edit, because the harness now looks improved.
+- **Sandbox and budget it.** Self-improvement multiplies token spend; cap runs and keep the workspace isolated like any other destructive-capable tool.
+
+None of this argues against recursive harnessing — it argues for applying the same permission and evaluation discipline you would to any agent-authored change. The pattern to keep is structural: **separate the artifact from the process that improves it, and require evidence for every promotion.**
+
 ## Multi-model orchestration
 
 A major trend in harness design is running several models together instead of betting on one. Two recent examples show where this is going.
@@ -447,6 +471,10 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [meng shao: Google Harness² recursive harness optimization](https://x.com/shao__meng/status/2111730826308452600) — Folo intake, October 18, 2026
+- [google-research/harness2](https://github.com/google-research/harness2) — Apache-2.0 reference implementation and reported results
+- [Harness² paper (arXiv 2610.14224)](https://arxiv.org/pdf/2610.14224) — Propose–Probe–Compose and the two-level recursion
 
 - [meng shao: agentchat transport SDK](https://x.com/shao__meng/status/2109819186893766721) — Folo intake, October 13, 2026
 - [BerriAI agentchat: Architecture at `fb892cb`](https://github.com/BerriAI/agentchat/blob/fb892cb8945af17b2e6dbe7aa1563daeb15cfcad/docs/architecture.md) — adapter/core/application ownership
