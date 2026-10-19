@@ -439,6 +439,38 @@ The division of labor: **vision is for exploration, code is for execution.** Exp
 
 When the GUI path cannot be frozen into an API, split **decision** from **perception and action**. Cua's jev-use does this for computer use: the driver observes (screenshot, accessibility tree, DOM) and executes; a System One model such as Jev only picks one candidate action by ID. The client generates the candidate list deterministically, so the model chooses instead of generating. Open-ended generation becomes a bounded choice — faster, cheaper, and easier to verify. Use a vision parser only when the accessibility tree or DOM is not enough.
 
+## Computer use: give the agent a program, not a click
+
+GUI-only agents pay for perception on every step: screenshot, interpret, click, screenshot again. Alibaba's Tongyi MAI-UI **OpenGCUA** tech report argues the unit of action should be a **program** instead. Their generalist computer-use agent (GCUA) definition is a system where the model decides three things itself:
+
+- **How to observe** — call a screenshot when needed, not unconditionally each step.
+- **How to act** — emit Python that combines GUI operations, app APIs, and shell commands, with loops and conditionals.
+- **How to organize work** — maintain its own todo list and declare intent per step, instead of inheriting fixed harness state logic.
+
+They call the second half of this **harness-to-model decision transfer**: observation and task-state choices move from hard-coded harness rules to the model.
+
+### Why code as the action space works
+
+Intermediate results inside a loop decide the next code path, so a fifty-step batch never has to return to the model fifty times. It also reuses a capability models already have — writing programs — instead of demanding pixel-accurate clicking.
+
+On OSWorld-v2 with eight frontier models, the report claims a mean partial score rise from 45.3 to 64.9 (+19.6) and 53% fewer steps per task versus batched GUI-only execution. Two secondary findings are more interesting than the headline:
+
+- **Weaker models gain more.** The strongest-to-weakest gap narrowed from 39.1 to 18.0 points, consistent with coding ability substituting for GUI precision.
+- **Code execution beats tool alternation.** With the same GUI and shell access, writing a program added 6.1 points and cut steps by 14.8% over a GUI+CLI agent.
+
+These are the authors' results on a benchmark. Their own real-device check is the caution: on four macOS tasks with the harness fixed, one model used **19.4×** the reasoning tokens of another and still finished fewer tasks. Benchmark scores hid an efficiency gap that would dominate real usage cost.
+
+### Contain the code path
+
+Making the model's output executable turns every observation into a potential command. In the released harness this shows up as explicit limits — `bash()` can be disabled for a run, GUI calls can be refused with `PERMISSION_DENIED`, and the operator gets a stop control. Keep that posture in your own build:
+
+- **Sandbox the executor.** Filesystem, network, and credentials should be scoped to the task, with a timeout and output cap.
+- **Gate destructive actions outside the model.** Deleting files, sending mail, and paying money need approval regardless of how the code was written. See [purchase approval boundaries](/env/agent-harness#separate-discovery-from-purchase-approval).
+- **Handle session loss honestly.** If the interpreter resets mid-task, in-memory state is gone but the world may already have changed — the released harness explicitly tells the agent to re-observe and **not** blindly retry UI actions. Copy that: “state lost” and “nothing happened” are different facts.
+- **Log the program, not just the clicks.** A code action is reviewable evidence; a screenshot sequence is not.
+
+Treat this as an early research preview: the harness and cross-device SDK are labelled preliminary, and its numbers have not been reproduced externally.
+
 ## Team-level harness: shared knowledge
 
 Individual best practices evaporate with each session unless they are captured as team assets. Tencent's TeamAI CLI (open-sourced September 2026, used internally for six months) turns team AI knowledge into a git repository that every agent works from, and solves three problems:
@@ -471,6 +503,10 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [meng shao: OpenGCUA generalist computer-use stack](https://x.com/shao__meng/status/2111999471588679916) — Folo intake, October 19, 2026
+- [Tongyi-MAI/OpenGCUA](https://github.com/Tongyi-MAI/OpenGCUA) — Apache-2.0 harness, SDK, and evaluation trajectories
+- [OpenGCUA tech report (arXiv 2610.22200)](https://arxiv.org/abs/2610.22200) — code execution, harness-to-model decision transfer, OSWorld-v2 results
 
 - [meng shao: Google Harness² recursive harness optimization](https://x.com/shao__meng/status/2111730826308452600) — Folo intake, October 18, 2026
 - [google-research/harness2](https://github.com/google-research/harness2) — Apache-2.0 reference implementation and reported results
