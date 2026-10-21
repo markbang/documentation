@@ -114,6 +114,22 @@ If 95 of 100 cases pass, a judge that always says “pass” has 95% accuracy bu
 
 Recheck agreement after changing the judge model, rubric, or application distribution. Review false alarms and missed failures rather than merely optimizing the aggregate score. Keep the application model/prompt and the grader configuration versioned so score changes remain interpretable.
 
+## Do not inherit a decision model's default threshold
+
+Decision models — TypeSafe's Jev, Perplexity's Decider, Liquid's d1, Cloudflare's Clef, OpenAI's Decisions API — are an appealing cheap alternative to an LLM judge. They return a **probability** that a trace contains a failure, and their APIs turn that into a verdict using a default threshold of `0.5`. Hamel Husain's experiment with 98 human-labeled production traces shows why that default deserves skepticism.
+
+Consider a model that scores every failing trace `0.40` and every passing trace `0.10`. It is a perfect classifier at a `0.30` threshold — and at `0.50` it catches nothing. Real score distributions overlap, so threshold choice is a precision/recall trade-off, and the right point follows from consequences: an alerting system that must avoid false alarms is not a cancer screening.
+
+A working procedure, which costs nothing extra once scores are saved:
+
+1. **Set minimums first.** Require floor precision and recall for the task (Hamel's example: both ≥ 80%). Any model that cannot meet them is out, regardless of its average score.
+2. **Tune on training folds, measure on held-out folds.** Use stratified cross-validation with identical splits across models, and pick the threshold on the training portion only. Select an objective that matches the business — F-beta if precision and recall are not equally costly.
+3. **Compare cost and performance.** On this small sample the cheapest candidate ran about 0.82 cents per 100 evaluations at F1 0.79; the strongest ran 3.72 cents at F1 0.87. Three points is an illustration, not a benchmark.
+4. **Check calibration before treating a score as confidence.** A `0.8` should mean roughly 80% of similar traces fail. Some models were badly miscalibrated — one batch averaged 8% predicted probability while 60% actually failed. Platt scaling fixed several models; for one it made the Brier score slightly worse (0.159 → 0.164), and fitting directly on probabilities instead gave 0.154. Method choice matters, so measure after calibrating.
+5. **Re-tune after any prompt change.** Threshold and calibration are properties of the prompt–model pair, not the model alone.
+
+Two scope notes. The experiment deliberately used a broad “any substantive issue” task to separate models; for production, keep **one judge per failure mode**, which usually compresses the gaps between models. And a cheap prompt improvement — replacing a vague instruction with an explicit list of failure types — moved F1 from 0.78 to 0.80, which is worth trying before reaching for calibration machinery.
+
 ## Separate regression tests, monitoring, and guardrails
 
 | Placement | Data and timing | Purpose | Response to failure |
@@ -136,6 +152,9 @@ CI pass rates are not estimates of user satisfaction: regression suites delibera
 - Assign an owner for failures and feed new production cases back into the suite.
 
 ## References
+
+- [meng shao: using decision models for evals](https://x.com/shao__meng/status/2112720094287786298) — Folo intake, October 21, 2026
+- [Hamel Husain: How To Use Decision Models For Evals](https://hamel.dev/blog/posts/decision-model-evals/) — threshold tuning, cost/performance, calibration, prompt scope
 
 - [meng shao: Common agent-eval questions](https://x.com/shao__meng/status/2110585984564039900) — Folo intake, October 15, 2026
 - [LangChain: The Most Common Questions About Agent Evals, Answered](https://www.langchain.com/blog/common-questions-about-agent-evals) — step, conversation, trajectory, and environment-state evaluation

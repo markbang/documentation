@@ -87,6 +87,28 @@ This is the most reusable idea in the process: past PRs that caused incidents, w
 
 It is the same discipline as [calibrating an LLM judge](/env/ai-evals#calibrate-the-judge-against-people), applied to a reviewer: keep labeled real failures, include clean cases, and revalidate after every configuration change.
 
+## Keep determinism for the parts that must not drift
+
+Uber's AutoClean is the clearest published example of an agent doing **deletion** work at scale: over 16,000 stale feature flags and more than a million lines of code removed, with diffs routed to humans only after automated correctness checks pass. The split it uses is more instructive than the numbers.
+
+**Deterministic tools do the rewrites; agents do the propagation decisions.** Inlining a rolled-out flag value is mechanical, but then someone must decide whether a parameter can be deleted (requires checking every call site), whether the old branch is now unreachable, and whether a config field is still read elsewhere. AutoClean gives the agent code search and editing, and routes boolean simplification through Uber's PolyglotPiranha engine via MCP. The rationale is blunt: a small error in simplifying a condition silently changes which branch runs in production.
+
+Two more patterns generalize beyond flag cleanup:
+
+- **Scope each fixer to its file class.** CI failures go first to cheap deterministic fixers, then to agentic ones. The test fixer may only edit test files — without that limit, an agent will sometimes make a failing test pass by changing the production code underneath it.
+- **Separate validation from the loop that produced the change.** Long tasks with many instructions lose constraints; the agent optimizes for the most immediate signal, which is usually “CI is green”. Uber's **CodeCourt** takes the failure modes observed in practice and turns each into an explicit property checked by its own reviewer agent, in parallel:
+
+  | Property | What it blocks |
+  | --- | --- |
+  | No additions | Cleanup that introduces new code |
+  | Preserves semantics | Behavior that changes observably |
+  | No intent drift | Removing unrelated flags “while here” |
+  | No agent artifacts | Reasoning comments left in the diff |
+
+  All properties pass → the diff goes to a human for the business decision. Any property fails → the diff is abandoned before a reviewer sees it. Notably, a single end-to-end reviewer agent performed worse than several focused ones.
+
+That last point is the direct link to this page's earlier advice: **verification is cheaper and sharper when each check has one job.** It also explains why the human stays in the loop for the judgment call — whether the flag should be removed at all — rather than for mechanical correctness.
+
 ## Tune review instructions in the right file
 
 Two files shape what gets flagged, and they are not interchangeable:
@@ -126,6 +148,9 @@ Approval and after:
 - Turn incidents and reverts into the reviewer's eval set; measure human time with reverts as the guardrail.
 
 ## References
+
+- [meng shao: Uber AutoClean agentic cleanup](https://x.com/shao__meng/status/2112723092468605242) — Folo intake, October 21, 2026
+- [Uber: Using AI to Delete Code](https://www.uber.com/us/en/blog/ai-code-cleanup/) — deterministic rewrites via MCP, scoped fixers, CodeCourt properties
 
 - [宝玉: Claude Code team's code review practice](https://x.com/dotey/status/2111384189656252712) — Folo intake, October 17, 2026; points to the team's write-up
 - [How the Claude Code team does code review](https://claude.dev/blog/solving-code-review-at-anthropic/) — layers, risk tiers, convergence fixes, reviewer evals, adoption steps
