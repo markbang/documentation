@@ -159,15 +159,43 @@ Treat error text and fetched docs as data, not higher-priority instructions. A r
 
 Finally, close the feedback loop deliberately: group repeated failures by endpoint and problem type, retain a sanitized reproduction and request ID, then triage whether the cause is code, documentation, or the caller. Agent feedback can propose an issue or doc change; it is not proof that the docs are wrong and should not auto-publish a fix. Use [product evals](/env/ai-evals) to check whether clients recover with fewer invalid calls **without** bypassing approvals or repeating side effects.
 
+## A controlled test of what agents actually need
+
+The [AgentReady](https://agentready.org) standard is worth reading because its requirements come from an experiment rather than a checklist. One documentation site was served under 19 configurations, including `llms.txt`, JSON-LD, `sitemap.xml`, and Markdown mirrors, and probed on five topics by a plain-fetch client and a JavaScript-capable client — 190 probes.
+
+Only two kinds of change stopped a client from retrieving the answer:
+
+- **The answer existed only in JavaScript** — plain fetch failed on every topic, while the JS client succeeded.
+- **Agents were blocked**, for example a `403` to agent user agents — both clients failed.
+
+The other sixteen configurations, including `llms.txt`, changed nothing. Agents asked for Markdown on roughly 65% of fetches, but Markdown mirrors and content negotiation never decided success.
+
+That does not make `llms.txt` useless — it changes where agents go, not whether they can read you. Where agents went, across traced runs: docs pages 83%, homepage 69%, `/.well-known/*` 23%, `openapi.json` 21%, `sitemap.xml` 4%. And when agents did open those machine-oriented files, they usually arrived by **following a link**: `openapi.json` 97%, `/.well-known/*` 93%, `llms.txt` 86%.
+
+### What to fix first
+
+Reorder your effort accordingly:
+
+1. **Be reachable.** Allow agents in `robots.txt` and bot protection, written as rules rather than an allowlist of named crawlers.
+2. **Put the answer in the initial HTML.** Client-side rendering with no server-rendered content is the one architectural choice in the study that broke retrieval outright.
+3. **Return real HTTP status codes** so clients can distinguish “not found” from “rendered empty”.
+4. **Link the machine files from human pages.** An `llms.txt` nobody links to is close to unread: the study's traffic went to the pages humans visit.
+5. **Treat Markdown mirrors, JSON-LD, and catalog files as conveniences.** Cheap to add, but they do not compensate for a page an agent cannot fetch.
+
+If an agent has to *finish* a task rather than read a page, the standard raises the bar: provide an MCP server or CLI, and authentication an agent can actually complete.
+
+The same study also quantifies the cost of being unreadable. Across 1,056 business sites, when an agent could not read the site it answered from search results and third-party pages instead, and those answers were **3.7× as likely** (25% vs 7%) to contain none of the facts asked for. Agent-ready businesses were clearly recommended about twice as often (20% vs 11%).
+
 ## Roll this out in phases
 
 Use the smallest useful sequence:
 
 1. Fix `robots.txt`, `sitemap.xml`, titles, and descriptions.
-2. Add `llms.txt`.
-3. Add Markdown delivery via `Accept: text/markdown` and/or `/index.md`.
-4. Add `Content-Signal` if you need explicit AI usage preferences.
-5. Add API or MCP discovery only if your site actually exposes capabilities.
+2. Make sure each page's answer is in the initial HTML with a real status code.
+3. Add `llms.txt`, and link it from a human-facing page.
+4. Add Markdown delivery via `Accept: text/markdown` and/or `/index.md`.
+5. Add `Content-Signal` if you need explicit AI usage preferences.
+6. Add API or MCP discovery only if your site actually exposes capabilities.
 
 ## What agents actually read
 
@@ -204,6 +232,9 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 
 ## References
 
+- [meng shao: AgentReady standard](https://x.com/shao__meng/status/2113084778673287480) — Folo intake, October 22, 2026
+- [AgentReady launch post](https://ora.ai/blog/agentready-launch) — the 19-configuration experiment, where agents go, link discovery, and unreadable-site answers
+- [AgentReady standard](https://agentready.org) — MUST/SHOULD/MAY requirements by find, read, act
 - [elvis: API errors as a documentation surface](https://x.com/omarsar0/status/2109718336158507107) — Folo intake, October 12, 2026; prompted the recovery-guidance pattern
 - [Restless: Agent-Ready APIs](https://www.restless.ai/blog/agent-ready-apis) — actionable error responses, focused docs, and agent feedback
 - [RFC 9457: Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html) — standard members, typed extensions, and disclosure risks

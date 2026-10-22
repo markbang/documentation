@@ -282,6 +282,25 @@ The reusable pattern is **prepare → request approval → execute → verify**,
 
 These are harness-design recommendations; the Vercel example demonstrates the discovery/confirmation split, not a guarantee that every payment interface enforces all of these controls. Check the installed CLI's behavior before granting it spending access.
 
+## Put the control plane outside the agent's reach
+
+Long-running agents download code, build tools, and request more permissions as they go, so risk compounds along a path nobody fully specified in advance. NVIDIA's framing for its OpenShell reference architecture is worth adopting as a design rule regardless of vendor: **an agent cannot govern itself.** Authorization, network egress, credential issuance, and audit belong in infrastructure the agent cannot edit.
+
+OpenShell splits the runtime into four parts, and the split itself is the lesson:
+
+| Component | Responsibility |
+| --- | --- |
+| **Gateway** | Control plane: sandbox lifecycle and policy |
+| **Supervisor** | Runs outside the sandbox; checks outbound requests against policy and brokers credentials |
+| **Sandbox** | Isolates the workload; restricts filesystem and process access |
+| **Policy prover** | Formal verification that a policy's permissions stay inside an organization-defined ceiling |
+
+The **policy prover** is the unusual piece and the one most worth copying conceptually. Permission reviews drift because nobody re-derives the whole authorization surface after each change. Asking a prover whether a policy can exceed a stated ceiling turns “we think this is fine” into a checkable property — the same shift from example-based to property-based verification that makes [formal methods valuable to agents](/env/ai-evals).
+
+Two extension points matter operationally: middleware that inspects, blocks, or rewrites network payloads, and control-plane interceptors that connect existing identity, authorization, data-protection, and audit systems. Both keep policy decisions outside the model while reusing the systems you already trust.
+
+NVIDIA also describes an optional hardware layer — a DPU outside the agent's trust domain, monitoring requests, file activity, and selected host memory, with enforcement in silicon so a violating agent can be quarantined in milliseconds. For most teams the software boundaries matter first; the hardware tier is for deployments where the agent must not be trusted even with kernel-level compromise. Note that the accompanying performance figures (faster sandbox startup, more concurrent environments) are vendor and partner benchmarks, not independent measurements.
+
 ## A quick diagnostic checklist
 
 When an agent behaves oddly, ask:
@@ -503,6 +522,9 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [meng shao: NVIDIA OpenShell reference architecture](https://x.com/shao__meng/status/2113086907047703000) — Folo intake, October 22, 2026
+- [NVIDIA: How the OpenShell reference architecture secures and governs agent workloads](https://developer.nvidia.com/blog/how-nvidia-openshell-reference-architecture-secures-and-governs-ai-agent-workloads-at-scale/) — gateway, supervisor, sandbox, policy prover, and the optional hardware trust domain
 
 - [meng shao: OpenGCUA generalist computer-use stack](https://x.com/shao__meng/status/2111999471588679916) — Folo intake, October 19, 2026
 - [Tongyi-MAI/OpenGCUA](https://github.com/Tongyi-MAI/OpenGCUA) — Apache-2.0 harness, SDK, and evaluation trajectories

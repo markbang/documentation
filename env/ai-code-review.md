@@ -81,6 +81,27 @@ The Claude Code team tracks human approvals per PR (median and 95th percentile),
 
 They also measure reviewer **noise** by observing what authors do with each comment: fixed it, said it was wrong, said the behavior was intentional, or ignored it. They additionally run the reviewer against known-clean PRs to count harmful false alarms. Recall alone is easy to inflate; the response distribution is the honest signal.
 
+## Watch what the reviewer costs, and why
+
+Cloudflare's AI reviewer is a useful cost postmortem: from March to August the average review went from $1.22 to $2.32 with no architectural change, then fell to **$0.77 (−68%)** with a median time of 1m 32s instead of 4m 09s. Roughly 40% of the savings came from code changes and the rest from model and effort choices. The diagnostic half is more transferable than the numbers.
+
+**Spend followed context, not output.** Just before optimizing, the bill split roughly 43% cache writes, 34% cache reads, and 23% output: most money went to context the model had already seen or was about to re-see. A single code-quality session made 16.6 model calls, writing 72k tokens to cache and reading back 1.08M, because every call resends the conversation. A high cache hit rate is not the same as a small bill — the hit rate rose to 97% while tokens per review tripled to 2.99M.
+
+The largest single fix was the least obvious. Every session opens with 11k–21k tokens of tool definitions and agent prompt that are identical across repositories, yet the first request hit cache only 14–26% of the time. The prompt had been assembled as one block with a single cache breakpoint at the end, so the shared prefix was never stored on its own. Splitting the block at a marker, removing repository-specific content ahead of it, and keeping tool descriptions stable lifted first-request hits to 91–99.5%. Prepending the standards reviewer's reference index instead of spending three turns reading it cut its calls from 15.9 to 9.6.
+
+Smaller fixes were each worth cents and compound:
+
+- Remove tools a sub-reviewer cannot use — 57–76% of sessions tried to call the one that posts the final comment, then spent a call recovering.
+- Read files in parallel instead of one tool call per turn.
+- On re-reviews, skip reviewers with nothing new to look at.
+- Stop after posting instead of running a turn to write an unread summary.
+- Distinguish "slow" from "broken": a reviewer hitting its time limit was restarted with the same limit.
+- Honor cancellation — in a sample of 446 cancelled jobs, 358 ran to completion.
+
+**Then check quality per role, not in aggregate.** Fewer critical findings can mean less noise or more misses, so Cloudflare checked both directions: the share of serious findings authors acted on rose from 34% to 59% (baseline coincidence ~15%), important findings per review stayed flat at 0.28 → 0.30, and inflated severities fell 70% (0.46 → 0.14). But their performance reviewer lost about 64% of important findings at medium effort, so code quality moved to high effort while the others are still being tested. Medium effort genuinely lost real findings for that role.
+
+Two habits to copy: instrument the **first request of every session** for cache hits, and verify that each reviewer still finds real problems at the effort level you pay for. The authors also note their before/after hour-based comparison is not a controlled experiment.
+
 ## Turn incidents into a reviewer eval set
 
 This is the most reusable idea in the process: past PRs that caused incidents, with their fix-forwards and reverts, become the reviewer's regression suite. Engineers who know that code confirm each bug and where it lived, and the reviewer runs against the set daily. Any change to the reviewer's prompt, tools, or model gets rescored against all of it.
@@ -148,6 +169,9 @@ Approval and after:
 - Turn incidents and reverts into the reviewer's eval set; measure human time with reverts as the guardrail.
 
 ## References
+
+- [meng shao: Cloudflare AI code review cost optimization](https://x.com/shao__meng/status/2113098764324159608) — Folo intake, October 22, 2026
+- [Cloudflare: Cutting our inference bill by 68%](https://blog.cloudflare.com/obsessive-inference-optimization/) — token accounting, shared cache prefixes, per-role quality checks
 
 - [meng shao: Uber AutoClean agentic cleanup](https://x.com/shao__meng/status/2112723092468605242) — Folo intake, October 21, 2026
 - [Uber: Using AI to Delete Code](https://www.uber.com/us/en/blog/ai-code-cleanup/) — deterministic rewrites via MCP, scoped fixers, CodeCourt properties

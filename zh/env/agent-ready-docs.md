@@ -174,15 +174,43 @@ Sitemap: https://example.com/sitemap.xml
 
 最后再建立反馈闭环：按接口和问题类型合并重复失败，保留脱敏复现与请求 ID，再判断原因在代码、文档还是调用方。Agent 反馈可以形成 issue 或文档修改建议，但不能证明文档一定错了，更不能自动发布修正。用[产品评测](/zh/env/ai-evals)检查客户端是否减少了无效调用，且**没有**绕过审批或重复产生副作用。
 
+## 一次受控实验：Agent 真正需要什么
+
+[AgentReady](https://agentready.org) 这份标准值得读，因为它的要求来自实验，而不是清单。他们把同一个文档站以 19 种配置提供，其中包括 `llms.txt`、JSON-LD、`sitemap.xml` 和 Markdown 镜像，再用普通抓取客户端与能跑 JavaScript 的客户端各取五个主题的答案——共 190 次探测。
+
+只有两类改动让客户端拿不到答案：
+
+- **答案只存在于 JavaScript 里**——普通抓取全部失败，能跑 JS 的客户端则成功。
+- **挡住了 Agent**，比如对 Agent 的 user agent 返回 `403`——两种客户端都失败。
+
+其余十六种配置毫无影响，`llms.txt` 也在其中。Agent 在约 65% 的抓取里请求了 Markdown，但 Markdown 镜像和内容协商从来没有决定成败。
+
+这不代表 `llms.txt` 没用——它影响 Agent 去哪里，而不影响能不能读到你。被追踪的运行里 Agent 的落脚点：文档页 83%、首页 69%、`/.well-known/*` 23%、`openapi.json` 21%、`sitemap.xml` 4%。而当 Agent 真的打开这些面向机器的文件时，它们通常是**顺着链接**过去的：`openapi.json` 97%、`/.well-known/*` 93%、`llms.txt` 86%。
+
+### 先修哪几项
+
+据此重排优先级：
+
+1. **先确保能被访问。** 在 `robots.txt` 和防机器人策略里放行 Agent，写成规则，而不是只列几个具名爬虫的白名单。
+2. **把答案放进初始 HTML。** 纯客户端渲染、服务端不输出内容，是这项研究里唯一直接导致抓取失败的架构选择。
+3. **返回真实的 HTTP 状态码**，让客户端能区分“不存在”和“渲染为空”。
+4. **从人类页面链接那些机器文件。** 没人链接的 `llms.txt` 几乎不会被读：实验中的流量都去了人访问的页面。
+5. **把 Markdown 镜像、JSON-LD、目录文件当锦上添花。** 成本很低，但弥补不了一个 Agent 抓不到的页面。
+
+如果 Agent 要**完成任务**而不只是读页面，标准的要求更高：提供 MCP 服务器或 CLI，并提供 Agent 能独立走完的认证。
+
+同一项研究还量化了“读不到”的代价：在 1,056 个商业网站上，当 Agent 读不到站点时，它会改用搜索结果和第三方页面作答，而这些回答**完全没有包含用户所问事实的概率高 3.7 倍**（25% 对 7%）。被明确推荐的 Agent 友好企业大约多一倍（20% 对 11%）。
+
 ## 按阶段落地最省事
 
 推荐这样推进：
 
 1. 先修好 `robots.txt`、`sitemap.xml`、标题、描述
-2. 再加 `llms.txt`
-3. 再补 Markdown 输出：`Accept: text/markdown` 或 `/index.md`
-4. 需要时再补 `Content-Signal`
-5. 站点真的有 API 或 MCP，再做协议发现
+2. 确保每页的答案在初始 HTML 里，并返回真实状态码
+3. 再加 `llms.txt`，并从人类可访问的页面链接过去
+4. 再补 Markdown 输出：`Accept: text/markdown` 或 `/index.md`
+5. 需要时再补 `Content-Signal`
+6. 站点真的有 API 或 MCP，再做协议发现
 
 ## Agent 到底在读什么
 
@@ -219,6 +247,9 @@ curl "https://example.com/docs/page" -H "Accept: text/markdown"
 
 ## 参考资料
 
+- [meng shao：AgentReady 开放标准](https://x.com/shao__meng/status/2113084778673287480) — 2026-10-22 的 Folo 线索
+- [AgentReady 发布文章](https://ora.ai/blog/agentready-launch) — 19 种配置的受控实验、Agent 的落脚点、链接发现与“读不到”的代价
+- [AgentReady 标准](https://agentready.org) — 按“找到、读取、操作”划分 MUST／SHOULD／MAY
 - [elvis：把 API 错误当作文档入口](https://x.com/omarsar0/status/2109718336158507107) — 2026-10-12 的 Folo 线索，触发本次恢复指引整理
 - [Restless：Agent-Ready APIs](https://www.restless.ai/blog/agent-ready-apis) — 可操作的错误响应、具体文档与 Agent 反馈
 - [RFC 9457：Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html) — 标准字段、结构化扩展与信息泄漏风险

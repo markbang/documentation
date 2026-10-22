@@ -282,6 +282,25 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 
 以上是 harness 设计建议。Vercel 案例证明了“查询与确认分离”的做法，不代表每个支付接口都实现了全部控制措施。授予花钱权限前，应核对所安装 CLI 的实际行为。
 
+## 把控制面放到 Agent 碰不到的地方
+
+长时间运行的 Agent 会边走边下载代码、搭建工具、申请更多权限，风险沿一条没人完整预设过的路径累积。NVIDIA 为其 OpenShell 参考架构给出的判断，不管用不用它的产品，都值得当作设计规则：**Agent 管不了自己。** 授权、网络出口、凭证签发与审计，都应该在 Agent 改不动的基础设施里。
+
+OpenShell 把运行时拆成四部分，拆分本身就是可学的部分：
+
+| 组件 | 职责 |
+| --- | --- |
+| **Gateway** | 控制面：沙箱生命周期与策略 |
+| **Supervisor** | 在沙箱之外运行，按策略检查出站请求并代理凭证 |
+| **Sandbox** | 隔离工作负载，限制文件系统与进程访问 |
+| **Policy prover** | 用形式化验证证明策略的权限不会超出组织设定的上限 |
+
+**Policy prover** 是最特别的一块，也是最值得在概念上借鉴的。权限评审会漂移，因为没人会在每次变更后重新推导整个授权面。让证明器回答“这条策略是否可能超出既定上限”，就把“我们觉得没问题”变成了可检查的性质——这正是从示例验证转向性质验证的同一思路，也是[形式化方法对 Agent 有价值](/zh/env/ai-evals)的原因。
+
+两个扩展点在运维上很关键：中间件可以检查、阻断或改写网络内容；控制面拦截器可以接入已有的身份、授权、数据保护与审计系统。两者都让策略决定留在模型之外，同时复用你本来就信任的系统。
+
+NVIDIA 还描述了一个可选的硬件层：位于 Agent 信任域之外的 DPU，监控请求、文件活动与部分主机内存，并在芯片层执行策略，几毫秒内隔离违规 Agent。对多数团队来说，软件边界是第一位的；硬件层适用于“即使内核被攻破也不能相信 Agent”的部署。需要注意，配套的性能数字（沙箱启动更快、并发环境更多）来自厂商与合作伙伴基准，不是独立测量。
+
 ## 快速排查清单
 
 当 Agent 表现异常时，按这个顺序问：
@@ -503,6 +522,9 @@ GUI 路径没法固化成 API 时，把**决策**和**感知/执行**拆开。Cu
 如果只是一次性、低风险任务，一个提示词加几个工具就够了。只要任务开始变成长时间、带状态、可复用的工作流，就应该尽早设计 harness。
 
 ## 参考资料
+
+- [meng shao：NVIDIA OpenShell 参考架构](https://x.com/shao__meng/status/2113086907047703000) — 2026-10-22 的 Folo 线索
+- [NVIDIA：OpenShell 参考架构如何治理 Agent 工作负载](https://developer.nvidia.com/blog/how-nvidia-openshell-reference-architecture-secures-and-governs-ai-agent-workloads-at-scale/) — Gateway、Supervisor、Sandbox、Policy prover 与可选硬件信任域
 
 - [meng shao：OpenGCUA 通用计算机使用技术栈](https://x.com/shao__meng/status/2111999471588679916) — 2026-10-19 的 Folo 线索
 - [Tongyi-MAI/OpenGCUA](https://github.com/Tongyi-MAI/OpenGCUA) — Apache-2.0 的 harness、SDK 与评测轨迹
