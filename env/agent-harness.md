@@ -506,6 +506,43 @@ Its three-layer architecture is a useful reference pattern:
 
 The deeper trend: competition is shifting from single-agent capability to **team-level harnesses and memory systems**. The winning question is no longer "which model is best?" but "how does the team's knowledge compound across sessions and members?"
 
+## Fold subagents into the main loop when structure stops paying
+
+Anthropic's Applied AI team observed the same failure pattern across enterprise deployments: each team ships its own specialist subagent, a platform team builds an orchestrator on top, and the architecture ends up **copying the org chart**. The recurring symptoms:
+
+- context handoffs that lose detail
+- **subagent sprawl** — hundreds of overlapping agents with no owner
+- the **Frankenprompt** — every team appends a sentence until the rules conflict
+- evals optimized per subtask, so leadership optimizes a watered-down score
+- added latency; one customer measured roughly **2x** faster runtime after collapsing to a single loop
+
+Subagents still earn their place in three situations: a single loop degrades from context bloat, work genuinely parallelizes into throwaway contexts, or one agent cannot reliably pick tools amid conflicting instructions. Outside those, the alternative is **progressive disclosure** — show short descriptions of skills and tools, load the full content only when needed. Anthropic reports cutting Claude Code's system prompt by over 80% partly through this move.
+
+The target design is deliberately boring: one model, one context window, an open-ended tool loop with turn and cost budgets plus write gates; each turn emits a batch of parallel tool calls whose raw results return to the same model; the model writes its own plan on the first turn and revises it. Ordering and domain procedure move into **skills**; hard limits and mid-conversation lookups move into **tools**. Two practical constraints: keep tool counts under roughly 30–50 before selection degrades, and put per-user permission checks inside tools so one loop can serve users with different access.
+
+Migrate incrementally, and be honest about the comparison:
+
+1. Build a small end-to-end eval first — even ten golden examples. Keep one shared set owned centrally, plus per-skill sets owned by the teams that ship them.
+2. Wrap existing subagents as tools before rewriting anything; that gives you a baseline without new failure modes.
+3. Fold one subagent at a time into skills plus tools, and compare with and without.
+4. **Look at which tasks flipped, not just the score**, and run each case more than once. In their sample, folding a subagent lowered latency but broke a previously passing flow — the main agent answered with its own order lookup instead of asking the shipping specialist for the delivery date. It only appeared in one of two runs.
+
+## Multiplayer harness: five shared primitives
+
+TeamAI CLI (below) packages knowledge; LangChain's write-up on internal agents packages the **runtime** around it. Across a GTM agent, an engineering agent that reviews every pull request, and a marketing agent, they converged on five primitives worth checking against your own design:
+
+| Primitive | What it decides |
+| --- | --- |
+| **Entry point** | Where people already work (for them, Slack), with agents reachable in channels |
+| **Identity** | Per tool: act on behalf of the invoking user, or with a fixed service identity |
+| **Memory** | Two tiers — global for everyone, plus per-user |
+| **Code execution** | Agent runs outside the sandbox and executes inside it, with a secret proxy for authenticated services |
+| **Scheduled runs** | A large share of runs are ambient — cron or events, not a person clicking |
+
+Identity is the hard one, and their per-tool split is the reusable insight. The engineering agent opens pull requests as *you* but reviews as *itself*; the GTM agent uses a fixed identity for CRM access so nobody has to log in, but sends email on behalf of the caller — and only in DMs, never in shared channels. The marketing agent can read and draft with a company identity while posting to a shared account is restricted to a whitelist. "Who is this action for?" belongs to the tool, not to the agent.
+
+Two UX details generalize: give agents a way to **break out into their own thread** so an agent's work does not pollute a live human discussion, and admit when chat is the wrong surface — reviewing a backlog of queued emails needed a purpose-built UI.
+
 ## When to invest in a stronger harness
 
 Start simple. Add structure when the work becomes repeated, risky, or expensive.
@@ -522,6 +559,11 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [elvis: Anthropic on folding subagents into the main loop](https://x.com/omarsar0/status/2114621038281814167) — Folo intake, October 26, 2026
+- [Anthropic: Building agents — when to fold subagents into your main agent loop](https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop) — failure modes, progressive disclosure, migration path
+- [meng shao: LangChain company harness](https://x.com/shao__meng/status/2114544704461373848) — Folo intake, October 26, 2026
+- [LangChain: Components of a company harness](https://www.langchain.com/blog/components-building-company-harness) — Slack entry point, per-tool identity, two-tier memory, sandboxed execution, ambient runs
 
 - [meng shao: NVIDIA OpenShell reference architecture](https://x.com/shao__meng/status/2113086907047703000) — Folo intake, October 22, 2026
 - [NVIDIA: How the OpenShell reference architecture secures and governs agent workloads](https://developer.nvidia.com/blog/how-nvidia-openshell-reference-architecture-secures-and-governs-ai-agent-workloads-at-scale/) — gateway, supervisor, sandbox, policy prover, and the optional hardware trust domain
