@@ -102,6 +102,8 @@ Before approving a package, ask:
 
 The last question is the most important. Install scripts often run before your app code, but with access to the developer or CI environment.
 
+Editor extensions follow the same trust model through a different channel. See [Editor extension supply chain](/env/editor-extension-security).
+
 ## References
 
 - [Folo source: npm allowScripts defaults discussion](https://x.com/wwwgoubuli/status/2067397155841868203)

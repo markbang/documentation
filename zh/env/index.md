@@ -40,6 +40,10 @@ GitHub Actions CI/CD 自动化。
 审查并锁定 npm 安装脚本。
 </Card>
 
+<Card title="编辑器扩展供应链安全" icon="puzzle-piece" href="/zh/env/editor-extension-security">
+控制扩展更新，清理恶意版本。
+</Card>
+
 <Card title="Browser Observability" icon="magnifying-glass-chart" href="/zh/env/browser-observability">
 浏览器自动化调试 — 只读 CDP 旁路采集。
 </Card>

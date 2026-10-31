@@ -40,6 +40,10 @@ GitHub Actions CI/CD automation.
 Review and lock down npm install scripts.
 </Card>
 
+<Card title="Editor extension supply chain" icon="puzzle-piece" href="/env/editor-extension-security">
+Control extension updates and clean up malicious releases.
+</Card>
+
 <Card title="Browser Observability" icon="magnifying-glass-chart" href="/env/browser-observability">
 Debug browser automation with read-only CDP tracing.
 </Card>

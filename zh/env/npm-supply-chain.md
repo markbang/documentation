@@ -102,6 +102,8 @@ npm ci --strict-allow-scripts
 
 最后一个问题最重要。安装脚本通常早于你的应用代码执行，却可能拿到开发机或 CI 环境里的权限。
 
+编辑器扩展的信任模型相同，只是换了一条投递渠道，见 [编辑器扩展供应链安全](/zh/env/editor-extension-security)。
+
 ## 参考资料
 
 - [Folo 来源：npm allowScripts 默认策略讨论](https://x.com/wwwgoubuli/status/2067397155841868203)
