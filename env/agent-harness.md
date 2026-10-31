@@ -135,6 +135,17 @@ workspace/
 
 The exact names can change. The important rule is that state should be **inspectable, restartable, and scoped**. For agent-assisted learning, this lets the agent teach the next step from the learner's current capability instead of from a generic syllabus. For engineering work, the same pattern applies to onboarding notes, migration logs, incident follow-ups, and task journals.
 
+### Reset at checkpoints; keep raw history retrievable
+
+A summary is a lossy copy. When a harness compacts a long session, it rereads the history and rewrites it as prose. The exact error message, file path, or number the next step needs may not survive. Two October 2026 papers point to a different default.
+
+- **Checkpoint, then start clean.** CORAL (COLM 2026) gives the agent a tool it can call to save task progress and verified facts, clear the cluttered context, and start a new episode that sees only the checkpoint. An 8B model trained to use the tool with reinforcement learning (MERPO) reached 42.8% average accuracy on GAIA. The biggest gains were on the long-horizon Level 2 and 3 tasks, and it used 6–7× fewer input tokens than a ReAct agent. The authors used RL to improve when and what the agent checkpoints, so do not expect an untrained model to time resets well on its own. Without RL, approximate it with a fixed checkpoint template (verified facts, open questions, next step) that the agent fills at phase boundaries before you open a fresh session.
+- **Keep the raw record and retrieve from it.** Raw-RAG (arXiv 2610.30755) splits raw conversation history into windows and uses dense retrieval plus cross-encoder reranking, with no extraction, summaries, or graphs. It ranked first among the compared memory systems in 6 of 7 benchmark–model settings across LoCoMo, LongMemEval, MEME, and MemoryAgentBench. Adding fact extraction, summaries, or graph expansion on top *lowered* accuracy. In the authors' Mem0 audit, making memory append-only (no UPDATE or DELETE) raised LoCoMo accuracy from 67.36% to 69.42%. The likely reason: answers often depend on the order of events and on how one value led to another, and transformations drop that context.
+
+The rule that carries over: **write the full session record append-only, keep the checkpoint small and verified, and let a fresh session search the raw record on demand.** Treat summaries as an index into the record, not a replacement for it. See [Claude Code patterns](/env/claude-code-patterns) for the interactive version of this workflow.
+
+Limits: Raw-RAG's evidence comes from offline conversation benchmarks, and raw logs cost storage and raise privacy questions. Compaction is still reasonable when the agent has no tool to search its own history. Compare both on your own tasks before committing to one.
+
 ### Audit memory for the associativity blind spot
 
 Every current memory architecture — Flat RAG, graph memory, agentic hierarchies, OS-style memory kernels — retrieves with the same recipe: embed query and stored content into one similarity space (BM25 or dense vectors), take top-K. That caps recall at **surface similarity**.
@@ -600,6 +611,10 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
 - [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
 - [Tencent T-Mem](https://arxiv.org/abs/2606.15405) — 写入时预演 trigger，填补相似度检索的联想盲区
+- [CORAL: Don't Lose the Thread (arXiv 2610.40350)](https://arxiv.org/abs/2610.40350) — agent-callable checkpoint and context reset; 42.8% on GAIA with an 8B model and 6–7× fewer input tokens than ReAct
+- [Micropaper: 智能体学会主动清空记忆](https://unbug.github.io/one-minute-read-paper-coral-context-reset/) — Folo intake for CORAL
+- [Raw-RAG: Is Complex Agentic Memory Always Needed? (arXiv 2610.30755)](https://arxiv.org/abs/2610.30755) — retrieval over raw history leads compared memory systems in 6 of 7 settings; extraction and summaries lower accuracy
+- [Folo source: Raw-RAG thread](https://x.com/shao__meng/status/2116179695221743882) and [compaction debate](https://x.com/dotey/status/2116026448234332315)
 - [TypeSafe: notes on coding agents](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Fireworks: The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取

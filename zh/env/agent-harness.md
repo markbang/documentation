@@ -135,6 +135,17 @@ workspace/
 
 具体文件名可以调整。关键原则是：状态必须**可检查、可恢复、有边界**。在 Agent 辅助学习里，这能让 Agent 基于学习者当前能力继续教学，而不是每次都从通用大纲开始。在工程工作里，同样可以用于 onboarding 笔记、迁移日志、事故复盘和任务 journal。
 
+### 在检查点重置，原始记录保持可检索
+
+摘要是有损副本。harness 压缩长会话时，会把历史重读一遍，再改写成一段文字。下一步需要的那条报错原文、那个文件路径、那个数字，可能就丢在这一步。2026 年 10 月的两篇论文给出了另一种默认做法。
+
+- **先存档，再从干净状态继续。** CORAL（COLM 2026）给 Agent 一个可以自己调用的工具：存下任务进度和已验证的事实，清空杂乱的上下文，开一个只看得到存档的新回合。用强化学习算法 MERPO 训练会用这个工具的 8B 模型，在 GAIA 上平均准确率 42.8%，提升主要来自长周期的 Level 2 和 Level 3 任务，输入 token 比 ReAct Agent 少 6–7 倍。作者靠 RL 改善 Agent 何时存档、存什么，所以不要指望未经训练的模型自己把握好重置时机。没有 RL 条件时，可以用固定的存档模板来近似：已验证事实、未决问题、下一步，让 Agent 在每个阶段结束时填好，再开新会话。
+- **保留原始记录，按需检索。** Raw-RAG（arXiv 2610.30755）把原始对话历史切成窗口，用稠密检索加 cross-encoder 重排，不做信息抽取、摘要或建图。在 LoCoMo、LongMemEval、MEME、MemoryAgentBench 上，它在 7 组基准–模型设置中有 6 组排第一。在它上面再加事实抽取、摘要或图扩展，准确率反而*下降*。作者审计 Mem0 时把记忆改成只追加（不做 UPDATE、DELETE），LoCoMo 准确率从 67.36% 升到 69.42%。可能的原因是：答案经常取决于事件发生的顺序，以及一个值是怎么推出另一个值的，而这些上下文在转换中丢掉了。
+
+可迁移的规则：**完整会话记录只追加写入，存档保持精简且经过验证，新会话按需检索原始记录。** 摘要当作原始记录的索引，而不是替代品。交互式用法见 [Claude Code 高效使用](/zh/env/claude-code-patterns)。
+
+适用边界：Raw-RAG 的证据来自离线对话基准；原始日志占存储，也带来隐私问题。如果 Agent 没有检索自身历史的工具，压缩仍是合理选择。两种做法在自己的任务上对比之后再定。
+
 ### 审计记忆系统的联想盲区
 
 当前所有记忆架构——Flat RAG、图结构记忆、agentic 层级、操作系统式内核——检索配方都一样：把查询和内容投进同一个相似度空间（BM25 或稠密向量），取 top-K。这把召回上限锁死在**表面相似度**上。
@@ -600,6 +611,10 @@ Anthropic 应用 AI 团队在多个企业部署里看到同一种失败模式：
 - [Cua jev-use](https://x.com/shao__meng/status/2100870131324985740) — Computer Use 拆成决策层 + 确定性 Driver
 - [GAVEL: graph world models](https://academy.dair.ai/papers/gavel-graph-world-models-for-verified-and-efficient-long-horizon-llm-task-planni-2609.19315) — harness 把 Qwen3-8B 从 41.2% 提到 91.8%，模型零改动
 - [腾讯 T-Mem](https://arxiv.org/abs/2606.15405) — 写入时预演 trigger，填补相似度检索的联想盲区
+- [CORAL: Don't Lose the Thread (arXiv 2610.40350)](https://arxiv.org/abs/2610.40350) — Agent 可调用的存档与上下文重置；8B 模型 GAIA 42.8%，输入 token 比 ReAct 少 6–7 倍
+- [Micropaper：智能体学会主动清空记忆](https://unbug.github.io/one-minute-read-paper-coral-context-reset/) — CORAL 的 Folo 线索
+- [Raw-RAG: Is Complex Agentic Memory Always Needed? (arXiv 2610.30755)](https://arxiv.org/abs/2610.30755) — 直接检索原始历史，在 7 组设置中 6 组领先所比较的记忆系统；抽取和摘要反而降低准确率
+- [Folo 来源：Raw-RAG 讨论](https://x.com/shao__meng/status/2116179695221743882) 与 [压缩之争](https://x.com/dotey/status/2116026448234332315)
 - [TypeSafe：coding agent 笔记](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Fireworks：The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
