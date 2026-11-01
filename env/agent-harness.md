@@ -293,6 +293,24 @@ The reusable pattern is **prepare → request approval → execute → verify**,
 
 These are harness-design recommendations; the Vercel example demonstrates the discovery/confirmation split, not a guarantee that every payment interface enforces all of these controls. Check the installed CLI's behavior before granting it spending access.
 
+### Check selected tool calls before they run
+
+Many agent loops execute a tool call as soon as the model proposes it. IBM's JevAct (arXiv 2610.38620) adds a gate between proposal and execution, without changing the agent model or its tools:
+
+1. **Compile the policy offline.** An LLM turns the written domain policy into executable checks over tool state, fixed yes/no questions about the conversation, and a checklist of steps the agent must try before handing off to a human.
+2. **At runtime, check facts with code and context with a decision model.** Code verifies what the tool records already show. A small prefill-only decision model answers the questions with a probability instead of generated text, so the gate can apply a threshold.
+3. **Return failures as feedback with a retry budget.** A flagged call goes back to the agent with the specific reason. The agent gets a bounded number of revisions (two for write calls in the paper). The agent still chooses its actions; the gate only approves or returns them.
+4. **Check endings as well as actions.** A hand-off check catches agents that give up before they've tried the required steps.
+
+On τ²-bench Telecom, all eight agents improved, and success across three runs rose by 16.9 points on average. Opus 4.6 went from 39.5% to 80.7%. On BFCL, all nine agents improved three-run success; Airline gains were smaller and mixed. These numbers measure the whole harness (checks plus revision chances), not the judge alone. The decision model's cost was $0.0003–0.0017 per task, against $0.0127–0.0231 for API-model judges.
+
+Rules that carry over:
+
+- **Gate writes and task endings, not every call.** A wrong answer can often be corrected in a later turn; an unauthorized write or a premature hand-off is harder to undo.
+- **Put checkable facts in code.** Use the model only for questions that need the conversation.
+- **Drop questions that fire too often.** Real violations are rare. The paper dropped any question that flagged more than 10% of logged calls.
+- **Tune thresholds on logged traces, not defaults.** Check the judge's context length too: smaller judges missed more bad calls on inputs over 8k tokens. See [AI product evals](/env/ai-evals) for threshold calibration.
+
 ## Put the control plane outside the agent's reach
 
 Long-running agents download code, build tools, and request more permissions as they go, so risk compounds along a path nobody fully specified in advance. NVIDIA's framing for its OpenShell reference architecture is worth adopting as a design rule regardless of vendor: **an agent cannot govern itself.** Authorization, network egress, credential issuance, and audit belong in infrastructure the agent cannot edit.
@@ -618,6 +636,8 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [TypeSafe: notes on coding agents](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Fireworks: The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
+- [JevAct: Think Before You Act (arXiv 2610.38620)](https://arxiv.org/abs/2610.38620) — runtime decision gate before selected tool calls; Opus 4.6 three-run success on τ²-bench Telecom 39.5% → 80.7%
+- [Folo source: elvis on IBM decision gates](https://x.com/omarsar0/status/2116547247018229999)
 - [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
 - [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
 - [Cloudflare: Auto Router](https://blog.cloudflare.com/auto-router/) — 组织级控制面路由，终端用户无感省最多 30%

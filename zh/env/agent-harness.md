@@ -293,6 +293,24 @@ Anthropic 在 **2026 年 4 月**发布的 Claude Code 质量问题复盘很有�
 
 以上是 harness 设计建议。Vercel 案例证明了“查询与确认分离”的做法，不代表每个支付接口都实现了全部控制措施。授予花钱权限前，应核对所安装 CLI 的实际行为。
 
+### 在工具调用执行前先过一道闸
+
+很多 Agent 循环在模型提出工具调用后立刻执行。IBM 的 JevAct（arXiv 2610.38620）在“提出”和“执行”之间加了一道闸，不改 Agent 模型，也不改工具：
+
+1. **离线编译策略。** 由 LLM 把成文的业务策略转成三样东西：针对工具状态的可执行检查、关于对话内容的固定是非题，以及转人工前必须尝试的步骤清单。
+2. **运行时，事实用代码查，语境交给决策模型。** 工具记录里已经有的事实，用代码核对；依赖对话的问题，交给一个只做 prefill 的小型决策模型。它直接返回概率而不生成文字，闸口可以按阈值判定。
+3. **不通过就带着反馈退回，并限定重试次数。** 被拦下的调用连同具体原因退回给 Agent，Agent 有有限次修改机会（论文里写操作是两次）。动作仍由 Agent 选，闸口只负责放行或退回。
+4. **既查动作，也查收尾。** 转人工检查能拦下还没试完必要步骤就放弃的 Agent。
+
+在 τ²-bench Telecom 上，八个 Agent 全部提升，三次运行全部成功的比例平均提高 16.9 个点，Opus 4.6 从 39.5% 升到 80.7%。BFCL 上九个 Agent 的三次全成功率都有提升；Airline 上提升较小且有涨有跌。这些数字衡量的是整套 harness（检查加修改机会），不是单独的裁判。决策模型每个任务的裁判成本约 $0.0003–0.0017，API 模型当裁判则是 $0.0127–0.0231。
+
+可迁移的规则：
+
+- **只给写操作和任务收尾设闸，不必每次调用都查。** 答错一句话往往还能在后面修正，越权写入或过早转人工就难挨回了。
+- **能用代码核对的事实，就用代码。** 只把必须读对话才能判断的问题交给模型。
+- **触发太频繁的问题就删掉。** 真正的违规很少见，论文把在超过 10% 历史调用上报警的问题都去掉了。
+- **阈值用历史 trace 调，不要用默认值。** 还要注意裁判的上下文长度：输入超过 8k token 时，小裁判漏掉的坏调用明显更多。阈值校准见 [AI 产品评测](/zh/env/ai-evals)。
+
 ## 把控制面放到 Agent 碰不到的地方
 
 长时间运行的 Agent 会边走边下载代码、搭建工具、申请更多权限，风险沿一条没人完整预设过的路径累积。NVIDIA 为其 OpenShell 参考架构给出的判断，不管用不用它的产品，都值得当作设计规则：**Agent 管不了自己。** 授权、网络出口、凭证签发与审计，都应该在 Agent 改不动的基础设施里。
@@ -618,6 +636,8 @@ Anthropic 应用 AI 团队在多个企业部署里看到同一种失败模式：
 - [TypeSafe：coding agent 笔记](https://x.com/shao__meng/status/2101921711545331832) — KV cache 审计：按难度路由为何经常更贵，按查询重建上下文才是解法
 - [Fireworks：The frontier isn't a model, it's a router](https://fireworks.ai/blog/the-frontier-isnt-a-model-its-a-router) — oracle 路由 97.6% vs 最佳单模型 74.1%；价值来自互补覆盖而非池子大小
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
+- [JevAct: Think Before You Act (arXiv 2610.38620)](https://arxiv.org/abs/2610.38620) — 在选定工具调用执行前设运行时决策闸；τ²-bench Telecom 上 Opus 4.6 三次全成功率 39.5% → 80.7%
+- [Folo 来源：elvis 谈 IBM 决策闸](https://x.com/omarsar0/status/2116547247018229999)
 - [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
 - [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
 - [Cloudflare: Auto Router](https://blog.cloudflare.com/auto-router/) — 组织级控制面路由，终端用户无感省最多 30%
