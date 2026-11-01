@@ -22,3 +22,7 @@ Go 作为 Python 友好学习的语言，最终被我选中。
 <Card title="Gin 框架" icon="bolt" href="/zh/backend/Go/gin/index">
 Go 最流行的 Web 框架，快速搭建 API 服务。
 </Card>
+
+<Card title="监听端口与 MPTCP" icon="network-wired" href="/zh/backend/Go/mptcp">
+Go 1.24+ 服务端在 Linux 上默认接受 MPTCP，如何检查与关闭。
+</Card>

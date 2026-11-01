@@ -22,3 +22,7 @@ Go is friendly for Python learners to pick up, which is why I chose it.
 <Card title="Gin Framework" icon="bolt" href="/backend/Go/gin/index">
 Go's most popular web framework for building API services.
 </Card>
+
+<Card title="Listeners and MPTCP" icon="network-wired" href="/backend/Go/mptcp">
+Go 1.24+ servers accept MPTCP by default on Linux. Check and turn it off.
+</Card>

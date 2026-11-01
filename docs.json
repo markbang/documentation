@@ -136,7 +136,8 @@
                     "icon": "golang",
                     "pages": [
                       "backend/Go/index",
-                      "backend/Go/gin/index"
+                      "backend/Go/gin/index",
+                      "backend/Go/mptcp"
                     ]
                   },
                   {
@@ -423,7 +424,8 @@
                     "icon": "golang",
                     "pages": [
                       "zh/backend/Go/index",
-                      "zh/backend/Go/gin/index"
+                      "zh/backend/Go/gin/index",
+                      "zh/backend/Go/mptcp"
                     ]
                   },
                   {
