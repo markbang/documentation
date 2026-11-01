@@ -415,6 +415,108 @@ jobs:
       - run: npm run lint
 ```
 
+## CI 提速：不减校验，只减等待
+
+有了 AI 以后写代码快了很多，校验却没有跟着变快，CI 的等待时间成了新的瓶颈。目标是在不减少任何必要测试和功能校验的前提下，把等待时间压到最低。按顺序做，每改一步就量一次。
+
+这份清单也可以直接交给编码 Agent：让它先测量，再逐条优化，最后给出优化前后的对比。
+
+### 1. 先测量时间花在哪
+
+把每个 job 拆成三段：**排队**（等 runner）、**准备**（checkout、工具链、依赖）和**干活**（构建与测试）。CI 慢，很多时候慢在准备阶段，而不是测试本身。
+
+```bash
+# 某个 workflow 最近 50 次运行：job、创建、开始、结束时间
+gh run list --workflow ci.yml --limit 50 --json databaseId --jq '.[].databaseId' |
+while read -r id; do
+  gh api "repos/{owner}/{repo}/actions/runs/$id/jobs" \
+    --jq '.jobs[] | [.name, .created_at, .started_at, .completed_at] | @tsv'
+done
+```
+
+`started_at` 减 `created_at` 就是排队时间。每个 job 的 `steps` 数组也有各自的时间戳，用同样的办法就能把准备和干活分开。
+
+### 2. 同一个 PR 只跑最新一次，`main` 不取消
+
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+```
+
+`github.head_ref` 只在 pull request 事件里有值，所以同一个 PR 连续推送时会落在同一组，旧的运行被取消。推到 `main` 时退回到唯一的 `run_id`，保证 `main` 上每个提交都完整跑一遍。如果分组写成 `${{ github.ref }}`，`main` 上排队中的运行也会被取消或替换。
+
+### 3. 只改文档不跑 CI，但别卡住合并
+
+如果整个 workflow 因 `paths`、`paths-ignore` 或分支过滤被跳过，它对应的必需检查会一直停在 **Pending**，PR 合不进去。而被 `if:` 条件跳过的 job 会报告成功。所以必需检查要让 workflow 照常启动，在 job 层面跳过：
+
+```yaml
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            code:
+              - 'src/**'
+              - 'tests/**'
+              - 'package*.json'
+              - '.github/workflows/**'
+
+  test:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm test
+```
+
+### 4. 优先用 setup 类 action 自带的缓存
+
+- `actions/setup-node` 设置 `cache: npm`（或 `yarn`、`pnpm`）后才会缓存。
+- `actions/setup-go` 默认开启缓存。
+- Rust 用 `Swatinem/rust-cache`。
+
+每个仓库的缓存默认只有 10 GB。7 天没被访问的条目会被删除；空间满了以后按最近访问时间淘汰，可能导致缓存反复创建又被删。用不上的东西不要往里放。
+
+`pull_request` 触发的运行创建的缓存只属于该 PR 的 merge ref，其他 PR 用不上。给 `main` 的 `push` 也跑 CI，PR 才能从默认分支恢复热缓存。
+
+### 5. 第二次构建应该几乎不花时间
+
+在本地连续构建两次。第二次应该几乎不耗时；如果还很慢，就是有什么在破坏缓存。常见原因是 Dockerfile 在安装依赖前就 COPY 了整个仓库，或者构建脚本盯着一个不存在的文件，导致目标永远被当成过期。
+
+```dockerfile
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+```
+
+### 6. 工具直接下载预编译版本
+
+`go install` 和 `cargo install` 每次都从源码现场编译。改为下载 release 二进制，或用会拉预编译产物的安装工具，Rust 工具可以用 `cargo binstall` 或 `taiki-e/install-action`。
+
+### 7. 互不依赖的 job 并行跑
+
+删掉不传 outputs 或 artifacts 的 `needs:`。最长的那套测试用 matrix 拆到多台机器上跑。
+
+### 8. macOS runner 只留给必须用 macOS 的活
+
+Free、Pro、Team 套餐下，标准 GitHub 托管 runner 最多同时跑 5 个 macOS job，且所有 workflow 共用这个额度。格式化、lint、依赖审计这些不挑系统的活，都挪到 `ubuntu-latest`。
+
+### 9. 做过的事不重复做
+
+别的 job 已经跑过的检查不要再跑一遍。只构建前端的 job 不需要恢复 Rust 缓存。
+
+### 10. 对比优化前后
+
+推送改动，用第 1 步的方法重新测量，对比同一批 job 的耗时。找出下一个最慢的阶段，再来一轮。
+
 ## 最佳实践
 
 1. **使用缓存**：加速依赖安装
@@ -452,5 +554,11 @@ GitHub Actions 在 2025–2026 年经历了多次频繁宕机。Mitchell Hashimo
 ## 参考资源
 
 - [GitHub Actions 官方文档](https://docs.github.com/actions)
+- [Folo 来源：Tw93 关于 GitHub Actions CI 提速](https://x.com/HiTw93/status/2116797957454401746)
+- [GitHub 文档：控制 workflow 与 job 的并发](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs)
+- [GitHub 文档：必需状态检查排障](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/troubleshooting-required-status-checks)
+- [GitHub 文档：依赖缓存参考](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
+- [GitHub 文档：Actions 限制](https://docs.github.com/en/actions/reference/limits)
+- [actions/setup-go：缓存说明](https://github.com/actions/setup-go#caching-dependency-files-and-build-outputs)
 - [Actions Marketplace](https://github.com/marketplace?type=actions)
 - [工作流语法](https://docs.github.com/actions/reference/workflow-syntax-for-github-actions)

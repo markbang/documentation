@@ -414,6 +414,108 @@ jobs:
       - run: npm run lint
 ```
 
+## Speed up CI without dropping checks
+
+Coding agents write code faster than CI can verify it, so CI wait time becomes the bottleneck. The goal is to cut wait time without removing any check that protects a release. Work through these steps in order, and measure after each one.
+
+The list also works as a prompt for a coding agent: have it measure first, apply the steps, and report before-and-after numbers.
+
+### 1. Measure where the time goes
+
+Split each job into three parts: **queued** (waiting for a runner), **setup** (checkout, toolchains, dependencies), and **work** (build and tests). Slow CI is often slow setup, not slow tests.
+
+```bash
+# Last 50 runs of one workflow: job, created, started, completed
+gh run list --workflow ci.yml --limit 50 --json databaseId --jq '.[].databaseId' |
+while read -r id; do
+  gh api "repos/{owner}/{repo}/actions/runs/$id/jobs" \
+    --jq '.jobs[] | [.name, .created_at, .started_at, .completed_at] | @tsv'
+done
+```
+
+`started_at` minus `created_at` is queue time. Each job's `steps` array has its own timestamps, so you can split setup from work the same way.
+
+### 2. Cancel superseded PR runs, but never `main`
+
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+```
+
+`github.head_ref` is only set for pull request events, so new pushes to the same PR share a group and cancel the older run. Pushes to `main` fall back to the unique `run_id`, so every commit on `main` still gets a full run. A group such as `${{ github.ref }}` would also cancel or replace queued `main` runs.
+
+### 3. Skip docs-only changes without blocking merges
+
+If a workflow is skipped by `paths`, `paths-ignore`, or branch filters, its required checks stay **Pending** and the PR cannot merge. A job skipped by an `if:` condition reports success. For required checks, let the workflow start and skip jobs instead:
+
+```yaml
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            code:
+              - 'src/**'
+              - 'tests/**'
+              - 'package*.json'
+              - '.github/workflows/**'
+
+  test:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm test
+```
+
+### 4. Use the cache built into setup actions
+
+- `actions/setup-node` caches when you set `cache: npm` (or `yarn`, `pnpm`).
+- `actions/setup-go` caches by default.
+- For Rust, use `Swatinem/rust-cache`.
+
+Cache storage is 10 GB per repository by default. Entries not used for 7 days are deleted, and when the repository is full, the least recently used entries are evicted, which can cause thrashing. Don't cache what you won't restore.
+
+Caches created by a `pull_request` run are scoped to that PR's merge ref, so other PRs can't reuse them. Run CI on `push` to `main` so PRs can restore a warm cache from the default branch.
+
+### 5. Make a second build nearly free
+
+Build twice locally. The second build should take almost no time. If it doesn't, something is defeating the cache. Common causes are a Dockerfile that copies the whole repository before installing dependencies, or a build script that watches a file that doesn't exist, so the target always looks stale.
+
+```dockerfile
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+```
+
+### 6. Download tools instead of compiling them
+
+`go install` and `cargo install` compile from source on every run. Download release binaries instead, or use an installer that fetches prebuilt binaries, such as `cargo binstall` or `taiki-e/install-action` for Rust tools.
+
+### 7. Run independent jobs in parallel
+
+Remove `needs:` entries that don't pass outputs or artifacts. Split the longest test suite across several machines with a matrix.
+
+### 8. Save macOS runners for work that needs macOS
+
+On the Free, Pro, and Team plans, standard GitHub-hosted runners allow at most 5 concurrent macOS jobs, shared by all your workflows. Move formatting, lint, and dependency audits that don't depend on the OS to `ubuntu-latest`.
+
+### 9. Don't do the same work twice
+
+Don't rerun a check that another job already ran. A frontend-only job doesn't need to restore the Rust cache.
+
+### 10. Compare before and after
+
+Push the changes, rerun the measurement from step 1, and compare the same jobs. Look for the next slowest phase and repeat.
+
 ## Best Practices
 
 1. **Use caching** to speed up dependency installation.
@@ -451,5 +553,11 @@ When your CI/CD platform has regular outages that block you for hours, it become
 ## References
 
 - [GitHub Actions Official Docs](https://docs.github.com/actions)
+- [Folo source: Tw93 on speeding up GitHub Actions CI](https://x.com/HiTw93/status/2116797957454401746)
+- [GitHub Docs: Control the concurrency of workflows and jobs](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs)
+- [GitHub Docs: Troubleshooting required status checks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/troubleshooting-required-status-checks)
+- [GitHub Docs: Dependency caching reference](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
+- [GitHub Docs: Actions limits](https://docs.github.com/en/actions/reference/limits)
+- [actions/setup-go: caching](https://github.com/actions/setup-go#caching-dependency-files-and-build-outputs)
 - [Actions Marketplace](https://github.com/marketplace?type=actions)
 - [Workflowsyntax](https://docs.github.com/actions/reference/workflow-syntax-for-github-actions)
