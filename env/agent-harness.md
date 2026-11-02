@@ -248,6 +248,29 @@ The strongest quantitative case that harness beats model: the **GAVEL** paper (2
 
 The reusable lesson: many long-horizon agent failures are **state-tracking failures, not reasoning failures**, and a symbolic checker outside the LLM catches them cheaply. Wrap the model's decision point in deterministic structure — a world model, a candidate list, a verifier — and the small model stops paying for what the harness already knows.
 
+### Spend verification effort where it pays
+
+A verification CLI makes checking possible. The next questions are when to check and who checks. Alibaba and Cornell (arXiv 2610.34577) compared 17 verification designs across seven frontier coding models on Terminal-Bench (TB) and SWE-bench Verified (SWE), grouped into four layers:
+
+| Layer | What it adds | Accuracy change | Cost vs. baseline |
+| --- | --- | --- | --- |
+| L0 instructions | "Actually run it and read the real output; rereading the code isn't evidence" | +3.3 TB / +3.9 SWE in the system prompt; weaker in the user message | Little extra |
+| L1 reminders | Nudges after edits or every few turns, capped at four | Mixed: up to +5.4 TB, flat on SWE | Little extra |
+| L2 completion gates | When the agent stops, ask it to recheck, or reject the first "done" | Best variant +6.0 TB / +6.2 SWE | Rejection gates 1.48–1.76× |
+| L3 independent review | A separate critic checks the work | +5.9–9.5 TB / +3.9–6.6 SWE | 1.13–1.25× TB, 1.00–1.04× SWE |
+
+The critic setup is the part to copy:
+
+- **Fresh context: the task plus the diff.** Giving the critic the agent's full trajectory cost 29–43% more and did no better on the visual benchmark.
+- **A live sandbox, read-only for the deliverable.** The critic runs its own checks but never edits the work; scratch files go in `/tmp`.
+- **A structured verdict.** A `done` flag, feedback, and a checklist with evidence for each requirement.
+- **A bounded loop.** Objections go back to the agent as a user message, and the next delivery is accepted without another review.
+- **Look at rendered output** for UI and visual artifacts, not just the code.
+
+Scaling also favored independence. On TB, one critic for one round reached 62.7% at $0.47 per task. Four rounds reached 66.1% at $0.77, and four separate critics reached 65.8% at $0.62.
+
+The practical order: before adding more reminders to the main agent's prompt, add one independent reviewer with fresh context and a single revision pass. [AI code review](/env/ai-code-review) applies the same layering to pull requests.
+
 ## Failure modes to watch
 
 For the review side of high-volume agent output — layered checks, verified findings, risk-tiered approvals, and reviewer evals — see [Code review when agents write the code](/env/ai-code-review).
@@ -572,6 +595,25 @@ Identity is the hard one, and their per-tool split is the reusable insight. The 
 
 Two UX details generalize: give agents a way to **break out into their own thread** so an agent's work does not pollute a live human discussion, and admit when chat is the wrong surface — reviewing a backlog of queued emails needed a purpose-built UI.
 
+## Always-on agents: route between tasks, work inside them
+
+Single-task coding agents are now strong enough that the limit is human attention. DeepSeek's Harness team observes that a person can keep up with only about 3–5 active sessions. Their October 2026 design essay and open-source prototype describe one system that keeps many tasks moving across IM, GitHub, and email. The essay calls this an architecture exploration, not a product feature, and the prototype is labeled research code. The patterns still transfer:
+
+- **Split coordination from execution.** A resident **Router** session receives every message and event, keeps cross-task memory, and dispatches work. It executes nothing, can run without Bash, and often works well on a lighter model. Each **Worker** gets isolated context, full tools, the strongest model, and one task. Workers never talk to users; they report to the Router, which replies. Unlike an agent-team lead, which breaks one task into parts, the Router only decides how separate tasks relate.
+- **Filter events in two stages.** Deterministic rules (source, group, allowlist) drop noise first. Only what passes reaches an LLM for a judgment call.
+- **Subscribe Workers to threads.** Once a Worker owns a PR, IM topic, or email chain, later events on that thread go straight to it. In their test this didn't change completion time, but without it the Router made about 30% more decisions and read about 37% more cached tokens.
+- **Treat context as a cache.** Inline what is likely needed and replace the rest with a pointer. Give every object an ID and include related IDs, so the model can follow references hop by hop instead of loading the full history.
+- **Make long tools asynchronous.** `start()` returns immediately and the result arrives later as an event, so the conversation keeps accepting messages. DeepSeek Harness implements this but leaves it off by default.
+- **Match output to the channel.** In IM, reply in under about 100 words and only when someone must act. On GitHub and email, write structured updates with background, changes, and verification.
+- **Separate compute, state, and environment.** Run the agent loop in stateless containers, keep session state in a database, and put a thin, stateless daemon on each machine that only executes commands. The agent stays online and can still work on a developer's own machine.
+- **Watch from outside.** A separate watchdog session runs on a timer, checks infrastructure, and asks whether each Worker is making real progress.
+
+In a synthetic test (about 300 messages with about 20 work requests, coding replaced by a timer, five runs each), Router/Worker finished tasks in 12.4 / 15.7 minutes (p50 / p95). One session with a subagent tool and a neutral prompt took 20.4 / 29.5 minutes, because the model never delegated. The faster setup cost more: 23.23M cache-read tokens against 6.05M. Under load, the Router batched backlogged events into one call, cutting the amortized time per decision from 6.4 to 1.6 seconds.
+
+The prototype's operating rule matters as much as the architecture: **take as little human attention as possible, and give as much value as possible.** The agent acts only when an allowed person asks or a written rule permits. Proactive rules start in `observe` mode, which only records what the agent would have accepted until someone reviews those decisions. It confirms once, stays quiet while working, and speaks again only with a result, a question, or a failure.
+
+Open problems the team names: when to split the Router, memory that lasts for months, and security. A compromised cloud loop could control every connected machine, so the agent needs to use credentials without ever seeing them. This is the same concern as keeping the control plane outside the agent's reach, covered earlier on this page.
+
 ## When to invest in a stronger harness
 
 Start simple. Add structure when the work becomes repeated, risky, or expensive.
@@ -638,6 +680,11 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [JevAct: Think Before You Act (arXiv 2610.38620)](https://arxiv.org/abs/2610.38620) — runtime decision gate before selected tool calls; Opus 4.6 three-run success on τ²-bench Telecom 39.5% → 80.7%
 - [Folo source: elvis on IBM decision gates](https://x.com/omarsar0/status/2116547247018229999)
+- [Rethinking Verification in Agent Harnesses (arXiv 2610.34577)](https://arxiv.org/abs/2610.34577) — 17 verification designs in four layers; an independent critic gives +5.9–9.5 points on Terminal-Bench at 1.13–1.25× cost
+- [Folo source: DAIR.AI top papers of the week (Oct 26 – Nov 1)](https://x.com/omarsar0/status/2116953630037459147)
+- [DeepSeek: dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) — research prototype of the Router/Worker design; see `docs/000-philosophy.md` and `docs/002-authorization.md`
+- [AgentsPulse: DeepSeek Super-agent architecture](https://agentspulse.github.io/tutorials/deepseek-super-agent-architecture/) — English summary of the essay, with the ablation table
+- [Folo source: meng shao on DeepSeek Super-agent](https://x.com/shao__meng/status/2116541149443698968) and [elvis on coordination-execution architecture](https://x.com/omarsar0/status/2116942815150157871)
 - [ReFigBench (arXiv 2609.18844)](https://arxiv.org/abs/2609.18844) — 同一模型在 Claude Code 与 Codex 里表现方向相反，提示词相同
 - [OpenAI: Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6) — 显式断点、cache key 与诊断；读取最多打 1 折
 - [Cloudflare: Auto Router](https://blog.cloudflare.com/auto-router/) — 组织级控制面路由，终端用户无感省最多 30%
