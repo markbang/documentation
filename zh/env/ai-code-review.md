@@ -46,6 +46,26 @@ Claude Code 的 Code Review 在 Anthropic 基础设施上分四步：
 
 如果想让 CI 依据评审结果做门禁，就要显式解析机器可读的结论行。文档指出：结论行缺失代表**没有结论**（评审失败、超时或被更新的一次取代），而不是零问题。把"缺失"当成通过，等于让门禁失效。
 
+### 让评审器为每条问题拿出证据
+
+只读 diff 的评审器只能讲道理。给它一个沙箱，要求它把 bug 复现出来。OpenRouter 的教程用一个 233 行、只用标准库的 Python 脚本实现了这套做法：
+
+1. **上传完整文件，而不只是改动片段。** 脚本会发送每个改动文件的完整内容、你指定的上下文文件（比如测试）和 diff，模型不必从片段里猜 import 或类型。
+2. **在沙箱里复现。** 模型在托管的 Linux 容器里对原代码跑简短的检查。每条问题都标成 **confirmed**（附上复现 bug 的命令和输出），或 **unconfirmed**（用简短脚本无法复现）。
+3. **修复以补丁形式返回，先打在副本上。** 补丁先应用到临时副本，不加 `--apply` 就不会动你的工作区。应用之后还要自己重新跑测试。
+4. **用严格的结构化结果收尾。** 最终报告通过一个带严格 JSON schema 的函数工具提交。作者发现，请求里带工具时，某个模型不强制遵守 `json_schema` 文本格式，答案会漂成散文。
+5. **用退出码做门禁。** `0` 表示没有达到 `--block-at`（默认 `high`）的问题；`1` 表示有阻塞级问题；`2` 表示评审没跑完。完整报告里有你的代码片段，默认写到 `.git/ai-review.json`，避免误提交。
+
+在一个埋了五个 bug 的示例改动上，一次评审耗时 1–4 分钟，花费 $0.015–$0.045。参测的四个模型在每次完成的评审里都复现了同样四个 bug，但补丁质量差别很大：一个模型三次里三次都把五个 bug 全修好，更便宜的一个只有一次。成本是只看 diff 的评审的 10–40 倍，多花的钱买的是证据。沙箱按秒计费，模型思考的时间也算在内，所以便宜但慢的模型，沙箱费可能反而比贵但快的模型多。
+
+接入 CI 时，要保护评审器本身：
+
+- **从基础分支运行评审器**（`git show "$BASE:review.py"`），让 PR 改不了评判自己的脚本。这和从基础分支读取 `REVIEW.md` 是同一个思路。
+- **job 会把代码发到外部 API 时，跳过来自 fork 的 PR**，密钥放在 secrets 里。
+- **不要只靠 `pre-push` hook。** `git push --no-verify` 会跳过它，所以 CI 里要再跑一遍同样的检查。
+
+把 **confirmed** 的问题当强信号，**unconfirmed** 的当成给人看的备注，应用任何补丁前都先读一遍。
+
 ## 让审批权限真正有约束力
 
 风险分层只有在无法绕过时才有意义。Claude Code 团队的规则可作为一组参考：
@@ -72,6 +92,12 @@ Agent 作者和 Agent 评审者可以无限互相消耗。公开案例里有一�
 - **跨轮去重**：与仍打开的讨论比对。
 
 除了召回率，还要跟踪"通过所需轮次"。多找出一点点却要多花一倍轮次，通常是净亏。
+
+## 让构建变红仍然意味着停下
+
+没人信任构建的话，评审层加得再多也没用。Thoughtworks 做过一个实验：一个团队连续一周只让 Agent 写代码。应用能跑，构建却经常是红的。红成了常态，大家就不再理会它，绿也就不再让人放心。Thoughtworks 的 Rachel Laycock 列了几种可能的原因：并行的 Agent 互相踩改动、系统模块化不够，或者改动来得比检查跑得快。
+
+DORA 2025 报告在行业层面看到了同样的现象：AI 采用度现在和更高的交付吞吐量正相关，但仍然和更低的交付稳定性相关。把 `main` 上的红构建当成事故处理，而不是背景噪音。先修复或回滚，再查 Agent 为什么能在红构建上继续合入，比如缺少合并队列，或者检查太慢、拦不住每一次改动。
 
 ## 用安全护栏衡量省下的人工时间
 
@@ -183,3 +209,9 @@ PR 之前：
 - [自定义 Code Review](https://code.claude.com/docs/en/code-review-customize) — `REVIEW.md` 与 `CLAUDE.md` 的分工，以及从哪个分支读取规则
 - [Bringing Code Review to Claude Code](https://claude.com/resources/articles/code-review) — 厂商自报的预览期数据（16% → 54%、大 PR 命中率、不足 1% 被判错误）
 - [Code Review 正式可用](https://claude.com/resources/articles/code-review-is-now-generally-available) — Quick／Standard／Deep 三档与更快的评审
+
+- [Folo 来源：meng shao 解读 OpenRouter 可验证代码审查](https://x.com/shao__meng/status/2117411081971015897)
+- [OpenRouter：Build an AI code reviewer](https://openrouter.ai/blog/tutorials/ai-code-review/) — 沙箱复现、confirmed/unconfirmed、退出码、CI 里从基础分支运行评审器
+- [Folo 来源：meng shao 解读好开发者为何仍谨慎](https://x.com/shao__meng/status/2117092563329179702)
+- [Rachel Laycock：Why are good developers so wary of agentic development?](https://www.martinfowler.com/rachels-ramblings/good-devs-wary.html) — 只用 Agent 的一周与常红的构建
+- [Google Cloud：Announcing the 2025 DORA report](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) — AI 采用度、吞吐量与稳定性

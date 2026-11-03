@@ -46,6 +46,26 @@ Two product behaviors are easy to misread:
 
 If you want CI to gate on review results, parse the machine-readable verdict line deliberately. The docs note that a missing verdict line means *no verdict* — a review that failed, timed out, or was superseded — not zero findings. Treating absence as success turns your gate into a no-op.
 
+### Make the reviewer prove each finding
+
+A reviewer that only reads the diff can only argue. Give it a sandbox and ask it to show the bug. OpenRouter's tutorial builds this in a 233-line, standard-library Python script:
+
+1. **Upload whole files, not just hunks.** The script sends the full content of each changed file, any context files you name (such as tests), and the diff, so the model doesn't guess imports or types from a fragment.
+2. **Reproduce in a sandbox.** The model runs short checks against the original code in a hosted Linux container. Every finding comes back **confirmed**, with the command and output that showed the bug, or **unconfirmed** when a quick script couldn't show it.
+3. **Return fixes as patches, applied to a copy.** Patches go to a scratch copy first, and nothing touches your working tree unless you pass `--apply`. Run your tests again after applying.
+4. **End with a strict structured answer.** The final report comes through a function tool with a strict JSON schema. The authors found that a `json_schema` text format wasn't enforced on one model when tools were in the request, and answers drifted into prose.
+5. **Gate with exit codes.** `0` means nothing at or above `--block-at` (default `high`); `1` means a blocking finding; `2` means the review didn't finish. The full report, which contains pieces of your code, goes to `.git/ai-review.json` so it can't be committed by accident.
+
+On a five-bug sample change, a review took one to four minutes and cost $0.015–$0.045. All four models tested confirmed the same four bugs in every completed review, but patch quality varied: one model's patches fixed all five bugs in three of three runs, and a cheaper one did so in one of three. That is 10–40× the cost of a diff-only review; the extra pays for evidence. Sandbox time is billed per second, including the model's thinking time, so a slow cheap model can pay more for the sandbox than a fast expensive one.
+
+When you wire it into CI, protect the reviewer itself:
+
+- **Run the reviewer from the base branch** (`git show "$BASE:review.py"`), so a pull request can't edit the script that judges it. This is the same idea as reading `REVIEW.md` from the base branch.
+- **Skip fork pull requests** when the job sends code to an external API, and keep the key in secrets.
+- **Don't rely on a `pre-push` hook alone.** `git push --no-verify` skips it, so run the same check in CI.
+
+Treat **confirmed** findings as strong signals and **unconfirmed** ones as notes for a person, and read every patch before applying it.
+
 ## Make approval authority real
 
 Risk tiering only helps if it cannot be gamed. The Claude Code team's rules are a useful reference set:
@@ -72,6 +92,12 @@ Fixes that make review converge:
 - **Dedup across runs** by comparing against open threads.
 
 Track rounds-to-pass alongside recall. A reviewer that finds slightly more while requiring twice the rounds is usually a net loss.
+
+## Keep a red build meaning stop
+
+More review layers don't help if nobody trusts the build. In a Thoughtworks experiment where a team let agents write all the code for a week, the application ran but the build was often red. When red is the normal state, people stop reacting to it, and a green build stops being reassuring too. Thoughtworks' Rachel Laycock lists possible causes: parallel agents stepping on each other, a system that isn't modular enough, or changes arriving faster than the checks can finish.
+
+DORA's 2025 report shows the same pattern at industry scale: AI adoption is now linked to higher delivery throughput but still to lower delivery stability. Treat a red build on `main` as an incident, not background noise. Fix or revert first, then find out why agents could land on top of it, for example a missing merge queue or checks that are too slow to gate each change.
 
 ## Measure human time with a safety guardrail
 
@@ -183,3 +209,9 @@ Approval and after:
 - [Customize Code Review](https://code.claude.com/docs/en/code-review-customize) — `REVIEW.md` vs `CLAUDE.md`, and which branch the rules are read from
 - [Bringing Code Review to Claude Code](https://claude.com/resources/articles/code-review) — vendor-reported preview metrics (16% → 54%, large-PR findings, under 1% judged incorrect)
 - [Code Review is now generally available](https://claude.com/resources/articles/code-review-is-now-generally-available) — Quick/Standard/Deep levels and faster reviews
+
+- [Folo source: meng shao on OpenRouter's verifiable code review](https://x.com/shao__meng/status/2117411081971015897)
+- [OpenRouter: Build an AI code reviewer](https://openrouter.ai/blog/tutorials/ai-code-review/) — sandbox reproduction, confirmed/unconfirmed findings, exit codes, base-branch reviewer in CI
+- [Folo source: meng shao on why good developers are wary](https://x.com/shao__meng/status/2117092563329179702)
+- [Rachel Laycock: Why are good developers so wary of agentic development?](https://www.martinfowler.com/rachels-ramblings/good-devs-wary.html) — the agent-only week and the red build
+- [Google Cloud: Announcing the 2025 DORA report](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) — AI adoption, throughput, and stability
