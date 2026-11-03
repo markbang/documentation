@@ -182,6 +182,14 @@ The first retrieval move deserves disproportionate investment. The **Question's 
 
 The error analysis is the real lesson: of 79 remaining errors for the strongest model, only 3 came from the gold document never being retrieved. The other 76 happened later — previewing, opening, or using the evidence. **Front-load the opening context; verify the consumption, not just the fetch.** Cost: 2.3–5.3 extra tool calls per question, cheap against a full failed run.
 
+### Judge indexes by context cost, not just accuracy
+
+Once a search loop is competent, extra index structures may not raise accuracy at all. The RAGFlow team (arXiv 2610.41172) ran a harness with only BM25 and `grep` on MiniMax M3. With no vector or compiled index, it answered 85% of BrowseComp-Plus and 91% of multi-hop FRAMES questions. Adding summary trees, a PageIndex-style outline, wikis, or graphs gave no detectable accuracy gain on FRAMES, and the outline got worse at scale.
+
+The structures paid off in context instead. A navigation tree whose leaves are **claim–evidence pairs** cut query tokens by 91% when the leaf evidence was enough to answer, and added 1.9% when it wasn't, a 38% average saving. The token saving is bought with extra retrieval rounds, so it costs latency. A decision gate that chose when to stop cut latency from 140 seconds to 30. Other artifacts, such as ontologies, timelines, and entity graphs, earned their keep in governance, onboarding, and continuity, which accuracy benchmarks don't measure.
+
+Practical order: start with lexical search (BM25, `grep`) and a disciplined loop that doesn't repeat queries or reread documents. Add compiled structures only when you can show they cut tokens or latency on your own queries. Make leaves self-contained claims with their evidence, so the agent can stop reading early. This matches the [raw-history finding](#reset-at-checkpoints-keep-raw-history-retrievable) above: keep the source, and treat compiled views as a way in, not a replacement.
+
 ### Design for human collaboration, not just autonomous execution
 
 Most agent products optimize for self-evolution: the agent plans, executes, and closes the loop on its own. This is not always a healthy pattern. Even with transparency and traceability tools, an agent that prioritizes autonomous completion can create noise that is hard to hand off or maintain.
@@ -490,6 +498,17 @@ Within a single model, the lever is prompt-cache engineering. GPT-6's caching wo
 
 Cached reads discount up to 90% and cut time-to-first-token by up to 80%; cache writes may carry a fee on newer families, so a bloated but rarely-reused prefix is now a cost, not a free safety net. The design habit this rewards: put everything volatile at the tail, and treat "did the cache hit?" as a monitored metric, not an accident.
 
+Prompt caching saves compute on content the model has already read. **Server-side conversation state** saves something else: the upload. Claude's Messages API added message threads in public beta (header `message-threads-2026-08-12`). The first request sends the full conversation with the system prompt and tools; each later turn sends only the new messages and the previous response's `id`. Anthropic reports that for 500k–1M-token requests, median time to first token dropped about 35% for Claude Code users. Pricing and token usage don't change, because the model still reads the whole conversation every turn. Threads also don't cache anything by themselves: you still set cache breakpoints.
+
+Treat a thread as a best-effort cache, not as storage:
+
+- **Keep the full transcript yourself.** A thread expires 5 minutes after its last request. When a continue request returns `404`, replay the whole conversation in a new create request.
+- **Fix the shape up front.** System prompt, tools, model, and thinking settings can't change mid-thread. Change any of them and you start a new thread.
+- **It's append-only.** Each response `id` can be continued once. Editing, branching, or compacting earlier turns means starting a new thread.
+- **Check data rules.** Threads are held encrypted in memory and never written to disk, but they aren't eligible for zero data retention or HIPAA, and don't work with batches or token counting.
+
+The general rule matches [durable state as files](#represent-durable-state-as-files): provider-side session state is an optimization you can lose at any time. Your own log stays the source of truth.
+
 Both levers — cross-model routing and within-model caching — increasingly live in an **organizational control plane** rather than in each developer's head. Cloudflare's Auto Router (public beta, September 2026) sits in AI Gateway: set the model to `cloudflare/auto` and each request routes to a model capable enough for the task, invisible to the end user. Internal use through OpenCode saved up to 30% versus frontier-only. The rationale matches the Fireworks finding: individuals manually pick overkill models ("no one needs Opus to summarize an email"), but blanket blocking breaks power users — so the savings have to be ones users never notice. The gateway position matters: every request from every user, agent, and tool already flows through it, so it can enforce what budgets and policy documents only request.
 
 ## Computer use cost: reverse-engineer to scripts
@@ -680,6 +699,11 @@ If the task is one-off and low-risk, a prompt plus a few tools may be enough. If
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [JevAct: Think Before You Act (arXiv 2610.38620)](https://arxiv.org/abs/2610.38620) — runtime decision gate before selected tool calls; Opus 4.6 three-run success on τ²-bench Telecom 39.5% → 80.7%
 - [Folo source: elvis on IBM decision gates](https://x.com/omarsar0/status/2116547247018229999)
+- [Context as Infrastructure (arXiv 2610.41172)](https://arxiv.org/abs/2610.41172) — BM25/grep-only harness reaches 85% BrowseComp-Plus and 91% FRAMES; compiled indexes save tokens, not accuracy
+- [Folo source: DAIR.AI on Context as Infrastructure](https://x.com/omarsar0/status/2117278517385925003)
+- [Claude docs: Message threads](https://platform.claude.com/docs/en/build-with-claude/message-threads) — create/continue/replay, 5-minute expiry, fixed fields, data retention
+- [Claude: Make long-running agents faster with message threads](https://claude.com/resources/articles/message-threads) — about 35% lower median TTFT at 500k–1M tokens
+- [Folo source: 宝玉 on Claude API message threads](https://x.com/dotey/status/2117339521683448221)
 - [Rethinking Verification in Agent Harnesses (arXiv 2610.34577)](https://arxiv.org/abs/2610.34577) — 17 verification designs in four layers; an independent critic gives +5.9–9.5 points on Terminal-Bench at 1.13–1.25× cost
 - [Folo source: DAIR.AI top papers of the week (Oct 26 – Nov 1)](https://x.com/omarsar0/status/2116953630037459147)
 - [DeepSeek: dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) — research prototype of the Router/Worker design; see `docs/000-philosophy.md` and `docs/002-authorization.md`

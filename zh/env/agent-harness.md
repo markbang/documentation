@@ -182,6 +182,14 @@ Anthropic 的生物学 Agent 案例很有代表性：研究团队让科学 Agent
 
 错误分析才是真正的教训：最强模型剩下的 79 个错误里，只有 3 个是证据文档从未被检索到，其余 76 个都发生在后面——预览、打开、使用证据的时候。**把开场的上下文做厚；验证消费环节，而不只是抓取环节。** 代价是每题多 2.3–5.3 次工具调用，相比一整轮失败很便宜。
 
+### 评估索引要看上下文成本，而不只看准确率
+
+检索循环本身够好之后，再加索引结构未必能提高准确率。RAGFlow 团队（arXiv 2610.41172）用 MiniMax M3 跑了一个只有 BM25 和 `grep` 的 harness，没有向量索引也没有预编译索引，在 BrowseComp-Plus 上答对 85%，在多跳问答 FRAMES 上答对 91%。再加上摘要树、PageIndex 式大纲、wiki 或图谱，FRAMES 上都没有可见的准确率提升，大纲在规模变大后反而变差。
+
+这些结构的价值在上下文上。一棵叶子是**“论点–证据”对**的导航树，在叶子证据足够作答时把查询 token 省了 91%，不够时只多花 1.9%，平均省 38%。省下的 token 是用更多检索轮次换来的，所以会增加延迟；加一道决定何时停下的决策闸后，延迟从 140 秒降到 30 秒。其他产物，比如本体、时间线、实体图谱，价值体现在治理、新人上手和连续性上，这些准确率基准测不到。
+
+实际顺序：先用词法检索（BM25、`grep`）加一个有纪律的循环，不重复查询、不重复读文档。只有在自己的查询上证明能省 token 或降延迟时，才加预编译结构。叶子要写成自包含的论点加证据，让 Agent 能提前停下。这和本页前面“保留原始记录”的结论一致：原始内容要留着，编译出的视图只是入口，不是替代品。
+
 ### 为人际协作而设计，而不只是追求自主执行
 
 大多数 Agent 产品把目标放在自进化和闭环上：Agent 自己规划、执行、收尾。这不一定是健康的模式。即使加了透明度和追溯工具，优先追求自主完成的 Agent 也可能制造出难以交接和维护的噪音。
@@ -490,6 +498,17 @@ Harness 设计的一个大趋势是同时运行多个模型，而不是赌一个
 
 缓存读取最多打 1 折、首 token 延迟最多降 80%；新一代模型上缓存**写入**可能收费，所以臃肿但很少复用的前缀现在是成本，不是免费保险。这个机制奖励的设计习惯：易变的东西全放尾部，把"缓存命中了吗"当监控指标，而不是碰运气。
 
+提示词缓存省的是模型已经读过的内容的计算。**服务端会话状态**省的是另一样东西：上传。Claude 的 Messages API 推出了消息线程（message threads）公测（请求头 `message-threads-2026-08-12`）。第一次请求发完整对话、系统提示词和工具定义，之后每轮只发新消息和上一条回复的 `id`。Anthropic 称，在 Claude Code 用户中，50 万到 100 万 token 的请求首 token 延迟中位数降低约 35%。价格和 token 用量都不变，因为模型每轮仍要读完整对话。线程也不会自动缓存，缓存断点还是要自己设。
+
+把线程当成尽力而为的缓存，而不是存储：
+
+- **完整对话记录自己保留。** 线程在最后一次请求后 5 分钟过期。续接请求返回 `404` 时，用完整对话重新发一个创建请求。
+- **一开始就定好形状。** 系统提示词、工具、模型和思考设置在线程中途都不能改，改任何一项都要开新线程。
+- **只能追加。** 每个回复 `id` 只能续接一次。要修改、分叉或压缩之前的轮次，都得开新线程。
+- **核对数据规定。** 线程加密存在内存里、不写磁盘，但不符合零数据保留（ZDR）和 HIPAA 要求，也不支持批处理和 token 计数。
+
+通用规则和本页“用文件承载持久状态”一致：服务商侧的会话状态只是优化，随时可能丢失，你自己的记录才是事实来源。
+
 这两个杠杆——跨模型路由和模型内缓存——正越来越多地住进**组织级控制面**，而不是每个开发者的脑子里。Cloudflare 的 Auto Router（2026 年 9 月公开 beta）放在 AI Gateway 里：模型设成 `cloudflare/auto`，每个请求自动路由到对任务足够用的模型，终端用户无感。内部经 OpenCode 实测比纯旗舰省最多 30%。理由和 Fireworks 的发现一致：个人手动选模型经常杀鸡用牛刀（"总结邮件不需要 Opus"），但一刀切封禁又会伤到重度用户——所以省钱必须让用户察觉不到。Gateway 的位置才是关键：每个用户、Agent、工具的请求本来都要经过它，预算和政策文档只能"请求"的事，它可以直接执行。
 
 ## Computer Use 成本控制：反向工程为脚本
@@ -680,6 +699,11 @@ Anthropic 应用 AI 团队在多个企业部署里看到同一种失败模式：
 - [Question's Gambit (arXiv 2609.14412)](https://arxiv.org/abs/2609.14412) — 首步预检索把 GPT-5.5 从 83.1% 提到 90.5%；错误集中在消费环节而非抓取
 - [JevAct: Think Before You Act (arXiv 2610.38620)](https://arxiv.org/abs/2610.38620) — 在选定工具调用执行前设运行时决策闸；τ²-bench Telecom 上 Opus 4.6 三次全成功率 39.5% → 80.7%
 - [Folo 来源：elvis 谈 IBM 决策闸](https://x.com/omarsar0/status/2116547247018229999)
+- [Context as Infrastructure (arXiv 2610.41172)](https://arxiv.org/abs/2610.41172) — 只用 BM25/grep 的 harness 在 BrowseComp-Plus 上 85%、FRAMES 上 91%；预编译索引省的是 token，不是提高准确率
+- [Folo 来源：DAIR.AI 谈 Context as Infrastructure](https://x.com/omarsar0/status/2117278517385925003)
+- [Claude 文档：Message threads](https://platform.claude.com/docs/en/build-with-claude/message-threads) — 创建/续接/重放、5 分钟过期、固定字段与数据保留
+- [Claude：Make long-running agents faster with message threads](https://claude.com/resources/articles/message-threads) — 50 万–100 万 token 请求首 token 延迟中位数降约 35%
+- [Folo 来源：宝玉解读 Claude API 消息线程](https://x.com/dotey/status/2117339521683448221)
 - [Rethinking Verification in Agent Harnesses (arXiv 2610.34577)](https://arxiv.org/abs/2610.34577) — 四层 17 种验证设计；独立评审在 Terminal-Bench 上 +5.9–9.5 个点，成本 1.13–1.25 倍
 - [Folo 来源：DAIR.AI 本周 AI 论文（10/26–11/1）](https://x.com/omarsar0/status/2116953630037459147)
 - [DeepSeek：dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) — Router/Worker 设计的研究原型，参见 `docs/000-philosophy.md` 与 `docs/002-authorization.md`
