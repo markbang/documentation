@@ -52,6 +52,10 @@ GitHub Actions CI/CD 自动化。
 适合并行开发与多 agent 协作的多工作目录方案。
 </Card>
 
+<Card title="Agent 规模下的 Git" icon="code-merge" href="/zh/env/git-at-scale">
+Git 怎么搬数据，如何扛住大量 Agent。
+</Card>
+
 <Card title="Markdown" icon="file-lines" href="/zh/env/markdown">
 Markdown 写作技巧与工具。
 </Card>

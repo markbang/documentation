@@ -52,6 +52,10 @@ Debug browser automation with read-only CDP tracing.
 Parallel checkouts for multi-branch and multi-agent work.
 </Card>
 
+<Card title="Git at agent scale" icon="code-merge" href="/env/git-at-scale">
+How Git moves data, and how to scale it for many agents.
+</Card>
+
 <Card title="Markdown" icon="file-lines" href="/env/markdown">
 Markdown writing tips and tools.
 </Card>
