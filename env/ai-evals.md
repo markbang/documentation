@@ -130,6 +130,19 @@ A working procedure, which costs nothing extra once scores are saved:
 
 Two scope notes. The experiment deliberately used a broad “any substantive issue” task to separate models; for production, keep **one judge per failure mode**, which usually compresses the gaps between models. And a cheap prompt improvement — replacing a vague instruction with an explicit list of failure types — moved F1 from 0.78 to 0.80, which is worth trying before reaching for calibration machinery.
 
+## Evaluate classifiers at the operating point
+
+Airbnb's production classification study is a useful example of evaluating a model against product constraints. Its content-policy classifier gates publication, so false positives block legitimate content. It must return a score within 200 ms at thousands of requests per minute. The evaluation uses 10,000 held-out examples weighted to reflect production traffic.
+
+Airbnb reports that a small fine-tuned classifier matched frontier-model quality, with about 85 ms p99 latency. The reusable lesson is the evaluation procedure, rather than a model ranking:
+
+- **Set the decision costs first.** Choose a threshold on development data that meets the required precision and recall, then report held-out results at that threshold. The study reports maximum F1; that alone does not establish the right threshold for a product that particularly penalizes false positives.
+- **Compare scores and verdicts deliberately.** A score supports threshold sweeps; a yes/no answer supplies one operating point for that prompt. Rewriting a prompt to move that point creates a new configuration to evaluate.
+- **Measure latency under the expected load.** Include p99 and throughput, not just median response time. A model with excellent quality can still miss a synchronous publication deadline.
+- **Model the cost crossover.** Dedicated GPU rental continues while idle; API token costs grow with traffic. Include utilization, worker capacity, prompt length, cache behavior, and separately budget labeling, training, and operations.
+
+The article's “about 1%” compares serving costs at high volume using October 2026 public API prices and a single rented GPU. It assumes 71% cache hits for eligible APIs and excludes negotiated discounts; it is not a universal total-cost ratio. For low-volume tasks or policies that change frequently, a prompted API model can remain the better starting point. Fine-tuning becomes worth evaluating when the task is stable, labeled in-domain data is available, and latency or sustained volume justifies it.
+
 ## Separate regression tests, monitoring, and guardrails
 
 | Placement | Data and timing | Purpose | Response to failure |
@@ -152,6 +165,9 @@ CI pass rates are not estimates of user satisfaction: regression suites delibera
 - Assign an owner for failures and feed new production cases back into the suite.
 
 ## References
+
+- [meng shao: Airbnb's production classifier benchmark](https://x.com/shao__meng/status/2119973180945387755) — Folo intake, November 10, 2026; entry `1371263115974438914`
+- [Airbnb: Frontier quality at 1% of the cost](https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/) — weighted evaluation, scores versus verdicts, latency, and serving-cost assumptions
 
 - [meng shao: using decision models for evals](https://x.com/shao__meng/status/2112720094287786298) — Folo intake, October 21, 2026
 - [Hamel Husain: How To Use Decision Models For Evals](https://hamel.dev/blog/posts/decision-model-evals/) — threshold tuning, cost/performance, calibration, prompt scope

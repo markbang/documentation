@@ -66,6 +66,21 @@ Claude Code 的 Code Review 在 Anthropic 基础设施上分四步：
 
 把 **confirmed** 的问题当强信号，**unconfirmed** 的当成给人看的备注，应用任何补丁前都先读一遍。
 
+### 生成能区分新旧版本的测试
+
+Meta 的 Catching JiTTests 提供了另一种证据：在变更合入前生成可执行测试，寻找在父版本通过、在待合入版本失败的行为。**Dodgy diff** 工作流把变更本身视作潜在变异；**intent-aware** 工作流则从代码、标题与摘要推断意图，构造可能引入缺陷的变异，生成能暴露这些变异的测试，再拿到真实变更上运行。
+
+关键是区分 **weak catch（弱捕获）** 与 **strong catch（强捕获）**：前者只说明测试在新版本失败，后者要求失败确实揭示了 bug。有意的行为变化、测试断言写错，都可能产生弱捕获。测试失败证明了差异；差异是否违反需求，仍需要判断正确行为的依据，也就是测试预言机（oracle）。
+
+在普通仓库中，可以这样借鉴：
+
+1. 从一项高风险改动和一种疑似失败模式开始，把 diff、周边代码与预期行为交给生成器。
+2. 在隔离的父版本与待合入版本上，用等价 fixture 运行同一候选测试。一起保留测试、版本 ID、命令与输出；构建、fixture 和偶发失败另行排查。
+3. 先过滤，再打扰工程师。Meta 把确定性规则和多个 LLM 裁判结合，裁判同时查看测试、执行轨迹、diff 与推断意图；裁判排序仍然只是预测。
+4. 请工程师确认观察到的变化是否符合意图。缺陷确认后，保留预期行为正确的回归测试，并验证修复。
+
+Meta 报告，参与生产触达反馈的工程师给出了约 60% 的真阳性率。这是参与者的反馈口径，不是全部生成测试的精确率。把确认的 bug 数、人工审查负担与失败测试数量分开统计。
+
 ## 让审批权限真正有约束力
 
 风险分层只有在无法绕过时才有意义。Claude Code 团队的规则可作为一组参考：
@@ -195,6 +210,10 @@ PR 之前：
 - 把事故与撤回变成评审器的评测集；用人时和撤回率一起衡量。
 
 ## 参考资料
+
+- [meng shao：Meta Catching JiTTests](https://x.com/shao__meng/status/2119978619196084717) — 2026-11-10 的 Folo 线索，条目 `1371263115974438912`
+- [Meta：Catching Bugs Before They Land](https://engineering.fb.com/2026/10/29/security/catching-bugs-before-they-land-jittestings-human-on-the-loop-approach-at-full-scale/) — 两条生成工作流、过滤机制与工程师反馈
+- [Just-in-Time Catching Test Generation at Meta](https://arxiv.org/html/2601.22832v1) — 弱捕获、强捕获与测试预言机问题
 
 - [meng shao：Cloudflare AI 代码评审的成本优化](https://x.com/shao__meng/status/2113098764324159608) — 2026-10-22 的 Folo 线索
 - [Cloudflare：Cutting our inference bill by 68%](https://blog.cloudflare.com/obsessive-inference-optimization/) — token 账目、共享缓存前缀、分角色质量验证

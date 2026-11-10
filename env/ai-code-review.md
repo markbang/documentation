@@ -66,6 +66,21 @@ When you wire it into CI, protect the reviewer itself:
 
 Treat **confirmed** findings as strong signals and **unconfirmed** ones as notes for a person, and read every patch before applying it.
 
+### Generate tests that distinguish the change from its parent
+
+Meta's Catching JiTTests adds another source of evidence: generate executable tests before a change lands, looking for behavior that passes on the parent revision and fails on the proposed revision. Its **dodgy diff** workflow treats the change itself as a potential mutation; its **intent-aware** workflow infers intent from the code, title, and summary, constructs plausible buggy mutations, generates tests that expose them, then runs those tests on the actual change.
+
+The key distinction is between a **weak catch** (a test fails on the new revision) and a **strong catch** (that failure reveals a real bug). Intended behavior changes and incorrect test assertions can both produce weak catches. A failing test demonstrates a difference; deciding whether the difference violates the requirements still needs an oracle.
+
+A practical adaptation for a repository:
+
+1. Start with a risky change and a suspected failure mode. Give the generator the diff, surrounding code, and intended behavior.
+2. Run the same candidate test against isolated parent and proposed revisions with equivalent fixtures. Keep the test, revision IDs, commands, and outputs together; investigate build, fixture, and flaky failures separately.
+3. Filter candidates before asking an engineer. Meta combines deterministic rules with an LLM judge ensemble that sees the test, execution trace, diff, and inferred intent. The ensemble's ranking remains a prediction.
+4. Ask the engineer whether the observed behavior change was intended. Once a bug is confirmed, retain a regression test with the correct expected behavior and verify the fix.
+
+Meta reports a 60% true-positive rate from engineers who engaged with its production outreach. That is feedback from participating engineers, not the precision of every generated test. Track confirmed bugs and review burden separately from the number of failing tests.
+
 ## Make approval authority real
 
 Risk tiering only helps if it cannot be gamed. The Claude Code team's rules are a useful reference set:
@@ -195,6 +210,10 @@ Approval and after:
 - Turn incidents and reverts into the reviewer's eval set; measure human time with reverts as the guardrail.
 
 ## References
+
+- [meng shao: Meta Catching JiTTests](https://x.com/shao__meng/status/2119978619196084717) — Folo intake, November 10, 2026; entry `1371263115974438912`
+- [Meta: Catching Bugs Before They Land](https://engineering.fb.com/2026/10/29/security/catching-bugs-before-they-land-jittestings-human-on-the-loop-approach-at-full-scale/) — two generation workflows, filtering, engineer feedback
+- [Just-in-Time Catching Test Generation at Meta](https://arxiv.org/html/2601.22832v1) — weak versus strong catches and the test-oracle problem
 
 - [meng shao: Cloudflare AI code review cost optimization](https://x.com/shao__meng/status/2113098764324159608) — Folo intake, October 22, 2026
 - [Cloudflare: Cutting our inference bill by 68%](https://blog.cloudflare.com/obsessive-inference-optimization/) — token accounting, shared cache prefixes, per-role quality checks
