@@ -36,6 +36,10 @@ Type-safe ORM — SQLite & PostgreSQL schema design.
 Role-based access control and session cookie auth.
 </Card>
 
+<Card title="Consensus under network jitter" icon="network-wired" href="/backend/consensus">
+Safety, liveness, failure detection, and QuePaxa's optional leader.
+</Card>
+
 </CardGroup>
 
 ## Learning Path

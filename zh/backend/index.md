@@ -36,6 +36,10 @@ MySQL、SQLite 与数据库核心概念。
 基于角色的访问控制与会话 cookie 认证。
 </Card>
 
+<Card title="网络抖动下的共识选型" icon="network-wired" href="/zh/backend/consensus">
+安全性、活性、故障检测与 QuePaxa 的可选 leader。
+</Card>
+
 </CardGroup>
 
 ## 学习路线

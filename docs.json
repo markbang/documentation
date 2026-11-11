@@ -101,6 +101,7 @@
                 "icon": "server",
                 "pages": [
                   "backend/index",
+                  "backend/consensus",
                   {
                     "group": "Python",
                     "icon": "python",
@@ -390,6 +391,7 @@
                 "icon": "server",
                 "pages": [
                   "zh/backend/index",
+                  "zh/backend/consensus",
                   {
                     "group": "Python",
                     "icon": "python",
