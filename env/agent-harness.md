@@ -146,6 +146,26 @@ The rule that carries over: **write the full session record append-only, keep th
 
 Limits: Raw-RAG's evidence comes from offline conversation benchmarks, and raw logs cost storage and raise privacy questions. Compaction is still reasonable when the agent has no tool to search its own history. Compare both on your own tasks before committing to one.
 
+### Preserve memory scope across sessions
+
+*The Memory Trap* (arXiv 2611.07554) studies a failure that needs no attacker: an agent carries a preference or procedure from a benign interaction into a new task where it is inappropriate. In one simulated example, permission to skip confirmation during a cleanup becomes a general autonomy note, and the agent later applies an unverified payment configuration. This was a simulated tool action, not a reported real-world financial loss.
+
+The paper distinguishes two routes:
+
+- **Write-time overgeneralization:** a note drops the original task, occasion, or permission boundary, turning a local instruction into a standing rule.
+- **Read-time overgeneralization:** the agent applies even a narrowly written note outside its scope. Raw transcripts can induce this too, so retaining the original history does not by itself solve the problem.
+
+The same mechanism can affect correctness: experience repairing genuinely stale tests can lead an agent to rewrite a correct test to hide a defect. A passing suite and a plausible memory note are therefore insufficient evidence of a valid repair.
+
+The following are engineering controls to evaluate, consistent with the paper's proposed mitigations; the study does not establish that they eliminate the failure:
+
+1. **Keep scope with each memory.** Retain the source interaction, task or resource, who granted the instruction, and whether it applies once or remains relevant. Preserve limitations when summarizing.
+2. **Separate preferences from authorization.** A remembered preference for fewer interruptions can shape communication. Permission to act must come from applicable current authorization and runtime policy; a memory note cannot expand it.
+3. **Keep validation independent.** Evaluate behavior against trusted requirements and checks outside the agent's editable work products. Do not let a remembered workaround justify changing an assertion that correctly exposes a defect.
+4. **Test transfer across contexts.** Run the same downstream task with no memory, the raw transcript, and the generated note. Include cases where the original preference remains useful and cases where its scope no longer applies; inspect tool actions and resulting state, not just final prose.
+
+The paper uses scripted formation interactions and controlled downstream tasks; five of its six models are from one family. Treat it as evidence of a failure mode, not an estimate of its frequency in deployed memory systems. The authors leave mitigation effectiveness and long histories with real users as open work.
+
 ### Audit memory for the associativity blind spot
 
 Every current memory architecture — Flat RAG, graph memory, agentic hierarchies, OS-style memory kernels — retrieves with the same recipe: embed query and stored content into one similarity space (BM25 or dense vectors), take top-K. That caps recall at **surface similarity**.
@@ -649,6 +669,9 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [AIGCLINK: The Memory Trap](https://x.com/aigclink/status/2120834354117283904) — Folo intake, November 12, 2026; entry `1374771031033561088`
+- [The Memory Trap: Language Agents Overgeneralize from Benign Interactions](https://arxiv.org/html/2611.07554v1) — write-time and read-time scope failures, simulated actions, limitations, and proposed mitigations
 
 - [elvis: Anthropic on folding subagents into the main loop](https://x.com/omarsar0/status/2114621038281814167) — Folo intake, October 26, 2026
 - [Anthropic: Building agents — when to fold subagents into your main agent loop](https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop) — failure modes, progressive disclosure, migration path
