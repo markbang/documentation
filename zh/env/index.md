@@ -60,6 +60,10 @@ Git 怎么搬数据，如何扛住大量 Agent。
 Markdown 写作技巧与工具。
 </Card>
 
+<Card title="防御 Agent 化入侵" icon="shield-halved" href="/zh/env/agentic-security">
+应对机器速度 LLM 辅助入侵的防守控制。
+</Card>
+
 <Card title="Agent 友好文档" icon="robot" href="/zh/env/agent-ready-docs">
 让文档站更容易被 AI Agent 发现和读取。
 </Card>

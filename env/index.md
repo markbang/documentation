@@ -60,6 +60,10 @@ How Git moves data, and how to scale it for many agents.
 Markdown writing tips and tools.
 </Card>
 
+<Card title="Agentic intrusion defense" icon="shield-halved" href="/env/agentic-security">
+Defensive controls for machine-speed, LLM-assisted intrusions.
+</Card>
+
 <Card title="Agent-ready docs" icon="robot" href="/env/agent-ready-docs">
 Make docs easier for AI agents to discover and read.
 </Card>
