@@ -76,6 +76,16 @@ A semantic grader can return a small structured result such as:
 
 This is an illustrative format, not a vendor API. Make it possible for a human to check the cited event. Missing evidence or a grader timeout is an evaluation error requiring review, not an automatic pass.
 
+## Verify citations at two levels
+
+A link that resolves does not prove that it identifies the intended work, and a correctly identified work does not prove the claim it is cited for. Evaluate both when an agent drafts research notes, reports, or documentation.
+
+1. **Match the work and version.** Resolve the DOI or repository ID if supplied, then compare the title, authors, year, and venue with the publisher or repository record. If no ID is supplied, search by title and author and treat the results as candidates, not matches. Keep preprints and published versions distinct. The [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) returns records for Crossref-registered DOIs; a miss there is not proof that a work does not exist.
+2. **Check publication status.** Look for corrections, retractions, or expressions of concern on the publisher's page, through Crossmark where available, and in sources such as Retraction Watch. Record the checked version and date. An empty update record is not proof that no update exists.
+3. **Verify the claim against the source.** Read the cited passage, table, or figure in context. Check the population, conditions, and direction of the result; capture the section or page and the evidence. If the relevant full text is inaccessible, mark the claim unverified rather than treating a metadata match as support.
+
+Keep the results separate. For example, `work: matched`, `status: no notice found`, and `claim: not supported` can all be true for one citation. Automate ID and metadata checks first; send ambiguous matches, missing sources, and unsupported claims for review. For an eval set, include a real DOI attached to the wrong title, a correct reference paired with an overstated claim, and a genuine source missing from one index.
+
 ## Check the path, conversation, and final state
 
 LangChain's agent-evals guide distinguishes several evaluation scopes. Pick the scope that can actually reveal the failure:
@@ -165,6 +175,10 @@ CI pass rates are not estimates of user satisfaction: regression suites delibera
 - Assign an owner for failures and feed new production cases back into the suite.
 
 ## References
+
+- [Micropaper: citation verification brief](https://unbug.github.io/innovation-brief-citation-verification-service/) — Folo intake, November 19, 2026; prompted the citation-checking workflow
+- [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) — DOI lookup and member-deposited metadata
+- [Crossmark](https://www.crossref.org/services/crossmark/) and [Retraction Watch](https://www.crossref.org/documentation/retrieve-metadata/retraction-watch/) — publication updates and coverage limits
 
 - [meng shao: Airbnb's production classifier benchmark](https://x.com/shao__meng/status/2119973180945387755) — Folo intake, November 10, 2026; entry `1371263115974438914`
 - [Airbnb: Frontier quality at 1% of the cost](https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/) — weighted evaluation, scores versus verdicts, latency, and serving-cost assumptions

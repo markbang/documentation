@@ -76,6 +76,16 @@ Agent：告诉用户预约已确认。
 
 这是示意格式，不是某个厂商的 API。应让人能复查所引用的事件。缺少证据或裁判超时属于需要处理的评测错误，不能自动算作通过。
 
+## 分开核验文献与论断
+
+链接能打开，不代表它指向想引用的文献；文献找对了，也不代表它支持正文里的论断。让 Agent 起草研究笔记、报告或文档时，要分别评测这两件事。
+
+1. **匹配文献和版本。** 有 DOI 或仓库编号就先解析，再比对出版方或仓库记录中的标题、作者、年份和发表渠道。没有编号就用标题和作者检索，把结果当候选，不自动确认。区分预印本和正式发表版本。[Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) 提供在 Crossref 注册的 DOI 记录；查不到不等于文献不存在。
+2. **检查出版状态。** 到出版方页面、可用的 Crossmark 或 Retraction Watch 等来源查看更正、撤稿或关注声明。记录核对的版本与日期。没有查到更新记录，不代表确实没有更新。
+3. **对照原文核验论断。** 结合上下文阅读相关段落、图或表，检查适用人群、条件和结果方向，记录章节或页码与证据。拿不到相关全文时，把论断标为未核验，不要把元数据匹配当成论断有据。
+
+分别记录结果。例如，同一条引用可以同时是 `文献：匹配`、`状态：未查到公告`、`论断：原文不支持`。先自动检查编号和元数据，把匹配有歧义、来源缺失和论断无证据的条目交给人工。评测集可以放入真实 DOI 配错标题、引用正确但正文夸大，以及真实文献未被某个索引收录的样例。
+
 ## 检查路径、完整会话与最终状态
 
 LangChain 的 Agent 评测指南区分了多种评测范围。根据失败发生的位置，选择真正能发现它的检查范围：
@@ -165,6 +175,10 @@ CI 通过率不是用户满意度的估计：回归集会故意增加已知失�
 - 明确失败由谁处理，把新的生产案例回流到测试集。
 
 ## 参考资料
+
+- [Micropaper：投稿前引用回查](https://unbug.github.io/innovation-brief-citation-verification-service/) — 2026-11-19 的 Folo 线索，引出引用核验流程
+- [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) — DOI 查询及成员提交的元数据
+- [Crossmark](https://www.crossref.org/services/crossmark/) 与 [Retraction Watch](https://www.crossref.org/documentation/retrieve-metadata/retraction-watch/) — 出版状态更新及覆盖范围限制
 
 - [meng shao：Airbnb 生产分类器评测](https://x.com/shao__meng/status/2119973180945387755) — 2026-11-10 的 Folo 线索，条目 `1371263115974438914`
 - [Airbnb：Frontier quality at 1% of the cost](https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/) — 加权评测、分数与判定、延迟和推理服务成本假设
