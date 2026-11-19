@@ -581,6 +581,28 @@ Making the model's output executable turns every observation into a potential co
 
 Treat this as an early research preview: the harness and cross-device SDK are labelled preliminary, and its numbers have not been reproduced externally.
 
+## Budget human attention for proactive work
+
+LangChain's internal GTM Agent and Robin illustrate a different bottleneck from execution throughput: an agent can work in the background faster than people can review its questions and results. Their write-up distinguishes real-world events, developer schedules, and agent-created schedules. A trigger is an opportunity to evaluate work, not an obligation to notify a person.
+
+### Evaluate silence as well as action
+
+| Situation | Agent acts or interrupts | Agent stays quiet |
+| --- | --- | --- |
+| Something needs attention | Useful action | Missed opportunity |
+| Nothing needs attention | Noise | Useful silence |
+
+Notification count alone cannot distinguish these outcomes. Review samples of both surfaced and suppressed events; track the share of check-ins people act on, review time, and important misses. Reduced interruption is only an improvement if necessary approvals and time-sensitive issues still reach a person.
+
+### Make each check-in reviewable
+
+- **Triage before drafting.** Separate items waiting on a person, items needing a draft, and items needing no reply. Do not create a review task for every event.
+- **Lead with the decision.** Give a short headline, the requested action, and enough context to assess it. Robin's PR requests include a one-line summary, change size, and a claim button; details stay in the thread.
+- **Use the right review surface.** LangChain found reviewing a backlog of email drafts in Slack slow and built a dedicated review UI, while keeping briefs and follow-ups in existing Slack threads. Familiar entry points and specialized batch review can coexist.
+- **Close the feedback loop without widening permission.** Preserve edits, rejection reasons, and outcomes as scoped evidence. Check whether drafts get approved faster or check-ins become more useful, rather than counting memory entries. Remembered preferences must not bypass current authorization; see [memory scope](#preserve-memory-scope-across-sessions).
+
+Treat the action matrix and review patterns as design guidance from one team's deployment, not proof of a universal productivity gain. Evaluate them against your own event distribution, review capacity, and missed-action costs.
+
 ## Team-level harness: shared knowledge
 
 Individual best practices evaporate with each session unless they are captured as team assets. Tencent's TeamAI CLI (open-sourced September 2026, used internally for six months) turns team AI knowledge into a git repository that every agent works from, and solves three problems:
@@ -669,6 +691,9 @@ A stronger harness is worth it when:
 If the task is one-off and low-risk, a prompt plus a few tools may be enough. If the task is long-running and stateful, invest in harness design early.
 
 ## References
+
+- [meng shao: LangChain proactive agents](https://x.com/shao__meng/status/2122995228689010872) — Folo intake, November 18, 2026; entry `1383362636233601024`
+- [LangChain: What We’ve Learned Building Proactive Agents](https://www.langchain.com/blog/what-weve-learned-building-proactive-agents) — trigger types, action/silence matrix, review UX, and outcome-based memory evaluation
 
 - [AIGCLINK: The Memory Trap](https://x.com/aigclink/status/2120834354117283904) — Folo intake, November 12, 2026; entry `1374771031033561088`
 - [The Memory Trap: Language Agents Overgeneralize from Benign Interactions](https://arxiv.org/html/2611.07554v1) — write-time and read-time scope failures, simulated actions, limitations, and proposed mitigations
