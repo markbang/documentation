@@ -81,6 +81,16 @@ Meta 的 Catching JiTTests 提供了另一种证据：在变更合入前生成�
 
 Meta 报告，参与生产触达反馈的工程师给出了约 60% 的真阳性率。这是参与者的反馈口径，不是全部生成测试的精确率。把确认的 bug 数、人工审查负担与失败测试数量分开统计。
 
+### 给界面改动附上浏览器证据
+
+修复渲染问题时，附上实际页面的验证结果。对比改动前后时，保持浏览器、视口、操作流程和测试数据一致。截图覆盖受影响的页面状态及相关的响应式布局。
+
+- **固定接口响应。** 在 Playwright 中，导航前注册 `page.route()`，用 `route.fulfill()` 给指定请求返回测试数据。这样可以稳定复现加载成功、空结果和错误状态。对外分享截图和追踪记录时使用合成数据。
+- **断言通过后再截图。** 等待可观察的条件成立，例如错误消息出现或加载指示消失。把断言结果和截图一起交给评审者。涉及交互缺陷时，记录操作步骤并检查操作后的状态。
+- **附上复现方式。** 写明版本、场景、视口和重跑方式。固定响应验证的是界面如何处理该响应。改动涉及 API 契约或认证流程时，另外用真实后端做集成检查。
+
+Chrome 介绍的 Pensionbazaar 案例也采用了类似的评审交付方式，将多个视口的截图与布局、控制台错误和性能检查一起提交。
+
 ## 让审批权限真正有约束力
 
 风险分层只有在无法绕过时才有意义。Claude Code 团队的规则可作为一组参考：
@@ -210,6 +220,10 @@ PR 之前：
 - 把事故与撤回变成评审器的评测集；用人时和撤回率一起衡量。
 
 ## 参考资料
+
+- 2026-11-21 的 Folo 线索，讨论评审证据与模拟接口响应。[宝玉原帖](https://x.com/dotey/status/2123936278056165393)
+- 浏览器验证与多视口截图。[Chrome 案例](https://developer.chrome.com/blog/policybazaar-agentic-audit)
+- 拦截请求并返回固定响应。[Playwright API 模拟指南](https://playwright.dev/docs/mock)
 
 - [meng shao：Meta Catching JiTTests](https://x.com/shao__meng/status/2119978619196084717) — 2026-11-10 的 Folo 线索，条目 `1371263115974438912`
 - [Meta：Catching Bugs Before They Land](https://engineering.fb.com/2026/10/29/security/catching-bugs-before-they-land-jittestings-human-on-the-loop-approach-at-full-scale/) — 两条生成工作流、过滤机制与工程师反馈

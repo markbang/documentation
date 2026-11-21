@@ -81,6 +81,16 @@ A practical adaptation for a repository:
 
 Meta reports a 60% true-positive rate from engineers who engaged with its production outreach. That is feedback from participating engineers, not the precision of every generated test. Track confirmed bugs and review burden separately from the number of failing tests.
 
+### Attach browser evidence to UI changes
+
+A patch for a rendering bug should include evidence from the rendered page. For a before-and-after comparison, keep the browser, viewport, user flow, and test data the same across revisions. Capture the affected state and any responsive layout that the change touches.
+
+- **Control the response.** In Playwright, register `page.route()` before navigation and use `route.fulfill()` to return a fixture for the selected request. Use this to reproduce loaded, empty, and error states without waiting for live data to exhibit them. Use synthetic data in shared screenshots and traces.
+- **Assert the behavior before capturing it.** Wait for an observable condition such as an error message appearing or a loading indicator disappearing. Attach the assertion result and screenshot together. For an interaction bug, record the steps and check the resulting state.
+- **Give reviewers the reproduction details.** Include the revision, scenario, viewport, and how to rerun the check. A fixture exercises the UI's handling of the supplied response. Keep a separate integration check against the real backend when the API contract or authentication flow is part of the change.
+
+Chrome's Pensionbazaar case study describes a similar review handoff with screenshots across viewports alongside checks for layout, console errors, and performance.
+
 ## Make approval authority real
 
 Risk tiering only helps if it cannot be gamed. The Claude Code team's rules are a useful reference set:
@@ -210,6 +220,10 @@ Approval and after:
 - Turn incidents and reverts into the reviewer's eval set; measure human time with reverts as the guardrail.
 
 ## References
+
+- Folo lead on review evidence and mocked API responses, November 21, 2026. [宝玉 on X](https://x.com/dotey/status/2123936278056165393)
+- Browser verification and screenshots across viewports. [Chrome case study](https://developer.chrome.com/blog/policybazaar-agentic-audit)
+- Fixed responses for intercepted requests. [Playwright API mocking guide](https://playwright.dev/docs/mock)
 
 - [meng shao: Meta Catching JiTTests](https://x.com/shao__meng/status/2119978619196084717) — Folo intake, November 10, 2026; entry `1371263115974438912`
 - [Meta: Catching Bugs Before They Land](https://engineering.fb.com/2026/10/29/security/catching-bugs-before-they-land-jittestings-human-on-the-loop-approach-at-full-scale/) — two generation workflows, filtering, engineer feedback
