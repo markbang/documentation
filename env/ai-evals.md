@@ -103,6 +103,16 @@ For state-changing tasks, start every evaluation from a clean, known fixture and
 
 Containers are one way to isolate such tasks, not the definition of every benchmark and not a complete security boundary by themselves. Limit credentials, network access, mounts, and run time to what the test needs. Record the fixture version, tool configuration, grading result, and trace. Repeat stochastic cases when needed and report passes over attempts; record infrastructure errors and timeouts separately rather than silently excluding them or counting them as success.
 
+## Evaluate recovery from the state the error left behind
+
+A regression test that starts *before* a bad action asks whether the agent can avoid it. A recovery test starts *after* the action and asks whether the agent can repair the state it actually left behind. SecondChance, a preprint, builds checkpoints from errors in agents' own task attempts and resumes different agents from the same checkpoints.
+
+1. **Save a replayable checkpoint.** Record the conversation, tool results, and environment state immediately after the error. Restore that state in an isolated test environment, including side effects that already happened. Document whether a safe repair is known, impossible under the available tools and policy, or not yet established.
+2. **Vary the help, not the starting state.** Compare no hint, a notice that something went wrong, the location of the error, and repair guidance. Report each condition separately so a guided fix does not count as unaided recovery.
+3. **Score correction separately from completion.** Check whether the original error is still fixed at the end, whether the user's goal was achieved, and whether unrelated state was preserved. Also record policy compliance, disclosure, and recovery cost such as tool calls or elapsed time. Keep the approval rule explicit: disclosure after a write is not prior consent.
+
+A run can finish the task while leaving the earlier damage in place, or fix the damage without finishing the task. Neither is complete recovery. For effects that cannot be reversed, enforce the required checks before execution; in the recovery test, credit accurate disclosure and escalation separately rather than pretending they undo the action.
+
 ## Calibrate the judge against people
 
 A second model's opinion is not ground truth. Build a human-labeled set containing both passes and failures for the same criterion, and resolve unclear definitions before tuning the judge.
@@ -175,6 +185,9 @@ CI pass rates are not estimates of user satisfaction: regression suites delibera
 - Assign an owner for failures and feed new production cases back into the suite.
 
 ## References
+
+- [Micropaper: Correcting an error is not the same as recovering the task](https://unbug.github.io/one-minute-read-paper-secondchance-error-recovery/) — Folo intake, November 26, 2026; entry `1394420601942159360`
+- [SecondChance: Benchmarking Reliable Error Recovery in AI Agents](https://arxiv.org/html/2611.31586v1) — preprint on error checkpoints, graded assistance, and separate recovery outcomes
 
 - [Micropaper: citation verification brief](https://unbug.github.io/innovation-brief-citation-verification-service/) — Folo intake, November 19, 2026; prompted the citation-checking workflow
 - [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) — DOI lookup and member-deposited metadata
